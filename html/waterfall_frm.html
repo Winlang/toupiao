@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,address=no"/>
+    <title>项目展示页</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />   
+    <style>
+        .bg-dark{
+    	    background-color:#333!important;
+    	}
+    	.aui-slide-node img{
+    	    width:auto;
+    	    height:100%;
+    	}
+          .in-title{
+               margin-top:-65px;
+               color:#fff;
+               text-align:center;
+           /*vertical-align:middle;*/
+          }
+          .in-title h4,.in-title h5{color:#fff;}
+    </style>
+</head>
+<body>
+     <div id="aui-slide">
+           <div class="aui-slide-wrap">
+                 <div class="aui-slide-node bg-dark aui-slide-node-middle aui-slide-node-center">
+                       <img src="../image/l1.png" alt="" />
+                 </div>
+                 <div class="aui-slide-node bg-dark aui-slide-node-middle aui-slide-node-center">
+                       <img src="../image/l2.png" alt="" />
+                 </div>
+                 <div class="aui-slide-node bg-dark aui-slide-node-middle aui-slide-node-center">
+                       <img src="../image/l3.png" alt="" />
+                 </div>
+           </div>
+           <div class="aui-slide-page-wrap"><!-- 分页容器--></div>
+     </div>
+	<div id="aui-content">
+	      <ul class="aui-waterfall" id="aui-waterfall">
+	      	<li onclick="openNew()">
+	      	    <div class="aui-waterfall-header">
+	      	          <img src="../image/45.png" alt="" />
+	      	    </div>
+	      	    <div class="aui-waterfall-body in-title">
+	      	          <h4>示例1</h4>
+	      	          <h5>投票项目1</h5>
+	      	    </div>
+	      	</li>
+	      	<li>
+	      	    <div class="aui-waterfall-header">
+	      	          <img src="../image/46.png" alt="" />
+	      	    </div>
+	      	    <div class="aui-waterfall-body in-title">
+	      	          <h4>示例2</h4>
+	      	          <h5>投票项目2</h5>
+	      	    </div>
+	      	</li>
+	      	<li>
+	      	    <div class="aui-waterfall-header">
+	      	          <img src="../image/47.png" alt="" />
+	      	    </div>
+	      	    <div class="aui-waterfall-body in-title">
+	      	          <h4>示例3</h4>
+	      	          <h5>投票项目3</h5>
+	      	    </div>
+	      	</li>
+	      	<li>
+	      	    <div class="aui-waterfall-header">
+	      	          <img src="../image/48.png" alt="" />
+	      	    </div>
+	      	    <div class="aui-waterfall-body in-title">
+	      	          <h4>示例4</h4>
+	      	          <h5>投票项目4</h5>
+	      	    </div>
+	      	</li>
+	      	<li>
+	      	    <div class="aui-waterfall-header">
+	      	          <img src="../image/49.png" alt="" />
+	      	    </div>
+	      	    <div class="aui-waterfall-body in-title">
+	      	          <h4>示例5</h4>
+	      	          <h5>投票项目5</h5>
+	      	    </div>
+	      	</li>
+	      	<li>
+	      	    <div class="aui-waterfall-header">
+	      	          <img src="../image/50.png" alt="" />
+	      	    </div>
+	      	    <div class="aui-waterfall-body in-title">
+	      	          <h4>示例6</h4>
+	      	          <h5>投票项目6</h5>
+	      	    </div>
+	      	</li>
+	      	<li>
+	      	    <div class="aui-waterfall-header">
+	      	          <img src="../image/45.png" alt="" />
+	      	    </div>
+	      	    <div class="aui-waterfall-body in-title">
+	      	          <h4>示例7</h4>
+	      	          <h5>投票项目7</h5>
+	      	    </div>
+	      	</li>
+	      </ul>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-waterfall.js"></script>
+<script type="text/javascript">
+$aui.waterfall($api.byId("aui-waterfall"),{
+      col:1,
+      padding:10,
+      space:10
+});
+
+function openNew(){
+        api.openWin({
+            name: 'procon',
+            url: 'procon_win.html',
+            bounces: true,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            }
+        });
+}
+	apiready = function(){
+		
+	};
+</script>
+<!--轮播组件-->
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript">
+         var slide = new auiSlide({
+             container:document.getElementById("aui-slide"),
+             "height":240,
+             "speed":500,
+             "autoPlay":3000,
+             "loop":true,
+             "pageShow":true,
+             "pageStyle":'dot',
+             "dotPosition":'center'
+         })
+</script>
+
+</html>

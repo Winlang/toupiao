@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>投票内容页</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <style>
+    	body{
+    		height:100%;
+    		margin:0;
+    		padding:0;
+    	}
+    	.aui-content{
+    	    background-color:#fff;
+    	}
+    	.idol-avatar{
+    	    max-width:100%;
+    	    height:240px;
+    	}
+    	.f-avatar{
+    	   width:30px;
+    	   height:30px;
+    	   vertical-align: middle;
+    	   margin-right:15px;
+    	   border-radius: 15px;
+    	}
+    	.f-vote{
+    	   font-size:12px;
+    	   line-height:30px;
+    	}
+    	.mine{
+    	   padding-top:5px;
+    	}
+    	.mine li{
+    	   display:inline-block;
+    	   width:24%;
+    	   text-align:center;
+    	   padding:20px 0 6px;
+    	   background-size:30px;
+    	   background-repeat:no-repeat;
+    	   background-position:top;
+    	}
+    	.mine li a{
+    	   margin:10px 10px 0 10px;
+    	   color:#323237;
+    	   font-size:14px;
+    	   display: block;
+    	}
+    	.vote{
+    	   background-image:url("../image/vote.png");
+    	}
+    	.comment{
+    	   background-image:url("../image/comment.png");
+    	}
+    	.share{
+    	   background-image:url("../image/share.png");
+    	}
+    	.collect{
+    	   background-image:url("../image/collect.png");
+    	}
+    	.vote-info{
+    	      position:relative;
+    	      margin-top:-60px;
+    	      height:60px;
+    	}
+        .vote-info p{
+            padding:0 20px;
+        }
+        .vote-info p>span{
+            font-size:22px;
+        }
+        .avatar{
+            display:block;
+            width:40px;
+            height:40px;
+            border-radius:50%;
+        }
+        .commemt-caption{
+             display:block;
+             width:100%;
+             height:40px;
+        }
+        .commemt-caption h5{
+           font-size:12px;
+           line-height:12px;
+        }
+        .commemt-caption span{
+             font-size:10px;
+             color:#858F87;
+             line-height:10px;           
+        }
+        .appreciate span{
+          font-size:14px;
+        }
+        .appreciate span.aui-iconfont{
+          margin-left:10px;
+          margin-right:5px;
+        }
+        .reverse{
+            transform: rotateY(180deg);
+        }
+        .aui-img-body p{
+           font-size:12px;
+           color:#333;
+        }
+    </style>
+</head>
+<body>
+    <div class="aui-content">
+          <img class="idol-avatar" src="../image/123.jpg" alt="" />
+          <div class="vote-info">
+               <div class="aui-pull-left">
+                     <p>得票: <span>1123</span></p>
+               </div>
+               <div class="aui-pull-right">
+                     <p>排名: <span>11</span></p>
+               </div>
+          </div>
+          <ul class="mine">
+          	<li class="vote">
+          	    <a>投一票</a>
+          	</li>
+          	<li class="comment">
+          	     <a>说两句</a>
+          	</li>
+          	<li class="share">
+          	     <a>分享拉票</a>
+          	</li>
+          	<li class="collect">
+          	     <a>收藏</a>
+          	</li>
+          </ul>
+    </div>
+	<div class="aui-content">
+	     <ul class="aui-list-view">
+	     	<li class="aui-list-view-cell" onclick="openGrid()">
+	     	    <div class="aui-arrow-right aui-text-default f-vote">您有11个好友投了ta <img class="f-avatar aui-pull-right" src="../image/wx.png" alt="" /></div>
+	     	</li>
+	     </ul>
+	</div>
+	<div class="aui-content aui-padded-10">
+	      <p>介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍</p>
+	</div>
+	<div class="aui-content">
+	      <ul class="aui-list-view">
+	      	<li class="aui-list-view-cell aui-img">
+	      	     <div class="aui-img-object aui-pull-left ">
+	      	     	  <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
+	      	     </div>     
+	      	     <div class="aui-img-body">	
+	      	         <div class="commemt-caption">
+	      	           <div class="aui-pull-left">
+	      	                 <h5>生如夏花丶</h5>
+	      	                 <span>意见领袖</span>
+	      	           </div>
+	      	           <div class="aui-pull-right appreciate">
+	      	                <span class="aui-iconfont aui-icon-appreciate"></span><span>133</span>
+	      	                <span class="aui-iconfont aui-icon-appreciate reverse"></span><span>266</span>
+	      	           </div>
+	      	         </div>  	   	            
+	      	           <p>图文列表缩略图在左边的样式，默认大小为80PX，文字介绍内容可以为一行也可以为两行，超出部分自动省略....</p>
+	      	     </div>
+	      	</li>
+	      	<li class="aui-list-view-cell aui-img">
+	      	     <div class="aui-img-object aui-pull-left ">
+	      	     	  <img class="avatar" src="../image/demos-1.jpg" alt="" /> 
+	      	     </div>     
+	      	     <div class="aui-img-body">	
+	      	         <div class="commemt-caption">
+	      	           <div class="aui-pull-left">
+	      	                 <h5>生如夏花丶</h5>
+	      	                 <span>意见领袖</span>
+	      	           </div>
+	      	           <div class="aui-pull-right appreciate">
+	      	                <span class="aui-iconfont aui-icon-appreciate"></span><span>133</span>
+	      	                <span class="aui-iconfont aui-icon-appreciate reverse"></span><span>266</span>
+	      	           </div>
+	      	         </div>  	   	            
+	      	           <p>图文列表缩略图在左边的样式，默认大小为80PX，文字介绍内容可以为一行也可以为两行，超出部分自动省略....</p>
+	      	     </div>
+	      	</li>
+	      	<li class="aui-list-view-cell aui-img">
+	      	     <div class="aui-img-object aui-pull-left ">
+	      	     	  <img class="avatar" src="../image/demos-3.jpg" alt="" /> 
+	      	     </div>     
+	      	     <div class="aui-img-body">	
+	      	         <div class="commemt-caption">
+	      	           <div class="aui-pull-left">
+	      	                 <h5>生如夏花丶</h5>
+	      	                 <span>意见领袖</span>
+	      	           </div>
+	      	           <div class="aui-pull-right appreciate">
+	      	                <span class="aui-iconfont aui-icon-appreciate"></span><span>133</span>
+	      	                <span class="aui-iconfont aui-icon-appreciate reverse"></span><span>266</span>
+	      	           </div>
+	      	         </div>  	   	            
+	      	           <p>图文列表缩略图在左边的样式，默认大小为80PX，文字介绍内容可以为一行也可以为两行，超出部分自动省略....</p>
+	      	     </div>
+	      	</li>
+	      	<li class="aui-list-view-cell aui-img">
+	      	     <div class="aui-img-object aui-pull-left ">
+	      	     	  <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
+	      	     </div>     
+	      	     <div class="aui-img-body">	
+	      	         <div class="commemt-caption">
+	      	           <div class="aui-pull-left">
+	      	                 <h5>生如夏花丶</h5>
+	      	                 <span>意见领袖</span>
+	      	           </div>
+	      	           <div class="aui-pull-right appreciate">
+	      	                <span class="aui-iconfont aui-icon-appreciate"></span><span>133</span>
+	      	                <span class="aui-iconfont aui-icon-appreciate reverse"></span><span>266</span>
+	      	           </div>
+	      	         </div>  	   	            
+	      	           <p>图文列表缩略图在左边的样式，默认大小为80PX，文字介绍内容可以为一行也可以为两行，超出部分自动省略....</p>
+	      	     </div>
+	      	</li>
+	      </ul>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+function openGrid(){
+   api.openWin({
+        name:'grid_win',
+        url:'grid_win.html'
+   });
+}
+    apiready=function(){
+    
+    }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

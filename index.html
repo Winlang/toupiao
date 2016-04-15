@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>投票项目</title>
+    <link rel="stylesheet" href="css/aui.css" type="text/css"/>
+    <style>
+          .aui-iconfont{
+            font-size:22px !important;
+          }
+    </style>
+</head>
+<body>
+        <div class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">欢迎投票！</div>
+        <script type="text/javascript" src="script/api.js"></script>
+        <script type="text/javascript" src="scriptaui-alert.js"></script>
+<script>
+    apiready = function () {
+//      api.openSlidLayout({
+//          type: 'left',
+//          leftEdge: 60,
+//          fixedPane: {
+//              name: 'fixed',
+//              url: 'html/fixed.html'
+//          },
+//          slidPane: {
+//              name: 'slide',
+//              url: 'html/slide.html'
+//          }
+//      }, function (ret) {
+//
+//      });
+//      
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
+        api.openFrame({
+            name: 'waterfall',
+            url: 'html/waterfall_frm.html',
+            bounces: true,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: 'auto'
+            }
+        });
+    }
+</script>
+</body>
+</html>
