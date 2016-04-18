@@ -42,76 +42,46 @@
            </div>
            <div class="aui-slide-page-wrap"><!-- 分页容器--></div>
      </div>
-	<div id="aui-content">
-	      <ul class="aui-waterfall" id="aui-waterfall">
-	      	<li onclick="openNew()">
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/45.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例1</h4>
-	      	          <h5>投票项目1</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/46.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例2</h4>
-	      	          <h5>投票项目2</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/47.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例3</h4>
-	      	          <h5>投票项目3</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/48.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例4</h4>
-	      	          <h5>投票项目4</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/49.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例5</h4>
-	      	          <h5>投票项目5</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/50.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例6</h4>
-	      	          <h5>投票项目6</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/45.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例7</h4>
-	      	          <h5>投票项目7</h5>
-	      	    </div>
-	      	</li>
-	      </ul>
-	</div>
+
+   
+		<div id="aui-content"></div>
+		 <script id="test" type="text/html">
+	      	<ul class="aui-waterfall" id="aui-waterfall">
+	      	{{each list as value i}}
+	      		<li>
+	      	    	<div class="aui-waterfall-header">
+	      	          	<img src="http://testb.xieli.cn/Uploads/admin/{{value.item_titleimg}}" alt="" />
+	      	    	</div>
+	      	    	<div class="aui-waterfall-body in-title">
+	      	          <h4></h4>
+	      	          <h5>{{value.item_title}}</h5>
+	      	    	</div>
+	      		</li>
+	      		{{/each}}
+	      	</ul>
+	      </script>
+	
+<!-- 	<div id="content"></div>
+	<script id="test" type="text/html">
+		<h1>{{title}}</h1>
+		<ul>
+		    {{each list as value i}}
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		    {{/each}}
+		</ul>
+	</script> -->
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/aui-waterfall.js"></script>
+<script type="text/javascript" src="http://libs.useso.com/js/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
+<!--数据请求-->
+<script type="text/javascript" src="../script/index.js">
 <script type="text/javascript">
 $aui.waterfall($api.byId("aui-waterfall"),{
       col:1,
@@ -133,7 +103,6 @@ function openNew(){
         });
 }
 	apiready = function(){
-		
 	};
 </script>
 <!--轮播组件-->
@@ -150,5 +119,4 @@ function openNew(){
              "dotPosition":'center'
          })
 </script>
-
 </html>
