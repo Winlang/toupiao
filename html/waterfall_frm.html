@@ -16,12 +16,15 @@
     	    height:100%;
     	}
           .in-title{
-               margin-top:-65px;
+               margin-top:-70px;
                color:#fff;
                text-align:center;
-           /*vertical-align:middle;*/
+               padding:8px;
           }
           .in-title h4,.in-title h5{color:#fff;}
+                    .aui-waterfall li::after{
+              border:none;
+          }
     </style>
 </head>
 <body>
@@ -112,7 +115,7 @@
 <script type="text/javascript">
 $aui.waterfall($api.byId("aui-waterfall"),{
       col:1,
-      padding:10,
+      padding:-5,
       space:10
 });
 
