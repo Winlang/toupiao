@@ -21,11 +21,15 @@
 	</header>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript">
     function closeWin(){
      api.closeWin();
     }
 	apiready = function(){
+        //获取主题id
+        var item_id = getQueryString('item_id');
+
 		api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
@@ -33,7 +37,7 @@
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
             name: 'procon_frm',
-            url: 'procon_frm.html',
+            url: 'procon_frm.html?item_id='+item_id,
             bounces: true,
             rect: {
                 x: 0,

@@ -7,6 +7,22 @@
     <title>项目展示页</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
     <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />   
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+    function openNew(item_id){
+    api.openWin({
+        name: 'procon',
+        url: 'procon_win.html?item_id='+item_id,
+        bounces: true,
+        rect: {
+            x: 0,
+            y: 0,
+            w: 'auto',
+            h: 'auto'
+        }
+    });
+}
+    </script>
     <style>
         .bg-dark{
     	    background-color:#333!important;
@@ -48,7 +64,7 @@
 		 <script id="test" type="text/html">
 	      	<ul class="aui-waterfall" id="aui-waterfall">
 	      	{{each list as value i}}
-	      		<li>
+	      		<li onclick="openNew({{value.id}})">
 	      	    	<div class="aui-waterfall-header">
 	      	          	<img src="http://testb.xieli.cn/Uploads/admin/{{value.item_titleimg}}" alt="" />
 	      	    	</div>
@@ -76,9 +92,9 @@
 	</script> -->
 
 </body>
-<script type="text/javascript" src="../script/api.js"></script>
+
 <script type="text/javascript" src="../script/aui-waterfall.js"></script>
-<script type="text/javascript" src="http://libs.useso.com/js/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
 <script type="text/javascript" src="../script/template.js"></script>
 <!--数据请求-->
 <script type="text/javascript" src="../script/index.js">
@@ -89,21 +105,9 @@ $aui.waterfall($api.byId("aui-waterfall"),{
       space:10
 });
 
-function openNew(){
-        api.openWin({
-            name: 'procon',
-            url: 'procon_win.html',
-            bounces: true,
-            rect: {
-                x: 0,
-                y: 0,
-                w: 'auto',
-                h: 'auto'
-            }
-        });
-}
-	apiready = function(){
-	};
+
+apiready = function(){
+};
 </script>
 <!--轮播组件-->
 <script type="text/javascript" src="../script/aui-slide.js"></script>
