@@ -21,11 +21,13 @@
 	</header>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript">
     function closeWin(){
        api.closeWin();
     }
 	apiready = function(){
+        var item_optid = getQueryString('itemoptid');
 		api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
@@ -33,7 +35,7 @@
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
             name: 'votecon_frm',
-            url: 'votecon_frm.html',
+            url: 'votecon_frm.html?itemoptid='+item_optid,
             bounces: true,
             rect: {
                 x: 0,

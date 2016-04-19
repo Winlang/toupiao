@@ -174,7 +174,7 @@
                 <!--选项列表-->
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
-                <div class="aui-input-row idols" onclick="openVote()">
+                <div class="aui-input-row idols" onclick="openVote({{value.item_optid}})">
                    <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
                    <div class="idol-info">
 
@@ -201,10 +201,10 @@
 <script type="text/javascript" src="../script/item_detail.js"></script>
 <script type="text/javascript" src="../script/template.js"></script>
 <script type="text/javascript">
-    function openVote(){
+    function openVote(item_optid){
        api.openWin({
 	       name: 'votecon_win',
-	       url: 'votecon_win.html'
+	       url: 'votecon_win.html?itemoptid='+item_optid
        });
     }
 	apiready = function(){
