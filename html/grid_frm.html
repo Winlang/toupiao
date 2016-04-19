@@ -8,16 +8,20 @@
 </head>
 <body>
 	<div class="aui-content">
-		<ul class="aui-grid-nine">
+		<!--选项列表-->
+        <div id="cates_list"></div>
+        <script type="text/html" id="cates">
+        <ul class="aui-grid-nine">
 
-
-            <li class="aui-col-xs-4 aui-text-center" onclick="openList()">
+            {{each list as value i}}
+            <li class="aui-col-xs-4 aui-text-center" onclick="openList({{value.id}})">
                 <span class="aui-iconfont aui-icon-edit aui-text-warning"></span>
-                <p>栏目</p>
+                <p>{{value.title}}</p>
             </li>
-
+            {{/each}}
 
 		</ul>
+        </script>
 	</div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -25,11 +29,12 @@
 <script type="text/javascript" src="../script/jquery.js"></script>
 <script type="text/javascript" src="../script/grid.js"></script>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
 <script type="text/javascript">
-function openList(){
+function openList(cateid){
    api.openWin({
-      name:'focus_win',
-      url:'focus_win.html'
+      name:'grid_list_win',
+      url:'grid_list_win.html?cateid='+cateid
    });
 }
 	apiready = function(){
