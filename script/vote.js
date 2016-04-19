@@ -5,6 +5,7 @@ $(function() {
     //主题选项基本信息
 	$.post(ApiUrl+'/api/itemoption?id='+itemoptid+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
+		$('.aui-title').html(data.data.item_opttitle);
 		var html = template('itemoptdata', data);
 		document.getElementById('itemoptinfo').innerHTML = html;
 	});
@@ -12,6 +13,7 @@ $(function() {
 	//主题选项评论列表
 	$.post(ApiUrl+'/api/optioncomments?id='+itemoptid+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
+		
 		var html = template('itemopt_commdata', data);
 		document.getElementById('itemopt_comminfo').innerHTML = html;
 	});
