@@ -104,23 +104,25 @@
   </style>
 </head>
 <body>
-       
+
+      <div id="iteminfo"></div>
+       <script type="text/html" id="item">
        <div class="aui-content">
             <div class="aui-text-center savatar">
-                 <img src="../image/123.jpg" alt="" />
+                 <img src="http://testb.xieli.cn/Uploads/admin/{{data.item_titleimg}}" alt="" />
             </div>
             <div class="vote-info">
                  <div class="aui-pull-left">
-                       <p>开始：2016-04-12</p>
-                       <p>结束：2016-08-12</p>
+                       <p>开始：{{data.item_starttime}}</p>
+                       <p>结束：{{data.item_endtime}}</p>
                  </div>
                  <div class="aui-pull-right">
-                       <p>选项数：32</p>
-                       <p>投票数：1189338</p>
+                       <p>选项数：{{data.item_optnum}}</p>
+                       <p>投票数：{{data.item_click}}</p>
                  </div>
             </div>
             <div class="aui-padded-10 title">
-                  <h2 class="aui-text-center">标题标题标题标题标题标题</h2>
+                  <h2 class="aui-text-center">{{data.item_title}}</h2>
             </div>
             <div class="rule">
                  <div class="reword aui-btn aui-btn-warning aui-btn-outlined">奖项</div>
@@ -128,8 +130,13 @@
             </div>
        </div>
        <div class="aui-content aui-padded-10">
-             <p>简介简介简介简介简介简介简介简介简介简介简介简介简介简介....</p>
+             <p>{{data.item_desc}}</p>
        </div>
+      
+       </script>
+
+
+
        <div class="aui-content">
              <ul class="aui-list-view">
              	<li class="aui-list-view-cell">
@@ -162,82 +169,31 @@
 <!--搜索项目-->
 
            <div class="aui-form">
+
+                <div id="itemoption_list"></div>
+                <!--选项列表-->
+                <script type="text/html" id="itemoptions">
+                {{each data as value i}}
                 <div class="aui-input-row idols" onclick="openVote()">
                    <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
                    <div class="idol-info">
-                        <img src="../image/demos.jpg" alt="" />
-                                                                        张学友
+                        <img src="http://testb.xieli.cn/Uploads/admin/{{value.item_optimg}}" alt="" />
+                                                                        {{value.item_opttitle}}
                    </div>
                    <div class="aui-pull-right idol-vote">
-                         <img src="../image/idol-1.png" alt="" />318
-                         <img src="../image/idol-2.png" alt="" />118
-                         <img src="../image/idol-3.png" alt="" />33
+                         <img src="../image/idol-1.png" alt="" />{{value.item_opttoupiao}}
+                         <img src="../image/idol-2.png" alt="" />{{value.item_optcomment_number}}
+                         <img src="../image/idol-3.png" alt="" />
                    </div>
                 </div>
-                <div class="aui-input-row idols">                
-                   <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
-                   <div class="idol-info">
-                        <img src="../image/demos-1.jpg" alt="" />
-                                                                        金成国
-                   </div>
-                   <div class="aui-pull-right idol-vote">
-                         <img src="../image/idol-1.png" alt="" />318
-                         <img src="../image/idol-2.png" alt="" />118
-                         <img src="../image/idol-3.png" alt="" />33
-                   </div>
-                </div>
-                <div class="aui-input-row idols">
-                   <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
-                   <div class="idol-info">
-                        <img src="../image/demos-1.jpg" alt="" />
-                                                                       姚明
-                   </div>
-                   <div class="aui-pull-right idol-vote">
-                         <img src="../image/idol-1.png" alt="" />318
-                         <img src="../image/idol-2.png" alt="" />118
-                         <img src="../image/idol-3.png" alt="" />33
-                   </div>
-                </div>
-                <div class="aui-input-row idols">
-                   <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
-                   <div class="idol-info">
-                        <img src="../image/demos-2.jpg" alt="" />
-                                                                        金成国
-                   </div>
-                   <div class="aui-pull-right idol-vote">
-                         <img src="../image/idol-1.png" alt="" />318
-                         <img src="../image/idol-2.png" alt="" />118
-                         <img src="../image/idol-3.png" alt="" />33
-                   </div>
-                </div>
-                <div class="aui-input-row idols">
-                   <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
-                   <div class="idol-info">
-                        <img src="../image/demos-3.jpg" alt="" />
-                                                                      刘德华
-                   </div>
-                   <div class="aui-pull-right idol-vote">
-                         <img src="../image/idol-1.png" alt="" />318
-                         <img src="../image/idol-2.png" alt="" />118
-                         <img src="../image/idol-3.png" alt="" />33
-                   </div>
-                </div>
-                <div class="aui-input-row idols">
-                   <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
-                   <div class="idol-info">
-                        <img src="../image/demos-4.jpg" alt="" />
-                                                                          黎明
-                   </div>
-                   <div class="aui-pull-right idol-vote">
-                         <img src="../image/idol-1.png" alt="" />318
-                         <img src="../image/idol-2.png" alt="" />118
-                         <img src="../image/idol-3.png" alt="" />33
-                   </div>
-                </div>
+                {{/each}}
+                </script>
+                
            </div>      
        </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
 <script type="text/javascript" src="../script/jquery.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript" src="../script/item_detail.js"></script>
