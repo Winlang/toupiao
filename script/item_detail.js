@@ -13,6 +13,7 @@ $(function() {
 
         //主题对应选项列表
         $.post(ApiUrl+'/api/itemoptions?id='+item_id+'&callback=?',{},function(res){
+                alert(res);
                 var data = JSON.parse(res);
                 //alert(typeof(data));
                 var html = template('itemoptions', data);
