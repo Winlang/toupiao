@@ -53,7 +53,7 @@
 	      	          <h5>投票项目1</h5>
 	      	    </div>
 	      	</li>
-	      	<li>
+	      	<li onclick="openCenter()">
 	      	    <div class="aui-waterfall-header">
 	      	          <img src="../image/46.png" alt="" />
 	      	    </div>
@@ -131,6 +131,19 @@ function openNew(){
                 h: 'auto'
             }
         });
+}
+function openCenter(){
+     api.openWin({
+         name:'percenter_win',
+         url:'percenter_win.html',
+         bounces:true,
+         rect:{
+           x:0,
+           y:0,
+           w:'auto',
+           h:'auto'
+         }
+      });
 }
 	apiready = function(){
 		
