@@ -68,18 +68,12 @@
     	.rule{
     	   padding-bottom:10px;
     	   display:block;
+    	   width:60%;
+    	   margin:0 auto;
     	}
-    	.reword{
-    	    display:inline-block;
-    	    width:20%;
-    	    margin-left:20%;
-    	    letter-spacing:5px;
-    	}
-    	.rank{
-    	    display:inline-block;
-    	    width:20%;
-    	    margin-left:20%;
-    	}
+        .rule-1,.rule-2{
+            display: inline-block;
+        }
    	.vote-title{
     	     font-size:18px;
     	}
@@ -125,18 +119,32 @@
                   <h2 class="aui-text-center">{{data.item_title}}</h2>
             </div>
             <div class="rule">
-                 <div class="reword aui-btn aui-btn-warning aui-btn-outlined">奖项</div>
-                 <div class="rank aui-btn aui-btn-warning  aui-btn-outlined">排行榜</div>
+               <div class="aui-content-padded rule-1">
+                   <div class="aui-btn aui-btn-outlined aui-btn-warning" tapmode onclick="show()">奖项</div>
+               </div>
+               <div class="aui-dialog aui-hidden" id="dialog">
+                          <div class="aui-dialog-header">投票奖励</div>
+                          <div class="aui-dialog-body aui-text-left">
+                                <p>1、奖励一</p>
+                                <p>2、奖励二</p>
+                                <p>3、奖励三</p>
+                                <p>4、奖励四</p>
+                                <p>5、奖励五</p>
+                          </div>
+                          <div class="aui-dialog-footer">
+                              <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
+                              <div class="aui-dialog-btn aui-text-info" tapmode onclick="confirm()">确定</div>
+                          </div>
+               </div>
+               <div class="aui-content-padded rule-2">
+                    <div class="aui-btn aui-btn-warning aui-btn-outlined" tapmode onclick="openRank()">排行榜</div>
+               </div>
             </div>
        </div>
        <div class="aui-content aui-padded-10">
              <p>{{data.item_desc}}</p>
-       </div>
-      
+       </div>  
        </script>
-
-
-
        <div class="aui-content">
              <ul class="aui-list-view">
              	<li class="aui-list-view-cell">
@@ -154,17 +162,17 @@
 </div>             
 <!--搜索项目-->           
         <div class="aui-searchbar-wrap demo search" id="search">
-        <div class="aui-searchbar aui-border-radius" tapmode onclick="doSearch()">
-            <i class="aui-iconfont aui-icon-search"></i>
-            <div class="aui-searchbar-text">请输入搜索内容</div>
+        <div class="aui-searchbar aui-border-radius" tapmode onclick="doSearch()">           
+            <div class="aui-searchbar-text ">请输入搜索内容</div>           
             <div class="aui-searchbar-input">
             	<form action="javascript:search();">
-            	<input type="text" placeholder="请输入搜索内容" id="search-input">
+            	<input type="text" placeholder="请输入搜索内容" id="search-input" >
             	</form>
             </div>
-            <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>
+            <i class="aui-iconfont aui-icon-search aui-pull-right"></i>
+           <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>-->
         </div>
-        <div class="aui-searchbar-cancel aui-text-info" tapmode onclick="cancelSearch()">取消</div>
+        <!--<div class="aui-searchbar-cancel aui-text-info" tapmode onclick="cancelSearch()">取消</div>-->
     </div>
 <!--搜索项目-->
 
@@ -177,15 +185,12 @@
                 <div class="aui-input-row idols" onclick="openVote({{value.item_optid}})">
                    <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
                    <div class="idol-info">
-
                         <img src="http://testb.xieli.cn/Uploads/admin/{{value.item_optimg}}" alt="" />
-                                                                        {{value.item_opttitle}}
+                        {{value.item_opttitle}}
                    </div>
                    <div class="aui-pull-right idol-vote">
                          <img src="../image/idol-1.png" alt="" />{{value.item_opttoupiao}}
                          <img src="../image/idol-2.png" alt="" />{{value.item_optcomment_number}}
-                         <img src="../image/idol-3.png" alt="" />
-
                    </div>
                 </div>
                 {{/each}}
@@ -237,6 +242,45 @@
 		}
 		cancelSearch();
 	}
+	    function show(){
+        $api.append($api.dom("body"),'<div class="aui-mask"></div>');
+        $api.removeCls($api.dom(".aui-dialog.aui-hidden"),"aui-hidden");
+        api.sendEvent({
+            name: 'dialogEvent',
+            extra: {type:'show'}
+        });
+    }
+    function cancel(){
+        $api.remove($api.dom(".aui-mask"));
+        $api.addCls($api.dom(".aui-dialog"),"aui-hidden");
+        api.sendEvent({
+            name: 'dialogEvent',
+            extra: {type:'hidden'}
+        });
+//      api.alert({
+//          title: '提示',
+//          msg: '您点击了取消'
+//      });
+
+    }
+    function confirm(){
+        $api.remove($api.dom(".aui-mask"));
+        $api.addCls($api.dom(".aui-dialog"),"aui-hidden");
+        api.sendEvent({
+            name: 'dialogEvent',
+            extra: {type:'hidden'}
+        });
+//      api.alert({
+//          title: '提示',
+//          msg: '您点击了确定'
+//      });
+    }
+    function openRank(){
+       api.openWin({
+	       name: 'rank_list_win',
+	       url: 'rank_list_win.html'
+       });
+    }
 </script>
 </html>
 
