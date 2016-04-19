@@ -27,7 +27,7 @@
        api.closeWin();
     }
 	apiready = function(){
-        var item_optid = getQueryString('itemoptid');
+        var itemoptid = getQueryString('itemoptid');
 		api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
@@ -35,7 +35,7 @@
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
             name: 'votecon_frm',
-            url: 'votecon_frm.html?itemoptid='+item_optid,
+            url: 'votecon_frm.html?itemoptid='+itemoptid,
             bounces: true,
             rect: {
                 x: 0,
