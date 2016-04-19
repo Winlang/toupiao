@@ -8,52 +8,33 @@
 </head>
 <body>
 	<div class="aui-content">
-		<ul class="aui-grid-nine">
-            <li class="aui-col-xs-4 aui-text-center">
+		<!--选项列表-->
+        <div id="cates_list"></div>
+        <script type="text/html" id="cates">
+        <ul class="aui-grid-nine">
+
+            {{each list as value i}}
+            <li class="aui-col-xs-4 aui-text-center" onclick="openList({{value.id}})">
                 <span class="aui-iconfont aui-icon-edit aui-text-warning"></span>
-                <p>TOP 10</p>
+                <p>{{value.title}}</p>
             </li>
-            <li class="aui-col-xs-4 aui-text-center">
-                <span class="aui-iconfont aui-icon-emoji aui-text-danger"></span>
-                <p>兴趣</p>
-            </li>
-            <li class="aui-col-xs-4 aui-text-center">
-                <span class="aui-iconfont aui-icon-favor aui-text-warning"></span>
-                <p>行业</p>
-            </li>
-            <li class="aui-col-xs-4 aui-text-center" tapmode onclick="openList()">
-                <span class="aui-iconfont aui-icon-phone aui-text-pink"></span>
-                <p>关注</p>
-            </li>
-            <li class="aui-col-xs-4 aui-text-center">
-                <span class="aui-iconfont aui-icon-taxi aui-text-dark"></span>
-                <p>活动</p>
-            </li>
-            <li class="aui-col-xs-4 aui-text-center">
-                <span class="aui-iconfont aui-icon-camera aui-text-info"></span>
-                <p>星座</p>
-            </li>
-            <li class="aui-col-xs-4 aui-text-center">
-                <span class="aui-iconfont aui-icon-like aui-text-blue"></span>
-                <p>美食</p>
-            </li>
-            <li class="aui-col-xs-4 aui-text-center">
-                <span class="aui-iconfont aui-icon-deliver aui-text-danger"></span>
-                <p>游戏</p>
-            </li>
-            <li class="aui-col-xs-4 aui-text-center">
-                <span class="aui-iconfont aui-icon-evaluate aui-text-warning"></span>
-                <p>电影</p>
-            </li>
+            {{/each}}
+
 		</ul>
+        </script>
 	</div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/grid.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
 <script type="text/javascript">
-function openList(){
+function openList(cateid){
    api.openWin({
       name:'focus_win',
-      url:'focus_win.html'
+      url:'focus_win.html?cateid='+cateid
    });
 }
 	apiready = function(){
