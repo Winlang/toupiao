@@ -65,16 +65,14 @@
     	   vertical-align: middle;
     	   margin-right:15px;
     	   }
-    	.rule{
-    	   padding-bottom:10px;
+  	.rule{
     	   display:block;
-    	   width:60%;
-    	   margin:0 auto;
     	}
         .rule-1,.rule-2{
             display: inline-block;
-        }
-   	.vote-title{
+            margin-left:20%;
+         }  
+   	    .vote-title{
     	     font-size:18px;
     	}
     	.vote-title span{
@@ -94,11 +92,10 @@
     	.f-vote{
     	  font-size:12px;
     	  line-height:30px;
-    	}
-  </style>
+    	}</style>
 </head>
 <body>
-      <header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
+  <header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
         <a class="aui-btn aui-btn-warning aui-pull-left " tapmode onclick="closeWin()">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
@@ -188,9 +185,13 @@
                 <!--选项列表-->
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
-                <div class="aui-input-row idols" onclick="openVote({{value.item_optid}})">
-                   <input type="radio" class="aui-radio aui-radio-warning" name="idol"/>
-                   <div class="idol-info">
+                <div class="aui-input-row idols" >
+                   <input type="radio" class="aui-radio aui-radio-warning" name="idol" tapmode onclick="showToast()"/>
+                       <div class="aui-toast" style="display:none" id="default">
+                               <i class="aui-iconfont aui-icon-check"></i>
+                              <div class="aui-toast-content">投票成功</div>
+                       </div>
+                   <div class="idol-info" tapmode onclick="openVote({{value.item_optid}})">
                         <img src="http://testb.xieli.cn/Uploads/admin/{{value.item_optimg}}" alt="" />
                         {{value.item_opttitle}}
                    </div>
@@ -291,6 +292,13 @@
 	       name: 'rank_list_win',
 	       url: 'rank_list_win.html'
        });
+    }
+    
+    function showToast(){
+        $api.css($api.byId("default"),"display:block");
+        setTimeout(function(){
+            $api.css($api.byId("default"),"display:none");
+        },2000)
     }
 </script>
 </html>
