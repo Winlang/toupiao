@@ -204,7 +204,8 @@ function closeWin(){
     }
     
     apiready=function(){
-    
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header);
     }
 </script>
 </html>
