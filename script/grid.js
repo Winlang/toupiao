@@ -1,5 +1,5 @@
 $(function() {
-        //分类列表
+    //分类列表
 	$.post(ApiUrl+'/api/cates/?callback=?',{},function(data){
                 var data = JSON.parse(data);
                 
