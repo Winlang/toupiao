@@ -1,3 +1,46 @@
+//投票方法
+function toupiao(obj,id){
+	alert(id);
+	$.post(ApiUrl+'/api/toupiao?id='+id+'&callback=?',{},function(data){
+		var data = JSON.parse(data);
+        if(data.status == 0){
+            alert(data);
+            $(obj).removeAttr('onclick');
+            $(obj).children('a').html("已投票");
+        }else{
+            alert(data.data);
+        }
+    });
+}
+
+//发表评论
+function pinglun(id){
+	var comment = '123';
+	var member_id = 1;
+	$.post(ApiUrl+'/api/item_comment?id='+id+'&comment='+comment+'&member_id='+member_id+'&callback=?',{},function(data){
+		var data = JSON.parse(data);
+		if(data.status == 0){
+		    alert(data.data);
+	  	}else{
+		    alert(data.status);
+		    alert(data.data);
+		}
+	});
+}
+
+//点赞和点扯ajax
+function good_bad(obj,commid,status){
+    $.post(ApiUrl+'/api/comm_goodbad?id='+commid+'&status='+status+'&callback=?',{},function(data){
+    	var data = JSON.parse(data);
+        if(data.status == 0){
+            alert(data.data);
+            $(obj).removeAttr('onclick');
+            $(obj).next('span').html("已点赞");
+        }else{
+            alert(data.data);
+        }
+    });
+}
 $(function() {
     //获取主题选项id
     var itemoptid = getQueryString('itemoptid');
@@ -17,4 +60,5 @@ $(function() {
 		var html = template('itemopt_commdata', data);
 		document.getElementById('itemopt_comminfo').innerHTML = html;
 	});
+	
 })
