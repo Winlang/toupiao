@@ -131,10 +131,36 @@
               </div>
               <ul class="mine">
                 <li class="vote">
-                    <a>投一票</a>
+                    <a onclick="toupiao(this,{{data.item_optid}});">投一票</a>
+                    <script type="text/javascript">
+                        function toupiao(obj,id){
+                            $.post(ApiUrl+'/api/toupiao?id='+id+'&status='+status+'&callback=?',{},function(data){
+                                if(data.status == 0){
+                                    alert(data.data);
+                                    $(obj).removeAttr('onclick');
+                                    $(obj).html("已投票");
+                                }else{
+                                    alert(data.data);
+                                }
+                            },'json');
+                        }
+                    </script>
                 </li>
                 <li class="comment">
-                     <a>说两句</a>
+                     <a onclick="pinglun({{data.item_optid}});">说两句</a>
+                     <script type="text/javascript">
+                      function pinglun(id){
+                        var comment = '123';
+                        var member_id = 1;
+                        $.post(ApiUrl+'/api/item_comment?id='+id+'&comment='+comment+'&member_id='+member_id+'&callback=?',{},function(data){
+                          if(data.status == 0){
+                            alert(data.data);
+                          }else{
+                            alert(data.data);
+                          }
+                        });
+                      }
+                     </script>
                 </li>
                 <li class="share">
                      <a>分享拉票</a>
@@ -184,11 +210,12 @@
             </script>
           </ul>
     </div>
-    <script>
+    <script type="text/javascript">
         //点赞和点扯ajax
         function good_bad(obj,commid,status){
             $.post(ApiUrl+'/api/comm_goodbad?id='+commid+'&status='+status+'&callback=?',{},function(data){
                 if(data.status == 0){
+                    alert(data.data);
                     $(obj).removeAttr('onclick');
                     $(obj).next('span').html("已点赞");
                 }else{
@@ -211,7 +238,6 @@ function openGrid(){
         url:'grid_win.html'
    });
 }
-
 function closeWin(){
        api.closeWin();
     }
@@ -222,48 +248,3 @@ function closeWin(){
     }
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
