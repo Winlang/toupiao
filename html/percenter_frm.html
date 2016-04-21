@@ -68,7 +68,7 @@
             <li class="aui-list-view-cell aui-img">
             <img class="aui-img-object aui-pull-left per-avatar" src="../image/demo2.png" alt="" />
             <div class="aui-img-body">
-                  <span class="aui-text-danger">淡淡的忧伤<em class="per-badge">资料</em></span>
+                  <span class="aui-text-danger">淡淡的忧伤<em class="per-badge" tapmode onclick="openInfo()">资料</em></span>
                   <div class="aui-ellipsis-1"><i class="aui-badge aui-badge-warning">LV.1</i><span class="rank">议员</span></div>                                      
             </div>
             </li>
@@ -141,6 +141,19 @@
           name:'focus_win',
           url:'focus_win.html',
           bounces:true,
+          rect:{
+             x:0,
+             y:0,
+             w:'auto',
+             h:'auto'
+          }
+       });
+    }
+    function openInfo(){
+       api.openWin({
+         name: 'my_info_win',
+         url: 'my_info_win.html',
+         bounces:true,
           rect:{
              x:0,
              y:0,

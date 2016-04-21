@@ -103,7 +103,7 @@
         <a class="aui-iconfont aui-icon-menu aui-pull-right"></a>
   </header>
       <div id="iteminfo"></div>
-       <!-- <script type="text/html" id="item"> -->
+       <script type="text/html" id="item">
        <div class="aui-content">
             <div class="aui-text-center savatar">
                  <img src="http://testb.xieli.cn/Uploads/admin/{{data.item_titleimg}}" alt="" />
@@ -147,7 +147,7 @@
        <div class="aui-content aui-padded-10">
              <p>{{data.item_desc}}</p>
        </div>  
-       <!-- </script> -->
+       </script>
        <div class="aui-content">
              <ul class="aui-list-view">
              	<li class="aui-list-view-cell">
@@ -205,6 +205,12 @@
                 
            </div>      
        </div>
+
+
+       <div class="aui-toast"  style="display:none" id="loading">
+        <div class="aui-toast-loading"></div>
+        <div class="aui-toast-content">加载中</div>
+    </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/config.js"></script>
@@ -219,9 +225,69 @@
 	       url: 'votecon_frm.html?itemoptid='+itemoptid
        });
     }
-	apiready = function(){
-		api.parseTapmode();
-	}
+	// apiready = function(){
+ //    var header = $api.byId('aui-header');
+ //    $api.fixStatusBar(header); 
+
+ //    // api. addEventListener({name:'scrolltobottom'}, function(ret, err){
+ //    //     //refresh event callback
+ //    //     toDoRequest();
+ //    // });
+
+ //    api.addEventListener({
+ //        name:'scrolltobottom',
+ //        extra:{
+ //            threshold:10            //设置距离底部多少距离时触发，默认值为0，数字类型
+ //        }
+ //        },function(ret,err){
+ //            // 加载下一页的数据，然后向现有页面追加数据。
+ //            alert(888);
+ //    });
+    
+	// 	api.parseTapmode();
+	// }
+
+  apiready = function(){
+      //头部加宽
+      var header = $api.byId('aui-header');
+      $api.fixStatusBar(header); 
+
+      //上拉加载
+      api.addEventListener({name:'scrolltobottom'}, function(ret, err){
+        showLoading();
+          // api.parseTapmode();
+          // $api.append($api.dom('body'),'<div class="aui-loading"><div class="aui-loading-1"></div><div class="aui-loading-2"></div></div>');
+      });
+
+        
+    }
+
+    //隐藏loading
+    function hide(){
+        $api.remove($api.dom('.aui-loading'));
+    }
+
+    //显示loading
+    function show(){
+        var loading = $api.dom(".aui-loading");
+        if(!loading){
+            $api.append($api.dom('body'),'<div class="aui-loading"><div class="aui-loading-1"></div><div class="aui-loading-2"></div></div>');
+        }
+        
+    }
+
+  function toDoRequest(){
+    alert(123);
+}
+
+
+  function showLoading(){
+        $api.css($api.byId("loading"),"display:block");
+        setTimeout(function(){
+            $api.css($api.byId("loading"),"display:none");
+        },2000)
+    }
+
 	function doSearch(){
 		$api.addCls($api.dom(".aui-searchbar-wrap"),"focus");
 		$api.dom('.aui-searchbar-input input').focus();
