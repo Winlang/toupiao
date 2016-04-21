@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <title>投票内容页</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
     <style>
-    	body{
-    		height:100%;
-    		margin:0;
-    		padding:0;
-    	}
-    	.aui-content{
-    	    background-color:#fff;
-    	}
-    	.idol-avatar{
-    	    max-width:100%;
-    	    height:240px;
-    	}
-    	.f-avatar{
-    	   width:30px;
-    	   height:30px;
-    	   vertical-align: middle;
-    	   margin-right:15px;
-    	   border-radius: 15px;
-    	}
-    	.f-vote{
-    	   font-size:12px;
-    	   line-height:30px;
-    	}
-    	.mine{
-    	   padding-top:5px;
-    	}
-    	.mine li{
-    	   display:inline-block;
-    	   width:24%;
-    	   text-align:center;
-    	   padding:20px 0 6px;
-    	   background-size:30px;
-    	   background-repeat:no-repeat;
-    	   background-position:top;
-    	}
-    	.mine li a{
-    	   margin:10px 10px 0 10px;
-    	   color:#323237;
-    	   font-size:14px;
-    	   display: block;
-    	}
-    	.vote{
-    	   background-image:url("../image/vote.png");
-    	}
-    	.comment{
-    	   background-image:url("../image/comment.png");
-    	}
-    	.share{
-    	   background-image:url("../image/share.png");
-    	}
-    	.collect{
-    	   background-image:url("../image/collect.png");
-    	}
-    	.vote-info{
+        body{
+            height:100%;
+            margin:0;
+            padding:0;
+        }
+        .aui-content{
+            background-color:#fff;
+        }
+        .idol-avatar{
+            max-width:100%;
+            height:240px;
+        }
+        .f-avatar{
+           width:30px;
+           height:30px;
+           vertical-align: middle;
+           margin-right:15px;
+           border-radius: 15px;
+        }
+        .f-vote{
+           font-size:12px;
+           line-height:30px;
+        }
+        .mine{
+           padding-top:5px;
+        }
+        .mine li{
+           display:inline-block;
+           width:24%;
+           text-align:center;
+           padding:20px 0 6px;
+           background-size:30px;
+           background-repeat:no-repeat;
+           background-position:top;
+        }
+        .mine li a{
+           margin:10px 10px 0 10px;
+           color:#323237;
+           font-size:14px;
+           display: block;
+        }
+        .vote{
+           background-image:url("../image/vote.png");
+        }
+        .comment{
+           background-image:url("../image/comment.png");
+        }
+        .share{
+           background-image:url("../image/share.png");
+        }
+        .collect{
+           background-image:url("../image/collect.png");
+        }
+        .vote-info{
               position:relative;
               margin-top:-65px;
               height:60px;
               padding-top:10px;
               background-color:rgba(0,0,0,.6);          
-    	}
+        }
         .vote-info p{
             padding:0 20px;
             color:#fff;
@@ -110,80 +110,120 @@
     </style>
 </head>
 <body>
-	<header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
-	        <a class="aui-btn aui-btn-warning aui-pull-left" tapmode onclick="closeWin()">
-	            <span class="aui-iconfont aui-icon-left"></span>
-	        </a>
-	        <div class="aui-title"></div>
-	        <a class="aui-iconfont aui-icon-menu aui-pull-right"></a>
-	</header>
-	<div id="itemoptinfo"></div>
-	<script type="text/html" id="itemoptdata">
-	    <div class="aui-content">
-	          <img class="idol-avatar" src="http://testb.xieli.cn/Uploads/admin/{{data.item_optimg}}" alt="" />
-	          <div class="vote-info">
-	               <div class="aui-pull-left">
-	                     <p>得票: <span>{{data.item_opttoupiao}}</span></p>
-	               </div>
-	               <div class="aui-pull-right">
-	                     <p>排名: <span>{{data.item_optpaiming}}</span></p>
-	               </div>
-	          </div>
-	          <ul class="mine">
-	          	<li class="vote">
-	          	    <a>投一票</a>
-	          	</li>
-	          	<li class="comment">
-	          	     <a>说两句</a>
-	          	</li>
-	          	<li class="share">
-	          	     <a>分享拉票</a>
-	          	</li>
-	          	<li class="collect">
-	          	     <a>收藏</a>
-	          	</li>
-	          </ul>
-	    </div>
-	
-	<div class="aui-content">
-	     <ul class="aui-list-view">
-	     	<li class="aui-list-view-cell" onclick="openGrid()">
-	     	    <div class="aui-arrow-right aui-text-default f-vote">您有11个好友投了ta <img class="f-avatar aui-pull-right" src="../image/wx.png" alt="" /></div>
-	     	</li>
-	     </ul>
-	</div>
-	<div class="aui-content aui-padded-10">
-	      <p>{{data.item_optdesc}}</p>
-	</div>
-	</script>
-	
-	<div class="aui-content">
-	      <ul class="aui-list-view">
-	      	<div id="itemopt_comminfo"></div>
-	      	<script type="text/html" id="itemopt_commdata">
-	      		{{each data as v i}}
-		      	<li class="aui-list-view-cell aui-img">
-		      	     <div class="aui-img-object aui-pull-left ">
-		      	     	  <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
-		      	     </div>     
-		      	     <div class="aui-img-body">	
-		      	         <div class="commemt-caption">
-		      	           <div class="aui-pull-left">
-		      	                 <h5>生如夏花丶</h5>
-		      	                 <span>意见领袖</span>
-		      	           </div>
-		      	           <div class="aui-pull-right appreciate">
-		      	                <span class="aui-iconfont aui-icon-appreciate"></span><span>{{v.comm_good}}</span>
-		      	                <span class="aui-iconfont aui-icon-appreciate reverse"></span><span>{{v.comm_bad}}</span>
-		      	           </div>
-		      	         </div>  	   	            
-		      	           <p>{{v.comm_con}}....</p>
-		      	     </div>
-		      	</li>
-		      	{{/each}}
-	      	</script>
-	      </ul>
-	</div>
+    <header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
+            <a class="aui-btn aui-btn-warning aui-pull-left" tapmode onclick="closeWin()">
+                <span class="aui-iconfont aui-icon-left"></span>
+            </a>
+            <div class="aui-title"></div>
+            <a class="aui-iconfont aui-icon-menu aui-pull-right"></a>
+    </header>
+    <div id="itemoptinfo"></div>
+    <script type="text/html" id="itemoptdata">
+        <div class="aui-content">
+              <img class="idol-avatar" src="http://votetest.xieli.cn/Uploads/admin/{{data.item_optimg}}" alt="" />
+              <div class="vote-info">
+                   <div class="aui-pull-left">
+                         <p>得票: <span>{{data.item_opttoupiao}}</span></p>
+                   </div>
+                   <div class="aui-pull-right">
+                         <p>排名: <span>{{data.item_optpaiming}}</span></p>
+                   </div>
+              </div>
+              <ul class="mine">
+                <li class="vote">
+                    <a onclick="toupiao(this,{{data.item_optid}});">投一票</a>
+                    <script type="text/javascript">
+                        function toupiao(obj,id){
+                            $.post(ApiUrl+'/api/toupiao?id='+id+'&status='+status+'&callback=?',{},function(data){
+                                if(data.status == 0){
+                                    alert(data.data);
+                                    $(obj).removeAttr('onclick');
+                                    $(obj).html("已投票");
+                                }else{
+                                    alert(data.data);
+                                }
+                            },'json');
+                        }
+                    </script>
+                </li>
+                <li class="comment">
+                     <a onclick="pinglun({{data.item_optid}});">说两句</a>
+                     <script type="text/javascript">
+                     	function pinglun(id){
+                     		var comment = '123';
+                     		var member_id = 1;
+                     		$.post(ApiUrl+'/api/item_comment?id='+id+'&comment='+comment+'&member_id='+member_id+'&callback=?',{},function(data){
+                     			if(data.status == 0){
+                     				alert(data.data);
+                     			}else{
+                     				alert(data.data);
+                     			}
+                     		});
+                     	}
+                     </script>
+                </li>
+                <li class="share">
+                     <a>分享拉票</a>
+                </li>
+                <li class="collect">
+                     <a>收藏</a>
+                </li>
+              </ul>
+        </div>
+    
+    <div class="aui-content">
+         <ul class="aui-list-view">
+            <li class="aui-list-view-cell" onclick="openGrid()">
+                <div class="aui-arrow-right aui-text-default f-vote">您有11个好友投了ta <img class="f-avatar aui-pull-right" src="../image/wx.png" alt="" /></div>
+            </li>
+         </ul>
+    </div>
+    <div class="aui-content aui-padded-10">
+          <p>{{data.item_optdesc}}</p>
+    </div>
+    </script>
+    
+    <div class="aui-content">
+          <ul class="aui-list-view">
+            <div id="itemopt_comminfo"></div>
+            <script type="text/html" id="itemopt_commdata">
+                {{each data as v i}}
+                <li class="aui-list-view-cell aui-img">
+                     <div class="aui-img-object aui-pull-left ">
+                          <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
+                     </div>     
+                     <div class="aui-img-body"> 
+                         <div class="commemt-caption">
+                           <div class="aui-pull-left">
+                                 <h5>生如夏花丶</h5>
+                                 <span>意见领袖</span>
+                           </div>
+                           <div class="aui-pull-right a --> -->ppreciate">
+                                <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span><span>{{v.comm_good}}</span>
+                                <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span><span>{{v.comm_bad}}</span>
+                           </div>
+                         </div>
+                           <p>{{v.comm_con}}....</p>
+                     </div>
+                </li>
+                {{/each}}
+            </script>
+          </ul>
+    </div>
+    <script type="text/javascript">
+        //点赞和点扯ajax
+        function good_bad(obj,commid,status){
+            $.post(ApiUrl+'/api/comm_goodbad?id='+commid+'&status='+status+'&callback=?',{},function(data){
+                if(data.status == 0){
+                    alert(data.data);
+                    $(obj).removeAttr('onclick');
+                    $(obj).next('span').html("已点赞");
+                }else{
+                    alert(data.data);
+                }
+            },'json');
+        }
+    </script>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/config.js"></script>
@@ -198,7 +238,6 @@ function openGrid(){
         url:'grid_win.html'
    });
 }
-
 function closeWin(){
        api.closeWin();
     }
@@ -209,48 +248,3 @@ function closeWin(){
     }
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
