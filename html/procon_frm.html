@@ -134,7 +134,7 @@
        <script type="text/html" id="item">
        <div class="aui-content">
             <div class="aui-text-center savatar">
-                 <img src="http://votetest.xieli.cn/Uploads/admin/{{data.item_titleimg}}" alt="" />
+                 <img src="{{data.item_titleimg}}" alt="" />
             </div>
             <div class="vote-info">
                  <div class="aui-pull-left">
@@ -168,7 +168,7 @@
                           </div>
                </div>
                <div class="aui-content-padded rule-2">
-                    <div class="aui-btn aui-btn-warning aui-btn-outlined" tapmode onclick="openRank()">排行榜</div>
+                    <div class="aui-btn aui-btn-warning aui-btn-outlined" tapmode onclick="openRank({{data.id}})">排行榜</div>
                </div>
             </div>
        </div>
@@ -231,10 +231,10 @@
                    <div class="idol-info" tapmode onclick="openVote({{value.item_optid}})">
 
                         <div class="idol-info-1" >
-                              <img src="http://testb.xieli.cn/Uploads/admin/{{value.item_optimg}}" alt="" />
+                              <img src="{{value.item_optimg}}" alt="" />
                         </div>
                         <div class="idol-info-2">
-                             {{value.item_opttitle}} 
+                             {{value.item_opttitle}}
                              <p class="aui-ellipsis-2"><span class="aui-text-info">电玩丶A：</span>aaaaaaaaaaaaaaaaaa</p>
                         </div>                                        
 
@@ -405,10 +405,10 @@
 //          msg: '您点击了确定'
 //      });
     }
-    function openRank(){
+    function openRank(item_id){
        api.openWin({
 	       name: 'rank_list_win',
-	       url: 'rank_list_win.html'
+	       url: 'rank_list_win.html?item_id='+item_id
        });
     }
     

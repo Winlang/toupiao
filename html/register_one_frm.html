@@ -48,14 +48,12 @@
     </div>
 </body>
 <script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/jquery.js" ></script>
+<script type="text/javascript" src="../script/config.js" ></script>
+<script type="text/javascript" src="../script/user.js" ></script>
+<script type="text/javascript" src="../script/common.js" ></script>
+<script type="text/javascript" src="../script/template.js" ></script>
 <script type="text/javascript">
-    function setGroupIndex(){
-        api.setFrameGroupIndex({
-            name: 'register_frm',
-            index:1,
-            scroll:true
-        });
-    }
     var isinerval,times;
     apiready = function () {
         api.parseTapmode();
