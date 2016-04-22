@@ -38,7 +38,7 @@
                         });
                       }
                     
-                    </script>
+    </script>
     <style>
         body{
             height:100%;
@@ -164,12 +164,12 @@
                    </div>
               </div>
               <ul class="mine">
-                <li class="vote">
-                    <a onclick="toupiao(this,{{data.item_optid}});">投一票</a>
+                <li class="vote" onclick="toupiao(this,{{data.item_optid}});">
+                    <a>投一票</a>
                     
                 </li>
-                <li class="comment">
-                     <a onclick="pinglun({{data.item_optid}});">说两句</a>
+                <li class="comment" onclick="pinglun({{data.item_optid}});">
+                     <a >说两句</a>
                 
                 </li>
                 <li class="share">
@@ -220,20 +220,6 @@
             </script>
           </ul>
     </div>
-    <script type="text/javascript">
-        //点赞和点扯ajax
-        function good_bad(obj,commid,status){
-            $.post(ApiUrl+'/api/comm_goodbad?id='+commid+'&status='+status+'&callback=?',{},function(data){
-                if(data.status == 0){
-                    alert(data.data);
-                    $(obj).removeAttr('onclick');
-                    $(obj).next('span').html("已点赞");
-                }else{
-                    alert(data.data);
-                }
-            },'json');
-        }
-    </script>
 </body>
 
 <script type="text/javascript">
