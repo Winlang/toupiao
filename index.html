@@ -15,21 +15,21 @@
     </header>
     <footer class="aui-nav" id="aui-footer">
         <ul class="aui-bar-tab">
-            <li class="active-warning" id="tabbar1" tapmode onclick="randomSwitchBtn(this,'活动',0)">
+            <li class="active-warning" id="tabbar1" tapmode onclick="randomSwitchBtn(this,'首页',0)">
                 <span class="aui-iconfont aui-icon-favor"></span>
-                <p>活动</p>
+                <p>首页</p>
             </li>
-            <li id="tabbar2" tapmode onclick="randomSwitchBtn(this,'动态',1)">
-                <span class="aui-iconfont aui-icon-mark"></span>
-                <p>动态</p>
+            <li id="tabbar2" tapmode onclick="randomSwitchBtn(this,'找活动',1)">
+                <span class="aui-iconfont aui-icon-like"></span>
+                <p>找活动</p>
             </li>
             <li id="tabbar3" tapmode onclick="randomSwitchBtn(this,'投票',2)">
                 <span class="aui-iconfont aui-icon-roundadd"></span>
                 <p>投票</p>
             </li>
-            <li id="tabbar4" tapmode onclick="randomSwitchBtn(this,'找活动',3)">
-                <span class="aui-iconfont aui-icon-like"></span>
-                <p>找活动</p>
+            <li id="tabbar4" tapmode onclick="randomSwitchBtn(this,'消息',3)">
+                <span class="aui-iconfont aui-icon-mark"></span>
+                <p>消息</p>
             </li>
             <li id="tabbar5" tapmode onclick="randomSwitchBtn(this,'个人中心',4)">
                 <span class="aui-iconfont aui-icon-my"></span>
@@ -59,20 +59,20 @@
                 url: 'html/waterfall_frm.html', 
                 bounces:false
             },{
-                name: 'list_frm', 
-                url: 'html/list_frm.html', 
+                name: 'grid_frm', 
+                url: 'html/grid_frm.html', 
                 bounces:false
             },{
                 name: 'procon_frm', 
                 url: 'html/procon_frm.html', 
                 bounces:false
             },{
-                name: 'grid_frm', 
-                url: 'html/grid_frm.html', 
+                name: 'list_frm', 
+                url: 'html/list_frm.html', 
                 bounces:false
             },{
-                name: 'my', 
-                url: 'html/my.html', 
+                name: 'percenter_frm', 
+                url: 'html/percenter_frm.html', 
                 bounces:false
             }]
         }, function(ret, err){
@@ -82,16 +82,16 @@
             var name = ret.name;
             var index = ret.index;
             if(index==0){
-                $api.text($api.byId('header-title'),'活动');
+                $api.text($api.byId('header-title'),'首页');
                 $api.addCls($api.byId('tabbar1'), 'active-warning');
             }else if(index==1){
-                $api.text($api.byId('header-title'),'动态');
+                $api.text($api.byId('header-title'),'找活动');
                 $api.addCls($api.byId('tabbar2'), 'active-warning');
            }else if(index==2){
                 $api.text($api.byId('header-title'),'投票');
                 $api.addCls($api.byId('tabbar3'), 'active-warning');
             }else if(index==3){
-                $api.text($api.byId('header-title'),'找活动');
+                $api.text($api.byId('header-title'),'消息');
                 $api.addCls($api.byId('tabbar4'), 'active-warning');
             }else if(index==4){
                 $api.text($api.byId('header-title'),'个人中心');
