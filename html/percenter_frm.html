@@ -133,6 +133,20 @@
             </li>
         </ul>
     </div>
+    <section class="aui-content">
+        <ul class="aui-list-view">
+            <li class="aui-list-view-cell" tapmode onclick="login()">
+                <a class="aui-arrow-right">
+                   <i class="aui-iconfont aui-icon-friendadd aui-bg-info"></i>  登录
+                </a>
+            </li>
+            <li class="aui-list-view-cell" tapmode onclick="register()">
+                <a class="aui-arrow-right">
+                   <i class="aui-iconfont aui-icon-friendfamous aui-bg-success"></i> 注册
+                </a>
+            </li>
+        </ul>
+    </section>
 </body>
 <script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript">
@@ -164,6 +178,28 @@
     }
     apiready = function(){
     
+    }
+   function register(){
+        api.openWin({
+            name: 'register_win',
+            url: 'register_win.html',
+            delay:delay
+        });
+    }
+    function login(){
+        api.openWin({
+            name: 'login',
+            url: 'login.html',
+            delay:delay
+        });
+    }
+    var delay = 0;
+    apiready = function () {
+        api.parseTapmode();
+        
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
     }
 </script>
 </html>
