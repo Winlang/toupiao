@@ -168,7 +168,7 @@
                           </div>
                </div>
                <div class="aui-content-padded rule-2">
-                    <div class="aui-btn aui-btn-warning aui-btn-outlined" tapmode onclick="openRank()">排行榜</div>
+                    <div class="aui-btn aui-btn-warning aui-btn-outlined" tapmode onclick="openRank({{data.id}})">排行榜</div>
                </div>
             </div>
        </div>
@@ -405,10 +405,10 @@
 //          msg: '您点击了确定'
 //      });
     }
-    function openRank(){
+    function openRank(item_id){
        api.openWin({
 	       name: 'rank_list_win',
-	       url: 'rank_list_win.html'
+	       url: 'rank_list_win.html?item_id='+item_id
        });
     }
     

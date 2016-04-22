@@ -27,7 +27,7 @@
        api.closeWin();
     }
 	apiready = function(){
-        var item_optid = getQueryString('itemoptid');
+        var item_id = getQueryString('item_id');
 		api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
@@ -35,7 +35,7 @@
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
             name: 'rank_list_frm',
-            url: 'rank_list_frm.html',
+            url: 'rank_list_frm.html?item_id='+item_id,
             bounces: true,
             rect: {
                 x: 0,
