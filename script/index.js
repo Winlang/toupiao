@@ -1,15 +1,16 @@
 $(function() {
-	$.post(ApiUrl+'/api/index/?callback=?',{},function(data){
-        // var data_list = {
-        //     title: '标签',
-        //     list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
-        // };
-        
-        var data = JSON.parse(data);
-        //alert(typeof(data));
-        var html = template('test', data);
-        document.getElementById('aui-content').innerHTML = html;
-	});
+        $.post(ApiUrl+'/api/index/?callback=?',{},function(data){
+                var data = JSON.parse(data);
+
+                //处理图片
+                for (var i = data.list.length - 1; i >= 0; i--) {
+                        data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
+                }
+
+                
+                var html = template('test', data);
+                document.getElementById('aui-content').innerHTML = html;
+        });
 })
 
 
