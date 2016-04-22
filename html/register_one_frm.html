@@ -28,7 +28,7 @@
             <div class="aui-input-row">
                 <input type="number" class="aui-input" id="code" placeholder="请输入收到的验证码"/>
                 <span class="aui-input-addon">
-                    <div class="aui-btn" id="sendVerify" status="1" tapmode>获取验证码</div>
+                    <button class="aui-btn" id="sendVerify" status="1" tapmode>获取验证码</button>
                 </span>
             </div>
             
@@ -42,7 +42,7 @@
                 <input type="password" id="password2" class="aui-input" placeholder="确认密码"/>
             </div>
             <div class="aui-btn-row">
-                <div class="aui-btn aui-btn-warning" tapmode onclick="setGroupIndex()">下一步</div>
+                <div class="aui-btn aui-btn-warning" tapmode onclick="setGroupIndex()">注册</div>
             </div>
         </div>
     </div>
@@ -50,8 +50,8 @@
 <script type="text/javascript" src="../script/api.js" ></script>
 <script type="text/javascript" src="../script/jquery.js" ></script>
 <script type="text/javascript" src="../script/config.js" ></script>
-<script type="text/javascript" src="../script/user.js" ></script>
 <script type="text/javascript" src="../script/common.js" ></script>
+<script type="text/javascript" src="../script/user.js" ></script>
 <script type="text/javascript" src="../script/template.js" ></script>
 <script type="text/javascript">
     var isinerval,times;
@@ -72,6 +72,5 @@
         $api.attr($api.byId('showpass-btn'),'onclick','showPassword();');
         api.parseTapmode();
     }
-    
 </script>
 </html>

@@ -10,7 +10,11 @@ function getQueryString(name) {
 //发送短信操作
 function sendMsg(mobile){
 	$.post(ApiUrl+'/api/sendMsg/?callback=?',{'mobile':mobile},function(data){
-		alert(data);
+		if(data.status == 1){
+			return 1;
+		}else{
+			return 0;
+		}
 	});
 }
 
@@ -24,3 +28,11 @@ function set_item_titleimg(item_titleimg){
 function set_item_optimg(item_optimg){
 	return UploadUrl+'/admin/'+item_optimg;
 }
+
+function showToast(){
+    $api.css($api.byId("default"),"display:block");
+    setTimeout(function(){
+        $api.css($api.byId("default"),"display:none");
+    },2000)
+}
+
