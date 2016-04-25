@@ -22,7 +22,7 @@ $(function(){
 		}
 
 		//倒计时
-		$(this).html(5);
+		$(this).html(60);
 
 		//不能被点击
 		$(this).attr("disabled", "disabled");
@@ -45,7 +45,7 @@ function StepTimes() {
 	}
 }
 
-//提交下一步
+//提交下一步   注册功能
 function setGroupIndex(){
         //获取value值
         var mobile = $('#mobile').val();
@@ -59,13 +59,52 @@ function setGroupIndex(){
         }
 
         //提交数据
-        $.post(ApiUrl+'/api/register_one/?callback=?',{'mobile':mobile,'code':code,'password':password,'password2':password2},function(data){
-        	alert(data);
-        });
+        $.post(ApiUrl+'/api/register_one',{'mobile':mobile,'code':code,'password':password,'password2':password2},function(data){
+        	//注册成功 进入个人中心
+        	if(data.status == 1){
 
-        api.setFrameGroupIndex({
-            name: 'percenter_frm',
-            index:1,
-            scroll:true
-        });
+	        	api.openWin({
+			        name: 'percenter',
+			        url: 'percenter_win.html',
+			        bounces: true,
+			        rect: {
+			            x: 0,
+			            y: 0,
+			            w: 'auto',
+			            h: 'auto'
+			        }
+	    		});
+	        }else{
+	        	alert('注册失败,请重新注册~');
+	        }
+        },'json');
 }
+
+//登陆
+function login(){
+        //获取value值
+        var mobile = $('#mobile').val();
+        var password = $('#password').val();
+
+        //提交数据
+        $.post(ApiUrl+'/api/register_one',{'mobile':mobile,'passwd':password},function(data){
+        	//登陆成功 进入个人中心
+        	if(data.status == 1){
+
+	        	api.openWin({
+			        name: 'percenter',
+			        url: 'percenter_win.html',
+			        bounces: true,
+			        rect: {
+			            x: 0,
+			            y: 0,
+			            w: 'auto',
+			            h: 'auto'
+			        }
+	    		});
+	        }else{
+	        	alert('登陆失败,请重新登陆~');
+	        }
+        },'json');
+}
+
