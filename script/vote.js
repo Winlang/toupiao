@@ -3,7 +3,7 @@ function toupiao(obj,id){
 	$.post(ApiUrl+'/api/toupiao?id='+id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
         if(data.status == 0){
-            alert(data);
+            alert(data.data);
             $(obj).removeAttr('onclick');
             $(obj).children('a').html("已投票");
         }else{
@@ -17,13 +17,12 @@ function pinglun(id){
 	var comment = '123';
 	var member_id = 1;
 	$.post(ApiUrl+'/api/item_comment?id='+id+'&comment='+comment+'&member_id='+member_id+'&callback=?',{},function(data){
-		var data = JSON.parse(data);
-		if(data.status == 0){
-		    alert(data.data);
-	  	}else{
-		    alert(data.status);
-		    alert(data.data);
-		}
+			var data = JSON.parse(data);
+			if(data.status == 0){
+			    alert(data.data);
+		  	}else{
+			    alert(data.data);
+			}
 	});
 }
 
@@ -34,7 +33,11 @@ function good_bad(obj,commid,status){
         if(data.status == 0){
             alert(data.data);
             $(obj).removeAttr('onclick');
-            $(obj).next('span').html("已点赞");
+            if(status == 'good'){
+            	$(obj).next('span').html("已点赞");
+            }else{
+            	$(obj).next('span').html("已点扯");
+            }
         }else{
             alert(data.data);
         }
