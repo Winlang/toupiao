@@ -113,6 +113,70 @@
            font-size:12px;
            color:#333;
         }
+      
+   	.aui-nav {
+		border-top:1px solid #eee;
+
+	}  
+	.ask-input {
+		height: 32px;
+		line-height: 32px;
+		margin: 10px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		font-size: 14px;
+		color: #999;
+		padding-left: 5px;
+	}
+	.ask-text {
+		height: 120px;
+		line-height: 30px;
+		margin-bottom: 10px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		font-size: 14px;
+		color: #666;
+		overflow: hidden;
+	}
+	.ask-text textarea {
+		height: 100%;
+		padding: 5px;
+		margin: 0;
+
+		border:none;
+	}
+	.mark {
+		background: rgba(0,0,0,0.5);
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		display: none;
+		z-index: 1;
+	}
+	.ask-reply-btn {
+		padding: 8px 0;
+	}
+	#ask-reply-box {
+		padding: 10px;
+	}
+	#aui-footer {
+		/*background: rgba(255,255,255,0.5);*/
+		background:rgba(255,255,255,1);		
+	}
+	#aui-footer.show {
+		-webkit-animation: showIn .5s ease both;
+		animation: showIn .5s ease both;
+	}
+	@-webkit-keyframes showIn {
+		form { height: 55px;background: rgba(255,255,255,0.5);}
+		to { height: 200px; background: rgba(255,255,255,1);}
+	}
+	@-webkit-keyframes hideIn {
+		from { opacity: 1;top: 8px;}
+		to { opacity: 0;top: -20px;}
+	}
     </style>
 </head>
 <body>
@@ -123,6 +187,7 @@
             <div class="aui-title"></div>
             <a class="aui-iconfont aui-icon-menu aui-pull-right"></a>
     </header>
+    <div class="mark" id="mark"></div>
     <div id="itemoptinfo"></div>
     <script type="text/html" id="itemoptdata">
         <div class="aui-content">
@@ -152,7 +217,7 @@
                 </li>
               </ul>
         </div>
-    
+
     <div class="aui-content">
          <ul class="aui-list-view">
             <li class="aui-list-view-cell" onclick="openGrid()">
@@ -192,6 +257,16 @@
             </script>
           </ul>
     </div>
+    <div class="aui-line-x"></div>
+    <footer class="aui-nav" id="aui-footer">
+		<div class="ask-input" tapmode onclick="showReply()" id="ask-input">发表评论</div>
+		<div id="ask-reply-box">
+			<div class="ask-text" id="ask-text">
+				<textarea placeholder="请输入你的评论，被赞后可获得奖励"></textarea>
+			</div>
+			<div class="aui-btn aui-btn-block aui-btn-info ask-reply-btn">提交</div>
+		</div>
+	</footer>
 </body>
 
 <script type="text/javascript">
@@ -205,9 +280,28 @@ function closeWin(){
        api.closeWin();
     }
     
+//发表评论
     apiready=function(){
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
+        	$api.addEvt($api.byId('mark'), 'click', function(){
+		$api.css($api.dom(".mark"),"display:none");
+		$api.css($api.byId("ask-input"),"display:block");
+		$api.css($api.byId("ask-reply-box"),"display:none");
+		$api.removeCls($api.byId("aui-footer"),"show");
+	});
     }
+function showReply(){
+	$api.css($api.dom(".mark"),"display:block");
+	$api.css($api.byId("ask-input"),"display:none");
+	$api.css($api.byId("ask-reply-box"),"display:block");
+	$api.addCls($api.byId("aui-footer"),"show");
+}
+function openAnswer(){
+	api.openWin({
+		name: 'comment_win',
+		url: 'comment_win.html'
+	});
+}
 </script>
 </html>
