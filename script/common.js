@@ -36,3 +36,20 @@ function showToast(){
     },2000)
 }
 
+function login(){
+    api.openWin({
+        name: 'login',
+        url: 'login.html',
+        delay:delay
+    });
+}
+
+function is_login(){
+	$.post(ApiUrl+'/api/is_login',{},function(data){
+		if(data.status == 1){
+			return 1;
+		}else{
+			return 2;
+		}
+	});
+}
