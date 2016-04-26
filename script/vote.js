@@ -14,15 +14,15 @@ function toupiao(obj,id){
 
 //发表评论
 function pinglun(id){
-	var comment = '123';
+	var comment = $('#ask-text textarea').val();
 	var member_id = 1;
 	$.post(ApiUrl+'/api/item_comment?id='+id+'&comment='+comment+'&member_id='+member_id+'&callback=?',{},function(data){
-			var data = JSON.parse(data);
-			if(data.status == 0){
-			    alert(data.data);
-		  	}else{
-			    alert(data.data);
-			}
+		var data = JSON.parse(data);
+		if(data.status == 0){
+		    alert(data.data);
+	  	}else{
+		    alert(data.data);
+		}
 	});
 }
 

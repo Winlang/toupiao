@@ -205,11 +205,11 @@
                     <a>投一票</a>
                     
                 </li>
-                <li class="comment" onclick="pinglun({{data.item_optid}});">
+                <li class="comment" onclick="showReply();">
                      <a >说两句</a>
                 
                 </li>
-                <li class="share">
+                <li class="share" onclick="weixin_share();">
                      <a>分享拉票</a>
                 </li>
                 <li class="collect">
@@ -264,44 +264,106 @@
 			<div class="ask-text" id="ask-text">
 				<textarea placeholder="请输入你的评论，被赞后可获得奖励"></textarea>
 			</div>
-			<div class="aui-btn aui-btn-block aui-btn-info ask-reply-btn">提交</div>
+			<div class="aui-btn aui-btn-block aui-btn-info ask-reply-btn" onclick="pinglun({{data.item_optid}})">提交</div>
 		</div>
 	</footer>
 </body>
 
 <script type="text/javascript">
-function openGrid(){
-   api.openWin({
-        name:'grid_win',
-        url:'grid_win.html'
-   });
-}
-function closeWin(){
+    function openGrid(){
+       api.openWin({
+            name:'grid_win',
+            url:'grid_win.html'
+       });
+    }
+    function closeWin(){
        api.closeWin();
     }
     
-//发表评论
+
     apiready=function(){
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
-        	$api.addEvt($api.byId('mark'), 'click', function(){
-		$api.css($api.dom(".mark"),"display:none");
-		$api.css($api.byId("ask-input"),"display:block");
-		$api.css($api.byId("ask-reply-box"),"display:none");
-		$api.removeCls($api.byId("aui-footer"),"show");
-	});
+
+        //发表评论
+        $api.addEvt($api.byId('mark'), 'click', function(){
+            $api.css($api.dom(".mark"),"display:none");
+            $api.css($api.byId("ask-input"),"display:block");
+            $api.css($api.byId("ask-reply-box"),"display:none");
+            $api.removeCls($api.byId("aui-footer"),"show");
+        });
     }
-function showReply(){
-	$api.css($api.dom(".mark"),"display:block");
-	$api.css($api.byId("ask-input"),"display:none");
-	$api.css($api.byId("ask-reply-box"),"display:block");
-	$api.addCls($api.byId("aui-footer"),"show");
-}
-function openAnswer(){
-	api.openWin({
-		name: 'comment_win',
-		url: 'comment_win.html'
-	});
-}
+
+    //qq分享
+    function qq_share(){
+        var qq = api.require('qq');
+        qq.installed(function(ret,err){
+            if(ret.status){
+                qq.shareNews({
+                    url:'http://www.xieli.cn',
+                    title:'小石投',
+                    description:'我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn',
+                    imgUrl:'http://upload.wabei.cn/2011/0807/20110807025817844.jpg'
+                });
+            }else{
+                api.alert("请先安装qq客户端");
+            } 
+        });
+    }
+
+    //微信分享
+    function weixin_share(){
+        var weixin = api.require('weiXin');
+        weixin.getUserInfo(function(ret,err){
+            if(ret.status){
+                api.alert({msg: ret.nickname});
+            }else{
+                api.alert({msg: "错误："+err.msg});
+            }
+        });
+    }
+
+    //新浪微博分享
+    function sina_share(){
+        var sinaweibo = api.require('sinaWeiBo');
+        sinaweibo.auth(function(ret,err){
+            if (ret.status) {
+                sinaweibo.sendRequest({
+                    contentType: 'text',
+                    text: '我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn',
+                    imageUrl: 'fs://a.png'
+                },function(ret,err){
+                    if (ret.status) {
+                        api.alert({
+                            title: '发表微博',
+                            msg: '发表成功',
+                            buttons: ['确定']
+                        });
+                    }else{
+                        api.alert({
+                            title: '发表微博',
+                            msg: '发表失败',
+                            buttons: ['确定']
+                        });
+                    }
+                });
+            }else{
+                api.alert({msg:'授权失败'+err.msg});
+            }
+        });
+    }
+
+    function showReply(){
+    	$api.css($api.dom(".mark"),"display:block");
+    	$api.css($api.byId("ask-input"),"display:none");
+    	$api.css($api.byId("ask-reply-box"),"display:block");
+    	$api.addCls($api.byId("aui-footer"),"show");
+    }
+    function openAnswer(){
+    	api.openWin({
+    		name: 'comment_win',
+    		url: 'comment_win.html'
+    	});
+    }
 </script>
 </html>
