@@ -126,7 +126,7 @@ function login(){
 
 	        	api.openWin({
 			        name: 'percenter',
-			        url: 'percenter_win.html',
+			        url: 'percenter_frm.html',
 			        bounces: true,
 			        rect: {
 			            x: 0,
