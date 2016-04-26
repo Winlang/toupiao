@@ -11,10 +11,11 @@
         <a class="aui-btn aui-btn-warning aui-pull-left" tapmode onclick="closeWin()">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
-        <div class="aui-title">列表页2</div>
+        <div class="aui-title">主题</div>
     </header>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript">
     function closeWin(){
         api.closeWin();
@@ -25,9 +26,11 @@
         $api.fixStatusBar(header); 
         var headerPos = $api.offset(header);
         var body_h = $api.offset($api.dom('body')).h;
+		
+		var cateid=getQueryString('cateid');
         api.openFrame({
             name: 'grid_list_frm',
-            url: 'grid_list_frm.html',
+            url: 'grid_list_frm.html?cateid='+cateid,
             bounces: true,
             rect: {
                 x: 0,
