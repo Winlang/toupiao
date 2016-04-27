@@ -1,4 +1,46 @@
 $(function(){
+	$.post(ApiUrl+'/api/is_login',{},function(data){
+		//var data = JSON.parse(data);
+		if(data.status > 0){
+		alert('已登录');
+		//用户中心信息
+			$.post(ApiUrl+'/api/userinfo',{'uid':data.status},function(data){
+		        
+		        var data = JSON.parse(data);
+		        //昵称
+		        $('#nickname').html(data.mobile);
+
+		        //金币数量
+
+		        //票友数量
+		        
+		        //我的号召力
+
+		        //积分等级
+
+		        //红包数量
+
+
+		        // //处理图片
+		        // for (var i = data.list.length - 1; i >= 0; i--) {
+		        //         data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
+		        // }
+
+		        
+		        var html = template('info', data);
+		        document.getElementById('info_place').innerHTML = html;
+		    });
+		}else{
+			//未登录
+			alert('未登录');
+			login_page();
+		}
+	},'json');
+	
+
+
+
+
 	$('#sendVerify').click(function(){
 		var mobile = $('#mobile').val();
 
@@ -85,11 +127,21 @@ function login(){
         //获取value值
         var mobile = $('#mobile').val();
         var password = $('#password').val();
-
+        if(mobile == '' || mobile == null){
+        	alert('手机号不能为空');
+        	return false;
+        }
+        if(password == '' || password == null){
+        	alert('密码不能为空');
+        	return false;
+        }
         //提交数据
-        $.post(ApiUrl+'/api/register_one',{'mobile':mobile,'passwd':password},function(data){
+        $.post(ApiUrl+'/api/login',{'mobile':mobile,'passwd':password},function(data){
         	//登陆成功 进入个人中心
         	if(data.status == 1){
+        		//设置 登陆表识
+        		$api.setStorage('is_login','yes');
+        		alert($api.getStorage('is_login'));
 
 	        	api.openWin({
 			        name: 'percenter',
