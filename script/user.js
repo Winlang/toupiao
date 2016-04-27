@@ -143,17 +143,22 @@ function login(){
         		$api.setStorage('is_login','yes');
         		alert($api.getStorage('is_login'));
 
-	        	api.openWin({
-			        name: 'percenter',
-			        url: 'percenter_win.html',
-			        bounces: true,
-			        rect: {
-			            x: 0,
-			            y: 0,
-			            w: 'auto',
-			            h: 'auto'
-			        }
-	    		});
+	      //   	api.openWin({
+			    //     name: 'percenter',
+			    //     url: 'percenter_win.html',
+			    //     bounces: true,
+			    //     rect: {
+			    //         x: 0,
+			    //         y: 0,
+			    //         w: 'auto',
+			    //         h: 'auto'
+			    //     }
+	    		// });
+	    		
+	    		// 回到首页
+                api.closeToWin({
+                        name : 'root'
+                });
 	        }else{
 	        	alert('登陆失败,请重新登陆~');
 	        }

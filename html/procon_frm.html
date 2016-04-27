@@ -36,6 +36,10 @@
     	     border:1px solid #858f87;
     	     
     	 }*/
+    	.option{
+    	    display:block;
+/*    	    position:relative;*/
+    	}
     	.idol-info{
     	     display:inline-block;
     	     position: relative;
@@ -46,37 +50,48 @@
     	     display:inline-block;
     	     float:left;
     	 }
+    	 .idol-info-2{padding-top:20px;}
     	.idol-info-1 img{
     	         width:40px;
     	         height:40px;
     	         margin-right:10px;
     	         margin-top:10px;
     	 }
-    	 .idol-info-2 p{
-    	   border:1px solid #ccc;
-    	   padding:5px;
-    	   max-width:190px;
-    	   word-wrap: break-word;
-    	   word-break: break-all;
-    	   border-radius: 3px;
-    	 }
     	.idol-vote{
     	     display:inline-block;
     	     font-size:12px; 
+/*    	     position: absolute;
+    	     bottom:5px;
+    	     right:5px;*/
     	}
     	.idol-vote img{
     	    position: relative;
     	    top:5px;
     	}
-    	.idol-vote-comment{
+    	.comment{
     	   display:block;
+    	   padding-left:12%;
+    	}
+    	.comment-1{
+    	  display:inline-block;
+    	  max-width:70%;
+    	  height:auto;
+          word-break:break-all;
+          word-wrap: break-word;
+          text-overflow:ellipsis;
+          background-color:#f5f5f5;
+          color:#333;
+          padding:5px;
+          border-radius: 5px;
+    	 }
+    	.comment-2{
+    	   display:inline-block;
     	   width:60px;
     	   height:25px;
     	   margin-top:5px;
     	   border:1px solid #3498db;
     	   border-radius:15px;
     	   text-align:center;
-    	 /*line-height: 25px;*/
     	   font-size:12px;
     	   padding:0 5px;
     	}
@@ -228,29 +243,33 @@
                                <i class="aui-iconfont aui-icon-check"></i>
                               <div class="aui-toast-content">投票成功</div>
                        </div>
-                   <div class="idol-info" tapmode onclick="openVote({{value.item_optid}})">
-
-                        <div class="idol-info-1" >
-                              <img src="{{value.item_optimg}}" alt="" />
+                   <div class="option">
+	                    <div class="idol-info" tapmode onclick="openVote({{value.item_optid}})">
+	                        <div class="idol-info-1" >
+	                              <img src="{{value.item_optimg}}" alt="" />
+	                        </div>
+	                        <div class="idol-info-2">
+	                             {{value.item_opttitle}}                            
+	                        </div>                                                           
+	                        <!--<img src="http://votetest.xieli.cn/Uploads/admin/{{value.item_optimg}}" alt="" />
+	                        {{value.item_opttitle}}-->
+	                   </div>
+	                   <div class="aui-pull-right idol-vote">
+	                         <div>
+	                               <img src="../image/idol-1.png" alt="" />{{value.item_opttoupiao}}
+	                               <img src="../image/idol-2.png" alt="" />{{value.item_optcomment_number}}
+	                         </div>
+	                   </div>
+                   </div>
+                   <div class="comment">
+                        <div class="comment-1 aui-ellipsis-2">
+                             <span class="aui-text-danger aui-padded-5">SSA:</span>qqqqqqqqqqqqqqddddddddddfffffffffrrrrrrrr
                         </div>
-                        <div class="idol-info-2">
-                             {{value.item_opttitle}}
-                             <p class="aui-ellipsis-2"><span class="aui-text-info">电玩丶A：</span>aaaaaaaaaaaaaaaaaa</p>
-                        </div>                                        
-
-                        <!--<img src="http://votetest.xieli.cn/Uploads/admin/{{value.item_optimg}}" alt="" />
-                        {{value.item_opttitle}}-->
-
+                        <div class="comment-2 aui-text-info aui-pull-right">
+	                          <span class="aui-iconfont aui-icon-appreciate"></span> 99+
+	                    </div>
                    </div>
-                   <div class="aui-pull-right idol-vote">
-                         <div>
-                               <img src="../image/idol-1.png" alt="" />{{value.item_opttoupiao}}
-                               <img src="../image/idol-2.png" alt="" />{{value.item_optcomment_number}}
-                         </div>
-                         <div class="idol-vote-comment aui-text-info">
-                               <span class="aui-iconfont aui-icon-appreciate"></span> 99+
-                         </div>
-                   </div>
+
                 </div>
                 {{/each}}
                 </script>
