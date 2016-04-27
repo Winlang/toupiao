@@ -68,10 +68,13 @@
             <li class="aui-list-view-cell aui-img">
             <img class="aui-img-object aui-pull-left per-avatar" src="../image/demo2.png" alt="" />
             <div class="aui-img-body">
-                  <span class="aui-text-danger">淡淡的忧伤<em class="per-badge" tapmode onclick="openInfo()">资料</em></span>
-                  <div class="aui-ellipsis-1"><i class="aui-badge aui-badge-warning">LV.1</i><span class="rank">议员</span></div>                                      
+                  <span class="aui-text-danger"><em id="nickname" tapmode onclick="login()">登陆/注册</em><em class="per-badge" tapmode onclick="openInfo()">资料</em></span>
+                  <div class="aui-ellipsis-1"><i class="aui-badge aui-badge-warning">LV.1</i><span class="rank">议员</span></div>                                
             </div>
             </li>
+
+            <li id="info_place"></li>
+            <script type="text/html" id="info">
             <li class="aui-list-view-cell per-account">
                  <div>金币：<span class="aui-text-danger coin">281,858</span></div>
                  <div class="per-change">
@@ -79,6 +82,7 @@
                        <span><i class="aui-iconfont aui-icon-form aui-text-danger"></i>明细</span>
                  </div>               
             </li>
+            </script>
             <li class="aui-list-view-cell" onclick="openFocus()">
                <div class="aui-arrow-right">
                      <i class="aui-iconfont aui-icon-edit aui-bg-info"></i>关注

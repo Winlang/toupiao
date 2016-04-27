@@ -1,27 +1,43 @@
 $(function(){
 	$.post(ApiUrl+'/api/is_login',{},function(data){
-		if(data.status == 1){
-			//已登录
+		//var data = JSON.parse(data);
+		if(data.status > 0){
+		alert('已登录');
+		//用户中心信息
+			$.post(ApiUrl+'/api/userinfo',{'uid':data.status},function(data){
+		        
+		        var data = JSON.parse(data);
+		        //昵称
+		        $('#nickname').html(data.mobile);
+
+		        //金币数量
+
+		        //票友数量
+		        
+		        //我的号召力
+
+		        //积分等级
+
+		        //红包数量
+
+
+		        // //处理图片
+		        // for (var i = data.list.length - 1; i >= 0; i--) {
+		        //         data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
+		        // }
+
+		        
+		        var html = template('info', data);
+		        document.getElementById('info_place').innerHTML = html;
+		    });
 		}else{
 			//未登录
-			login();
+			alert('未登录');
+			login_page();
 		}
-	});
+	},'json');
 	
-	//用户中心信息
-	// $.post(ApiUrl+'/api/userinfo',{},function(data){
- //        alert(data);
- //        // var data = JSON.parse(data);
 
- //        // //处理图片
- //        // for (var i = data.list.length - 1; i >= 0; i--) {
- //        //         data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
- //        // }
-
-        
- //        // var html = template('test', data);
- //        // document.getElementById('aui-content').innerHTML = html;
- //    });
 
 
 
@@ -126,7 +142,7 @@ function login(){
 
 	        	api.openWin({
 			        name: 'percenter',
-			        url: 'percenter_win.html',
+			        url: 'percenter_frm.html',
 			        bounces: true,
 			        rect: {
 			            x: 0,

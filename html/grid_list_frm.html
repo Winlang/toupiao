@@ -46,13 +46,16 @@
     </style>
 </head>
 <body>
-		<div id="aui-content"></div>
+	<div id="aui-content"></div>
 		 <script id="test" type="text/html">
 	      	<ul class="aui-waterfall" id="aui-waterfall">
 	      	{{each list as value i}}
 	      		<li onclick="openNew({{value.id}})">
 	      	    	<div class="aui-waterfall-header">
-	      	          	<img src="http://votetest.xieli.cn/Uploads/admin/{{value.item_titleimg}}" alt="" />
+
+	      	          	<img src="{{value.item_titleimg}}" alt="" />
+
+
 	      	    	</div>
 	      	    	<div class="aui-waterfall-body in-title">
 	      	          <h4></h4>
@@ -63,21 +66,21 @@
 	      	</ul>
 	      </script>
 </body>
-
-<script type="text/javascript" src="../script/aui-waterfall.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
 <script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/catedata.js"></script>
 <script type="text/javascript" src="../script/template.js"></script>
-<!--数据请求-->
-<script type="text/javascript" src="../script/index.js"></script>
 <script type="text/javascript">
-$aui.waterfall($api.byId("aui-waterfall"),{
-      col:1,
-      padding:-5,
-      space:10
-});
-apiready = function(){
-
-};
-
+	apiready = function(){
+		
+	};
+	function openNew(item_id){
+       api.openWin({
+	       name: 'procon_frm',
+	       url: 'procon_frm.html?item_id='+item_id
+       });
+    }
 </script>
 </html>
