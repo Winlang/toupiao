@@ -1,4 +1,5 @@
 $(function() {
+		//alert('hello'+$api.getStorage('is_login'));
         $.post(ApiUrl+'/api/index/?callback=?',{},function(data){
                 var data = JSON.parse(data);
 
