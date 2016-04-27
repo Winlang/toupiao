@@ -139,10 +139,13 @@ function login(){
         $.post(ApiUrl+'/api/login',{'mobile':mobile,'passwd':password},function(data){
         	//登陆成功 进入个人中心
         	if(data.status == 1){
+        		//设置 登陆表识
+        		$api.setStorage('is_login','yes');
+        		alert($api.getStorage('is_login'));
 
 	        	api.openWin({
 			        name: 'percenter',
-			        url: 'percenter_frm.html',
+			        url: 'percenter_win.html',
 			        bounces: true,
 			        rect: {
 			            x: 0,
