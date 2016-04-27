@@ -4,6 +4,7 @@ function toupiao(obj,id){
 		var data = JSON.parse(data);
         if(data.status == 0){
             alert(data.data);
+            $('#vote_num').html(data.item_optnum);
             $(obj).removeAttr('onclick');
             $(obj).children('a').html("已投票");
         }else{

@@ -194,7 +194,7 @@
               <img class="idol-avatar" src="http://votetest.xieli.cn/Uploads/admin/{{data.item_optimg}}" alt="" />
               <div class="vote-info">
                    <div class="aui-pull-left">
-                         <p>得票: <span>{{data.item_opttoupiao}}</span></p>
+                         <p>得票: <span id="vote_num">{{data.item_opttoupiao}}</span></p>
                    </div>
                    <div class="aui-pull-right">
                          <p>排名: <span>{{data.item_optpaiming}}</span></p>
@@ -205,7 +205,7 @@
                     <a>投一票</a>
                     
                 </li>
-                <li class="comment" onclick="pinglun({{data.item_optid}});">
+                <li class="comment" onclick="showReply();">
                      <a >说两句</a>
                 
                 </li>
