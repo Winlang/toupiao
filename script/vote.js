@@ -81,6 +81,5 @@ function collectionInfo(obj){
 	}else{
 		api.alert({msg: data.data});
 	}
-
 	});
 }
