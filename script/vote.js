@@ -78,7 +78,7 @@ function collectionInfo(obj){
 	$.post(ApiUrl+'/api/collectionInfo?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',{},function(data){
 	var data = JSON.parse(data);
 
-	if(data.status=='0'){
+	if(data.status=='0' || data.status=='2'){
 		api.alert({msg: data.data});
 		$('#collectionInfo').removeAttr('onclick');
 		$('#class_shoucang').removeClass('aui-icon-like');
