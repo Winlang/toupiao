@@ -130,6 +130,39 @@
             font-size: 14px;
             color: #fff;
         }
+        .third-party{
+             display:block;
+             width:100%;
+             margin:50px auto;
+        }
+        .third-party ul li{
+             display:inline-block;
+             float:left;
+             width:33%;
+             text-align:center;
+             vertical-align:middle;
+        }
+        .third-party ul li img{max-width:40px;max-height:40px;}
+        .tp-box{
+             width: 100%;
+             overflow: hidden;
+             position:relative;
+             margin-bottom:15px;
+        }
+        .tp-box span{
+             float:left;
+             text-align:center;
+             color:#fff;
+             font-size:14px;
+        }
+        .tp-box .tp-border{
+             border-bottom:1px solid #ffffff;
+             height:10px;
+             width:25%;
+        }
+        .tp-box .tp-content{
+             width:50%;
+        }
     </style>
 </head>
 <body>
@@ -149,8 +182,26 @@
                     <div class="aui-btn aui-btn-block aui-btn-warning" tapmode onclick="login()">登录</div>
                 </div>
                 <p class="aui-text-center register" tapmode onclick="register()">
-                    注册加入
+                                                           注册加入
                 </p>
+                <div class="third-party">
+                      <div class="tp-box">
+                            <span class="tp-border"></span>
+                            <span class="tp-content">第三方帐号登录</span>
+                            <span class="tp-border"></span>
+                      </div>
+                      <ul>
+                      	<li> 
+                      	     <a tapmode><img src="../image/weixin.png" alt="" /></a>
+                      	</li>
+                      	<li>
+                      	     <a tapmode> <img src="../image/qq.png" alt="" /></a>
+                      	</li>
+                      	<li>
+                      	     <a tapmode><img src="../image/sina.png" alt="" /></a>
+                      	</li>
+                      </ul>
+                </div>
             </div>
         </div>
     </div>
