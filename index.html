@@ -41,6 +41,15 @@
 <script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
     apiready = function(){
+        api.sendEvent({
+            name: 'login_succ',
+            extra: {
+                key1: 'value1', 
+                key2: 'value2'
+            }
+        });
+
+
         api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header); 
