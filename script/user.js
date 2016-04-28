@@ -1,29 +1,5 @@
 $(function(){
-	var uid = is_login();
-	if(uid > 0){
-		//用户中心信息
-		$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
-	        //昵称
-	        $('#nickname').html(data.mobile);
-
-	        //金币数量
-
-	        //票友数量
-	        
-	        //我的号召力
-
-	        //积分等级
-
-	        //红包数量
-	        
-	    },'json');
-	}
-	
-
-
-
-
-	$('#sendVerify').click(function(){
+		$('#sendVerify').click(function(){
 		var mobile = $('#mobile').val();
 
 		//验证是否是争取的手机号码
@@ -123,8 +99,13 @@ function login(){
         	//登陆成功 进入个人中心
         	if(data.status == 1){
         		//设置 登陆表识
-        		$api.setStorage('uid',data.msg);
         		var uid = data.msg;
+        		$api.setStorage('uid',uid);
+        		
+    			//     api.setPrefs({
+				//     key: 'uid',
+				//     value: data.msg
+				// });
 
         		//用户中心信息
 				$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
