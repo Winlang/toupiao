@@ -74,6 +74,7 @@ function setGroupIndex(){
 
         		//用户中心信息
 				$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
+					
 			        //昵称
 			        //$('#nickname').html(data.mobile);
 
@@ -98,8 +99,8 @@ function setGroupIndex(){
 		            api.closeWin();
 		           
 		           
-			    },'json');
-	        	
+			    });
+
 	        }else{
 	        	alert('注册失败,请重新注册~');
 	        }
