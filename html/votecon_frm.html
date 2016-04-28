@@ -265,10 +265,19 @@
                         <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
                     </div>
                </div>
-                <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">                   
+
+
+
+                <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
+                     
+
                      <span class="aui-text-warning aui-iconfont aui-icon-like" id="class_shoucang"></span>
                      <a class="shoucang">收藏</a>
+
+
                 </li>
+
+
               </ul>
         </div>
 
@@ -458,4 +467,25 @@
 
     }
 </script>
+<script>
+    $(function(){
+        var member_id=is_login();
+        var item_optid=getQueryString('itemoptid');
+        if(member_id!=-1){
+
+           $.post(ApiUrl+'/api/collectionstatus?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',{},function(data){
+            var data = JSON.parse(data);
+                if(data.status=='1'){
+                    $('#collectionInfo').removeAttr('onclick');
+                    $('#class_shoucang').removeClass('aui-icon-like');
+                    $('#class_shoucang').addClass('aui-icon-likefill');
+                    $('.shoucang').html("已收藏");
+                }
+
+            });
+        }
+    
+        
+    });
+    </script>
 </html>

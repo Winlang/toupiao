@@ -43,18 +43,6 @@ function login_page(){
     });
 }
 
-// function is_login(){
-// 	api.getPrefs({
-// 	    key: 'uid'
-// 	}, function( ret, err ){
-// 	    if( ret ){
-// 	    	return ret.value;
-// 	    }else{
-// 	         return -1;
-// 	    }
-// 	});
-// }
-
 function is_login(){
 	var uid = $api.getStorage('uid');
 	if(uid > 0){
@@ -65,6 +53,15 @@ function is_login(){
 		return -1;
 	}
 }
+// function is_login(){
+// 	$.post(ApiUrl+'/api/is_login',{},function(data){
+// 		if(data.status == 1){
+// 			return 1;
+// 		}else{
+// 			return 2;
+// 		}
+// 	});
+// }
 
 function dologout(){
 	$api.setStorage('uid','');
@@ -76,5 +73,3 @@ function dologout(){
     });
 	login_page();
 }
-
-
