@@ -73,8 +73,7 @@
             </div>
             </li>
 
-            <li id="info_place"></li>
-            <script type="text/html" id="info">
+            
             <li class="aui-list-view-cell per-account">
                  <div>金币：<span class="aui-text-danger coin">281,858</span></div>
                  <div class="per-change">
@@ -82,7 +81,7 @@
                        <span><i class="aui-iconfont aui-icon-form aui-text-danger"></i>明细</span>
                  </div>               
             </li>
-            </script>
+          
             <li class="aui-list-view-cell" onclick="openFocus()">
                <div class="aui-arrow-right">
                      <i class="aui-iconfont aui-icon-edit aui-bg-info"></i>关注
@@ -156,7 +155,7 @@
 <script type="text/javascript" src="../script/jquery.js" ></script>
 <script type="text/javascript" src="../script/config.js" ></script>
 <script type="text/javascript" src="../script/common.js" ></script>
-<script type="text/javascript" src="../script/user.js" ></script>
+
 <script type="text/javascript" src="../script/template.js" ></script>
 <script type="text/javascript">
     function openFocus(){
@@ -186,7 +185,17 @@
        });
     }
     apiready = function(){
-    
+      // 监听是否注册或者登录成功
+      api.addEventListener({
+              name : 'reg_login_successEvent'
+      }, function(ret) {
+              if (ret && ret.value) {
+                  var value = ret.value;
+                  var data = JSON.stringify(value);
+                  alert(data);
+                  $('#nickname').html(data.name);
+              }
+      });
     }
    function register(){
         api.openWin({
