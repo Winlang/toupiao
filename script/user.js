@@ -1,16 +1,23 @@
 $(function(){
-	$.post(ApiUrl+'/api/is_login',{},function(data){
-		if(data.msg > 0){
-			alert('已登录');
-			userinfo(data.status);
-		}
-		// else
-		// {
-		// 	//未登录
-		// 	alert('未登录');
-		// 	login_page();
-		// }
-	},'json');
+	var uid = is_login();
+	if(uid > 0){
+		//用户中心信息
+		$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
+	        //昵称
+	        $('#nickname').html(data.mobile);
+
+	        //金币数量
+
+	        //票友数量
+	        
+	        //我的号召力
+
+	        //积分等级
+
+	        //红包数量
+	        
+	    },'json');
+	}
 	
 
 
@@ -122,7 +129,7 @@ function login(){
         		//用户中心信息
 				$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
 			        //昵称
-			        $('#nickname').html(data.mobile);
+			        //$('#nickname').html(data.mobile);
 
 			        //金币数量
 
@@ -146,16 +153,18 @@ function login(){
 
 			        // 广播事件
 		            api.sendEvent({
-		                name : 'reg_login_successEvent',
-	                    extra : {
-	                       name : data.mobile,
-	                    }
-		            });
+			            name : 'reg_login_successEvent',
+			            extra : {
+			               name : data.mobile,
+			            }
+			        });
+
+		            api.closeWin();
 		           
 		           
 			    },'json');
 
-				api.closeWin();
+
 			
 
         		//alert($api.getStorage('is_login'));
