@@ -77,6 +77,8 @@ function collectionInfo(obj){
 	if(data.status=='0'){
 		api.alert({msg: data.data});
 		$('#collectionInfo').removeAttr('onclick');
+		$('#class_shoucang').removeClass('aui-icon-like');
+		$('#class_shoucang').addClass('aui-icon-likefill');
 		$('.shoucang').html("已收藏");
 	}else{
 		api.alert({msg: data.data});
