@@ -1,40 +1,15 @@
 $(function(){
 	$.post(ApiUrl+'/api/is_login',{},function(data){
-		//var data = JSON.parse(data);
-		if(data.status > 0){
-		alert('已登录');
-		//用户中心信息
-			$.post(ApiUrl+'/api/userinfo',{'uid':data.status},function(data){
-		        
-		        var data = JSON.parse(data);
-		        //昵称
-		        $('#nickname').html(data.mobile);
-
-		        //金币数量
-
-		        //票友数量
-		        
-		        //我的号召力
-
-		        //积分等级
-
-		        //红包数量
-
-
-		        // //处理图片
-		        // for (var i = data.list.length - 1; i >= 0; i--) {
-		        //         data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
-		        // }
-
-		        
-		        var html = template('info', data);
-		        document.getElementById('info_place').innerHTML = html;
-		    });
-		}else{
-			//未登录
-			alert('未登录');
-			login_page();
+		if(data.msg > 0){
+			alert('已登录');
+			userinfo(data.status);
 		}
+		// else
+		// {
+		// 	//未登录
+		// 	alert('未登录');
+		// 	login_page();
+		// }
 	},'json');
 	
 
@@ -137,11 +112,66 @@ function login(){
         }
         //提交数据
         $.post(ApiUrl+'/api/login',{'mobile':mobile,'passwd':password},function(data){
+        	
         	//登陆成功 进入个人中心
         	if(data.status == 1){
         		//设置 登陆表识
-        		$api.setStorage('is_login','yes');
-        		alert($api.getStorage('is_login'));
+        		$api.setStorage('uid',data.msg);
+        		var uid = data.msg;
+
+        		//用户中心信息
+				$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
+			        //昵称
+			        $('#nickname').html(data.mobile);
+
+			        //金币数量
+
+			        //票友数量
+			        
+			        //我的号召力
+
+			        //积分等级
+
+			        //红包数量
+
+
+			        // //处理图片
+			        // for (var i = data.list.length - 1; i >= 0; i--) {
+			        //         data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
+			        // }
+
+			        
+			        //var html = template('info', data);
+			        //document.getElementById('info_place').innerHTML = html;
+
+			        // 广播事件
+		            api.sendEvent({
+		                name : 'reg_login_successEvent',
+	                    extra : {
+	                       name : data.mobile,
+	                    }
+		            });
+		           
+		           
+			    },'json');
+
+				api.closeWin();
+			
+
+        		//alert($api.getStorage('is_login'));
+
+    			//api.sendEvent({
+				//     name: 'login_succ',
+				//     extra: {
+				//         uid : uid
+				//     }
+				// });
+
+				// var jsfun = 'userinfo('+uid+')';
+				// api.execScript({
+				//     script: jsfun
+				// });
+				//api.closeWin();
 
 	      //   	api.openWin({
 			    //     name: 'percenter',
@@ -154,14 +184,50 @@ function login(){
 			    //         h: 'auto'
 			    //     }
 	    		// });
-	    		
-	    		// 回到首页
-                api.closeToWin({
-                        name : 'root'
-                });
+
+	   //  		api.closeWin();
+	   // 			api.closeToWin({
+				//     name: 'percenter_frm',
+				//     animation: {
+				//         type: 'flip',
+				//         subType: 'from_bottom',
+				//         duration: 500
+				//     }
+				// });
+
+				//api.closeWin();
+
 	        }else{
 	        	alert('登陆失败,请重新登陆~');
 	        }
         },'json');
 }
 
+function userinfo(uid){
+	return false;
+	//用户中心信息
+	$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
+        //昵称
+        $('#nickname').html(data.mobile);
+
+        //金币数量
+
+        //票友数量
+        
+        //我的号召力
+
+        //积分等级
+
+        //红包数量
+
+
+        // //处理图片
+        // for (var i = data.list.length - 1; i >= 0; i--) {
+        //         data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
+        // }
+
+        
+        //var html = template('info', data);
+        //document.getElementById('info_place').innerHTML = html;
+    },'json');
+}
