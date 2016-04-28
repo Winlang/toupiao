@@ -41,6 +41,15 @@
 <script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
     apiready = function(){
+        api.sendEvent({
+            name: 'login_succ',
+            extra: {
+                key1: 'value1', 
+                key2: 'value2'
+            }
+        });
+
+
         api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header); 
@@ -49,7 +58,8 @@
         var footer_h = $api.offset($api.byId('aui-footer')).h;
         api.openFrameGroup ({
             name: 'footer_tab_demo',
-            scrollEnabled:true,
+//          scrollEnabled:true,
+            scrollEnabled:false,
             rect:{x:0, y:headerPos.h, w:'auto', h:body_h - headerPos.h - footer_h},
             index:0,
             preload:4,
@@ -109,6 +119,7 @@
             name: 'footer_tab_demo',
             index: index,
             scroll:true
+//          scroll:false
         });
     }
 

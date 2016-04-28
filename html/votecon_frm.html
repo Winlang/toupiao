@@ -177,6 +177,14 @@
 		from { opacity: 1;top: 8px;}
 		to { opacity: 0;top: -20px;}
 	}
+
+    /*分享弹出层样式*/
+    .sharecss{
+        width:80%;
+        height:200px;
+        display:block;
+        margin:0 auto;
+    }
     </style>
 </head>
 <body>
@@ -194,7 +202,7 @@
               <img class="idol-avatar" src="http://votetest.xieli.cn/Uploads/admin/{{data.item_optimg}}" alt="" />
               <div class="vote-info">
                    <div class="aui-pull-left">
-                         <p>得票: <span>{{data.item_opttoupiao}}</span></p>
+                         <p>得票: <span id="vote_num">{{data.item_opttoupiao}}</span></p>
                    </div>
                    <div class="aui-pull-right">
                          <p>排名: <span>{{data.item_optpaiming}}</span></p>
@@ -209,10 +217,28 @@
                      <a >说两句</a>
                 
                 </li>
-                <li class="share" onclick="weixin_share();">
+                <li class="share" onclick="share();">
                      <a>分享拉票</a>
                 </li>
+
+                <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
+
+
+                <div class="aui-dialog aui-hidden sharecss" id="dialog">
+                    <div class="aui-dialog-header">投票奖励</div>
+                    <div class="aui-dialog-body aui-text-left">
+                        <p onclick="qqfriend_share();">qq好友</p><br/>
+                        <p onclick="qqkongjian_share();">qq空间</p><br/>
+                        <p>微信</p><br/>
+                        <p onclick="sina_share();">新浪微博</p><br/>
+                    </div>
+                    <div class="aui-dialog-footer">
+                        <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
+                    </div>
+               </div>
+
                 <li class="collect">
+
                      <a>收藏</a>
                 </li>
               </ul>
@@ -259,12 +285,12 @@
     </div>
     <div class="aui-line-x"></div>
     <footer class="aui-nav" id="aui-footer">
-		<div class="ask-input" tapmode onclick="showReply()" id="ask-input">发表评论</div>
+		<div class="ask-input" tapmode onclick="showReply()" id="ask-input" tapmode>发表评论</div>
 		<div id="ask-reply-box">
 			<div class="ask-text" id="ask-text">
 				<textarea placeholder="请输入你的评论，被赞后可获得奖励"></textarea>
 			</div>
-			<div class="aui-btn aui-btn-block aui-btn-info ask-reply-btn" onclick="pinglun({{data.item_optid}})">提交</div>
+            <div class="aui-btn aui-btn-block aui-btn-info ask-reply-btn" tapmode onclick="pinglun()">提交</div>
 		</div>
 	</footer>
 </body>
@@ -294,8 +320,16 @@
         });
     }
 
-    //qq分享
-    function qq_share(){
+    //qq指定好友分享
+    function qqfriend_share(){
+        var qq = api.require('qq');
+        qq.shareText({
+            text:'我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn'
+        });
+    }
+
+    //qq空间分享
+    function qqkongjian_share(){
         var qq = api.require('qq');
         qq.installed(function(ret,err){
             if(ret.status){
@@ -307,7 +341,7 @@
                 });
             }else{
                 api.alert("请先安装qq客户端");
-            } 
+            }
         });
     }
 
@@ -348,7 +382,7 @@
                     }
                 });
             }else{
-                api.alert({msg:'授权失败'+err.msg});
+                api.alert({msg:'授权失败'});
             }
         });
     }
@@ -359,11 +393,41 @@
     	$api.css($api.byId("ask-reply-box"),"display:block");
     	$api.addCls($api.byId("aui-footer"),"show");
     }
+    function hideReply(){
+        $api.css($api.dom(".mark"),"display:none");
+        $api.css($api.byId("ask-input"),"display:block");
+        $api.css($api.byId("ask-reply-box"),"display:none");
+        $api.addCls($api.byId("aui-footer"),"hide");
+    }
+
     function openAnswer(){
     	api.openWin({
     		name: 'comment_win',
     		url: 'comment_win.html'
     	});
+    }
+
+    //分享弹出层
+    function share(){
+        $api.append($api.dom("body"),'<div class="aui-mask"></div>');
+        $api.removeCls($api.dom(".aui-dialog.aui-hidden"),"aui-hidden");
+        api.sendEvent({
+            name: 'dialogEvent',
+            extra: {type:'show'}
+        });
+    }
+    function cancel(){
+        $api.remove($api.dom(".aui-mask"));
+        $api.addCls($api.dom(".aui-dialog"),"aui-hidden");
+        api.sendEvent({
+            name: 'dialogEvent',
+            extra: {type:'hidden'}
+        });
+//      api.alert({
+//          title: '提示',
+//          msg: '您点击了取消'
+//      });
+
     }
 </script>
 </html>

@@ -43,6 +43,16 @@ function login_page(){
     });
 }
 
+function is_login(){
+	var uid = $api.getStorage('uid');
+	if(uid > 0){
+		//已登录
+		return uid;
+	}else{
+		//未登录
+		return -1;
+	}
+}
 // function is_login(){
 // 	$.post(ApiUrl+'/api/is_login',{},function(data){
 // 		if(data.status == 1){
@@ -52,3 +62,5 @@ function login_page(){
 // 		}
 // 	});
 // }
+
+
