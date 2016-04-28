@@ -63,3 +63,19 @@ $(function() {
 		document.getElementById('itemopt_comminfo').innerHTML = html;
 	});
 })
+function collectionInfo(obj){
+
+	var member_id=1;
+	var item_optid=obj;
+	$.post(ApiUrl+'/api/collectionInfo?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',{},function(data){
+	var data = JSON.parse(data);
+
+	if(data.status=='0'){
+		alert(data.data);
+		$('#collectionInfo').removeAttr('onclick');
+	}else{
+		alert(data.data);
+	}
+
+	});
+}
