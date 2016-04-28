@@ -16,6 +16,12 @@
     .aui-input-addon.aui-iconfont {
         font-size: 20px;
     }
+    .login{
+         display:block;
+         padding: 5px 0 20px 0;
+         font-size: 14px;
+         color: #848f94;
+     }
     </style>
 </head>
 <body>
@@ -42,8 +48,11 @@
                 <input type="password" id="password2" class="aui-input" placeholder="确认密码"/>
             </div>
             <div class="aui-btn-row">
-                <div class="aui-btn aui-btn-warning" tapmode onclick="setGroupIndex()">注册</div>
+                <div class="aui-btn aui-btn-warning aui-btn-block" tapmode onclick="setGroupIndex()">注册</div>
             </div>
+            <p class="aui-text-center login" tapmode onclick="login()">
+                                                           进入登录
+            </p>
         </div>
     </div>
 </body>
@@ -71,6 +80,16 @@
         $api.addCls($api.byId('showpass-btn'),'aui-icon-attention');
         $api.attr($api.byId('showpass-btn'),'onclick','showPassword();');
         api.parseTapmode();
+    }
+    function login(){
+        api.openWin({
+            name:'login',
+            url:'login.html',
+            delay:300,
+            animation:{
+                type:'fade'
+            }
+        })
     }
 </script>
 </html>
