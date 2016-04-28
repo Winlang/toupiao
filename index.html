@@ -49,7 +49,8 @@
         var footer_h = $api.offset($api.byId('aui-footer')).h;
         api.openFrameGroup ({
             name: 'footer_tab_demo',
-            scrollEnabled:true,
+//          scrollEnabled:true,
+            scrollEnabled:false,
             rect:{x:0, y:headerPos.h, w:'auto', h:body_h - headerPos.h - footer_h},
             index:0,
             preload:4,
@@ -109,6 +110,7 @@
             name: 'footer_tab_demo',
             index: index,
             scroll:true
+//          scroll:false
         });
     }
 
