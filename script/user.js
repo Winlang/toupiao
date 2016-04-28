@@ -63,17 +63,43 @@ function setGroupIndex(){
         	//注册成功 进入个人中心
         	if(data.status == 1){
 
-	        	api.openWin({
-			        name: 'percenter',
-			        url: 'percenter_win.html',
-			        bounces: true,
-			        rect: {
-			            x: 0,
-			            y: 0,
-			            w: 'auto',
-			            h: 'auto'
-			        }
-	    		});
+	        	//设置 登陆表识
+        		var uid = data.msg;
+        		$api.setStorage('uid',uid);
+        		
+    			//     api.setPrefs({
+				//     key: 'uid',
+				//     value: data.msg
+				// });
+
+        		//用户中心信息
+				$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
+			        //昵称
+			        //$('#nickname').html(data.mobile);
+
+			        //金币数量
+
+			        //票友数量
+			        
+			        //我的号召力
+
+			        //积分等级
+
+			        //红包数量
+
+			        // 广播事件
+		            api.sendEvent({
+			            name : 'reg_login_successEvent',
+			            extra : {
+			               name : data.mobile,
+			            }
+			        });
+
+		            api.closeWin();
+		           
+		           
+			    },'json');
+	        	
 	        }else{
 	        	alert('注册失败,请重新注册~');
 	        }
@@ -122,16 +148,6 @@ function login(){
 
 			        //红包数量
 
-
-			        // //处理图片
-			        // for (var i = data.list.length - 1; i >= 0; i--) {
-			        //         data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
-			        // }
-
-			        
-			        //var html = template('info', data);
-			        //document.getElementById('info_place').innerHTML = html;
-
 			        // 广播事件
 		            api.sendEvent({
 			            name : 'reg_login_successEvent',
@@ -145,79 +161,8 @@ function login(){
 		           
 			    },'json');
 
-
-			
-
-        		//alert($api.getStorage('is_login'));
-
-    			//api.sendEvent({
-				//     name: 'login_succ',
-				//     extra: {
-				//         uid : uid
-				//     }
-				// });
-
-				// var jsfun = 'userinfo('+uid+')';
-				// api.execScript({
-				//     script: jsfun
-				// });
-				//api.closeWin();
-
-	      //   	api.openWin({
-			    //     name: 'percenter',
-			    //     url: 'percenter_win.html',
-			    //     bounces: true,
-			    //     rect: {
-			    //         x: 0,
-			    //         y: 0,
-			    //         w: 'auto',
-			    //         h: 'auto'
-			    //     }
-	    		// });
-
-	   //  		api.closeWin();
-	   // 			api.closeToWin({
-				//     name: 'percenter_frm',
-				//     animation: {
-				//         type: 'flip',
-				//         subType: 'from_bottom',
-				//         duration: 500
-				//     }
-				// });
-
-				//api.closeWin();
-
 	        }else{
 	        	alert('登陆失败,请重新登陆~');
 	        }
         },'json');
-}
-
-function userinfo(uid){
-	return false;
-	//用户中心信息
-	$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
-        //昵称
-        $('#nickname').html(data.mobile);
-
-        //金币数量
-
-        //票友数量
-        
-        //我的号召力
-
-        //积分等级
-
-        //红包数量
-
-
-        // //处理图片
-        // for (var i = data.list.length - 1; i >= 0; i--) {
-        //         data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
-        // }
-
-        
-        //var html = template('info', data);
-        //document.getElementById('info_place').innerHTML = html;
-    },'json');
 }

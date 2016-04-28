@@ -75,10 +75,13 @@ function collectionInfo(obj){
 	var data = JSON.parse(data);
 
 	if(data.status=='0'){
-		alert(data.data);
+		api.alert({msg: data.data});
 		$('#collectionInfo').removeAttr('onclick');
+		$('#class_shoucang').removeClass('aui-icon-like');
+		$('#class_shoucang').addClass('aui-icon-likefill');
+		$('.shoucang').html("已收藏");
 	}else{
-		alert(data.data);
+		api.alert({msg: data.data});
 	}
 
 	});
