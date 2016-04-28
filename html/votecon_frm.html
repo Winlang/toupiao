@@ -21,10 +21,8 @@
             background-color:#fff;
         }
         .idol-avatar{
-            display:block;
             max-width:100%;
             height:240px;
-            margin:0 auto;
         }
         .f-avatar{
            width:30px;
@@ -223,6 +221,7 @@
                      <a>分享拉票</a>
                 </li>
 
+                <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
 
 
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
@@ -238,8 +237,9 @@
                     </div>
                </div>
 
-                <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
-                     <a class='shoucang'>收藏</a>
+                <li class="collect">
+
+                     <a>收藏</a>
                 </li>
               </ul>
         </div>

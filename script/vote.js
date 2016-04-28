@@ -75,11 +75,11 @@ function collectionInfo(obj){
 	var data = JSON.parse(data);
 
 	if(data.status=='0'){
-		api.alert({msg: data.data});
+		alert(data.data);
 		$('#collectionInfo').removeAttr('onclick');
-		$('.shoucang').html("已收藏");
 	}else{
-		api.alert({msg: data.data});
+		alert(data.data);
 	}
+
 	});
 }
