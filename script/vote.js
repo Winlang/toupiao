@@ -80,6 +80,7 @@ function collectionInfo(obj){
 		$('.shoucang').html("已收藏");
 	}else{
 		api.alert({msg: data.data});
+		
 	}
 
 	});
