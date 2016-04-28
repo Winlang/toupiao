@@ -79,7 +79,7 @@ function collectionInfo(obj){
 		$('#collectionInfo').removeAttr('onclick');
 		$('.shoucang').html("已收藏");
 	}else{
-		// api.alert({msg: data.data});
+		api.alert({msg: data.data});
 	}
 	});
 }
