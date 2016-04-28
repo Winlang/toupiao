@@ -50,12 +50,21 @@
            background-position:top;
         }
         .mine li a{
-           margin:10px 10px 0 10px;
+           margin:0 10px 10px 10px;
            color:#323237;
            font-size:14px;
            display: block;
         }
-        .vote{
+        .mine li span{
+           display:block;
+           width:35px;
+           height:35px;
+           margin:-10px auto 0 auto;
+           font-size:30px;
+           text-align:center;
+           line-height:30px;
+        }
+       /* .vote{
            background-image:url("../image/vote.png");
         }
         .comment{
@@ -66,10 +75,11 @@
         }
         .collect{
            background-image:url("../image/collect.png");
-        }
+        }*/
+       
         .vote-info{
               position:relative;
-              margin-top:-65px;
+              margin-top:-60px;
               height:60px;
               padding-top:10px;
               background-color:rgba(0,0,0,.6);          
@@ -212,14 +222,17 @@
               </div>
               <ul class="mine">
                 <li class="vote" onclick="toupiao(this,{{data.item_optid}});">
+                    <span class="aui-text-warning aui-iconfont aui-icon-roundcheck"></span>
                     <a>投一票</a>
                     
                 </li>
                 <li class="comment" onclick="showReply();">
+                     <span class="aui-text-warning aui-iconfont aui-icon-comment"></span>
                      <a >说两句</a>
                 
                 </li>
                 <li class="share" onclick="share();">
+                     <span class="aui-text-warning aui-iconfont aui-icon-share"></span>
                      <a>分享拉票</a>
                 </li>
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
@@ -235,8 +248,13 @@
                     </div>
                </div>
 
+
+                     
+
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
+                <span class="aui-text-warning aui-iconfont aui-icon-like"></span>
                      <a class="shoucang">收藏</a>
+
                 </li>
               </ul>
         </div>
