@@ -6,6 +6,8 @@ function toupiao(obj,id){
             api.alert({msg: data.data});
             $('#vote_num').html(data.item_optnum);
             $(obj).removeAttr('onclick');
+            $(obj).children('span').removeClass('aui-icon-roundcheck');
+        	$(obj).children('span').addClass('aui-icon-roundcheckfill');
             $(obj).children('a').html("已投票");
         }else{
             api.alert({msg: data.data});
@@ -38,9 +40,13 @@ function good_bad(obj,commid,status){
             api.alert({msg: data.data});
             $(obj).removeAttr('onclick');
             if(status == 'good'){
-            	$(obj).next('span').html("已点赞");
+            	$(obj).removeClass('aui-icon-appreciate');
+            	$(obj).addClass('aui-icon-appreciatefill');
+            	$(obj).addClass('aui-text-warning');
             }else{
-            	$(obj).next('span').html("已点扯");
+            	$(obj).removeClass('aui-icon-appreciate');
+            	$(obj).addClass('aui-icon-appreciatefill');
+            	$(obj).addClass('aui-text-warning');
             }
         }else{
             api.alert({msg: data.data});
