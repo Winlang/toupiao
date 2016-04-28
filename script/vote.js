@@ -3,12 +3,12 @@ function toupiao(obj,id){
 	$.post(ApiUrl+'/api/toupiao?id='+id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
         if(data.status == 0){
-            alert(data.data);
+            api.alert({msg: data.data});
             $('#vote_num').html(data.item_optnum);
             $(obj).removeAttr('onclick');
             $(obj).children('a').html("已投票");
         }else{
-            alert(data.data);
+            api.alert({msg: data.data});
         }
     });
 }
@@ -21,9 +21,11 @@ function pinglun(){
 	$.post(ApiUrl+'/api/item_comment?id='+id+'&comment='+comment+'&member_id='+member_id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
 		if(data.status == 0){
-		    alert(data.data);
+		    api.alert({msg: data.data});
+		    $('#ask-text textarea').val(' ');
+		    hideReply();
 	  	}else{
-		    alert(data.data);
+		    api.alert({msg: data.data});
 		}
 	});
 }
@@ -33,7 +35,7 @@ function good_bad(obj,commid,status){
     $.post(ApiUrl+'/api/comm_goodbad?id='+commid+'&status='+status+'&callback=?',{},function(data){
     	var data = JSON.parse(data);
         if(data.status == 0){
-            alert(data.data);
+            api.alert({msg: data.data});
             $(obj).removeAttr('onclick');
             if(status == 'good'){
             	$(obj).next('span').html("已点赞");
@@ -41,7 +43,7 @@ function good_bad(obj,commid,status){
             	$(obj).next('span').html("已点扯");
             }
         }else{
-            alert(data.data);
+            api.alert({msg: data.data});
         }
     });
 }

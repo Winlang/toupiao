@@ -224,10 +224,10 @@
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
                     <div class="aui-dialog-header">投票奖励</div>
                     <div class="aui-dialog-body aui-text-left">
-                        <p onclick="qqfriend_share();">qq好友</p>
-                        <p onclick="qqkongjian_share();">qq空间</p>
-                        <p>微信</p>
-                        <p onclick="sina_share();">新浪微博</p>
+                        <p onclick="qqfriend_share();">qq好友</p><br/>
+                        <p onclick="qqkongjian_share();">qq空间</p><br/>
+                        <p>微信</p><br/>
+                        <p onclick="sina_share();">新浪微博</p><br/>
                     </div>
                     <div class="aui-dialog-footer">
                         <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
@@ -281,12 +281,12 @@
     </div>
     <div class="aui-line-x"></div>
     <footer class="aui-nav" id="aui-footer">
-		<div class="ask-input" tapmode onclick="showReply()" id="ask-input">发表评论</div>
+		<div class="ask-input" tapmode onclick="showReply()" id="ask-input" tapmode>发表评论</div>
 		<div id="ask-reply-box">
 			<div class="ask-text" id="ask-text">
 				<textarea placeholder="请输入你的评论，被赞后可获得奖励"></textarea>
 			</div>
-            <div class="aui-btn aui-btn-block aui-btn-info ask-reply-btn" onclick="pinglun()">提交</div>
+            <div class="aui-btn aui-btn-block aui-btn-info ask-reply-btn" tapmode onclick="pinglun()">提交</div>
 		</div>
 	</footer>
 </body>
@@ -334,7 +334,7 @@
                 });
             }else{
                 api.alert("请先安装qq客户端");
-            } 
+            }
         });
     }
 
@@ -386,6 +386,13 @@
     	$api.css($api.byId("ask-reply-box"),"display:block");
     	$api.addCls($api.byId("aui-footer"),"show");
     }
+    function hideReply(){
+        $api.css($api.dom(".mark"),"display:none");
+        $api.css($api.byId("ask-input"),"display:block");
+        $api.css($api.byId("ask-reply-box"),"display:none");
+        $api.addCls($api.byId("aui-footer"),"hide");
+    }
+
     function openAnswer(){
     	api.openWin({
     		name: 'comment_win',
