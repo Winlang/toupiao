@@ -14,7 +14,8 @@ function toupiao(obj,id){
 }
 
 //发表评论
-function pinglun(id){
+function pinglun(){
+	var id = getQueryString('itemoptid');
 	var comment = $('#ask-text textarea').val();
 	var member_id = 1;
 	$.post(ApiUrl+'/api/item_comment?id='+id+'&comment='+comment+'&member_id='+member_id+'&callback=?',{},function(data){
