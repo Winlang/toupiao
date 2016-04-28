@@ -119,7 +119,9 @@
           margin-right:5px;
         }
         .reverse{
-            transform: rotateY(180deg);
+            display:inline-block;
+            transform: rotateX(180deg);
+            -webkit-transform:rotateX(180deg);
         }
         .aui-img-body p{
            font-size:12px;
@@ -237,27 +239,21 @@
                 </li>
 
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
-
-
-                <div class="aui-dialog aui-hidden sharecss" id="dialog">
-                    <div class="aui-dialog-header">投票奖励</div>
-                    <div class="aui-dialog-body aui-text-left">
-                        <p onclick="qqfriend_share();">qq好友</p><br/>
-                        <p onclick="qqkongjian_share();">qq空间</p><br/>
-                        <p>微信</p><br/>
-                        <p onclick="sina_share();">新浪微博</p><br/>
-                    </div>
-                    <div class="aui-dialog-footer">
-                        <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
-                    </div>
-               </div>
-
+		                <div class="aui-dialog aui-hidden sharecss" id="dialog">
+		                    <div class="aui-dialog-header">投票奖励</div>
+		                    <div class="aui-dialog-body aui-text-left">
+		                        <p onclick="qqfriend_share();">qq好友</p><br/>
+		                        <p onclick="qqkongjian_share();">qq空间</p><br/>
+		                        <p>微信</p><br/>
+		                        <p onclick="sina_share();">新浪微博</p><br/>
+		                    </div>
+		                    <div class="aui-dialog-footer">
+		                        <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
+		                    </div>
+		               </div>
+               </li>
                 <li class="collect">
-<<<<<<< HEAD
                      <span class="aui-text-warning aui-iconfont aui-icon-like"></span>
-=======
-
->>>>>>> origin/dev
                      <a>收藏</a>
                 </li>
               </ul>
@@ -290,7 +286,6 @@
                                  <h5>生如夏花丶</h5>
                                  <span>意见领袖</span>
                            </div>
-                           <div class="aui-pull-right a --> -->ppreciate">
                            <div class="aui-pull-right appreciate">
                                 <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span><span>{{v.comm_good}}</span>
                                 <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span><span>{{v.comm_bad}}</span>
