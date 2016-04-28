@@ -193,13 +193,13 @@
                       </div>
                       <ul>
                       	<li> 
-                      	     <a tapmode><img src="../image/weixin.png" alt="" /></a>
+                      	     <a tapmode onclick="wx_login()"><img src="../image/weixin.png" alt="" /></a>
                       	</li>
                       	<li>
-                      	     <a tapmode> <img src="../image/qq.png" alt="" /></a>
+                      	     <a tapmode onclick="qq_login()"> <img src="../image/qq.png" alt="" /></a>
                       	</li>
                       	<li>
-                      	     <a tapmode><img src="../image/sina.png" alt="" /></a>
+                      	     <a tapmode onclick="wb_login()"><img src="../image/sina.png" alt="" /></a>
                       	</li>
                       </ul>
                 </div>
@@ -235,5 +235,41 @@
         api.parseTapmode();
     }
     
+    function qq_login(){
+        var obj = api.require('qq');
+        obj.login(function(ret,err){
+            api.alert({
+                title: 'id和token',
+                msg: 'openId--'+ret.openId + '--token--' +ret.accessToken
+            });
+        });
+    }
+
+    function wx_login(){
+        var wx = api.require('wx');
+        wx.auth({
+            apiKey: ''
+        }, function(ret, err){ 
+            if(ret.status){
+                alert(JSON.stringify(ret));
+            }else{
+                alert(err.code);
+            }
+        });
+    }
+
+    function wb_login(){
+        var sinaWeiBo = api.require('sinaWeiBo');
+        sinaWeiBo.auth(function(ret,err){
+            if (ret.status) {
+                api.alert({
+                    title: '微博授权',
+                    msg: '授权成功'
+                });
+            }else{
+                api.alert({msg:'授权失败'+err.msg});
+            }
+        });
+    }
 </script>
 </html>
