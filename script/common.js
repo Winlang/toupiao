@@ -63,4 +63,13 @@ function is_login(){
 // 	});
 // }
 
-
+function dologout(){
+	$api.setStorage('uid','');
+	api.sendEvent({
+        name : 'logoutEvent',
+        extra : {
+           name : '登录/注册',
+        }
+    });
+	login_page();
+}
