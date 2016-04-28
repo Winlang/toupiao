@@ -318,7 +318,10 @@
 
     //qq指定好友分享
     function qqfriend_share(){
-
+        var qq = api.require('qq');
+        qq.shareText({
+            text:'我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn'
+        });
     }
 
     //qq空间分享
@@ -375,7 +378,7 @@
                     }
                 });
             }else{
-                api.alert({msg:'授权失败'+err.msg});
+                api.alert({msg:'授权失败'});
             }
         });
     }
