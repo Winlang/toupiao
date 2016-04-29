@@ -458,7 +458,7 @@
         $api.css($api.dom(".mark"),"display:none");
         $api.css($api.byId("ask-input"),"display:block");
         $api.css($api.byId("ask-reply-box"),"display:none");
-        $api.addCls($api.byId("aui-footer"),"hide");
+        $api.removeCls($api.byId("aui-footer"),"show");
     }
 
     function openAnswer(){
