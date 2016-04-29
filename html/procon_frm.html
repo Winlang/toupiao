@@ -228,12 +228,17 @@
                 <!--选项列表-->
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
-                <div class="aui-input-row idols" >
-                   <input type="radio" class="aui-radio aui-radio-warning" name="idol" tapmode onclick="showToast()"/>
-                       <div class="aui-toast" style="display:none" id="default">
-                               <i class="aui-iconfont aui-icon-check"></i>
-                              <div class="aui-toast-content">投票成功</div>
-                       </div>
+                <div class="aui-input-row idols">
+                	{{if value.is_toupiao == 1}}
+                   		<input type="radio" class="aui-radio aui-radio-warning" checked="checked" tapmode />
+                   	{{else}}
+                   		<input type="radio" class="aui-radio aui-radio-warning" tapmode onclick="showToast()"/>
+                   		<input type="hidden" name="item_optid" value="{{value.item_optid}}"/>
+                   	{{/if}}
+                   <div class="aui-toast" style="display:none" id="default">
+                           <i class="aui-iconfont aui-icon-check"></i>
+                          <div class="aui-toast-content">投票成功</div>
+                   </div>
                    <div class="option">
 	                    <div class="idol-info" tapmode onclick="openVote({{value.item_optid}})">
 	                        <div class="idol-info-1" >
@@ -252,15 +257,19 @@
 	                         </div>
 	                   </div>
                    </div>
-                   <div class="comment">
-                        <div class="comment-1 aui-ellipsis-2">
-                             <span class="aui-text-danger aui-padded-5">SSA:</span>qqqqqqqqqqqqqqddddddddddfffffffffrrrrrrrr
-                        </div>
-                        <div class="comment-2 aui-text-info aui-pull-right">
-	                          <span class="aui-iconfont aui-icon-appreciate"></span> 99+
-	                    </div>
-                   </div>
-
+	               		<div class="comment">
+	                        <div class="comment-1 aui-ellipsis-2">
+	               				{{if value.comm_data.comm_con}}
+		                            <span class="aui-text-danger aui-padded-5">
+		                            	SSA:
+		                            </span>
+	                             	{{value.comm_data.comm_con}}
+	                         	{{/if}}
+	                        </div>
+	                        <!--<div class="comment-2 aui-text-info aui-pull-right">
+		                          <span class="aui-iconfont aui-icon-appreciate"></span> 99+
+		                    </div>-->
+	                   	</div>
                 </div>
                 {{/each}}
                 </script>
@@ -423,10 +432,26 @@
     }
     
     function showToast(){
-        $api.css($api.byId("default"),"display:block");
-        setTimeout(function(){
-            $api.css($api.byId("default"),"display:none");
-        },2000)
+    	var id = $('input[name="item_optid"]').val();
+    	var member_id = is_login();
+		if(member_id == '-1'){
+			api.alert({msg: '请先登录'});
+			login_page();
+			return false;
+		}
+		$.post(ApiUrl+'/api/toupiao?id='+id+'&member_id='+member_id+'&callback=?',{},function(data){
+			var data = JSON.parse(data);
+	        if(data.status == 0 || data.status == 2){
+	        	api.alert({msg: data.data});
+	         //    $api.css($api.byId("default"),"display:block");
+		        // setTimeout(function(){
+		        //     $api.css($api.byId("default"),"display:none");
+		        // },2000)
+	        }else{
+	        	$('input[name="item_optid"]').prev().removeAttr('checked');
+	            api.alert({msg: data.data});
+	        }
+	    });
     }
 
     //显示更多主题简介

@@ -159,6 +159,12 @@
 
 		border:none;
 	}
+	.main{
+	   display:block;
+	   width:100%;
+	   height:auto;
+	   position: relative;	
+	}
 	.mark {
 		background: rgba(0,0,0,0.5);
 		position: absolute;
@@ -176,8 +182,7 @@
 		padding: 10px;
 	}
 	#aui-footer {
-		/*background: rgba(255,255,255,0.5);*/
-		background:rgba(255,255,255,1);		
+		background:rgba(255,255,255,1);	
 	}
 	#aui-footer.show {
 		-webkit-animation: showIn .5s ease both;
@@ -211,6 +216,9 @@
      .desc-1{
     	   word-wrap: break-word;
     	}
+     .ul-comment{
+       padding-bottom: 40px;
+     }
     </style>
 </head>
 <body>
@@ -221,6 +229,7 @@
             <div class="aui-title"></div>
             <a class="aui-iconfont aui-icon-menu aui-pull-right"></a>
     </header>
+    <div class="main">
     <div class="mark" id="mark"></div>
     <div id="itemoptinfo"></div>
     <script type="text/html" id="itemoptdata">
@@ -298,7 +307,7 @@
     </script>
     
     <div class="aui-content">
-          <ul class="aui-list-view">
+          <ul class="aui-list-view ul-comment">
             <div id="itemopt_comminfo"></div>
             <script type="text/html" id="itemopt_commdata">
                 {{each data as v i}}
@@ -346,6 +355,7 @@
                 {{/each}}
             </script>
           </ul>
+    </div>
     </div>
     <div class="aui-line-x"></div>
     <footer class="aui-nav" id="aui-footer">
