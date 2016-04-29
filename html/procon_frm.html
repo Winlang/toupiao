@@ -257,19 +257,18 @@
 	                         </div>
 	                   </div>
                    </div>
+                   {{if value.comm_data}}
 	               		<div class="comment">
 	                        <div class="comment-1 aui-ellipsis-2">
-	               				{{if value.comm_data.comm_con}}
 		                            <span class="aui-text-danger aui-padded-5">
-		                            	SSA:
-		                            </span>
-	                             	{{value.comm_data.comm_con}}
-	                         	{{/if}}
+		                            </span>SSA:
+	                             	{{value.comm_data}}
 	                        </div>
 	                        <!--<div class="comment-2 aui-text-info aui-pull-right">
 		                          <span class="aui-iconfont aui-icon-appreciate"></span> 99+
 		                    </div>-->
 	                   	</div>
+	                {{/if}}
                 </div>
                 {{/each}}
                 </script>
