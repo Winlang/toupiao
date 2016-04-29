@@ -45,10 +45,10 @@ function showToast(){
     },2000)
 }
 
-function login_page(){
+function login_page(callback){
   api.openWin({
         name:'login',
-        url:'login.html',
+        url:'login.html?type='+callback,
         delay:300,
         animation:{
             type:'fade'
