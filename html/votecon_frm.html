@@ -199,15 +199,20 @@
         display:block;
         margin:0 auto;
     }*/
+     .share-tit{
+       display:block;
+       padding-top:20px;
+     }
      .share-content ul li{
        display:inline-block;
        float:left;
-       width:25%;
+       width:24%;
        text-align:center;
+       padding-top:5px;
      }
      .share-content ul li img{
-       width:40px;
-       height:40px;
+       width:55px;
+       height:55px;
      }
     </style>
 </head>
@@ -254,12 +259,8 @@
                      <a>分享拉票</a>
                 </li>
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
-                    <div class="aui-dialog-header">分享拉票</div>
+                    <div class="aui-dialog-header share-tit">分享拉票</div>
                     <div class="aui-dialog-body share-content">
-                        <!--<p onclick="qqfriend_share();">qq好友</p>
-                        <p onclick="qqkongjian_share();">qq空间</p>
-                        <p>微信</p>
-                        <p onclick="sina_share();">新浪微博</p>-->
                         <ul>
                         	<li tapmode><img src="../image/sweixin.png" alt="" /></li>
                         	<li onclick="qqfriend_share();" tapmode><img src="../image/sqq.png" alt="" /></li>
