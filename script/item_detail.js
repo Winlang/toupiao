@@ -1,7 +1,8 @@
 $(function() {
         //获取主题id
         var item_id = getQueryString('item_id');
-        //alert(item_id);
+        //获取登录用户id
+        var member_id = is_login();
 
         //主题基本信息
 	$.post(ApiUrl+'/api/iteminfo?id='+item_id+'&callback=?',{},function(data){
@@ -16,7 +17,7 @@ $(function() {
 	});
 
         //主题对应选项列表
-        $.post(ApiUrl+'/api/itemoptions?id='+item_id+'&callback=?',{},function(res){
+        $.post(ApiUrl+'/api/itemoptions?id='+item_id+'&member_id='+member_id+'&callback=?',{},function(res){
                 
                 var data = JSON.parse(res);
                 
