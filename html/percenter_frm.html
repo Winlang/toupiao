@@ -206,20 +206,20 @@
         });
     }
 
-    function logout(){
-      api.removePrefs({
-          key : "userinfo"
-          }, function(ret, err) {
-                alert("用户已退出登录");
-                api.openWin({
-                        name : 'reg_login_win',
-                        url : 'reg_login_win.html',
-                        pageParam : {
-                                name : 'test'
-                        }
-                });
-          });
-    }
+    // function logout(){
+    //   api.removePrefs({
+    //       key : "userinfo"
+    //       }, function(ret, err) {
+    //             alert("用户已退出登录");
+    //             api.openWin({
+    //                     name : 'reg_login_win',
+    //                     url : 'reg_login_win.html',
+    //                     pageParam : {
+    //                             name : 'test'
+    //                     }
+    //             });
+    //       });
+    // }
 
 
     var delay = 0;
@@ -258,15 +258,20 @@
                     }
               });
 
+
+              
               // 监听退出操作
               api.addEventListener({
                       name : 'logoutEvent'
               }, function(ret) {
                     if (ret && ret.value) {
+
                         var value = ret.value;
+                        
                         $('#nickname').html(value.name);
                     }
               });
+
         }
         api.parseTapmode();
         
