@@ -15,8 +15,7 @@
     		background-color:#f7f9f8;
     	}
     	.aui-content{background-color:#fff;}
-    	.desc-2{
-    	   display:none;
+    	.desc-1{
     	   word-wrap: break-word;
     	}
     	.savatar img{
@@ -75,7 +74,7 @@
     	}
     	.comment-1{
     	  display:inline-block;
-    	  max-width:95%;
+    	  max-width:70%;
     	  height:auto;
           word-break:break-all;
           word-wrap: break-word;
@@ -85,7 +84,7 @@
           padding:5px;
           border-radius: 5px;
     	 }
-    	/*.comment-2{
+    	.comment-2{
     	   display:inline-block;
     	   width:60px;
     	   height:25px;
@@ -95,7 +94,7 @@
     	   text-align:center;
     	   font-size:12px;
     	   padding:0 5px;
-    	}*/
+    	}
     	.idols{
     	         vertical-align:middle;
     	         width: 100%;
@@ -187,13 +186,8 @@
             </div>
        </div>
        <div class="aui-content aui-padded-10">
-             <p class="aui-ellipsis-2 desc-1" id="desc-1">
+             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode>
              	{{data.item_desc}}
-             	<span class="aui-text-warning aui-pull-right" style="font-size:12px;" onclick="xian();">more>></span>
-            </p>
-             <p class="desc-2" id="desc-2">
-             	{{data.item_desc}}
-         		<span class="aui-text-warning aui-pull-right" style="font-size:12px;" onclick="yin();"><<up</span>
             </p>
        </div>  
        </script>
@@ -262,9 +256,9 @@
                         <div class="comment-1 aui-ellipsis-2">
                              <span class="aui-text-danger aui-padded-5">SSA:</span>qqqqqqqqqqqqqqddddddddddfffffffffrrrrrrrr
                         </div>
-                        <!--<div class="comment-2 aui-text-info aui-pull-right">
+                        <div class="comment-2 aui-text-info aui-pull-right">
 	                          <span class="aui-iconfont aui-icon-appreciate"></span> 99+
-	                    </div>-->
+	                    </div>
                    </div>
 
                 </div>
@@ -436,17 +430,12 @@
     }
 
     //显示更多主题简介
-    function xian() {
-    	var d1 = document.getElementById('desc-1');
-        var d2 = document.getElementById('desc-2');
-        d1.style.display = 'none';
-        d2.style.display = 'block';
-    }
-    function yin() {
-    	var d1 = document.getElementById('desc-1');
-        var d2 = document.getElementById('desc-2');
-        d1.style.display = 'block';
-        d2.style.display = 'none';
+    function xian(obj) {
+    	if($(obj).hasClass('aui-ellipsis-2')){
+    		$(obj).removeClass('aui-ellipsis-2');
+    	}else{
+    		$(obj).addClass('aui-ellipsis-2');
+    	}
     }
 </script>
 </html>

@@ -193,22 +193,24 @@
 	}
 
     /*分享弹出层样式*/
-/*    .sharecss{
-        width:80%;
-        height:200px;
-        display:block;
-        margin:0 auto;
-    }*/
+     .share-tit{
+       display:block;
+       padding-top:20px;
+     }
      .share-content ul li{
        display:inline-block;
        float:left;
-       width:25%;
+       width:24%;
        text-align:center;
+       padding-top:5px;
      }
      .share-content ul li img{
-       width:40px;
-       height:40px;
+       width:55px;
+       height:55px;
      }
+     .desc-1{
+    	   word-wrap: break-word;
+    	}
     </style>
 </head>
 <body>
@@ -254,12 +256,8 @@
                      <a>分享拉票</a>
                 </li>
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
-                    <div class="aui-dialog-header">分享拉票</div>
+                    <div class="aui-dialog-header share-tit">分享拉票</div>
                     <div class="aui-dialog-body share-content">
-                        <!--<p onclick="qqfriend_share();">qq好友</p>
-                        <p onclick="qqkongjian_share();">qq空间</p>
-                        <p>微信</p>
-                        <p onclick="sina_share();">新浪微博</p>-->
                         <ul>
                         	<li tapmode><img src="../image/sweixin.png" alt="" /></li>
                         	<li onclick="qqfriend_share();" tapmode><img src="../image/sqq.png" alt="" /></li>
@@ -272,12 +270,8 @@
                     </div>
                </div>
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
-                     
-
                      <span class="aui-text-warning aui-iconfont aui-icon-like" id="class_shoucang"></span>
                      <a class="shoucang">收藏</a>
-
-
                 </li>
               </ul>
         </div>
@@ -290,7 +284,9 @@
          </ul>
     </div>
     <div class="aui-content aui-padded-10">
-          <p>{{data.item_optdesc}}</p>
+          <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode>
+              {{data.item_optdesc}}
+          </p>
     </div>
     </script>
     
@@ -369,6 +365,22 @@
     
 
     apiready=function(){
+        //监听 登陆成功 
+        // 监听是否注册或者登录成功   监听成功
+          api.addEventListener({
+                  name : 'reg_login_successEvent'
+          }, function(ret) {
+                if (ret && ret.value) {
+                    var value = ret.value;
+                    var type = value.callback;
+                    //收藏的动作
+                    if(type == 'shoucang'){
+                        
+                    }
+                }
+          });
+
+
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
 
@@ -489,6 +501,14 @@
 //          msg: '您点击了取消'
 //      });
 
+    }
+    //显示更多主题简介
+    function xian(obj) {
+    	if($(obj).hasClass('aui-ellipsis-2')){
+    		$(obj).removeClass('aui-ellipsis-2');
+    	}else{
+    		$(obj).addClass('aui-ellipsis-2');
+    	}
     }
 </script>
 <script>
