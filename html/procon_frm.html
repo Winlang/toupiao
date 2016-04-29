@@ -17,6 +17,7 @@
     	.aui-content{background-color:#fff;}
     	.desc-2{
     	   display:none;
+    	   word-wrap: break-word;
     	}
     	.savatar img{
     	         max-width:100%;
@@ -171,11 +172,9 @@
                <div class="aui-dialog aui-hidden" id="dialog">
                           <div class="aui-dialog-header">投票奖励</div>
                           <div class="aui-dialog-body aui-text-left">
-                                <p>1、奖励一</p>
-                                <p>2、奖励二</p>
-                                <p>3、奖励三</p>
-                                <p>4、奖励四</p>
-                                <p>5、奖励五</p>
+                                {{each data.item_prize as v i}}
+                                    <p>{{i+1}}、{{v}}</p>
+                                {{/each}}
                           </div>
                           <div class="aui-dialog-footer">
                               <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
@@ -188,16 +187,16 @@
             </div>
        </div>
        <div class="aui-content aui-padded-10">
-             <p class="aui-ellipsis-2 desc-1" id="desc-1">{{data.item_desc}}<span class="aui-text-warning aui-pull-right" style="font-size:12px;">more>></span></p>
-             <p class="desc-2" id="desc-2">{{data.item_desc}}<span class="aui-text-warning aui-pull-right" style="font-size:12px;"><<up</span></p>
-<!--             <script>                
-              function desc() {
-                var d1 = document.getElementById('desc-1');
-                var d2 = document.getElementById('desc-2');
-                d1.style.display = 'none';
-                d2.style.display = 'block';
-              }
-             </script>-->
+             <p class="aui-ellipsis-2 desc-1" id="desc-1">
+             	{{data.item_desc}}
+             	<span class="aui-text-warning aui-pull-right" style="font-size:12px;" onclick="xian();">more>></span>
+            </p>
+             <p class="desc-2" id="desc-2">
+         		<span class="aui-text-warning aui-pull-right" style="font-size:12px;" onclick="yin();"><<up</span>
+            </p>
+             <script type="text/javascript">
+              
+             </script>
        </div>  
        </script>
        <div class="aui-content">
@@ -436,6 +435,20 @@
         setTimeout(function(){
             $api.css($api.byId("default"),"display:none");
         },2000)
+    }
+
+    //显示更多主题简介
+    function xian() {
+    	var d1 = document.getElementById('desc-1');
+        var d2 = document.getElementById('desc-2');
+        d1.style.display = 'none';
+        d2.style.display = 'block';
+    }
+    function yin() {
+    	var d1 = document.getElementById('desc-1');
+        var d2 = document.getElementById('desc-2');
+        d1.style.display = 'block';
+        d2.style.display = 'none';
     }
 </script>
 </html>

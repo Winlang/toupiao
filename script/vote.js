@@ -56,20 +56,10 @@ function good_bad(obj,commid,status){
         if(data.status == 0){
             api.alert({msg: data.data});
             $(obj).removeAttr('onclick');
-            if(status == 'good'){
-            	$(obj).removeClass('aui-icon-appreciate');
-            	$(obj).addClass('aui-icon-appreciatefill');
-            	$(obj).addClass('aui-text-warning');
-            }else{
-            	$(obj).removeClass('aui-icon-appreciate');
-            	$(obj).addClass('aui-icon-appreciatefill');
-            	$(obj).addClass('aui-text-warning');
-            }
-        }else if(data.status == 2){
-        	api.alert({msg: data.data});
-        	$('#'+data.good_bad).removeClass('aui-icon-appreciate');
-        	$('#'+data.good_bad).addClass('aui-icon-appreciatefill');
-        	$('#'+data.good_bad).addClass('aui-text-warning');
+        	$(obj).removeClass('aui-icon-appreciate');
+        	$(obj).addClass('aui-icon-appreciatefill');
+        	$(obj).addClass('aui-text-warning');
+        	$(obj).next('span').html(data.num);
         }else{
             api.alert({msg: data.data});
         }
@@ -81,24 +71,11 @@ function good_bad(obj,commid,status){
 $(function() {
     //获取主题选项id
     var itemoptid = getQueryString('itemoptid');
-
-    //判断是否投票
+    //获取当前登陆用户的id
     var member_id = is_login();
-    var item_optid = itemoptid;
-    if(member_id!=-1){
-   		$.post(ApiUrl+'/api/is_toupiao?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',{},function(data){
-		        var data = JSON.parse(data);
-	            if(data.status==1){
-	                $('.vote').removeAttr('onclick');
-			        $('.vote').children('span').removeClass('aui-icon-roundcheck');
-			    	$('.vote').children('span').addClass('aui-icon-roundcheckfill');
-			        $('.vote').children('a').html("已投票");
-	            }
-        });
-    }
 
     //主题选项基本信息
-	$.post(ApiUrl+'/api/itemoption?id='+itemoptid+'&callback=?',{},function(data){
+	$.post(ApiUrl+'/api/itemoption?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
 		$('.aui-title').html(data.data.item_opttitle);
 		var html = template('itemoptdata', data);
@@ -106,7 +83,7 @@ $(function() {
 	});
 	
 	//主题选项评论列表
-	$.post(ApiUrl+'/api/optioncomments?id='+itemoptid+'&callback=?',{},function(data){
+	$.post(ApiUrl+'/api/optioncomments?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
 		
 		var html = template('itemopt_commdata', data);
@@ -135,8 +112,4 @@ function collectionInfo(obj){
 	}
 
 	});
-}
-
-function is_toupiao(itemoptid){
-    
 }
