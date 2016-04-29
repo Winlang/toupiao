@@ -137,7 +137,8 @@
         </ul>
     </div>
     <section class="aui-content">
-        <ul class="aui-list-view">
+        <!--退出后显示-->
+        <ul class="aui-list-view logout_show">
             <li class="aui-list-view-cell" tapmode onclick="login()">
                 <a class="aui-arrow-right">
                    <i class="aui-iconfont aui-icon-friendadd aui-bg-info"></i>  登录
@@ -148,11 +149,16 @@
                    <i class="aui-iconfont aui-icon-friendfamous aui-bg-success"></i> 注册
                 </a>
             </li>
-            <li class="aui-list-view-cell" tapmode onclick="dologout()">
+            
+        </ul>
+
+        <!--登陆后显示-->
+        <ul class="aui-list-view logined_show">
+        <li class="aui-list-view-cell" tapmode onclick="dologout()">
                 <a class="aui-arrow-right">
                    <i class="aui-iconfont aui-icon-friendfamous aui-bg-success"></i> 退出
                 </a>
-            </li>
+        </li>
         </ul>
     </section>
 </body>
@@ -229,6 +235,9 @@
           var uid = is_login();
           alert(uid);
           if(uid > 0){
+            $('.logined_show').show();
+            $('.logout_show').hide();
+
 
             //用户中心信息
             $.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
@@ -247,6 +256,8 @@
 
               },'json');
           }else{
+              $('.logined_show').hide();
+              $('.logout_show').show();
 
               // 监听是否注册或者登录成功
               api.addEventListener({
@@ -267,8 +278,8 @@
                     if (ret && ret.value) {
 
                         var value = ret.value;
-                        
-                        $('#nickname').html(value.name);
+
+                        $('#nickname').html('登陆/注册');
                     }
               });
 
