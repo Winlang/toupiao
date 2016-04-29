@@ -365,6 +365,22 @@
     
 
     apiready=function(){
+        //监听 登陆成功 
+        // 监听是否注册或者登录成功   监听成功
+          api.addEventListener({
+                  name : 'reg_login_successEvent'
+          }, function(ret) {
+                if (ret && ret.value) {
+                    var value = ret.value;
+                    var type = value.callback;
+                    //收藏的动作
+                    if(type == 'shoucang'){
+                        
+                    }
+                }
+          });
+
+
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
 
