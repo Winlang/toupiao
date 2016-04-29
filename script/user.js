@@ -1,5 +1,4 @@
-$(function(){
-		$('#sendVerify').click(function(){
+function sendVerify(){
 		var mobile = $('#mobile').val();
 
 		//验证是否是争取的手机号码
@@ -29,8 +28,7 @@ $(function(){
 
 		StepTimes();
 
-	});
-});
+}
 
 //倒计时函数
 function StepTimes() {
@@ -46,7 +44,7 @@ function StepTimes() {
 }
 
 //提交下一步   注册功能
-function setGroupIndex(){
+function register(){
         //获取value值
         var mobile = $('#mobile').val();
         var code = $('#code').val();
@@ -96,8 +94,12 @@ function setGroupIndex(){
 			            }
 			        });
 
-		            api.closeWin();
-		           
+		            //api.closeWin();
+		           	//跳至详细设置页面
+		           	api.openWin({
+				        name: 'register_two',
+				        url: 'register_two_frm.html',
+				    });
 		           
 			    });
 

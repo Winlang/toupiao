@@ -33,7 +33,7 @@
 <body>
     <div class="aui-content aui-card aui-noborder">
         <div class="avatar-box">
-            <img src="image/noavatar.gif" id="avatarImg" tapmode onclick="getPicture()" />
+            <img src="" id="avatarImg" tapmode onclick="getPicture()" />
             <p>选择头像</p>
         </div>
         <input type="hidden" id="avatar" />
@@ -45,29 +45,70 @@
             <div class="aui-input-row">
                 <label class="aui-input-addon">性别</label>
                 <div class="aui-pull-right">
-                    <input class="aui-radio aui-radio-warning" type="radio" name="sex" value="man" checked><div class="aui-radio-name">男</div>
-                    <input class="aui-radio aui-radio-warning" type="radio" name="sex" value="woman"><div class="aui-radio-name">女</div>
+                    <input class="aui-radio aui-radio-warning" type="radio" name="sex" value="man" checked><div class="aui-radio-name">少爷</div>
+                    <input class="aui-radio aui-radio-warning" type="radio" name="sex" value="woman"><div class="aui-radio-name">公主</div>
                 </div>
             </div>
             <div class="aui-input-row">
                 <label class="aui-input-addon">生日</label>
                 <input type="text" class="aui-input" id="birthday" placeholder="年／月／日" readonly tapmode onclick="openPicker()" />
             </div>
-            <div class="aui-input-row">
+            <!-- <div class="aui-input-row">
                 <label class="aui-input-addon">地址</label>
                 <input type="text" class="aui-input" id="address" placeholder="所在地区"/>
-            </div>
+            </div> -->
             <div class="aui-btn-row">
-                <div class="aui-btn aui-btn-default" tapmode onclick="setGroupIndex()">上一步</div>
+                <!-- <div class="aui-btn aui-btn-default" tapmode onclick="setGroupIndex()">上一步</div> -->
                 <div class="aui-btn aui-btn-warning" tapmode onclick="confirm()">提交</div>
             </div>
         </div>
     </div>
 </body>
 <script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/jquery.js" ></script>
+<script type="text/javascript" src="../script/config.js" ></script>
+<script type="text/javascript" src="../script/common.js" ></script>
+<script type="text/javascript" src="../script/user.js" ></script>
+<script type="text/javascript" src="../script/template.js" ></script>
 <script type="text/javascript">
     function confirm(){
-        api.closeWin({});
+
+        //获取value值
+        var avatarImg = $('#avatarImg').attr('src');
+        var nickname = $('#nickname').val();
+        var birthday = $('#birthday').val();
+
+        if(avatarImg == "" || avatarImg == null){
+            alert('请为您设置一个漂亮的头像哦~');
+            return false;
+        }
+
+        if(nickname == "" || nickname == null){
+            alert('给自己起个响亮的名字吧~');
+            return false;
+        }
+
+        if(birthday == "" || birthday == null){
+            alert('生日悄悄告诉我~');
+            return false;
+        }
+
+        //获取登陆标识
+        var uid = is_login();
+        if(uid < 0){
+            alert('您未登陆');
+            return false;
+        }
+        //提交数据
+        $.post(ApiUrl+'/api/register_two',{'uid':uid,'avatarImg':avatarImg,'nickname':nickname,'birthday':birthday},function(data){
+            //设置成功 进入首页
+            if(data.status == 1){
+                //跳至应用首页
+                backtoindex();
+            }else{
+                alert('设置个人信息失败,请重新设置 Y^_^');
+            }
+        },'json');
     }
     function getPicture(){
         api.getPicture({
@@ -98,13 +139,7 @@
             $api.val($api.byId("birthday"),''+year+'/'+month+'/'+day+'');
         });
     }
-    function setGroupIndex(){
-        api.setFrameGroupIndex({
-            name: 'register_frm',
-            index:0,
-            scroll:true
-        });
-    }
+    
     apiready = function () {
         api.parseTapmode();
     }

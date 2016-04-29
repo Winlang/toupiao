@@ -7,6 +7,15 @@ function getQueryString(name) {
 	if (r != null) return unescape(r[2]); return null;
 }
 
+/**
+ * 回到应用的首页
+ */
+function backtoindex(){
+    api.closeToWin({
+        name: 'root'
+    });
+}
+
 //发送短信操作
 function sendMsg(mobile){
 	$.post(ApiUrl+'/api/sendMsg/?callback=?',{'mobile':mobile},function(data){
@@ -37,10 +46,14 @@ function showToast(){
 }
 
 function login_page(){
-    api.openWin({
-        name: 'login',
-        url: 'login.html',
-    });
+  api.openWin({
+        name:'login',
+        url:'login.html',
+        delay:300,
+        animation:{
+            type:'fade'
+        }
+    })
 }
 
 function is_login(){
