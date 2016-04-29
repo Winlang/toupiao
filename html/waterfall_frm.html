@@ -6,7 +6,25 @@
     <meta name="format-detection" content="telephone=no,email=no,address=no"/>
     <title>项目展示页</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />   
+    <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />  
+    <!--<link rel="stylesheet" type="text/css" href="../css/aui-pull-refresh.css" />--> 
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/config.js"></script>
+    <script type="text/javascript">
+    function openNew(item_id){
+    api.openWin({
+        name: 'procon',
+        url: 'procon_frm.html?item_id='+item_id,
+        bounces: true,
+        rect: {
+            x: 0,
+            y: 0,
+            w: 'auto',
+            h: 'auto'
+        }
+    });
+}
+    </script>
     <style>
         .bg-dark{
     	    background-color:#333!important;
@@ -16,12 +34,15 @@
     	    height:100%;
     	}
           .in-title{
-               margin-top:-65px;
+               margin-top:-70px;
                color:#fff;
                text-align:center;
-           /*vertical-align:middle;*/
+               padding:8px;
           }
           .in-title h4,.in-title h5{color:#fff;}
+                    .aui-waterfall li::after{
+              border:none;
+          }
     </style>
 </head>
 <body>
@@ -39,99 +60,64 @@
            </div>
            <div class="aui-slide-page-wrap"><!-- 分页容器--></div>
      </div>
-	<div id="aui-content">
-	      <ul class="aui-waterfall" id="aui-waterfall">
-	      	<li onclick="openNew()">
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/45.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例1</h4>
-	      	          <h5>投票项目1</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/46.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例2</h4>
-	      	          <h5>投票项目2</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/47.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例3</h4>
-	      	          <h5>投票项目3</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/48.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例4</h4>
-	      	          <h5>投票项目4</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/49.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例5</h4>
-	      	          <h5>投票项目5</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/50.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例6</h4>
-	      	          <h5>投票项目6</h5>
-	      	    </div>
-	      	</li>
-	      	<li>
-	      	    <div class="aui-waterfall-header">
-	      	          <img src="../image/45.png" alt="" />
-	      	    </div>
-	      	    <div class="aui-waterfall-body in-title">
-	      	          <h4>示例7</h4>
-	      	          <h5>投票项目7</h5>
-	      	    </div>
-	      	</li>
-	      </ul>
-	</div>
+     
+<!--     <div class="aui-load-container">
+        	<div class="aui-load-wrap">
+				<div class="aui-loading-dot"></div>
+				<div class="aui-loading-circle"></div>
+				<div class="aui-loading-title"></div>
+			</div>-->
+		<div id="aui-content"></div>
+	<!--</div>-->
+		 <script id="test" type="text/html">
+	      	<ul class="aui-waterfall" id="aui-waterfall">
+	      	{{each list as value i}}
+	      		<li onclick="openNew({{value.id}})">
+	      	    	<div class="aui-waterfall-header">
+	      	          	<img src="{{value.item_titleimg}}" alt="" />
+	      	    	</div>
+	      	    	<div class="aui-waterfall-body in-title">
+	      	          <h4></h4>
+	      	          <h5>{{value.item_title}}</h5>
+	      	    	</div>
+	      		</li>
+	      		{{/each}}
+	      	</ul>
+	      </script>
+	
+<!-- 	<div id="content"></div>
+	<script id="test" type="text/html">
+		<h1>{{title}}</h1>
+		<ul>
+		    {{each list as value i}}
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		        <li>索引 {{i + 1}} ：{{value}}</li>
+		    {{/each}}
+		</ul>
+	</script> -->
+
 </body>
-<script type="text/javascript" src="../script/api.js"></script>
+
 <script type="text/javascript" src="../script/aui-waterfall.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<!--数据请求-->
+<script type="text/javascript" src="../script/index.js"></script>
 <script type="text/javascript">
 $aui.waterfall($api.byId("aui-waterfall"),{
       col:1,
-      padding:10,
+      padding:-5,
       space:10
 });
+apiready = function(){
+    // var uid = is_login();
+    // alert(uid);
+};
 
-function openNew(){
-        api.openWin({
-            name: 'procon',
-            url: 'procon_win.html',
-            bounces: true,
-            rect: {
-                x: 0,
-                y: 0,
-                w: 'auto',
-                h: 'auto'
-            }
-        });
-}
-	apiready = function(){
-		
-	};
 </script>
 <!--轮播组件-->
 <script type="text/javascript" src="../script/aui-slide.js"></script>
@@ -147,5 +133,25 @@ function openNew(){
              "dotPosition":'center'
          })
 </script>
-
+<!--加载刷新-->
+<!--	<script src="../script/aui-pull-refresh.js"></script>
+	<script type="text/javascript">
+		var pullRefresh = new auiPullToRefresh({
+			callback: loadingCallback,
+			textDown:'下拉刷新'
+		})
+		function loadingCallback(status) {
+			if(status=='success'){
+				setTimeout(function(){
+					var wrap = document.getElementById("list")
+					var lis = wrap.querySelectorAll('li');
+					for (var i = lis.length, length = i + 10; i < length; i++) {
+						var html = '<li class="aui-list-view-cell">新加载'+(i+1)+'</li>';
+						wrap.insertAdjacentHTML('afterbegin', html);
+					}
+					pullRefresh.cancelLoading(); //刷新成功后调用此方法隐藏
+				},1500)
+			}
+		}
+	</script>-->
 </html>
