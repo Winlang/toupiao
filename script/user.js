@@ -72,19 +72,6 @@ function register(){
 
         		//用户中心信息
 				$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
-					
-			        //昵称
-			        //$('#nickname').html(data.mobile);
-
-			        //金币数量
-
-			        //票友数量
-			        
-			        //我的号召力
-
-			        //积分等级
-
-			        //红包数量
 
 			        // 广播事件
 		            api.sendEvent({
@@ -94,8 +81,8 @@ function register(){
 			            }
 			        });
 
-		            //api.closeWin();
-		           	//跳至详细设置页面
+		          
+		           	//跳至信息设置页面
 		           	api.openWin({
 				        name: 'register_two',
 				        url: 'register_two_frm.html',
@@ -111,6 +98,9 @@ function register(){
 
 //登陆
 function login(){
+		//接受回调参数
+		var type = getQueryString('type');
+	
         //获取value值
         var mobile = $('#mobile').val();
         var password = $('#password').val();
@@ -130,32 +120,16 @@ function login(){
         		//设置 登陆表识
         		var uid = data.msg;
         		$api.setStorage('uid',uid);
-        		
-    			//     api.setPrefs({
-				//     key: 'uid',
-				//     value: data.msg
-				// });
 
         		//用户中心信息
 				$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
-			        //昵称
-			        //$('#nickname').html(data.mobile);
-
-			        //金币数量
-
-			        //票友数量
-			        
-			        //我的号召力
-
-			        //积分等级
-
-			        //红包数量
 
 			        // 广播事件
 		            api.sendEvent({
 			            name : 'reg_login_successEvent',
 			            extra : {
 			               name : data.mobile,
+			               callback : type,
 			            }
 			        });
 

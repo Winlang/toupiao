@@ -230,65 +230,64 @@
 
     var delay = 0;
     apiready = function () {
-          //检测是否登录
+          // 监听退出操作
+          api.addEventListener({
+                  name : 'logoutEvent'
+          }, function(ret) {
+                if (ret && ret.value) {
+
+                    var value = ret.value;
+
+                    $('#nickname').html('登陆/注册');
+                    $('.logined_show').hide();
+                    $('.logout_show').show();
+                }
+          });
+
+
+          // 监听是否注册或者登录成功   监听成功
+          api.addEventListener({
+                  name : 'reg_login_successEvent'
+          }, function(ret) {
+                if (ret && ret.value) {
+                    var value = ret.value;
+                    $('#nickname').html(value.name);
+                    $('.logined_show').show();
+                    $('.logout_show').hide();
+                }
+          });
+          
+
+
           //加载相关数据
           var uid = is_login();
           alert(uid);
           if(uid > 0){
-            $('.logined_show').show();
-            $('.logout_show').hide();
 
-
-            //用户中心信息
-            $.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
-                  //昵称
-                  $('#nickname').html(data.mobile);
-
-                  //金币数量
-
-                  //票友数量
-                  
-                  //我的号召力
-
-                  //积分等级
-
-                  //红包数量
-
-              },'json');
+              $('.logined_show').show();
+              $('.logout_show').hide();
+              //用户中心信息
+              $.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
+                    //昵称
+                    $('#nickname').html(data.mobile);
+                    //金币数量
+                    //票友数量
+                    
+                    //我的号召力
+                    //积分等级
+                    //红包数量
+                },'json');
           }else{
               $('.logined_show').hide();
               $('.logout_show').show();
-
-              // 监听是否注册或者登录成功
-              api.addEventListener({
-                      name : 'reg_login_successEvent'
-              }, function(ret) {
-                    if (ret && ret.value) {
-                        var value = ret.value;
-                        $('#nickname').html(value.name);
-                    }
-              });
-
-
-              
-              // 监听退出操作
-              api.addEventListener({
-                      name : 'logoutEvent'
-              }, function(ret) {
-                    if (ret && ret.value) {
-
-                        var value = ret.value;
-
-                        $('#nickname').html('登陆/注册');
-                    }
-              });
-
-        }
-        api.parseTapmode();
+          }
+       
         
-        if(api.systemType != 'ios'){
-            delay = 300;
-        }
+          api.parseTapmode();
+        
+          if(api.systemType != 'ios'){
+              delay = 300;
+          }
     }
 </script>
 </html>
