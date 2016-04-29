@@ -272,10 +272,17 @@
                         <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
                     </div>
                </div>
+                {{if data.collection == 1}}
+                 <li class="collect" id="collectionInfo">
+                     <span class="aui-text-warning aui-iconfont aui-icon-likefill" id="class_shoucang"></span>
+                     <a class="shoucang">已收藏</a>
+                </li>
+                {{else}}
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
                      <span class="aui-text-warning aui-iconfont aui-icon-like" id="class_shoucang"></span>
                      <a class="shoucang">收藏</a>
                 </li>
+                  {{/if}}
               </ul>
         </div>
 
@@ -376,9 +383,15 @@
                 if (ret && ret.value) {
                     var value = ret.value;
                     var type = value.callback;
+                    var item_optid=getQueryString('itemoptid');
                     //收藏的动作
                     if(type == 'shoucang'){
                         
+                        collectionInfo(item_optid);
+                    }
+                    if(type=='toupiao'){
+                        var vote=$('.vote');
+                       toupiao(vote,item_optid);
                     }
                 }
           });
@@ -514,25 +527,5 @@
     	}
     }
 </script>
-<script>
-    $(function(){
-        var member_id=is_login();
-        var item_optid=getQueryString('itemoptid');
-        if(member_id!=-1){
 
-           $.post(ApiUrl+'/api/collectionstatus?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',{},function(data){
-            var data = JSON.parse(data);
-                if(data.status=='1'){
-                    $('#collectionInfo').removeAttr('onclick');
-                    $('#class_shoucang').removeClass('aui-icon-like');
-                    $('#class_shoucang').addClass('aui-icon-likefill');
-                    $('.shoucang').html("已收藏");
-                }
-
-            });
-        }
-    
-        
-    });
-    </script>
 </html>

@@ -3,7 +3,7 @@ function toupiao(obj,id){
 	var member_id = is_login();
 	if(member_id == '-1'){
 		api.alert({msg: '请先登录'});
-		login_page();
+		login_page('toupiao');
 		return false;
 	}
 	$.post(ApiUrl+'/api/toupiao?id='+id+'&member_id='+member_id+'&callback=?',{},function(data){
