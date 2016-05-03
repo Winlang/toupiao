@@ -85,6 +85,10 @@
             height:40px;
             border-radius:50%;
         }
+        .comment-tit{
+            color: #333;
+            font-size:14px;
+        }
         .commemt-caption{
              display:block;
              width:100%;
@@ -99,12 +103,17 @@
              color:#858F87;
              line-height:10px;           
         }
+        .comment-more{
+           color:#333;
+           font-size:12px;
+        }
         .appreciate span{
           font-size:14px;
         }
         .appreciate span.aui-iconfont{
           margin-left:10px;
           margin-right:5px;
+          font-size:18px;
         }
         .reverse{
             display:inline-block;
@@ -298,16 +307,19 @@
           <ul class="aui-list-view ul-comment">
             <div id="itemopt_comminfo"></div>
             <script type="text/html" id="itemopt_commdata">
-                {{each data as v i}}
                 <li class="aui-list-view-cell aui-img">
+                     <p class="comment-tit">精彩评论</p>
+                </li>
+                {{each data as v i}}
+                <li class="aui-list-view-cell aui-img">                  
                      <div class="aui-img-object aui-pull-left ">
                           <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
-                     </div>     
-                     <div class="aui-img-body"> 
+                     </div>                 
+                     <div class="aui-img-body">                        
                          <div class="commemt-caption">
                            <div class="aui-pull-left">
                                  <h5>生如夏花丶</h5>
-                                 <span>意见领袖</span>
+                                 <span>2016-5-3</span>
                            </div>
                            <div class="aui-pull-right appreciate">
                                 {{if v.good_bad_status == 'good'}}
@@ -341,6 +353,9 @@
                      </div>
                 </li>
                 {{/each}}
+                <li class="aui-list-view-cell aui-img">
+                     <p class="aui-text-center comment-more">查看更多精彩评论</p>
+                </li>
             </script>
           </ul>
     </div>
