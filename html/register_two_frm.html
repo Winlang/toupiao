@@ -71,7 +71,8 @@
 <script type="text/javascript" src="../script/user.js" ></script>
 <script type="text/javascript" src="../script/template.js" ></script>
 <script type="text/javascript">
-    function confirm(){
+//设置用户信息页面
+function confirm(){
 
         //获取value值
         var avatarImg = $('#avatarImg').attr('src');
@@ -103,6 +104,13 @@
         $.post(ApiUrl+'/api/register_two',{'uid':uid,'avatarImg':avatarImg,'nickname':nickname,'birthday':birthday},function(data){
             //设置成功 进入首页
             if(data.status == 1){
+                // 广播事件
+                api.sendEvent({
+                    name : 'reg_login_successEvent',
+                    extra : {
+                       name : data.msg,
+                    }
+                });
                 //跳至应用首页
                 backtoindex();
             }else{
@@ -110,6 +118,7 @@
             }
         },'json');
     }
+
     function getPicture(){
         api.getPicture({
             sourceType: 'library',
@@ -127,6 +136,7 @@
             }
         })
     }
+
     function openPicker(){
         api.openPicker({
             type: 'date',
@@ -139,7 +149,7 @@
             $api.val($api.byId("birthday"),''+year+'/'+month+'/'+day+'');
         });
     }
-    
+
     apiready = function () {
         api.parseTapmode();
     }

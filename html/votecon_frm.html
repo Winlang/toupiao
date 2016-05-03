@@ -64,19 +64,7 @@
            text-align:center;
            line-height:30px;
         }
-       /* .vote{
-           background-image:url("../image/vote.png");
-        }
-        .comment{
-           background-image:url("../image/comment.png");
-        }
-        .share{
-           background-image:url("../image/share.png");
-        }
-        .collect{
-           background-image:url("../image/collect.png");
-        }*/
-       
+               
         .vote-info{
               position:relative;
               margin-top:-60px;
@@ -97,6 +85,10 @@
             height:40px;
             border-radius:50%;
         }
+        .comment-tit{
+            color: #333;
+            font-size:14px;
+        }
         .commemt-caption{
              display:block;
              width:100%;
@@ -111,12 +103,17 @@
              color:#858F87;
              line-height:10px;           
         }
+        .comment-more{
+           color:#333;
+           font-size:12px;
+        }
         .appreciate span{
           font-size:14px;
         }
         .appreciate span.aui-iconfont{
           margin-left:10px;
           margin-right:5px;
+          font-size:18px;
         }
         .reverse{
             display:inline-block;
@@ -159,6 +156,12 @@
 
 		border:none;
 	}
+	.main{
+	   display:block;
+	   width:100%;
+	   height:auto;
+	   position: relative;	
+	}
 	.mark {
 		background: rgba(0,0,0,0.5);
 		position: absolute;
@@ -176,8 +179,7 @@
 		padding: 10px;
 	}
 	#aui-footer {
-		/*background: rgba(255,255,255,0.5);*/
-		background:rgba(255,255,255,1);		
+		background:rgba(255,255,255,1);	
 	}
 	#aui-footer.show {
 		-webkit-animation: showIn .5s ease both;
@@ -193,21 +195,26 @@
 	}
 
     /*分享弹出层样式*/
-/*    .sharecss{
-        width:80%;
-        height:200px;
-        display:block;
-        margin:0 auto;
-    }*/
+     .share-tit{
+       display:block;
+       padding-top:20px;
+     }
      .share-content ul li{
        display:inline-block;
        float:left;
-       width:25%;
+       width:24%;
        text-align:center;
+       padding-top:5px;
      }
      .share-content ul li img{
-       width:40px;
-       height:40px;
+       width:55px;
+       height:55px;
+     }
+     .desc-1{
+    	   word-wrap: break-word;
+    	}
+     .ul-comment{
+       padding-bottom: 40px;
      }
     </style>
 </head>
@@ -219,6 +226,7 @@
             <div class="aui-title"></div>
             <a class="aui-iconfont aui-icon-menu aui-pull-right"></a>
     </header>
+<div class="main">
     <div class="mark" id="mark"></div>
     <div id="itemoptinfo"></div>
     <script type="text/html" id="itemoptdata">
@@ -254,12 +262,8 @@
                      <a>分享拉票</a>
                 </li>
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
-                    <div class="aui-dialog-header">分享拉票</div>
+                    <div class="aui-dialog-header share-tit">分享拉票</div>
                     <div class="aui-dialog-body share-content">
-                        <!--<p onclick="qqfriend_share();">qq好友</p>
-                        <p onclick="qqkongjian_share();">qq空间</p>
-                        <p>微信</p>
-                        <p onclick="sina_share();">新浪微博</p>-->
                         <ul>
                         	<li tapmode><img src="../image/sweixin.png" alt="" /></li>
                         	<li onclick="qqfriend_share();" tapmode><img src="../image/sqq.png" alt="" /></li>
@@ -271,14 +275,17 @@
                         <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
                     </div>
                </div>
+                {{if data.collection == 1}}
+                 <li class="collect" id="collectionInfo">
+                     <span class="aui-text-warning aui-iconfont aui-icon-likefill"></span>
+                     <a>已收藏</a>
+                </li>
+                {{else}}
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
-                     
-
                      <span class="aui-text-warning aui-iconfont aui-icon-like" id="class_shoucang"></span>
                      <a class="shoucang">收藏</a>
-
-
                 </li>
+                  {{/if}}
               </ul>
         </div>
 
@@ -290,24 +297,29 @@
          </ul>
     </div>
     <div class="aui-content aui-padded-10">
-          <p>{{data.item_optdesc}}</p>
+          <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode>
+              {{data.item_optdesc}}
+          </p>
     </div>
     </script>
     
     <div class="aui-content">
-          <ul class="aui-list-view">
+          <ul class="aui-list-view ul-comment">
             <div id="itemopt_comminfo"></div>
             <script type="text/html" id="itemopt_commdata">
-                {{each data as v i}}
                 <li class="aui-list-view-cell aui-img">
+                     <p class="comment-tit">精彩评论</p>
+                </li>
+                {{each data as v i}}
+                <li class="aui-list-view-cell aui-img">                  
                      <div class="aui-img-object aui-pull-left ">
                           <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
-                     </div>     
-                     <div class="aui-img-body"> 
+                     </div>                 
+                     <div class="aui-img-body">                        
                          <div class="commemt-caption">
                            <div class="aui-pull-left">
                                  <h5>生如夏花丶</h5>
-                                 <span>意见领袖</span>
+                                 <span>2016-5-3</span>
                            </div>
                            <div class="aui-pull-right appreciate">
                                 {{if v.good_bad_status == 'good'}}
@@ -341,9 +353,13 @@
                      </div>
                 </li>
                 {{/each}}
+                <li class="aui-list-view-cell aui-img">
+                     <p class="aui-text-center comment-more">查看更多精彩评论</p>
+                </li>
             </script>
           </ul>
     </div>
+</div> 
     <div class="aui-line-x"></div>
     <footer class="aui-nav" id="aui-footer">
 		<div class="ask-input" tapmode onclick="showReply()" id="ask-input" tapmode>发表评论</div>
@@ -369,6 +385,28 @@
     
 
     apiready=function(){
+        //监听 登陆成功 
+        // 监听是否注册或者登录成功   监听成功
+          api.addEventListener({
+                  name : 'reg_login_successEvent'
+          }, function(ret) {
+                if (ret && ret.value) {
+                    var value = ret.value;
+                    var type = value.callback;
+                    var item_optid=getQueryString('itemoptid');
+                    //收藏的动作
+                    if(type == 'shoucang'){
+                        
+                        collectionInfo(item_optid);
+                    }
+                    if(type=='toupiao'){
+                        var vote=$('.vote');
+                       toupiao(vote,item_optid);
+                    }
+                }
+          });
+
+
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
 
@@ -458,7 +496,7 @@
         $api.css($api.dom(".mark"),"display:none");
         $api.css($api.byId("ask-input"),"display:block");
         $api.css($api.byId("ask-reply-box"),"display:none");
-        $api.addCls($api.byId("aui-footer"),"hide");
+        $api.removeCls($api.byId("aui-footer"),"show");
     }
 
     function openAnswer(){
@@ -490,26 +528,14 @@
 //      });
 
     }
+    //显示更多主题简介
+    function xian(obj) {
+    	if($(obj).hasClass('aui-ellipsis-2')){
+    		$(obj).removeClass('aui-ellipsis-2');
+    	}else{
+    		$(obj).addClass('aui-ellipsis-2');
+    	}
+    }
 </script>
-<script>
-    $(function(){
-        var member_id=is_login();
-        var item_optid=getQueryString('itemoptid');
-        if(member_id!=-1){
 
-           $.post(ApiUrl+'/api/collectionstatus?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',{},function(data){
-            var data = JSON.parse(data);
-                if(data.status=='1'){
-                    $('#collectionInfo').removeAttr('onclick');
-                    $('#class_shoucang').removeClass('aui-icon-like');
-                    $('#class_shoucang').addClass('aui-icon-likefill');
-                    $('.shoucang').html("已收藏");
-                }
-
-            });
-        }
-    
-        
-    });
-    </script>
 </html>
