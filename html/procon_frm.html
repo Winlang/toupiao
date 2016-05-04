@@ -418,7 +418,6 @@
     }
     function openRank(item_id){
         var member_id = is_login();
-        var item_id = getQueryString('item_id');
         $.post(ApiUrl+'/api/is_one_toupiao??member_id='+member_id+'&item_id='+item_id+'&callback=?',{},function(data){
             var data = JSON.parse(data);
             if(data.status == 1){
