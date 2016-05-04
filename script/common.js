@@ -86,3 +86,7 @@ function dologout(){
     });
 	login_page();
 }
+
+function getNowTime(){
+	return (new Date()).valueOf();
+}

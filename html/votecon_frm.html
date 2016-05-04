@@ -64,19 +64,7 @@
            text-align:center;
            line-height:30px;
         }
-       /* .vote{
-           background-image:url("../image/vote.png");
-        }
-        .comment{
-           background-image:url("../image/comment.png");
-        }
-        .share{
-           background-image:url("../image/share.png");
-        }
-        .collect{
-           background-image:url("../image/collect.png");
-        }*/
-       
+               
         .vote-info{
               position:relative;
               margin-top:-60px;
@@ -97,6 +85,10 @@
             height:40px;
             border-radius:50%;
         }
+        .comment-tit{
+            color: #333;
+            font-size:14px;
+        }
         .commemt-caption{
              display:block;
              width:100%;
@@ -111,12 +103,17 @@
              color:#858F87;
              line-height:10px;           
         }
+        .comment-more{
+           color:#333;
+           font-size:12px;
+        }
         .appreciate span{
           font-size:14px;
         }
         .appreciate span.aui-iconfont{
           margin-left:10px;
           margin-right:5px;
+          font-size:18px;
         }
         .reverse{
             display:inline-block;
@@ -159,6 +156,12 @@
 
 		border:none;
 	}
+	.main{
+	   display:block;
+	   width:100%;
+	   height:auto;
+	   position: relative;	
+	}
 	.mark {
 		background: rgba(0,0,0,0.5);
 		position: absolute;
@@ -176,8 +179,7 @@
 		padding: 10px;
 	}
 	#aui-footer {
-		/*background: rgba(255,255,255,0.5);*/
-		background:rgba(255,255,255,1);		
+		background:rgba(255,255,255,1);	
 	}
 	#aui-footer.show {
 		-webkit-animation: showIn .5s ease both;
@@ -224,6 +226,7 @@
             <div class="aui-title"></div>
             <a class="aui-iconfont aui-icon-menu aui-pull-right"></a>
     </header>
+<div class="main">
     <div class="mark" id="mark"></div>
     <div id="itemoptinfo"></div>
     <script type="text/html" id="itemoptdata">
@@ -274,8 +277,8 @@
                </div>
                 {{if data.collection == 1}}
                  <li class="collect" id="collectionInfo">
-                     <span class="aui-text-warning aui-iconfont aui-icon-likefill" id="class_shoucang"></span>
-                     <a class="shoucang">已收藏</a>
+                     <span class="aui-text-warning aui-iconfont aui-icon-likefill"></span>
+                     <a>已收藏</a>
                 </li>
                 {{else}}
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
@@ -304,16 +307,19 @@
           <ul class="aui-list-view ul-comment">
             <div id="itemopt_comminfo"></div>
             <script type="text/html" id="itemopt_commdata">
-                {{each data as v i}}
                 <li class="aui-list-view-cell aui-img">
+                     <p class="comment-tit">精彩评论</p>
+                </li>
+                {{each data as v i}}
+                <li class="aui-list-view-cell aui-img">                  
                      <div class="aui-img-object aui-pull-left ">
                           <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
-                     </div>     
-                     <div class="aui-img-body"> 
+                     </div>                 
+                     <div class="aui-img-body">                        
                          <div class="commemt-caption">
                            <div class="aui-pull-left">
                                  <h5>生如夏花丶</h5>
-                                 <span>意见领袖</span>
+                                 <span>2016-5-3</span>
                            </div>
                            <div class="aui-pull-right appreciate">
                                 {{if v.good_bad_status == 'good'}}
@@ -347,9 +353,13 @@
                      </div>
                 </li>
                 {{/each}}
+                <li class="aui-list-view-cell aui-img">
+                     <p class="aui-text-center comment-more">查看更多精彩评论</p>
+                </li>
             </script>
           </ul>
     </div>
+</div> 
     <div class="aui-line-x"></div>
     <footer class="aui-nav" id="aui-footer">
 		<div class="ask-input" tapmode onclick="showReply()" id="ask-input" tapmode>发表评论</div>
