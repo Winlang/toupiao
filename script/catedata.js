@@ -3,6 +3,11 @@ $(function() {
     var cateid=getQueryString('cateid');
 // alert(cateid);return false;
 
+//头部修改
+$.post(ApiUrl+'/api/fenlei?id='+cateid+'&callback=?',{},function(data){
+     var data = JSON.parse(data);
+     $('.aui-title').html(data.msg.title);
+});
     $.post(ApiUrl+'/api/cateitems?id='+cateid+'&callback=?',{},function(data){
 
                 var data = JSON.parse(data);
@@ -17,6 +22,7 @@ $(function() {
                }
 
                 var html = template('test', data);
+
                 document.getElementById('aui-content').innerHTML = html;
         });
 })
