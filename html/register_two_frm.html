@@ -131,8 +131,48 @@ function confirm(){
             targetHeight:200,
             saveToPhotoAlbum: false
         }, function(ret, err){ 
-            if (ret.data) {
-                $api.attr($api.byId("avatarImg"),'src',ret.data);
+            if(ret.data){
+                api.ajax({
+                    url: ApiUrl+'/api/uploadAvatar',
+                    method: 'post',
+                    data: {
+                        values: { 
+                            name: 'upfile'
+                        },
+                        files: { 
+                            file: ret.data
+                        }
+                    }
+                },function(ret, err){
+                    if (ret) {
+                        //手机显示预览
+                        $api.attr($api.byId("avatarImg"),'src',ret.data);
+                    } else {
+                        alert('上传失败~');
+                        //api.alert({msg:JSON.stringify(err)});
+                    }
+                });
+
+
+                // api.ajax({
+                //       method : 'post',
+                //       url : ApiUrl+'/api/uploadAvatar',
+                //       data: {
+                //             values: {
+                //                 name: 'upfile'
+                //             },
+                //             files: {
+                //                 file: ret.data
+                //             }
+                //       }
+                // }, function(ret, err) {
+                //       api.hideProgress();
+                //       alert(JSON.stringify(ret));
+                //       //手机显示预览
+                //       $api.attr($api.byId("avatarImg"),'src',ret.data);
+                // });
+            }else{
+                api.alert({msg:err.msg});
             }
         })
     }
