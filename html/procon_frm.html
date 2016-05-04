@@ -424,10 +424,19 @@
 //      });
     }
     function openRank(item_id){
-       api.openWin({
-	       name: 'rank_list_win',
-	       url: 'rank_list_win.html?item_id='+item_id
-       });
+        var member_id = is_login();
+        var item_id = getQueryString('item_id');
+        $.post(ApiUrl+'/api/is_one_toupiao??member_id='+member_id+'&item_id='+item_id+'&callback=?',{},function(data){
+            var data = JSON.parse(data);
+            if(data.status == 1){
+                api.openWin({
+                    name: 'rank_list_win',
+                    url: 'rank_list_win.html?item_id='+item_id
+               });
+            }else{
+                api.alert({msg: data.msg});
+            }
+        });
     }
     
     function showToast(){
