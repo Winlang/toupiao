@@ -17,6 +17,7 @@ $(function() {
                }
 
                 var html = template('test', data);
+
                 document.getElementById('aui-content').innerHTML = html;
         });
 })
