@@ -5,6 +5,7 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <title>列表页</title>
     <link rel="stylesheet" type="text/css" href="../css/aui-win.css"/>
+
 </head>
 <body>
 	<header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
@@ -12,13 +13,16 @@
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
 
-        <div class="aui-title">主题1</div>
+        <div class="aui-title"></div>
 
 
     </header>
 </body>
-<script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
 <script type="text/javascript">
     function closeWin(){
         api.closeWin();
@@ -29,8 +33,15 @@
         $api.fixStatusBar(header); 
         var headerPos = $api.offset(header);
         var body_h = $api.offset($api.dom('body')).h;
+
+ 
 		
 		var cateid=getQueryString('cateid');
+        //头部修改
+        $.post(ApiUrl+'/api/fenlei?id='+cateid+'&callback=?',{},function(data){
+         var data = JSON.parse(data);
+         $('.aui-title').html(data.msg.title);
+});
         api.openFrame({
             name: 'grid_list_frm',
             url: 'grid_list_frm.html?cateid='+cateid,
