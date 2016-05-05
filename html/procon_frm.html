@@ -281,7 +281,7 @@
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript" src="../script/item_detail.js"></script>
 <script type="text/javascript" src="../script/template.js"></script>
-<script type="text/javascript" src="../script/recommend.js"></script>
+<!-- <script type="text/javascript" src="../script/recommend.js"></script> -->
 
 <script type="text/javascript">
     function openVote(itemoptid){
@@ -419,6 +419,7 @@
 //      });
     }
     function openRank(item_id){
+      
         var member_id = is_login();
         $.post(ApiUrl+'/api/is_one_toupiao??member_id='+member_id+'&item_id='+item_id+'&callback=?',{},function(data){
             var data = JSON.parse(data);
