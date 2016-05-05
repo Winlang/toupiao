@@ -29,18 +29,10 @@ div{
 	}
 
 	function closeClipCeng(){
-		 api.openFrame({
-            name : 'register_two_frm',
-            url : './register_two_frm.html',
-            rect : {
-                x : 0,
-                y : api.frameHeight-65,
-                w : 'auto',
-                h : 65
-            },
-            bounces : false,
-            opaque : false
-        });
-	}
+        //关闭截图
+        var imageClip = api.require('imageClip');
+        imageClip.close();
+        //api.closeFrame();
+    }
 </script>
 </html>
