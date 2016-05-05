@@ -98,18 +98,37 @@ function good_bad(obj,commid,status){
     });
 }
 
-//点击加载更多评论
+//点击加载更多精彩评论
+
+//点击加载更多最新评论
+loading_comm(1);
 function loading_comm(page){
 	//获取主题选项id
     var itemoptid = getQueryString('itemoptid');
     //获取当前登陆用户的id
     var member_id = is_login();
-	var prev_page = page+1;
-	$.post(ApiUrl+'/api/loading_new_comm?id='+itemoptid+'&member_id='+member_id+'&page='+page+'&callback=?',{},function(data){
-		var data = JSON.parse(data);
-
+	var next_page = page+1;
+	$.ajax({
+		'type':'get',
+		'url':ApiUrl+'/api/loading_new_comm?itemoptid='+itemoptid+'&member_id='+member_id+'&page='+page+'&callback=?',
+		beforeSend:function(){
+			$('#loading').removeAttr('onclick');
+			$('#loading').html('正在加载中...');
+		},
+		success:function(data){
+			var data = JSON.parse(data);
+			if(data.status == 0){
+				$('#itemopt_new_comminfo').append(data.msg);
+				$('#loading').html('查看更多评论');
+				$('#loading').attr('onclick','loading_comm('+next_page+')');
+			}else if(data.status == 2){
+				$('#loading').removeAttr('onclick');
+				$('#loading').html('没有更多评论了');
+			}else{
+				api.alert({msg:data.msg});
+			}
+		}
 	});
-	$('#loading').attr('onclick','loading_comm('+prev_page+')');
 }
 
 $(function() {
@@ -135,12 +154,12 @@ $(function() {
 	});
 
 	//主题选项最新评论列表
-	$.post(ApiUrl+'/api/option_new_comm?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
-		var data = JSON.parse(data);
+	// $.post(ApiUrl+'/api/option_new_comm?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
+	// 	var data = JSON.parse(data);
 		
-		var html = template('itemopt_bad_commdata', data);
-		document.getElementById('itemopt_bad_comminfo').innerHTML = html;
-	});
+	// 	var html = template('itemopt_new_commdata', data);
+	// 	document.getElementById('itemopt_new_comminfo').innerHTML = html;
+	// });
 })
 function collectionInfo(obj){
 
