@@ -180,6 +180,7 @@
                               <div class="aui-dialog-btn aui-text-info" tapmode onclick="confirm()">确定</div>
                           </div>
                </div>
+               <input type="hidden" id="search_id" value="{{data.id}}">
                <div class="aui-content-padded rule-2">
                     <div class="aui-btn aui-btn-warning aui-btn-outlined" tapmode onclick="openRank({{data.id}})">排行榜</div>
                </div>
@@ -215,8 +216,10 @@
               <input type="text" placeholder="请输入搜索内容" id="search-input" >
               </form>
             </div>
-            <i class="aui-iconfont aui-icon-search aui-pull-right"></i>
-           <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>-->
+            <!-- <script type="text/html" id="item_id"> -->
+<i class="aui-iconfont aui-icon-search aui-pull-right" onclick="search_info_two()"></i>
+<!-- </script> -->
+           <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput$('#search-input').val()()"></i>-->
         </div>
         <!--<div class="aui-searchbar-cancel aui-text-info" tapmode onclick="cancelSearch()">取消</div>-->
     </div>
@@ -224,7 +227,9 @@
 
            <div class="aui-form">
 
-                <div id="itemoption_list"></div>
+                <div id="itemoption_list" style="display:block;"></div>
+                <div id="itemoption_list_two" style="display:none;"></div>
+                 
                 <!--选项列表-->
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
