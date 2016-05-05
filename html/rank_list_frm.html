@@ -6,52 +6,68 @@
     <title>排行榜</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
     <style>
-        body{
-            background:#fff;
-        }
-        .aui-content ul li:nth-of-type(even){
-              background:#f5f5f5;
-              color:#666;
-        }
-       .aui-content ul li:nth-of-type(odd){
-              background:#fff;
-        }
-        .rank-title{
-            font-size:16px;
-            line-height:30px;
-            dislay:block;
-            padding:10px 5px;
-            text-align:center;
-            color:#333;
-            font-weight:600;
-         }
-        .rank-1,.rank-2,.rank-3{
-              display:inline-block;
-              text-align:center;
-              vertical-align:middle;
-              /*float:left;*/
-        }
-        .rank-1{width:10%;}
-        .rank-2{width:30%;}
-        .rank-3{width:50%;}
+           body{
+             background:#fff;
+           }
+           .caption{
+              font-size:16px;
+           }
+           .caption-1{
+              font-size: 14px;
+              color:#858f87;
+           }
+           .caption-2{
+             font-size:12px;
+             color:#858F87;
+           }
+           .rank-tit{
+             display:block;
+           }
+           .rank-options{
+              padding:10px 20px;
+           }
+           .progress{
+             display:block;
+           }
+           .aui-progress{
+             border-radius: 10px;
+           }
+           .aui-progress-bar{
+             border-radius: 10px;
+           }
     </style>
 </head>
 <body>
-	 <div class="aui-content">
-	    <p class="rank-title">谁是你最喜爱的影视明星？</p>     
-        <ul class="aui-list-view">       
-            <div id="item_rankinfo"></div>
-            <script type="text/html" id="item_rank">
-                {{each data.rank as v i}}
-                <li class="aui-list-view-cell">
-                    <div class="rank-1">{{i+1}}</div>
-                    <div class="rank-2">{{v.item_opttitle}}</div>
-                    <div class="rank-3">{{v.item_opttoupiao}}票</div>           
-                </li>
-                {{/each}}
-            </script>
-        </ul>
-    </div>
+      <div class="aui-content">
+            <div class="aui-text-center aui-padded-10 caption">我最喜爱的动物</div>
+                <div class="rank-options">             
+                      <div class="rank-tit aui-padded-5">
+                           <span class="aui-pull-left caption-1">猫</span>
+                           <span class="aui-pull-right caption-2">60人(60%)</span>
+                      </div>
+                      <div class="aui-progress aui-progress-xs progress">
+                            <div class="aui-progress-bar aui-progress-success" style="width:60%"></div>
+                      </div>
+                 </div>
+                 <div class="rank-options">
+                      <div class="rank-tit aui-padded-5">
+                           <span class="aui-pull-left caption-1">狗</span>
+                           <span class="aui-pull-right caption-2">30人(30%)</span>
+                      </div>
+                      <div class="aui-progress aui-progress-xs progress">
+                            <div class="aui-progress-bar aui-progress-warning" style="width:30%"></div>
+                      </div>
+                 </div>
+                 <div class="rank-options">
+                      <div class="rank-tit aui-padded-5">
+                           <span class="aui-pull-left caption-1">松鼠</span>
+                           <span class="aui-pull-right caption-2">10人(10%)</span>
+                      </div>
+                      <div class="aui-progress aui-progress-xs progress">
+                            <div class="aui-progress-bar aui-progress-danger" style="width:10%"></div>
+                      </div>
+                 </div>  
+      </div>
  </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/config.js"></script>

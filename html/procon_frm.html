@@ -197,7 +197,7 @@
              <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>                        
           </p>      
 <div class="aui-pull-right add">
-      <div class="aui-btn aui-btn-warning"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div> 
+      <div class="aui-btn aui-btn-warning" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div> 
 </div>             
 <!--搜索项目-->           
         <div class="aui-searchbar-wrap demo search" id="search">
@@ -208,7 +208,7 @@
             	<input type="text" placeholder="请输入搜索内容" id="search-input" >
             	</form>
             </div>
-            <i class="aui-iconfont aui-icon-search aui-pull-right"></i>
+            <i class="aui-iconfont aui-icon-search aui-pull-right" onclick="search_info($('#search-input').val());"></i>
            <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>-->
         </div>
         <!--<div class="aui-searchbar-cancel aui-text-info" tapmode onclick="cancelSearch()">取消</div>-->
@@ -217,7 +217,8 @@
 
            <div class="aui-form">
 
-                <div id="itemoption_list"></div>
+                <div id="itemoption_list" style="display:block;" ></div>
+                <div id="itemoption_l" style="display:none;"></div>
                 <!--选项列表-->
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
@@ -232,8 +233,8 @@
                            <i class="aui-iconfont aui-icon-check"></i>
                           <div class="aui-toast-content">投票成功</div>
                    </div>
-                   <div class="option">
-	                    <div class="idol-info" tapmode onclick="openVote({{value.item_optid}})">
+                   <div class="option" tapmode onclick="openVote({{value.item_optid}})">
+	                    <div class="idol-info">
 	                        <div class="idol-info-1" >
 	                              <img src="{{value.item_optimg}}" alt="" />
 	                        </div>
@@ -254,7 +255,7 @@
 	               		<div class="comment">
 	                        <div class="comment-1 aui-ellipsis-2">
 		                            <span class="aui-text-danger aui-padded-5">
-		                            </span>SSA:
+		                            </span>{{value.member_nick}}:
 	                             	{{value.comm_data}}
 	                        </div>
 	                        <!--<div class="comment-2 aui-text-info aui-pull-right">
@@ -288,6 +289,12 @@
        api.openWin({
 	       name: 'votecon_frm',
 	       url: 'votecon_frm.html?itemoptid='+itemoptid
+       });
+    }
+   function openAdd(){
+       api.openWin({
+	       name: 'add_option',
+	       url: 'add_option_win.html'
        });
     }
 	// apiready = function(){
