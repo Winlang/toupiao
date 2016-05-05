@@ -9,12 +9,12 @@
 <body>
 	 <div class="aui-content">
         <ul class="aui-list-view aui-in">
-            <li class="aui-list-view-cell">
+            <li class="aui-list-view-cell" onclick="appreciate()">
                 <div class="aui-arrow-right">
                       <i class="aui-iconfont aui-icon-like aui-bg-info"></i>赞
                 </div>               
             </li>
-            <li class="aui-list-view-cell">
+            <li class="aui-list-view-cell" onclick="review()">
                 <div class="aui-arrow-right">
                       <i class="aui-iconfont aui-icon-comment aui-bg-success"></i>评论
                 </div>              
@@ -37,5 +37,17 @@
 	apiready = function(){
 		
 	};
+	function appreciate(){
+	     api.openWin({
+	         name: 'appreciate_win',
+	         url: 'appreciate_win.html'
+         });
+	 }	
+	function review(){
+	     api.openWin({
+	         name: 'review_win',
+	         url: 'review_win.html'
+         });
+	 }	
 </script>
 </html>
