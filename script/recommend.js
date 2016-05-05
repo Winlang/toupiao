@@ -28,6 +28,6 @@ $(function() {
                 var html = template('itemoptions', data);
                 document.getElementById('itemoption_list').innerHTML = html;
         });
-        });
+    });
      
 })
