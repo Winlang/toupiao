@@ -6,8 +6,14 @@
     <title>选择头像区域</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
 </head>
-<body>
-<div class="aui-btn aui-btn-danger" tapmode onclick="closeClipCeng()">取消</div>
+<body>   
+     <!--<div class="aui-btn aui-btn-danger" tapmode onclick="closeClipCeng()">取消</div>-->
+     <header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
+        <a class="aui-btn aui-btn-warning aui-pull-left" tapmode onclick="closeWin()">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-btn aui-btn-success aui-pull-right" tapmode>使用</div>
+    </header>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
@@ -18,6 +24,103 @@
     apiready = function(){
         var picUrl = getQueryString('picUrl');
         imageClip(picUrl);
-    };
+       
+    }; 
+    
+    //剪裁图片系列函数
+ function imageClip(picUrl){ 
+        var imageClip = api.require('imageClip');
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header); 
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
+        imageClip.open({
+               path: picUrl,
+                clipRect : {
+                    x : api.winWidth/2-150,
+                    y : api.winHeight/2-150,                
+                    w : 300,
+                    h : 300,
+                    fixation:true
+                },
+                bg:'#efefef',     
+                x: 0,
+                y: headerPos.h,
+                w: headerPos.w,
+                h: 'auto'                       
+        },function( ret, err ){    
+            if (ret.status) {
+                //功能frame控制保存和关闭功能
+//              api.openFrame({
+//                  name : 'save',
+//                  url : 'avatarclip_frm.html',
+//                  rect : {
+//                      x : 0,
+//                      y : 0,
+//                      w : 'auto',
+//                      h : 65
+//                  },
+//                  bounces : true,
+//                  opaque : false
+//              });
+                //功能frame控制保存和关闭功能
+                // api.openFrame({
+                //     name : 'close',
+                //     url : './clipclose.html',
+                //     rect : {
+                //         x : 0,
+                //         y : 0,
+                //         w : 'auto',
+                //         h : 64
+                //     },
+                //     bounces : false,
+                //     opaque : false
+                // });
+            }else{
+            	alert('打开裁剪头像失败~');
+            }
+        });
+}
+
+
+//上传头像
+function uploadAvatar(){
+ 	//上传
+    api.ajax({
+            url: ApiUrl+'/api/uploadAvatar',
+            method: 'post',
+            data: {
+                values: { 
+                    name: 'upfile'
+                },
+                files: { 
+                    file: ret.data
+                }
+            }
+        },function(ret1, err1){
+            if (ret1) {
+                //手机显示预览
+                $api.attr($api.byId("avatarImg"),'src',ret.data);
+            } else {
+                alert('上传失败~');
+                //api.alert({msg:JSON.stringify(err)});
+            }
+        });    
+
+}
+
+//保存剪裁图像并替换头像
+function save(){
+    var imageClip = api.require('imageClip');
+    imageClip.save(function( ret, err ){        
+        if( ret ){
+            alert( JSON.stringify( ret ) );
+        }else{
+            alert( JSON.stringify( err ) );
+        }
+    })
+}
+  
 </script>
 </html>
