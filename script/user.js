@@ -83,10 +83,15 @@ function register(){
 
 		          
 		           	//跳至信息设置页面
-		           	api.openWin({
-				        name: 'register_two',
-				        url: 'register_two_frm.html',
-				    });
+		      //      	api.openWin({
+				    //     name: 'register_two',
+				    //     url: 'register_two_frm.html',
+				    // });
+
+				    api.openFrame({
+			            name : 'register_two_frm',
+			            url : 'register_two_frm.html',
+			        });
 		           
 			    });
 

@@ -131,16 +131,15 @@ function getPicture(){
                 },
                 bg:'#efefef'
                 
-        },function( ret, err ){
-        	alert(ret.status);     
+        },function( ret, err ){    
             if (ret.status) {
                 //功能frame控制保存和关闭功能
                 api.openFrame({
                     name : 'save',
-                    url : './clipsave.html',
+                    url : 'avatarclip_frm.html',
                     rect : {
                         x : 0,
-                        y : api.frameHeight-65,
+                        y : 0,
                         w : 'auto',
                         h : 65
                     },
@@ -148,18 +147,18 @@ function getPicture(){
                     opaque : false
                 });
                 //功能frame控制保存和关闭功能
-                api.openFrame({
-                    name : 'close',
-                    url : './clipclose.html',
-                    rect : {
-                        x : 0,
-                        y : 0,
-                        w : 'auto',
-                        h : 64
-                    },
-                    bounces : false,
-                    opaque : false
-                });
+                // api.openFrame({
+                //     name : 'close',
+                //     url : './clipclose.html',
+                //     rect : {
+                //         x : 0,
+                //         y : 0,
+                //         w : 'auto',
+                //         h : 64
+                //     },
+                //     bounces : false,
+                //     opaque : false
+                // });
             }else{
             	alert('打开裁剪头像失败~');
             }
