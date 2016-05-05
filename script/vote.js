@@ -98,7 +98,19 @@ function good_bad(obj,commid,status){
     });
 }
 
+//点击加载更多评论
+function loading_comm(page){
+	//获取主题选项id
+    var itemoptid = getQueryString('itemoptid');
+    //获取当前登陆用户的id
+    var member_id = is_login();
+	var prev_page = page+1;
+	$.post(ApiUrl+'/api/loading_new_comm?id='+itemoptid+'&member_id='+member_id+'&page='+page+'&callback=?',{},function(data){
+		var data = JSON.parse(data);
 
+	});
+	$('#loading').attr('onclick','loading_comm('+prev_page+')');
+}
 
 $(function() {
     //获取主题选项id
