@@ -119,6 +119,10 @@ function confirm(){
         },'json');
     }
 
+
+
+
+
     function getPicture(){
         api.getPicture({
             sourceType: 'library',
@@ -130,8 +134,54 @@ function confirm(){
             targetWidth:200,
             targetHeight:200,
             saveToPhotoAlbum: false
-        }, function(ret, err){ 
+        }, function(ret, err){
             if(ret.data){
+
+                var imageClip = api.require('imageClip');
+                imageClip.open({
+                    path: ret.data
+                },function( ret, err ){     
+                    if( ret.status ){
+                        alert( JSON.stringify( ret ) );
+                    }else{
+                        alert( JSON.stringify( err ) );
+                    }
+                });
+
+                //照片剪裁开始
+                    // var FNImageClip = api.require('FNImageClip');
+                    // FNImageClip.open({
+                    //     rect: {
+                    //         x: 0,
+                    //         y: 0,
+                    //         w: api.winWidth,
+                    //         h: api.winHeight
+                    //     },
+                    //     srcPath: ret.data,
+                    //     style: {
+                    //         mask: '#888',
+                    //         clip: {
+                    //             w: 100,
+                    //             h: 100,
+                    //             x: 50,
+                    //             y: 50,
+                    //             borderColor: '#0f0',
+                    //             borderWidth: 1,
+                    //             appearance: 'rectangle'
+                    //         }
+                    //     },
+                    //     fixedOn: api.frameName
+                    // },
+                    // function(ret, err) {
+                    //     if (ret) {
+                    //         alert(JSON.stringify(ret));
+                    //     } else {
+                    //         alert(JSON.stringify(err));
+                    //     }
+                    // });
+                //照片剪裁结束
+
+                //上传
                 api.ajax({
                     url: ApiUrl+'/api/uploadAvatar',
                     method: 'post',
@@ -143,8 +193,8 @@ function confirm(){
                             file: ret.data
                         }
                     }
-                },function(ret, err){
-                    if (ret) {
+                },function(ret1, err1){
+                    if (ret1) {
                         //手机显示预览
                         $api.attr($api.byId("avatarImg"),'src',ret.data);
                     } else {
