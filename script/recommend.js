@@ -11,6 +11,7 @@ $(function() {
                 var html = template('item', data);
 
                 item_id=data.data.id;
+
                 document.getElementById('iteminfo').innerHTML = html;
 
                 //主题对应选项列表
@@ -31,3 +32,25 @@ $(function() {
     });
      
 })
+
+
+
+function search_info_two(item_title){
+                var item_id=$('#search_id').val();
+                var item_title=$('#search-input').val();
+         $.post(ApiUrl+'/api/search_info?id='+item_id+'&item_title='+item_title+'&callback=?',{},function(data){
+                
+                var data = JSON.parse(data);
+               if(data.status=='0'){
+                $('#itemoption_list_two').css('display','block');
+                $('#itemoption_list').css('display','none');
+                document.getElementById('itemoption_list_two').innerHTML = data.data;
+               }else{
+                api.alert({msg:data.data});
+                $('#itemoption_list_two').css('display','none');
+                $('#itemoption_list').css('display','block');
+               }
+                
+                
+        });
+}
