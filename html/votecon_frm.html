@@ -306,7 +306,11 @@
     <div class="aui-content">
           <ul class="aui-list-view ul-comment">
             <div id="itemopt_good_comminfo"></div>
-            <div id="itemopt_bad_comminfo"></div>
+            <li id="new_comm" class="aui-list-view-cell aui-img">
+                 <p class="comment-tit">最新评论</p>
+            </li>
+            <div id="itemopt_new_comminfo"></div>
+
             <script type="text/html" id="itemopt_good_commdata">
                 <li class="aui-list-view-cell aui-img">
                      <p class="comment-tit">精彩评论</p>
@@ -319,8 +323,8 @@
                      <div class="aui-img-body">                        
                          <div class="commemt-caption">
                            <div class="aui-pull-left">
-                                 <h5>生如夏花丶</h5>
-                                 <span>2016-5-3 20:30:25</span>
+                                <h5>{{v.member_nick}}</h5>
+                                <span>{{v.comm_ctime}}</span>
                            </div>
                            <div class="aui-pull-right appreciate">
                                 {{if v.good_bad_status == 'good'}}
@@ -354,106 +358,10 @@
                      </div>
                 </li>
                 {{/each}}
-            </script>
-            <script type="text/html" id="itemopt_bad_commdata">
-                <li id="new_comm" class="aui-list-view-cell aui-img">
-                     <p class="comment-tit">最新评论</p>
-                </li>
-                {{each data as v i}}
-                <li class="aui-list-view-cell aui-img">                  
-                     <div class="aui-img-object aui-pull-left ">
-                          <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
-                     </div>                 
-                     <div class="aui-img-body">                        
-                         <div class="commemt-caption">
-                           <div class="aui-pull-left">
-                                 <h5>生如夏花丶</h5>
-                                 <span>2016-5-3</span>
-                           </div>
-                           <div class="aui-pull-right appreciate">
-                                {{if v.good_bad_status == 'good'}}
-                                    {{if v.good_bad == '1'}}
-                                        <span class="aui-iconfont aui-icon-appreciatefill aui-text-warning"></span>
-                                        <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
-                                        <span>{{v.comm_bad}}</span>
-                                    {{else}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
-                                        <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
-                                        <span>{{v.comm_bad}}</span>
-                                    {{/if}}
-                                {{else}}
-                                    {{if v.good_bad == '1'}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
-                                        <span>{{v.comm_good}}</span>
-                                        <span class="aui-iconfont aui-iconfont aui-icon-appreciatefill aui-text-warning reverse"></span>
-                                        <span>{{v.comm_bad}}</span>
-                                    {{else}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
-                                        <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
-                                        <span>{{v.comm_bad}}</span>
-                                    {{/if}}
-                                {{/if}}
-                           </div>
-                         </div>
-                           <p>{{v.comm_con}}....</p>
-                     </div>
-                </li>
-                {{/each}}
-            </script>
-            <script type="text/html" id="itemopt_bad_commdata">
-                <li id="new_comm" class="aui-list-view-cell aui-img">
-                     <p class="comment-tit">最新评论</p>
-                </li>
-                {{each data as v i}}
-                <li class="aui-list-view-cell aui-img">                  
-                     <div class="aui-img-object aui-pull-left ">
-                          <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
-                     </div>                 
-                     <div class="aui-img-body">                        
-                         <div class="commemt-caption">
-                           <div class="aui-pull-left">
-                                 <h5>生如夏花丶</h5>
-                                 <span>2016-5-3</span>
-                           </div>
-                           <div class="aui-pull-right appreciate">
-                                {{if v.good_bad_status == 'good'}}
-                                    {{if v.good_bad == '1'}}
-                                        <span class="aui-iconfont aui-icon-appreciatefill aui-text-warning"></span>
-                                        <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
-                                        <span>{{v.comm_bad}}</span>
-                                    {{else}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
-                                        <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
-                                        <span>{{v.comm_bad}}</span>
-                                    {{/if}}
-                                {{else}}
-                                    {{if v.good_bad == '1'}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
-                                        <span>{{v.comm_good}}</span>
-                                        <span class="aui-iconfont aui-iconfont aui-icon-appreciatefill aui-text-warning reverse"></span>
-                                        <span>{{v.comm_bad}}</span>
-                                    {{else}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
-                                        <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
-                                        <span>{{v.comm_bad}}</span>
-                                    {{/if}}
-                                {{/if}}
-                           </div>
-                         </div>
-                           <p>{{v.comm_con}}....</p>
-                     </div>
-                </li>
-                {{/each}}
-                <li class="aui-list-view-cell aui-img">
-                     <p class="aui-text-center comment-more">查看更多精彩评论</p>
-                </li>
-            </script>
+            </script> 
+            <li class="aui-list-view-cell aui-img">
+                 <p id="loading" onclick="loading_comm(1,'new');" class="aui-text-center comment-more">查看更多评论</p>
+            </li>
           </ul>
     </div>
 </div> 

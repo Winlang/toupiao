@@ -180,7 +180,6 @@
                               <div class="aui-dialog-btn aui-text-info" tapmode onclick="confirm()">确定</div>
                           </div>
                </div>
-               <input type="hidden" id="search_id" value="{{data.id}}">
                <div class="aui-content-padded rule-2">
                     <div class="aui-btn aui-btn-warning aui-btn-outlined" tapmode onclick="openRank({{data.id}})">排行榜</div>
                </div>
@@ -216,10 +215,8 @@
               <input type="text" placeholder="请输入搜索内容" id="search-input" >
               </form>
             </div>
-            <!-- <script type="text/html" id="item_id"> -->
-<i class="aui-iconfont aui-icon-search aui-pull-right" onclick="search_info_two()"></i>
-<!-- </script> -->
-           <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput$('#search-input').val()()"></i>-->
+            <i class="aui-iconfont aui-icon-search aui-pull-right"></i>
+           <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>-->
         </div>
         <!--<div class="aui-searchbar-cancel aui-text-info" tapmode onclick="cancelSearch()">取消</div>-->
     </div>
@@ -227,9 +224,7 @@
 
            <div class="aui-form">
 
-                <div id="itemoption_list" style="display:block;"></div>
-                <div id="itemoption_list_two" style="display:none;"></div>
-                 
+                <div id="itemoption_list"></div>
                 <!--选项列表-->
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
@@ -266,7 +261,7 @@
                     <div class="comment">
                           <div class="comment-1 aui-ellipsis-2">
                                 <span class="aui-text-danger aui-padded-5">
-                                </span>SSA:
+                                </span>{{value.member_nick}}:
                                 {{value.comm_data}}
                           </div>
                           <!--<div class="comment-2 aui-text-info aui-pull-right">
@@ -490,4 +485,3 @@
 </script>
 
 </html>
-
