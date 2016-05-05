@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>注册</title>
+    <title>补全信息</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <style type="text/css">
     body {
@@ -120,111 +120,9 @@ function confirm(){
     }
 
 
+    //裁剪头像系列函数结束
 
 
-
-    function getPicture(){
-        api.getPicture({
-            sourceType: 'library',
-            encodingType: 'jpg',
-            mediaValue: 'pic',
-            destinationType: 'url',
-            allowEdit: true,
-            quality: 80,
-            targetWidth:200,
-            targetHeight:200,
-            saveToPhotoAlbum: false
-        }, function(ret, err){
-            if(ret.data){
-                var imageClip = api.require('imageClip');
-                imageClip.open({
-                    path: ret.data
-                },function( ret, err ){     
-                    if( ret.status ){
-                        alert( JSON.stringify( ret ) );
-                    }else{
-                        alert( JSON.stringify( err ) );
-                    }
-                });
-
-                //照片剪裁开始
-                    // var FNImageClip = api.require('FNImageClip');
-                    // FNImageClip.open({
-                    //     rect: {
-                    //         x: 0,
-                    //         y: 0,
-                    //         w: api.winWidth,
-                    //         h: api.winHeight
-                    //     },
-                    //     srcPath: ret.data,
-                    //     style: {
-                    //         mask: '#888',
-                    //         clip: {
-                    //             w: 100,
-                    //             h: 100,
-                    //             x: 50,
-                    //             y: 50,
-                    //             borderColor: '#0f0',
-                    //             borderWidth: 1,
-                    //             appearance: 'rectangle'
-                    //         }
-                    //     },
-                    //     fixedOn: api.frameName
-                    // },
-                    // function(ret, err) {
-                    //     if (ret) {
-                    //         alert(JSON.stringify(ret));
-                    //     } else {
-                    //         alert(JSON.stringify(err));
-                    //     }
-                    // });
-                //照片剪裁结束
-
-                //上传
-                api.ajax({
-                    url: ApiUrl+'/api/uploadAvatar',
-                    method: 'post',
-                    data: {
-                        values: { 
-                            name: 'upfile'
-                        },
-                        files: { 
-                            file: ret.data
-                        }
-                    }
-                },function(ret1, err1){
-                    if (ret1) {
-                        //手机显示预览
-                        $api.attr($api.byId("avatarImg"),'src',ret.data);
-                    } else {
-                        alert('上传失败~');
-                        //api.alert({msg:JSON.stringify(err)});
-                    }
-                });
-
-
-                // api.ajax({
-                //       method : 'post',
-                //       url : ApiUrl+'/api/uploadAvatar',
-                //       data: {
-                //             values: {
-                //                 name: 'upfile'
-                //             },
-                //             files: {
-                //                 file: ret.data
-                //             }
-                //       }
-                // }, function(ret, err) {
-                //       api.hideProgress();
-                //       alert(JSON.stringify(ret));
-                //       //手机显示预览
-                //       $api.attr($api.byId("avatarImg"),'src',ret.data);
-                // });
-            }else{
-                api.alert({msg:err.msg});
-            }
-        })
-    }
 
     function openPicker(){
         api.openPicker({
