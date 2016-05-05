@@ -31,12 +31,44 @@ function pinglun(){
 		login_page();
 		return false;
 	}
+	if(comment == ''){
+		api.alert({msg:'评论内容不能为空'});
+		return false;
+	}
+	if(comment.length > 200){
+		api.alert({msg:'评论内容不能超过200个字符'});
+		return false;
+	}
+	
 	$.post(ApiUrl+'/api/item_comment?id='+id+'&comment='+comment+'&member_id='+member_id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
 		if(data.status == 0){
 		    api.alert({msg: data.data});
 		    $('#ask-text textarea').val(' ');
-		    hideReply();
+            hideReply();
+		    //最新评论显示在最上面
+        	var hh = '';
+			hh += '<li class="aui-list-view-cell aui-img">';                  
+				hh += '<div class="aui-img-object aui-pull-left ">';
+			  		hh += '<img class="avatar" src="../image/demos-2.jpg" alt="" /> ';
+				hh += '</div>';
+				hh += '<div class="aui-img-body">';
+					hh += '<div class="commemt-caption">';
+						hh += '<div class="aui-pull-left">';
+							hh += '<h5>生如夏花丶</h5>';
+							hh += '<span>2016-5-3</span>';
+						hh += ' </div>';
+						hh += '<div class="aui-pull-right appreciate">';
+							hh += '<span class="aui-iconfont aui-icon-appreciatefill aui-text-warning"></span>';
+							hh += '<span></span>';
+							hh += '<span onclick="good_bad()" class="aui-iconfont aui-icon-appreciate reverse"></span>';
+							hh += '<span></span>';
+						hh += '</div>';
+					hh += '</div>';
+					hh += '<p>'+data.comm_data.comm_con+'</p>';
+				hh += '</div>';
+			hh += '</li>';
+			$('#new_comm').after(hh);
 	  	}else{
 		    api.alert({msg: data.data});
 		}
@@ -82,12 +114,20 @@ $(function() {
 		document.getElementById('itemoptinfo').innerHTML = html;
 	});
 	
-	//主题选项评论列表
-	$.post(ApiUrl+'/api/optioncomments?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
+	//主题选项精彩评论列表
+	$.post(ApiUrl+'/api/option_good_comm?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
 		
-		var html = template('itemopt_commdata', data);
-		document.getElementById('itemopt_comminfo').innerHTML = html;
+		var html = template('itemopt_good_commdata', data);
+		document.getElementById('itemopt_good_comminfo').innerHTML = html;
+	});
+
+	//主题选项最新评论列表
+	$.post(ApiUrl+'/api/option_new_comm?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
+		var data = JSON.parse(data);
+		
+		var html = template('itemopt_bad_commdata', data);
+		document.getElementById('itemopt_bad_comminfo').innerHTML = html;
 	});
 })
 function collectionInfo(obj){

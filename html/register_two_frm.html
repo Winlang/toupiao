@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>注册</title>
+    <title>补全信息</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <style type="text/css">
     body {
@@ -119,23 +119,10 @@ function confirm(){
         },'json');
     }
 
-    function getPicture(){
-        api.getPicture({
-            sourceType: 'library',
-            encodingType: 'jpg',
-            mediaValue: 'pic',
-            destinationType: 'url',
-            allowEdit: true,
-            quality: 80,
-            targetWidth:200,
-            targetHeight:200,
-            saveToPhotoAlbum: false
-        }, function(ret, err){ 
-            if (ret.data) {
-                $api.attr($api.byId("avatarImg"),'src',ret.data);
-            }
-        })
-    }
+
+    //裁剪头像系列函数结束
+
+
 
     function openPicker(){
         api.openPicker({

@@ -250,18 +250,18 @@
 	                         </div>
 	                   </div>
                    </div>
-	               		{{if value.comm_data}}
-                    <div class="comment">
-                          <div class="comment-1 aui-ellipsis-2">
-                                <span class="aui-text-danger aui-padded-5">
-                                </span>SSA:
-                                {{value.comm_data}}
-                          </div>
-                          <!--<div class="comment-2 aui-text-info aui-pull-right">
-                              <span class="aui-iconfont aui-icon-appreciate"></span> 99+
-                        </div>-->
-                      </div>
-                  {{/if}}
+                   {{if value.comm_data}}
+	               		<div class="comment">
+	                        <div class="comment-1 aui-ellipsis-2">
+		                            <span class="aui-text-danger aui-padded-5">
+		                            </span>SSA:
+	                             	{{value.comm_data}}
+	                        </div>
+	                        <!--<div class="comment-2 aui-text-info aui-pull-right">
+		                          <span class="aui-iconfont aui-icon-appreciate"></span> 99+
+		                    </div>-->
+	                   	</div>
+	                {{/if}}
                 </div>
                 {{/each}}
                 </script>
@@ -281,6 +281,8 @@
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript" src="../script/item_detail.js"></script>
 <script type="text/javascript" src="../script/template.js"></script>
+<!-- <script type="text/javascript" src="../script/recommend.js"></script> -->
+
 <script type="text/javascript">
     function openVote(itemoptid){
        api.openWin({
@@ -423,10 +425,19 @@
 //      });
     }
     function openRank(item_id){
-       api.openWin({
-	       name: 'rank_list_win',
-	       url: 'rank_list_win.html?item_id='+item_id
-       });
+      
+        var member_id = is_login();
+        $.post(ApiUrl+'/api/is_one_toupiao??member_id='+member_id+'&item_id='+item_id+'&callback=?',{},function(data){
+            var data = JSON.parse(data);
+            if(data.status == 1){
+                api.openWin({
+                    name: 'rank_list_win',
+                    url: 'rank_list_win.html?item_id='+item_id
+               });
+            }else{
+                api.alert({msg: data.msg});
+            }
+        });
     }
     
     function showToast(){
@@ -461,6 +472,7 @@
     	}
     }
 </script>
+
 </html>
 
 
