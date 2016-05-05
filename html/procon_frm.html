@@ -197,7 +197,7 @@
              <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>                        
           </p>      
 <div class="aui-pull-right add">
-      <div class="aui-btn aui-btn-warning"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div> 
+      <div class="aui-btn aui-btn-warning" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div> 
 </div>             
 <!--搜索项目-->           
         <div class="aui-searchbar-wrap demo search" id="search">
@@ -286,6 +286,12 @@
        api.openWin({
 	       name: 'votecon_frm',
 	       url: 'votecon_frm.html?itemoptid='+itemoptid
+       });
+    }
+   function openAdd(){
+       api.openWin({
+	       name: 'add_option',
+	       url: 'add_option_win.html'
        });
     }
 	// apiready = function(){
