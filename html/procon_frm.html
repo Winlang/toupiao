@@ -208,7 +208,7 @@
             	<input type="text" placeholder="请输入搜索内容" id="search-input" >
             	</form>
             </div>
-            <i class="aui-iconfont aui-icon-search aui-pull-right"></i>
+            <i class="aui-iconfont aui-icon-search aui-pull-right" onclick="search_info($('#search-input').val());"></i>
            <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>-->
         </div>
         <!--<div class="aui-searchbar-cancel aui-text-info" tapmode onclick="cancelSearch()">取消</div>-->
@@ -217,7 +217,8 @@
 
            <div class="aui-form">
 
-                <div id="itemoption_list"></div>
+                <div id="itemoption_list" style="display:block;" ></div>
+                <div id="itemoption_l" style="display:none;"></div>
                 <!--选项列表-->
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
