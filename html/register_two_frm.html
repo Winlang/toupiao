@@ -136,7 +136,6 @@ function confirm(){
             saveToPhotoAlbum: false
         }, function(ret, err){
             if(ret.data){
-
                 var imageClip = api.require('imageClip');
                 imageClip.open({
                     path: ret.data
