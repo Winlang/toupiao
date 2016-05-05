@@ -1,3 +1,4 @@
+
 /*
  * js获取url参数
  */
@@ -106,9 +107,9 @@ function getPicture(){
     }, function(ret, err){
         if(ret.data){
             //打开功能弹层
-             api.openFrame({
-                name: 'avatarclip_win',
-                url: 'avatarclip_win.html?picUrl='+ret.data,
+             api.openWin({
+                name: 'avatarclip_frm',
+                url: 'avatarclip_frm.html?picUrl='+ret.data,
                 bounces: true,
             });
         }else{
@@ -124,28 +125,31 @@ function getPicture(){
                path: picUrl,
                 clipRect : {
                     x : api.winWidth/2-150,
-                    y : api.winHeight/2-150,
+                    y : api.winHeight/2-150,                
                     w : 300,
                     h : 300,
                     fixation:true
                 },
-                bg:'#efefef'
-                
+                bg:'#efefef',     
+                x:0,
+                y:48,
+                w:'auto',
+                h:'auto'                         
         },function( ret, err ){    
             if (ret.status) {
                 //功能frame控制保存和关闭功能
-                api.openFrame({
-                    name : 'save',
-                    url : 'avatarclip_frm.html',
-                    rect : {
-                        x : 0,
-                        y : 0,
-                        w : 'auto',
-                        h : 65
-                    },
-                    bounces : false,
-                    opaque : false
-                });
+//              api.openFrame({
+//                  name : 'save',
+//                  url : 'avatarclip_frm.html',
+//                  rect : {
+//                      x : 0,
+//                      y : 0,
+//                      w : 'auto',
+//                      h : 65
+//                  },
+//                  bounces : true,
+//                  opaque : false
+//              });
                 //功能frame控制保存和关闭功能
                 // api.openFrame({
                 //     name : 'close',
@@ -203,4 +207,5 @@ function save(){
         }
     })
 }
+
 
