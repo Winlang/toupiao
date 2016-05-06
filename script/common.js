@@ -115,7 +115,7 @@ function getPicture(){
                 bounces: true,
             });
         }else{
-            api.alert({msg:err.msg});
+            alert('您没有选择图片');
         }
     })
 }
