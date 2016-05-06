@@ -12,11 +12,13 @@
         <a class="aui-btn aui-btn-warning aui-pull-left" tapmode onclick="closeWin()">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
-        <div class="aui-btn aui-btn-success aui-pull-right" tapmode>使用</div>
+        <div class="aui-btn aui-btn-success aui-pull-right" tapmode onclick="save()">使用</div>
     </header>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
 <script type="text/javascript">
     function closeWin(){
         api.closeWin();
