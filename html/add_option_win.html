@@ -22,6 +22,7 @@
         api.closeWin();
     }
     apiready = function(){
+        var item_id = getQueryString('item_id');
         api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header); 
@@ -29,7 +30,7 @@
         var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
             name: 'add_option_frm',
-            url: 'add_option_frm.html',
+            url: 'add_option_frm.html?item_id='+item_id,
             bounces: true,
             rect: {
                 x: 0,
