@@ -152,15 +152,19 @@
 	.ask-text textarea {
 		height: 100%;
 		padding: 5px;
-		margin: 0;
-		
+		margin: 0;		
 		border:none;
+		overflow-y: auto;
 	}
 	.main{
 	   display:block;
 	   width:100%;
 	   height:auto;
 	   position: relative;	
+	}
+	.main-fix{
+	  position:fixed;
+	  top:inherit;
 	}
 	.mark {
 		background: rgba(0,0,0,0.5);
@@ -177,6 +181,7 @@
 	}
 	#ask-reply-box {
 		padding: 10px;
+		z-index: 20;
 	}
 	#aui-footer {
 		background:rgba(255,255,255,1);	
@@ -297,9 +302,7 @@
          </ul>
     </div>
     <div class="aui-content aui-padded-10">
-          <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode>
-              {{data.item_optdesc}}
-          </p>
+          <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">{{data.item_optdesc}}</p>
     </div>
     </script>
     
@@ -482,6 +485,11 @@
     
 
     apiready=function(){
+         //暂无简介
+	      var sum = $("#summary").html();
+	      if(sum == ""){
+	         $("#summary").html("暂无简介");
+	      }
         //监听 登陆成功 
         // 监听是否注册或者登录成功   监听成功
           api.addEventListener({
@@ -513,6 +521,7 @@
             $api.css($api.byId("ask-input"),"display:block");
             $api.css($api.byId("ask-reply-box"),"display:none");
             $api.removeCls($api.byId("aui-footer"),"show");
+            $api.removeCls($api.dom(".main"),"main-fix");
         });
     }
 
@@ -588,12 +597,14 @@
     	$api.css($api.byId("ask-input"),"display:none");
     	$api.css($api.byId("ask-reply-box"),"display:block");
     	$api.addCls($api.byId("aui-footer"),"show");
+    	$api.addCls($api.dom(".main"),"main-fix");
     }
     function hideReply(){
         $api.css($api.dom(".mark"),"display:none");
         $api.css($api.byId("ask-input"),"display:block");
         $api.css($api.byId("ask-reply-box"),"display:none");
         $api.removeCls($api.byId("aui-footer"),"show");
+        $api.removeCls($api.dom(".main"),"main-fix");
     }
 
     function openAnswer(){
