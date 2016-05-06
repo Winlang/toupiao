@@ -357,10 +357,12 @@
                            <p>{{v.comm_con}}....</p>
                      </div>
                 </li>
-                {{/each}}
+                {{if i > 3}}
                 <li class="aui-list-view-cell aui-img">
                      <p onclick="openGoodcomm();" class="aui-text-center comment-more">查看更多精彩评论</p>
                 </li>
+                {{/if}}
+                {{/each}}
             </script> 
             
             <li class="aui-list-view-cell aui-img">
