@@ -53,7 +53,7 @@
 	 		      <span>添加选项图片</span>
 	 		      <span class="middle"></span>
 	 		</div>
-
+	 		<input type="hidden" id="opt_img_path" value="">
 	 		<div class="aui-input-row">
 	 			<label class="aui-input-addon">选项名称</label>
 	 			<input type="number" class="aui-input" id="xx_title" value="" placeholder="请输入您的选项名称" />
@@ -83,35 +83,37 @@
       }, function(ret) {
             if (ret && ret.value) {
                 var value = ret.value;
-                $api.attr($api.byId("xx_bg_img"),'src',value.name);
+                var imgpath = UploadUrl+'/admin/vote_itemopt/usercreate/'+value.name;
+                $api.attr($api.byId("xx_bg_img"),'src',imgpath);
+                $('#opt_img_path').val('vote_itemopt/usercreate/'+value.name);
             }
       });
  	}
 
  	function submit_xx(){
  		var item_id = getQueryString('item_id');
- 		var item_optimg = $('#xx_bg_img').attr('src');
+ 		
+ 		var item_optimg = $('#opt_img_path').val();
  		var item_opttitle = $('#xx_title').val();
  		var item_optdesc = $('#xx_desc').val();
  		$.post(ApiUrl+'/api/additemopt/?callback=?',{'item_id':item_id,'item_opttitle':item_opttitle,'item_optdesc':item_optdesc,'item_optimg':item_optimg},function(data){
-                      var ret_data = JSON.parse(ret_data);
-                      if(ret_data.status == 1){
-                      	  //设置监听 返回设置头像
-                		  // 广播事件
-				            api.sendEvent({
-					            name : 'avatar_upload_successEvent',
-					            extra : {
-					               name : ret1.msg,
-					            }
-					        });
+                      var data = JSON.parse(data);
+                      if(data.status == 1){
+                      		var item_optid = data.msg;
+                     		openVote(item_optid);
+				            //跳至所增加的选项页
 
-				            //关闭当前窗口
-				            api.closeWin();
-                		  	
                       }else{
-                      	  alert(ret_data.msg);
+                      	  alert(data.msg);
                       }
                 });
  	}
+
+function openVote(itemoptid){
+       api.openWin({
+	       name: 'votecon_frm',
+	       url: 'votecon_frm.html?itemoptid='+itemoptid
+       });
+    }
  </script>
  </html>

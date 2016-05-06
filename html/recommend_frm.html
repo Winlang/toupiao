@@ -128,6 +128,7 @@
       }</style>
 </head>
 <body>
+  <input type="hidden" id="item_id_hidden" value="">
   <!-- <header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
         <a class="aui-btn aui-btn-warning aui-pull-left " tapmode onclick="closeWin()">
             <span class="aui-iconfont aui-icon-left"></span>
@@ -281,9 +282,10 @@
        });
     }
     function openAdd(){
+      var item_id = $('#item_id_hidden').val();
        api.openWin({
          name: 'add_option',
-         url: 'add_option_win.html'
+         url: 'add_option_win.html?item_id='+item_id
        });
     }
   // apiready = function(){
