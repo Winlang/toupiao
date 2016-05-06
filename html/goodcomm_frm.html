@@ -289,130 +289,124 @@
     }
 
     //qq指定好友分享
-    function qqfriend_share(){
-        var qq = api.require('qq');
-        qq.shareText({
-            text:'我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn'
-        });
-    }
+    // function qqfriend_share(){
+    //     var qq = api.require('qq');
+    //     qq.shareText({
+    //         text:'我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn'
+    //     });
+    // }
 
     //qq空间分享
-    function qqkongjian_share(){
-        var qq = api.require('qq');
-        qq.installed(function(ret,err){
-            if(ret.status){
-                qq.shareNews({
-                    url:'http://www.xieli.cn',
-                    title:'小石投',
-                    description:'我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn',
-                    imgUrl:'http://upload.wabei.cn/2011/0807/20110807025817844.jpg'
-                });
-            }else{
-                api.alert("请先安装qq客户端");
-            }
-        });
-    }
+    // function qqkongjian_share(){
+    //     var qq = api.require('qq');
+    //     qq.installed(function(ret,err){
+    //         if(ret.status){
+    //             qq.shareNews({
+    //                 url:'http://www.xieli.cn',
+    //                 title:'小石投',
+    //                 description:'我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn',
+    //                 imgUrl:'http://upload.wabei.cn/2011/0807/20110807025817844.jpg'
+    //             });
+    //         }else{
+    //             api.alert("请先安装qq客户端");
+    //         }
+    //     });
+    // }
 
     //微信分享
-    function weixin_share(){
-        var weixin = api.require('weiXin');
-        weixin.getUserInfo(function(ret,err){
-            if(ret.status){
-                api.alert({msg: ret.nickname});
-            }else{
-                api.alert({msg: "错误："+err.msg});
-            }
-        });
-    }
+    // function weixin_share(){
+    //     var weixin = api.require('weiXin');
+    //     weixin.getUserInfo(function(ret,err){
+    //         if(ret.status){
+    //             api.alert({msg: ret.nickname});
+    //         }else{
+    //             api.alert({msg: "错误："+err.msg});
+    //         }
+    //     });
+    // }
 
     //新浪微博分享
-    function sina_share(){
-        var sinaweibo = api.require('sinaWeiBo');
-        sinaweibo.auth(function(ret,err){
-            if (ret.status) {
-                sinaweibo.sendRequest({
-                    contentType: 'text',
-                    text: '我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn',
-                    imageUrl: 'fs://a.png'
-                },function(ret,err){
-                    if (ret.status) {
-                        api.alert({
-                            title: '发表微博',
-                            msg: '发表成功',
-                            buttons: ['确定']
-                        });
-                    }else{
-                        api.alert({
-                            title: '发表微博',
-                            msg: '发表失败',
-                            buttons: ['确定']
-                        });
-                    }
-                });
-            }else{
-                api.alert({msg:'授权失败'});
-            }
-        });
-    }
+    // function sina_share(){
+    //     var sinaweibo = api.require('sinaWeiBo');
+    //     sinaweibo.auth(function(ret,err){
+    //         if (ret.status) {
+    //             sinaweibo.sendRequest({
+    //                 contentType: 'text',
+    //                 text: '我在小石投里面投了一票，大家快来帮我拉一票，点击链接即可：http://www.xieli.cn',
+    //                 imageUrl: 'fs://a.png'
+    //             },function(ret,err){
+    //                 if (ret.status) {
+    //                     api.alert({
+    //                         title: '发表微博',
+    //                         msg: '发表成功',
+    //                         buttons: ['确定']
+    //                     });
+    //                 }else{
+    //                     api.alert({
+    //                         title: '发表微博',
+    //                         msg: '发表失败',
+    //                         buttons: ['确定']
+    //                     });
+    //                 }
+    //             });
+    //         }else{
+    //             api.alert({msg:'授权失败'});
+    //         }
+    //     });
+    // }
 
-    function showReply(){
-    	$api.css($api.dom(".mark"),"display:block");
-    	$api.css($api.byId("ask-input"),"display:none");
-    	$api.css($api.byId("ask-reply-box"),"display:block");
-    	$api.addCls($api.byId("aui-footer"),"show");
-    }
-    function hideReply(){
-        $api.css($api.dom(".mark"),"display:none");
-        $api.css($api.byId("ask-input"),"display:block");
-        $api.css($api.byId("ask-reply-box"),"display:none");
-        $api.removeCls($api.byId("aui-footer"),"show");
-    }
+    // function showReply(){
+    // 	$api.css($api.dom(".mark"),"display:block");
+    // 	$api.css($api.byId("ask-input"),"display:none");
+    // 	$api.css($api.byId("ask-reply-box"),"display:block");
+    // 	$api.addCls($api.byId("aui-footer"),"show");
+    // }
+    // function hideReply(){
+    //     $api.css($api.dom(".mark"),"display:none");
+    //     $api.css($api.byId("ask-input"),"display:block");
+    //     $api.css($api.byId("ask-reply-box"),"display:none");
+    //     $api.removeCls($api.byId("aui-footer"),"show");
+    // }
 
-    function openAnswer(){
-    	api.openWin({
-    		name: 'comment_win',
-    		url: 'comment_win.html'
-    	});
-    }
+    // function openAnswer(){
+    // 	api.openWin({
+    // 		name: 'comment_win',
+    // 		url: 'comment_win.html'
+    // 	});
+    // }
 
     //分享弹出层
-    function share(){
-        $api.append($api.dom("body"),'<div class="aui-mask"></div>');
-        $api.removeCls($api.dom(".aui-dialog.aui-hidden"),"aui-hidden");
-        api.sendEvent({
-            name: 'dialogEvent',
-            extra: {type:'show'}
-        });
-    }
-    function cancel(){
-        $api.remove($api.dom(".aui-mask"));
-        $api.addCls($api.dom(".aui-dialog"),"aui-hidden");
-        api.sendEvent({
-            name: 'dialogEvent',
-            extra: {type:'hidden'}
-        });
-//      api.alert({
-//          title: '提示',
-//          msg: '您点击了取消'
-//      });
-
-    }
+    // function share(){
+    //     $api.append($api.dom("body"),'<div class="aui-mask"></div>');
+    //     $api.removeCls($api.dom(".aui-dialog.aui-hidden"),"aui-hidden");
+    //     api.sendEvent({
+    //         name: 'dialogEvent',
+    //         extra: {type:'show'}
+    //     });
+    // }
+    // function cancel(){
+    //     $api.remove($api.dom(".aui-mask"));
+    //     $api.addCls($api.dom(".aui-dialog"),"aui-hidden");
+    //     api.sendEvent({
+    //         name: 'dialogEvent',
+    //         extra: {type:'hidden'}
+    //     });
+    // }
     //显示更多主题简介
-    function xian(obj) {
-    	if($(obj).hasClass('aui-ellipsis-2')){
-    		$(obj).removeClass('aui-ellipsis-2');
-    	}else{
-    		$(obj).addClass('aui-ellipsis-2');
-    	}
-    }
+    // function xian(obj) {
+    // 	if($(obj).hasClass('aui-ellipsis-2')){
+    // 		$(obj).removeClass('aui-ellipsis-2');
+    // 	}else{
+    // 		$(obj).addClass('aui-ellipsis-2');
+    // 	}
+    // }
 
     //打开新页面---精彩评论
-    function openGoodcomm(itemopt_id){
-        api.openWin({
-           name: 'goodcomm_win',
-           url: 'goodcomm_win.html?itemopt_id='+itemopt_id
-       });
-    }
+    // function openGoodcomm(itemopt_id){
+    //     api.openWin({
+    //        name: 'goodcomm_win',
+    //        url: 'goodcomm_win.html?itemopt_id='+itemopt_id
+    //    });
+    // }
 </script>
-
 </html>

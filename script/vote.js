@@ -8,7 +8,7 @@ function toupiao(obj,id){
 	}
 	$.post(ApiUrl+'/api/toupiao?id='+id+'&member_id='+member_id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
-        if(data.status == 0 || data.status == 2){
+        if(data.status == 0){
             api.alert({msg: data.data});
             $('#vote_num').html(data.item_optnum);
             $(obj).removeAttr('onclick');
@@ -16,6 +16,7 @@ function toupiao(obj,id){
         	$(obj).children('span').addClass('aui-icon-roundcheckfill');
             $(obj).children('a').html("已投票");
         }else{
+        	
             api.alert({msg: data.data});
         }
     });
@@ -123,7 +124,7 @@ function loading_new_comm(page,good_new){
 				$('#loading').removeAttr('onclick');
 				$('#loading').html('没有更多评论了');
 			}else{
-				api.alert({msg:data.msg});
+				$('#loading').parent('li').remove();
 			}
 		}
 	});
