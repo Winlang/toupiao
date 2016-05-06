@@ -27,19 +27,8 @@
                width:18px;
                height:18px;
                }
-      .add{
-           padding:8px 0 12px;
-           background-color:#ebeced;
-           
-       }
-/*       .search{
-           background-color:#fff;
-           border:1px solid #858f87;
-           
-       }*/
       .option{
           display:block;
-/*          position:relative;*/
       }
       .idol-info{
            display:inline-block;
@@ -71,6 +60,7 @@
       .comment{
          display:block;
          padding-left:12%;
+         font-size:14px;
       }
       .comment-1{
         display:inline-block;
@@ -187,7 +177,7 @@
             </div>
        </div>
        <div class="aui-content aui-padded-10">
-             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode>
+             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">
               {{data.item_desc}}
             </p>
        </div>  
@@ -200,36 +190,29 @@
              </ul>
        </div>
        <div class="aui-content">
-           <p class="aui-padded-10 vote-title">
+           <div class="aui-padded-10 vote-title">
                                         投票选项          
-             <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>                        
-          </p>      
-<div class="aui-pull-right add">
-      <div class="aui-btn aui-btn-warning"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div> 
-</div>             
-<!--搜索项目-->           
-        <div class="aui-searchbar-wrap demo search" id="search">
-        <div class="aui-searchbar aui-border-radius" tapmode onclick="doSearch()">           
-            <div class="aui-searchbar-text ">请输入搜索内容</div>           
+             <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>  
+             <div class="aui-btn aui-btn-warning aui-pull-right" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div>                      
+          </div>                    
+<!--搜索项目-->
+	<div class="aui-searchbar-wrap aui-padded-0-10" id="search">
+        <div class="aui-searchbar aui-border-radius" tapmode onclick="doSearch()">
+            <i class="aui-iconfont aui-icon-search"></i>
+            <div class="aui-searchbar-text">请输入搜索内容</div>
             <div class="aui-searchbar-input">
-              <form action="javascript:search();">
-              <input type="text" placeholder="请输入搜索内容" id="search-input" >
-              </form>
+            	<form action="javascript:search();">
+            	<input type="text" placeholder="请输入搜索内容" id="search-input">
+            	</form>
             </div>
-            <!-- <script type="text/html" id="item_id"> -->
-<i class="aui-iconfont aui-icon-search aui-pull-right" onclick="search_info_two()"></i>
-<!-- </script> -->
-           <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput$('#search-input').val()()"></i>-->
+            <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>
         </div>
-        <!--<div class="aui-searchbar-cancel aui-text-info" tapmode onclick="cancelSearch()">取消</div>-->
+        <div class="aui-btn aui-btn-warning" tapmode onclick="search_info_two()">搜索</div>
     </div>
 <!--搜索项目-->
-
            <div class="aui-form">
-
                 <div id="itemoption_list" style="display:block;"></div>
-                <div id="itemoption_list_two" style="display:none;"></div>
-                 
+                <div id="itemoption_list_two" style="display:none;"></div>                
                 <!--选项列表-->
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
@@ -265,13 +248,9 @@
                     {{if value.comm_data}}
                     <div class="comment">
                           <div class="comment-1 aui-ellipsis-2">
-                                <span class="aui-text-danger aui-padded-5">
-                                </span>SSA:
+                                <span class="aui-text-danger aui-padded-5"></span>SSA:
                                 {{value.comm_data}}
                           </div>
-                          <!--<div class="comment-2 aui-text-info aui-pull-right">
-                              <span class="aui-iconfont aui-icon-appreciate"></span> 99+
-                        </div>-->
                       </div>
                   {{/if}}
                 </div>
@@ -294,12 +273,17 @@
 <!-- <script type="text/javascript" src="../script/item_detail.js"></script> -->
 <script type="text/javascript" src="../script/template.js"></script>
 <script type="text/javascript" src="../script/recommend.js"></script>
-
 <script type="text/javascript">
     function openVote(itemoptid){
        api.openWin({
          name: 'votecon_frm',
          url: 'votecon_frm.html?itemoptid='+itemoptid
+       });
+    }
+    function openAdd(){
+       api.openWin({
+	       name: 'add_option',
+	       url: 'add_option_win.html'
        });
     }
   // apiready = function(){

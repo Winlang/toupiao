@@ -47,7 +47,7 @@
  </head>
  <body>
  	<section class="aui-card">
-	 		<div class="option-img aui-text-center aui-text-info" tapmode>
+	 		<div class="option-img aui-text-center aui-text-info" tapmode onclick="getPicture()">
 	 		      <i class="aui-iconfont aui-icon-add"></i>
 	 		      <span>添加选项图片</span>
 	 		      <span class="middle"></span>
@@ -69,6 +69,7 @@
  	</section>
  </body>
  <script type="text/javascript" src="../script/api.js"></script>
+ <script type="text/javascript" src="../script/common.js"></script>
  <script type="text/javascript">
  	apiready = function(){
  	    api.parseTapmode();
