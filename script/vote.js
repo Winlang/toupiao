@@ -8,7 +8,7 @@ function toupiao(obj,id){
 	}
 	$.post(ApiUrl+'/api/toupiao?id='+id+'&member_id='+member_id+'&callback=?',{},function(data){
 		var data = JSON.parse(data);
-        if(data.status == 0 || data.status == 2){
+        if(data.status == 0){
             api.alert({msg: data.data});
             $('#vote_num').html(data.item_optnum);
             $(obj).removeAttr('onclick');
@@ -16,6 +16,7 @@ function toupiao(obj,id){
         	$(obj).children('span').addClass('aui-icon-roundcheckfill');
             $(obj).children('a').html("已投票");
         }else{
+        	
             api.alert({msg: data.data});
         }
     });
@@ -98,11 +99,9 @@ function good_bad(obj,commid,status){
     });
 }
 
-//点击加载更多精彩评论
-
 //点击加载更多最新评论
-loading_comm(1);
-function loading_comm(page){
+loading_new_comm(1,'new');
+function loading_new_comm(page,good_new){
 	//获取主题选项id
     var itemoptid = getQueryString('itemoptid');
     //获取当前登陆用户的id
@@ -110,7 +109,7 @@ function loading_comm(page){
 	var next_page = page+1;
 	$.ajax({
 		'type':'get',
-		'url':ApiUrl+'/api/loading_new_comm?itemoptid='+itemoptid+'&member_id='+member_id+'&page='+page+'&callback=?',
+		'url':ApiUrl+'/api/loading_comm?itemoptid='+itemoptid+'&member_id='+member_id+'&good_new='+good_new+'&page='+page+'&callback=?',
 		beforeSend:function(){
 			$('#loading').removeAttr('onclick');
 			$('#loading').html('正在加载中...');
@@ -119,13 +118,13 @@ function loading_comm(page){
 			var data = JSON.parse(data);
 			if(data.status == 0){
 				$('#itemopt_new_comminfo').append(data.msg);
-				$('#loading').html('查看更多评论');
-				$('#loading').attr('onclick','loading_comm('+next_page+')');
+				$('#loading').html('查看更多精彩评论');
+				$('#loading').attr('onclick','loading_new_comm('+next_page+',"new")');
 			}else if(data.status == 2){
 				$('#loading').removeAttr('onclick');
 				$('#loading').html('没有更多评论了');
 			}else{
-				api.alert({msg:data.msg});
+				$('#loading').parent('li').remove();
 			}
 		}
 	});
