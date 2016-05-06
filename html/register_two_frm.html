@@ -139,6 +139,16 @@ function confirm(){
 
     apiready = function () {
         api.parseTapmode();
+        // 监听头像上传成功
+          api.addEventListener({
+                  name : 'avatar_upload_successEvent'
+          }, function(ret) {
+                if (ret && ret.value) {
+                    var value = ret.value;
+                    var imgpath = UploadUrl+'/avatar/'+value.name;
+                    $api.attr($api.byId("avatarImg"),'src',imgpath);
+                }
+          });
     }
 </script>
 </html>

@@ -100,9 +100,9 @@ function getPicture(){
         mediaValue: 'pic',
         destinationType: 'url',
         allowEdit: true,
-        quality: 100,
-        targetWidth:200,
-        targetHeight:200,
+        quality: 75,
+        // targetWidth:200,
+        // targetHeight:200,
         saveToPhotoAlbum: false
     }, function(ret, err){
         if(ret.data){
@@ -178,7 +178,7 @@ function getPicture(){
 
 
 //上传头像
-function uploadAvatar(){
+function uploadAvatar(picUrl){
  	//上传
     api.ajax({
             url: ApiUrl+'/api/uploadAvatar',
@@ -188,13 +188,36 @@ function uploadAvatar(){
                     name: 'upfile'
                 },
                 files: { 
-                    file: ret.data
+                    file: picUrl
                 }
             }
         },function(ret1, err1){
-            if (ret1) {
+        	//显示等待上传过程
+        	//showDialog()
+            if (ret1.msg != '') {
                 //手机显示预览
-                $api.attr($api.byId("avatarImg"),'src',ret.data);
+                var uid = is_login();
+                //记录用户所传图片路径及返回
+                $.post(ApiUrl+'/api/saveUserAvatar/?callback=?',{'avatar':ret1.msg,'uid':uid},function(ret_data){
+                      var ret_data = JSON.parse(ret_data);
+                      if(ret_data.status == 1){
+                      	  //设置监听 返回设置头像
+                		  // 广播事件
+				            api.sendEvent({
+					            name : 'avatar_upload_successEvent',
+					            extra : {
+					               name : ret1.msg,
+					            }
+					        });
+
+				            //关闭当前窗口
+				            api.closeWin();
+                		  	
+                      }else{
+                      	  alert(ret_data.msg);
+                      }
+                });
+                
             } else {
                 alert('上传失败~');
                 //api.alert({msg:JSON.stringify(err)});
@@ -208,7 +231,8 @@ function save(){
     var imageClip = api.require('imageClip');
     imageClip.save(function( ret, err ){        
         if( ret ){
-            alert( JSON.stringify( ret ) );
+            //alert( JSON.stringify( ret ) );
+            uploadAvatar(ret.savePath);
         }else{
             alert( JSON.stringify( err ) );
         }
