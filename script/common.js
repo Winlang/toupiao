@@ -1,3 +1,4 @@
+
 /*
  * js获取url参数
  */
@@ -91,7 +92,9 @@ function getNowTime(){
 	return (new Date()).valueOf();
 }
 
-//打开系统相册
+
+/**********************************头像上传相关函数  开始************************************/
+//头像打开系统相册
 function getPicture(){
     api.getPicture({
         sourceType: 'library',
@@ -99,16 +102,16 @@ function getPicture(){
         mediaValue: 'pic',
         destinationType: 'url',
         allowEdit: true,
-        quality: 100,
-        targetWidth:200,
-        targetHeight:200,
+        quality: 75,
+        // targetWidth:200,
+        // targetHeight:200,
         saveToPhotoAlbum: false
     }, function(ret, err){
         if(ret.data){
             //打开功能弹层
-             api.openFrame({
-                name: 'avatarclip_win',
-                url: 'avatarclip_win.html?picUrl='+ret.data,
+             api.openWin({
+                name: 'avatarclip_frm',
+                url: 'avatarclip_frm.html?picUrl='+ret.data,
                 bounces: true,
             });
         }else{
@@ -117,35 +120,45 @@ function getPicture(){
     })
 }
 
- //剪裁图片系列函数
- function imageClip(picUrl){
+ 
+
+ //头像剪裁图片
+ function imageClip(picUrl){ 
         var imageClip = api.require('imageClip');
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header); 
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
         imageClip.open({
                path: picUrl,
                 clipRect : {
                     x : api.winWidth/2-150,
-                    y : api.winHeight/2-150,
+                    y : api.winHeight/2-180,                
                     w : 300,
                     h : 300,
                     fixation:true
                 },
-                bg:'#efefef'
-                
+                bg:'#080808',     
+                x: 0,
+                y: headerPos.h,
+                w: headerPos.w,
+                h: 'auto'                       
         },function( ret, err ){    
             if (ret.status) {
                 //功能frame控制保存和关闭功能
-                api.openFrame({
-                    name : 'save',
-                    url : 'avatarclip_frm.html',
-                    rect : {
-                        x : 0,
-                        y : 0,
-                        w : 'auto',
-                        h : 65
-                    },
-                    bounces : false,
-                    opaque : false
-                });
+//              api.openFrame({
+//                  name : 'save',
+//                  url : 'avatarclip_frm.html',
+//                  rect : {
+//                      x : 0,
+//                      y : 0,
+//                      w : 'auto',
+//                      h : 65
+//                  },
+//                  bounces : true,
+//                  opaque : false
+//              });
                 //功能frame控制保存和关闭功能
                 // api.openFrame({
                 //     name : 'close',
@@ -167,7 +180,7 @@ function getPicture(){
 
 
 //上传头像
-function uploadAvatar(){
+function uploadAvatar(picUrl){
  	//上传
     api.ajax({
             url: ApiUrl+'/api/uploadAvatar',
@@ -177,13 +190,36 @@ function uploadAvatar(){
                     name: 'upfile'
                 },
                 files: { 
-                    file: ret.data
+                    file: picUrl
                 }
             }
         },function(ret1, err1){
-            if (ret1) {
+        	//显示等待上传过程
+        	//showDialog()
+            if (ret1.msg != '') {
                 //手机显示预览
-                $api.attr($api.byId("avatarImg"),'src',ret.data);
+                var uid = is_login();
+                //记录用户所传图片路径及返回
+                $.post(ApiUrl+'/api/saveUserAvatar/?callback=?',{'avatar':ret1.msg,'uid':uid},function(ret_data){
+                      var ret_data = JSON.parse(ret_data);
+                      if(ret_data.status == 1){
+                      	  //设置监听 返回设置头像
+                		  // 广播事件
+				            api.sendEvent({
+					            name : 'avatar_upload_successEvent',
+					            extra : {
+					               name : ret1.msg,
+					            }
+					        });
+
+				            //关闭当前窗口
+				            api.closeWin();
+                		  	
+                      }else{
+                      	  alert(ret_data.msg);
+                      }
+                });
+                
             } else {
                 alert('上传失败~');
                 //api.alert({msg:JSON.stringify(err)});
@@ -192,15 +228,174 @@ function uploadAvatar(){
 
 }
 
-//保存剪裁图像并替换头像
+//保存剪裁图像
 function save(){
     var imageClip = api.require('imageClip');
     imageClip.save(function( ret, err ){        
         if( ret ){
-            alert( JSON.stringify( ret ) );
+            //alert( JSON.stringify( ret ) );
+            uploadAvatar(ret.savePath);
         }else{
             alert( JSON.stringify( err ) );
         }
     })
 }
 
+
+
+/**********************************头像上传相关函数  结束************************************/
+
+
+
+
+/**********************************选项图片上传相关函数  开始************************************/
+//头像打开系统相册
+function xx_getPicture(){
+    api.getPicture({
+        sourceType: 'library',
+        encodingType: 'jpg',
+        mediaValue: 'pic',
+        destinationType: 'url',
+        allowEdit: true,
+        quality: 75,
+        // targetWidth:200,
+        // targetHeight:200,
+        saveToPhotoAlbum: false
+    }, function(ret, err){
+        if(ret.data){
+            //打开功能弹层
+             api.openWin({
+                name: 'xxclip_frm',
+                url: 'xxclip_frm.html?picUrl='+ret.data,
+                bounces: true,
+            });
+        }else{
+            api.alert({msg:err.msg});
+        }
+    })
+}
+
+ 
+
+ //头像剪裁图片
+ function xx_imageClip(picUrl){ 
+        var imageClip = api.require('imageClip');
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header); 
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
+        imageClip.open({
+               path: picUrl,
+                clipRect : {
+                    x : api.winWidth/2-150,
+                    y : api.winHeight/2-180,                
+                    w : 300,
+                    h : 200,
+                    fixation:true
+                },
+                bg:'#080808',     
+                x: 0,
+                y: headerPos.h,
+                w: headerPos.w,
+                h: 'auto'                       
+        },function( ret, err ){    
+            if (ret.status) {
+                //功能frame控制保存和关闭功能
+//              api.openFrame({
+//                  name : 'save',
+//                  url : 'avatarclip_frm.html',
+//                  rect : {
+//                      x : 0,
+//                      y : 0,
+//                      w : 'auto',
+//                      h : 65
+//                  },
+//                  bounces : true,
+//                  opaque : false
+//              });
+                //功能frame控制保存和关闭功能
+                // api.openFrame({
+                //     name : 'close',
+                //     url : './clipclose.html',
+                //     rect : {
+                //         x : 0,
+                //         y : 0,
+                //         w : 'auto',
+                //         h : 64
+                //     },
+                //     bounces : false,
+                //     opaque : false
+                // });
+            }else{
+            	alert('打开裁剪头像失败~');
+            }
+        });
+}
+
+
+//上传头像
+function xx_uploadAvatar(picUrl){
+ 	//上传
+    api.ajax({
+            url: ApiUrl+'/api/uploadAvatar',
+            method: 'post',
+            data: {
+                values: { 
+                    name: 'upfile'
+                },
+                files: { 
+                    file: picUrl
+                }
+            }
+        },function(ret1, err1){
+        	//显示等待上传过程
+        	//showDialog()
+            if (ret1.msg != '') {
+                //手机显示预览
+                var uid = is_login();
+                //记录用户所传图片路径及返回
+                $.post(ApiUrl+'/api/saveUserAvatar/?callback=?',{'avatar':ret1.msg,'uid':uid},function(ret_data){
+                      var ret_data = JSON.parse(ret_data);
+                      if(ret_data.status == 1){
+                      	  //设置监听 返回设置头像
+                		  // 广播事件
+				            api.sendEvent({
+					            name : 'avatar_upload_successEvent',
+					            extra : {
+					               name : ret1.msg,
+					            }
+					        });
+
+				            //关闭当前窗口
+				            api.closeWin();
+                		  	
+                      }else{
+                      	  alert(ret_data.msg);
+                      }
+                });
+                
+            } else {
+                alert('上传失败~');
+                //api.alert({msg:JSON.stringify(err)});
+            }
+        });    
+
+}
+
+//选项保存剪裁图像
+function xx_save(){
+    var imageClip = api.require('imageClip');
+    imageClip.save(function( ret, err ){        
+        if( ret ){
+            //alert( JSON.stringify( ret ) );
+            uploadAvatar(ret.savePath);
+        }else{
+            alert( JSON.stringify( err ) );
+        }
+    })
+}
+
+
+
+/**********************************选项图片上传相关函数  结束************************************/
