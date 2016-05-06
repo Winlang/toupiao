@@ -192,26 +192,24 @@
              </ul>
        </div>
        <div class="aui-content">
-           <p class="aui-padded-10 vote-title">
+              <div class="aui-padded-10 vote-title">
                                         投票选项          
-             <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>                        
-          </p>      
-<div class="aui-pull-right add">
-      <div class="aui-btn aui-btn-warning" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div> 
-</div>             
-<!--搜索项目-->           
-        <div class="aui-searchbar-wrap demo search" id="search">
-        <div class="aui-searchbar aui-border-radius" tapmode onclick="doSearch()">           
-            <div class="aui-searchbar-text ">请输入搜索内容</div>           
+             <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>  
+             <div class="aui-btn aui-btn-warning aui-pull-right" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div>                      
+          </div>                    
+<!--搜索项目-->
+  <div class="aui-searchbar-wrap aui-padded-0-10" id="search">
+        <div class="aui-searchbar aui-border-radius" tapmode onclick="doSearch()">
+            <i class="aui-iconfont aui-icon-search"></i>
+            <div class="aui-searchbar-text">请输入搜索内容</div>
             <div class="aui-searchbar-input">
-            	<form action="javascript:search();">
-            	<input type="text" placeholder="请输入搜索内容" id="search-input" >
-            	</form>
+              <form action="javascript:search();">
+              <input type="text" placeholder="请输入搜索内容" id="search-input">
+              </form>
             </div>
-            <i class="aui-iconfont aui-icon-search aui-pull-right" onclick="search_info($('#search-input').val());"></i>
-           <!-- <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>-->
+            <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>
         </div>
-        <!--<div class="aui-searchbar-cancel aui-text-info" tapmode onclick="cancelSearch()">取消</div>-->
+        <div class="aui-btn aui-btn-warning" tapmode onclick="search_info_two()">搜索</div>
     </div>
 <!--搜索项目-->
 
@@ -296,6 +294,8 @@
        });
     }
    function openAdd(){
+       var item_id = getQueryString('item_id');
+
        api.openWin({
 	       name: 'add_option',
 	       url: 'add_option_win.html?item_id='+item_id
@@ -429,6 +429,30 @@
 //          msg: '您点击了确定'
 //      });
     }
+
+
+    function search_info_two(item_title){
+
+            var item_id=$('#search_id').val();
+            var item_title=$('#search-input').val();
+             $.post(ApiUrl+'/api/search_info?id='+item_id+'&item_title='+item_title+'&callback=?',{},function(data){
+                    
+                    var data = JSON.parse(data);
+                   if(data.status=='0'){
+                    $('#itemoption_list_two').css('display','block');
+                    $('#itemoption_list').css('display','none');
+                    document.getElementById('itemoption_list_two').innerHTML = data.data;
+                   }else{
+                    api.alert({msg:data.data});
+                    $('#itemoption_list_two').css('display','none');
+                    $('#itemoption_list').css('display','block');
+                   }
+                    
+                    
+            });
+    }
+
+
     function openRank(item_id){
         var member_id = is_login();
         $.post(ApiUrl+'/api/is_one_toupiao?member_id='+member_id+'&item_id='+item_id+'&callback=?',{},function(data){
