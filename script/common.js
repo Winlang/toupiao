@@ -265,8 +265,8 @@ function xx_getPicture(){
         if(ret.data){
             //打开功能弹层
              api.openWin({
-                name: 'avatarclip_frm',
-                url: 'avatarclip_frm.html?picUrl='+ret.data,
+                name: 'xxclip_frm',
+                url: 'xxclip_frm.html?picUrl='+ret.data,
                 bounces: true,
             });
         }else{
@@ -291,7 +291,7 @@ function xx_getPicture(){
                     x : api.winWidth/2-150,
                     y : api.winHeight/2-180,                
                     w : 300,
-                    h : 300,
+                    h : 200,
                     fixation:true
                 },
                 bg:'#080808',     
