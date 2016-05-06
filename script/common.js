@@ -339,18 +339,38 @@ function xx_getPicture(){
 
 //上传头像
 function uploadxxpic(picUrl){
+	//上传
+    api.ajax({
+            url: ApiUrl+'/api/uploaditemoptimg',
+            method: 'post',
+            data: {
+                values: { 
+                    name: 'upfile'
+                },
+                files: { 
+                    file: picUrl
+                }
+            }
+        },function(ret, err){
+        	//显示等待上传过程
+        	//showDialog()
+            if (ret.msg != '') {
+                //手机显示预览
+                var uid = is_login();
+              	  //设置监听 返回设置头像
+        		  // 广播事件
+		            api.sendEvent({
+			            name : 'xx_upload_successEvent',
+			            extra : {
+			               name : ret.msg,
+			            }
+			        });
 
-	//设置监听 返回选项图片
-  	// 广播事件
-    api.sendEvent({
-        name : 'xx_upload_successEvent',
-        extra : {
-           name : picUrl,
-        }
-    });
-
-    //关闭当前窗口
-    api.closeWin();
+		            //关闭当前窗口
+		            api.closeWin();
+                	
+                };
+        });   
  }
 
 //选项保存剪裁图像

@@ -83,33 +83,26 @@
       }, function(ret) {
             if (ret && ret.value) {
                 var value = ret.value;
-                $api.attr($api.byId("xx_bg_img"),'src',value.name);
+                var imgpath = UploadUrl+'/itemoptimg/'+value.name;
+                $api.attr($api.byId("xx_bg_img"),'src',imgpath);
             }
       });
  	}
 
  	function submit_xx(){
  		var item_id = getQueryString('item_id');
+ 		alert(item_id);
  		var item_optimg = $('#xx_bg_img').attr('src');
  		var item_opttitle = $('#xx_title').val();
  		var item_optdesc = $('#xx_desc').val();
  		$.post(ApiUrl+'/api/additemopt/?callback=?',{'item_id':item_id,'item_opttitle':item_opttitle,'item_optdesc':item_optdesc,'item_optimg':item_optimg},function(data){
-                      var ret_data = JSON.parse(ret_data);
-                      if(ret_data.status == 1){
-                      	  //设置监听 返回设置头像
-                		  // 广播事件
-				            api.sendEvent({
-					            name : 'avatar_upload_successEvent',
-					            extra : {
-					               name : ret1.msg,
-					            }
-					        });
+                      var data = JSON.parse(data);
+                      if(data.status == 1){
+                     		alert(data.msg);
+				            //跳至所增加的选项页
 
-				            //关闭当前窗口
-				            api.closeWin();
-                		  	
                       }else{
-                      	  alert(ret_data.msg);
+                      	  alert(data.msg);
                       }
                 });
  	}
