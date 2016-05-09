@@ -11,7 +11,8 @@ $(function() {
                 var html = template('item', data);
 
                 item_id=data.data.id;
-
+                $('#item_id_hidden').val(item_id);
+                
                 document.getElementById('iteminfo').innerHTML = html;
 
                 //主题对应选项列表

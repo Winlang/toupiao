@@ -154,7 +154,11 @@
 		padding: 5px;
 		margin: 0;		
 		border:none;
+<<<<<<< HEAD
 		overflow-y: auto;
+=======
+    overflow-y: auto;
+>>>>>>> master
 	}
 	.main{
 	   display:block;
@@ -162,10 +166,17 @@
 	   height:auto;
 	   position: relative;	
 	}
+<<<<<<< HEAD
 	.main-fix{
 	  position:fixed;
 	  top:inherit;
 	}
+=======
+  .main-fix{
+     position:fixed;
+     top:inherit;
+   }
+>>>>>>> master
 	.mark {
 		background: rgba(0,0,0,0.5);
 		position: absolute;
@@ -181,7 +192,11 @@
 	}
 	#ask-reply-box {
 		padding: 10px;
+<<<<<<< HEAD
 		z-index: 20;
+=======
+    z-index: 20;
+>>>>>>> master
 	}
 	#aui-footer {
 		background:rgba(255,255,255,1);	
@@ -301,8 +316,13 @@
             </li>
          </ul>
     </div>
+<<<<<<< HEAD
     <div class="aui-content aui-padded-10" id="jianjie">
           <p id="summary" class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode >{{data.item_optdesc}}</p>
+=======
+    <div class="aui-content aui-padded-10">
+          <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">{{data.item_optdesc}}</p>
+>>>>>>> master
     </div>
     </script>
     
@@ -360,10 +380,12 @@
                            <p>{{v.comm_con}}....</p>
                      </div>
                 </li>
-                {{/each}}
+                {{if i > 3}}
                 <li class="aui-list-view-cell aui-img">
                      <p onclick="openGoodcomm();" class="aui-text-center comment-more">查看更多精彩评论</p>
                 </li>
+                {{/if}}
+                {{/each}}
             </script> 
             
             <li class="aui-list-view-cell aui-img">
@@ -397,11 +419,19 @@
     
 
     apiready=function(){
+<<<<<<< HEAD
          //暂无简介
 	      var sum = $("#summary").html();
 	      if(sum == ""){
 	         $("#summary").html("暂无简介");
 	      }
+=======
+          //暂无简介
+         var sum = $("#summary").html();
+         if(sum == ""){
+            $("#summary").html("暂无简介");
+         }
+>>>>>>> master
         //监听 登陆成功 
         // 监听是否注册或者登录成功   监听成功
           api.addEventListener({
@@ -508,7 +538,11 @@
     	$api.css($api.byId("ask-input"),"display:none");
     	$api.css($api.byId("ask-reply-box"),"display:block");
     	$api.addCls($api.byId("aui-footer"),"show");
+<<<<<<< HEAD
     	$api.addCls($api.dom(".main"),"main-fix");
+=======
+      $api.addCls($api.dom(".main"),"main-fix");
+>>>>>>> master
     }
     function hideReply(){
         $api.css($api.dom(".mark"),"display:none");

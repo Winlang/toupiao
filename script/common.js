@@ -249,6 +249,9 @@ function save(){
 
 
 /**********************************选项图片上传相关函数  开始************************************/
+
+//   xx 代表:  选项
+
 //头像打开系统相册
 function xx_getPicture(){
     api.getPicture({
@@ -430,10 +433,10 @@ function save(){
 
 
 //上传头像
-function xx_uploadAvatar(picUrl){
- 	//上传
+function uploadxxpic(picUrl){
+	//上传
     api.ajax({
-            url: ApiUrl+'/api/uploadAvatar',
+            url: ApiUrl+'/api/uploaditemoptimg',
             method: 'post',
             data: {
                 values: { 
@@ -443,40 +446,28 @@ function xx_uploadAvatar(picUrl){
                     file: picUrl
                 }
             }
-        },function(ret1, err1){
+        },function(ret, err){
+        
         	//显示等待上传过程
         	//showDialog()
-            if (ret1.msg != '') {
+            if (ret.msg != '') {
                 //手机显示预览
                 var uid = is_login();
-                //记录用户所传图片路径及返回
-                $.post(ApiUrl+'/api/saveUserAvatar/?callback=?',{'avatar':ret1.msg,'uid':uid},function(ret_data){
-                      var ret_data = JSON.parse(ret_data);
-                      if(ret_data.status == 1){
-                      	  //设置监听 返回设置头像
-                		  // 广播事件
-				            api.sendEvent({
-					            name : 'avatar_upload_successEvent',
-					            extra : {
-					               name : ret1.msg,
-					            }
-					        });
+              	  //设置监听 返回设置头像
+        		  // 广播事件
+		            api.sendEvent({
+			            name : 'xx_upload_successEvent',
+			            extra : {
+			               name : ret.msg,
+			            }
+			        });
 
-				            //关闭当前窗口
-				            api.closeWin();
-                		  	
-                      }else{
-                      	  alert(ret_data.msg);
-                      }
-                });
-                
-            } else {
-                alert('上传失败~');
-                //api.alert({msg:JSON.stringify(err)});
-            }
-        });    
-
-}
+		            //关闭当前窗口
+		            api.closeWin();
+                	
+                };
+        });   
+ }
 
 //选项保存剪裁图像
 function xx_save(){
@@ -484,7 +475,7 @@ function xx_save(){
     imageClip.save(function( ret, err ){        
         if( ret ){
             //alert( JSON.stringify( ret ) );
-            uploadAvatar(ret.savePath);
+            uploadxxpic(ret.savePath);
         }else{
             alert( JSON.stringify( err ) );
         }
