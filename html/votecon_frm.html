@@ -301,8 +301,8 @@
             </li>
          </ul>
     </div>
-    <div class="aui-content aui-padded-10">
-          <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">{{data.item_optdesc}}</p>
+    <div class="aui-content aui-padded-10" id="jianjie">
+          <p id="summary" class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode >{{data.item_optdesc}}</p>
     </div>
     </script>
     
@@ -436,7 +436,6 @@
             $api.removeCls($api.dom(".main"),"main-fix");
         });
     }
-
     //qq指定好友分享
     function qqfriend_share(){
         var qq = api.require('qq');

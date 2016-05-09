@@ -196,24 +196,14 @@
              <div class="aui-btn aui-btn-warning aui-pull-right" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div>                      
           </div>                    
 <!--搜索项目-->
-<<<<<<< HEAD
-	<div class="aui-searchbar-wrap aui-padded-0-10" id="search">
-=======
   <div class="aui-searchbar-wrap aui-padded-0-10" id="search">
->>>>>>> refs/remotes/origin/dev
         <div class="aui-searchbar aui-border-radius" tapmode onclick="doSearch()">
             <i class="aui-iconfont aui-icon-search"></i>
             <div class="aui-searchbar-text">请输入搜索内容</div>
             <div class="aui-searchbar-input">
-<<<<<<< HEAD
-            	<form action="javascript:search();">
-            	<input type="text" placeholder="请输入搜索内容" id="search-input">
-            	</form>
-=======
               <form action="javascript:search();">
               <input type="text" placeholder="请输入搜索内容" id="search-input">
               </form>
->>>>>>> refs/remotes/origin/dev
             </div>
             <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>
         </div>
@@ -325,21 +315,12 @@
 	// 	api.parseTapmode();
 	// }
 
-<<<<<<< HEAD
   apiready = function(){ 
       //暂无简介
       var sum = $("#summary").html();
       if(sum == ""){
          $("#summary").html("暂无简介");
       }
-=======
-  apiready = function(){
-       //暂无简介
-	     var sum = $("#summary").html();
-	     if(sum == ""){
-	        $("#summary").html("暂无简介");
-	     }
->>>>>>> refs/remotes/origin/dev
       //头部加宽
       var header = $api.byId('aui-header');
       $api.fixStatusBar(header); 
