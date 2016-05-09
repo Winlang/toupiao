@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<widget id="A6915992782055" version="0.0.1"> 
+<widget id="A6917225861168" version="0.0.1"> 
   <name>投票项目</name>  
   <description>应用AUI框架</description>  
   <author email="cuihuale@yeah.net" href="http://www.apicloud.com">APPxn</author>  
@@ -12,8 +12,8 @@
   <preference name="autoUpdate" value="true"/>  
   <preference name="smartUpdate" value="false"/>  
   <preference name="debug" value="true"/>  
-  <preference name="statusBarAppearance" value="true"/>  
-  <permission name="location"/>  
+  <preference name="statusBarAppearance" value="true"/>
+  <permission name="location"/>
   <permission name="internet"/>  
   <access origin="*"/> 
     <!--qq分享-->
@@ -32,5 +32,10 @@
         <param name="urlScheme" value="wxd0d84bbf23b4a0e4"/>
         <param name="apiKey" value="wxd0d84bbf23b4a0e4"/>
         <param name="apiSecret" value="a354f72aa1b4c2b8eaad137ac81434cd"/>
+    </feature>
+    <!--极光推送-->
+    <feature name="ajpush"> 
+        <param name="app_key" value=" 436d613d69806272c5469aa4"/>  
+        <param name="channel" value="all"/> 
     </feature>
 </widget>
