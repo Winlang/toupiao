@@ -14,7 +14,7 @@
   <preference name="debug" value="true"/>  
   <preference name="statusBarAppearance" value="true"/>
   <permission name="location"/>
-  <permission name="internet"/>  
+  <permission name="internet"/>
   <access origin="*"/> 
     <!--qq分享-->
     <feature name="qq">
