@@ -51,7 +51,7 @@ function pinglun(){
         	var hh = '';
 			hh += '<li class="aui-list-view-cell aui-img">';                  
 				hh += '<div class="aui-img-object aui-pull-left ">';
-			  		hh += '<img class="avatar" src="../image/demos-2.jpg" alt="" /> ';
+			  		hh += '<img class="avatar" src="/Uploads/avatar"'+data.comm_data.avatar+' alt="" /> ';
 				hh += '</div>';
 				hh += '<div class="aui-img-body">';
 					hh += '<div class="commemt-caption">';
