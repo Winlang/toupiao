@@ -143,10 +143,10 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 });
 
 	apiready = function(){
-		    api.parseTapmode();
-    var demo2 = $api.domAll("#main-tab li");
-    for(var i in demo2){
-            $api.addEvt(demo2[i], 'click', function(){
+	api.parseTapmode();
+    var mt = $api.domAll("#main-tab li");
+    for(var i in mt){
+            $api.addEvt(mt[i], 'click', function(){
                 $api.removeCls($api.dom("#main-tab li.active"),'active');
                 $api.addCls(this,'active');
             });
