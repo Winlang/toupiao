@@ -491,14 +491,14 @@
 		            $api.css($api.byId("default_succ"),"display:none");
 		        },2000)
 	        }else if(data.status == 2){
-               //投票成功
+               //已经投过了
 	        	  $(obj).removeAttr('checked');
 	            $api.css($api.byId("yitouguo"),"display:block");
                 setTimeout(function(){
                     $api.css($api.byId("yitouguo"),"display:none");
                 },2000)
 	        }else{
-               //投票成功
+               //投票失败
                $(obj).removeAttr('checked');
                $api.css($api.byId("default_fail"),"display:block");
                 setTimeout(function(){
