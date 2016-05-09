@@ -72,13 +72,17 @@
 	      </script>
 	</div>
     </div>
-   <div id="tab-new" style="display:none;padding-top: 10px;">
-       <div class="aui-content-padded">
-	      <ul class="aui-waterfall" id="aui-waterfall">
-	      	<li>
-	      	     <div class="aui-waterfall-header wheader" style="background:url(../image/l3.png) center no-repeat;background-size:cover;">
+   <div id="tab-new" style="display:none;">
+       <div class="aui-content">
+       		<div id="aui-content1"></div>
+
+       	  <script id="test1" type="text/html">
+	      <ul class="aui-waterfall" id="aui-waterfall1">
+	      	{{each list as value i}}
+	      	<li onclick="openNew({{value.id}})">
+	      	     <div class="aui-waterfall-header wheader" style="background:url({{value.item_titleimg}}) center no-repeat;background-size:cover;">
 	      	          <p class="aui-text-center">
-	      	              <span class="wtitle">你认为谁是最美女明星？</span>
+	      	              <span class="wtitle">{{value.item_title}}</span>
 	      	              <span class="wmiddle"></span>
 	      	          </p>   	          
 	      	     </div>
@@ -87,32 +91,10 @@
 	      	           <span class="aui-pull-right">125人参与</span>
 	      	     </div>
 	      	</li>
-	      	<li>
-	      	     <div class="aui-waterfall-header wheader" style="background:url(../image/l1.png) center no-repeat;background-size:cover;">
-	      	          <p class="aui-text-center">
-	      	              <span class="wtitle">何处的风景最好看？</span>
-	      	              <span class="wmiddle"></span>
-	      	          </p>   	          
-	      	     </div>
-	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
-	      	     </div>
-	      	</li>
-	      	<li>
-	      	     <div class="aui-waterfall-header wheader" style="background:url(../image/l2.png) center no-repeat;background-size:cover;">
-	      	          <p class="aui-text-center">
-	      	              <span class="wtitle">为什么不知道的问题一定要查《十万个为什么》？</span>
-	      	              <span class="wmiddle"></span>
-	      	          </p>   	          
-	      	     </div>
-	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
-	      	     </div>
-	      	</li>
+	      	{{/each}}
 	      </ul>
-	</div>
+	      </script>
+	   </div>
     </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
