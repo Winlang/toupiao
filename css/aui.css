@@ -523,6 +523,11 @@ button, .aui-btn {
 	background-color: #bdc3c7;
 	border: 1px solid #bdc3c7;
 }
+.aui-btn-white {
+	color: #ffffff;
+	background-color: #fff;
+	border: 1px solid #fff;
+}
 .aui-btn-primary {
 	color: #ffffff;
 	background-color: #1abc9c;
