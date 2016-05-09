@@ -50,11 +50,15 @@
     </div>
     <div id="tab-hot">
        <div class="aui-content">
+       	  <div id="aui-content"></div>
+
+       	  <script id="test" type="text/html">
 	      <ul class="aui-waterfall" id="aui-waterfall">
-	      	<li>
-	      	     <div class="aui-waterfall-header wheader" style="background:url(../image/l1.png) center no-repeat;background-size:cover;">
+	      	{{each list as value i}}
+	      	<li onclick="openNew({{value.id}})">
+	      	     <div class="aui-waterfall-header wheader" style="background:url({{value.item_titleimg}}) center no-repeat;background-size:cover;">
 	      	          <p class="aui-text-center">
-	      	              <span class="wtitle">你认为谁是最美女明星？</span>
+	      	              <span class="wtitle">{{value.item_title}}</span>
 	      	              <span class="wmiddle"></span>
 	      	          </p>   	          
 	      	     </div>
@@ -63,31 +67,9 @@
 	      	           <span class="aui-pull-right">125人参与</span>
 	      	     </div>
 	      	</li>
-	      	<li>
-	      	     <div class="aui-waterfall-header wheader" style="background:url(../image/l2.png) center no-repeat;background-size:cover;">
-	      	          <p class="aui-text-center">
-	      	              <span class="wtitle">何处的风景最好看？</span>
-	      	              <span class="wmiddle"></span>
-	      	          </p>   	          
-	      	     </div>
-	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
-	      	     </div>
-	      	</li>
-	      	<li>
-	      	     <div class="aui-waterfall-header wheader" style="background:url(../image/l3.png) center no-repeat;background-size:cover;">
-	      	          <p class="aui-text-center">
-	      	              <span class="wtitle">为什么不知道的问题一定要查《十万个为什么》？</span>
-	      	              <span class="wmiddle"></span>
-	      	          </p>   	          
-	      	     </div>
-	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
-	      	     </div>
-	      	</li>
+	      	{{/each}}
 	      </ul>
+	      </script>
 	</div>
     </div>
    <div id="tab-new" style="display:none;padding-top: 10px;">
@@ -135,6 +117,12 @@
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/aui-waterfall.js" ></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<!--数据请求-->
+<script type="text/javascript" src="../script/index.js"></script>
 <script type="text/javascript">
 $aui.waterfall($api.byId("aui-waterfall"),{
     col:1,//列数
@@ -165,5 +153,19 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 	   hot.style.display = "none";
 	   news.style.display = "block";
 	}
+
+	    function openNew(item_id){
+    api.openWin({
+        name: 'procon',
+        url: 'procon_win.html?item_id='+item_id,
+        bounces: true,
+        rect: {
+            x: 0,
+            y: 0,
+            w: 'auto',
+            h: 'auto'
+        }
+    });
+}
 </script>
 </html>
