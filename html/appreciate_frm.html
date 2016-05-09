@@ -17,8 +17,8 @@
             <script id="comments" type="text/html">
                 {{each list as value i}}
                  <li class="aui-list-view-cell">
-                      <i class="aui-iconfont aui-icon-like aui-bg-info"></i>赞了我在<span class="aui-text-primary">某主题</span>的<span class="aui-text-info">某选项</span>上的评论：<br />
-                      <span class="aui-text-danger aui-ellipsis-2 comment-con">"他说的很对"</span>
+                      <i class="aui-iconfont aui-icon-like aui-bg-info"></i>我赞了主题为<span class="aui-text-primary">{{value.item_title}}</span>的<span class="aui-text-info">{{value.item_opttitle}}</span>选项上的评论：<br />
+                      <span class="aui-text-danger aui-ellipsis-2 comment-con">"{{value.comm_con}}"</span>
                  </li>
                 {{/each}}
             </script>
