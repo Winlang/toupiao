@@ -179,9 +179,7 @@
             </div>
        </div>
        <div class="aui-content aui-padded-10">
-             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode>
-             	{{data.item_desc}}
-            </p>
+             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">{{data.item_desc}}</p>
        </div>  
        </script>
        <div class="aui-content">
@@ -192,7 +190,11 @@
              </ul>
        </div>
        <div class="aui-content">
+<<<<<<< HEAD
+           <div class="aui-padded-10 vote-title">
+=======
               <div class="aui-padded-10 vote-title">
+>>>>>>> master
                                         投票选项          
              <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>  
              <div class="aui-btn aui-btn-warning aui-pull-right" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div>                      
@@ -209,7 +211,11 @@
             </div>
             <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>
         </div>
+<<<<<<< HEAD
+        <div class="aui-btn aui-btn-warning" tapmode onclick="search_info_two()">搜索</div>
+=======
         <div class="aui-btn aui-btn-warning" tapmode onclick="search_info($('#search-input').val())">搜索</div>
+>>>>>>> master
     </div>
 <!--搜索项目-->
 
@@ -323,7 +329,12 @@
 	// 	api.parseTapmode();
 	// }
 
-  apiready = function(){
+  apiready = function(){ 
+      //暂无简介
+      var sum = $("#summary").html();
+      if(sum == ""){
+         $("#summary").html("暂无简介");
+      }
       //头部加宽
       var header = $api.byId('aui-header');
       $api.fixStatusBar(header); 
