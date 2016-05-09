@@ -35,7 +35,7 @@
     </feature>
     <!--极光推送-->
     <feature name="ajpush"> 
-        <param name="app_key" value=" 436d613d69806272c5469aa4"/>  
+        <param name="app_key" value="436d613d69806272c5469aa4"/>  
         <param name="channel" value="all"/> 
     </feature>
 </widget>
