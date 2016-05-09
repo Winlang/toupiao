@@ -276,6 +276,9 @@ h4 small,h5 small,h6 small {
 .aui-text-pink {
 	color: #fbb8af !important;
 }
+.aui-bg-theme{
+    background-color: #7935fe !important;
+}
 .aui-bg-default {
 	background-color: #f4f4f4 !important;
 }
@@ -449,6 +452,9 @@ h4 small,h5 small,h6 small {
 	vertical-align: baseline;
 	border-radius: .15em;
 }
+.aui-label-theme{
+    background-color: #7935fe !important;
+}
 .aui-label-default {
 	background-color: #f4f4f4;
 	color: #8f8f94;
@@ -501,6 +507,16 @@ button, .aui-btn {
 .aui-btn:active {
 	color: #ffffff;
 	background-color: #bdc3c7;
+}
+.aui-btn-theme{
+    color:#FFFFFF;
+    background-color: #7935fe;
+    border:1px solid #7935fe;
+}
+.aui-btn-theme.active, .aui-btn-theme:active {
+	color: #fff;
+	background-color: #0404ff;
+	border: 1px solid #0404ff;
 }
 .aui-btn-default {
 	color: #ffffff;
@@ -576,6 +592,9 @@ button, .aui-btn {
 .aui-btn-default.aui-btn-outlined {
 	color: #bdc3c7;
 }
+.aui-btn-theme.aui-btn-outlined{
+    color: #7935fe;
+}
 .aui-btn-primary.aui-btn-outlined {
 	color: #16a085;
 }
@@ -594,6 +613,10 @@ button, .aui-btn {
 .aui-btn-default.aui-btn-outlined:active {
 	background: #bdc3c7;
 	color: #ffffff;
+}
+.aui-btn-theme.aui-btn-outlined:active {
+    background: #7935fe;
+    color:#FFFFFF;
 }
 .aui-btn-primary.aui-btn-outlined:active {
 	background: #16a085;
@@ -1385,6 +1408,10 @@ input[type="time"] {
 	background-color: #bdc3c7;
 	border-radius: 100px;
 }
+.aui-badge-theme{
+    color:#FFFFFF;
+    background-color: #7935fe;
+}
 .aui-badge-primary {
 	color: #ffffff;
 	background-color: #1abc9c;
@@ -1444,6 +1471,10 @@ input[type="time"] {
 }
 .aui-bar-dark {
 	background-color: #34495e;
+}
+.aui-bar-theme{
+    background-color: #fff ;
+    color:#7935fe;
 }
 .aui-bar-primary {
 	background-color: #1abc9c;
@@ -1550,6 +1581,9 @@ input[type="time"] {
 }
 .aui-nav .aui-bar-tab .active-dark .aui-iconfont, .aui-nav .aui-bar-tab .active-dark p {
 	color: #34495e;
+}
+.aui-nav .aui-bar-tab .active-theme .aui-iconfont, .aui-nav .aui-bar-tab .active-theme p {
+    color: #7935fe ;
 }
 .aui-nav .aui-bar-tab .active-primary .aui-iconfont, .aui-nav .aui-bar-tab .active-primary p {
 	color: #1abc9c;
@@ -1918,6 +1952,10 @@ input.aui-counter-input {
 	/*-webkit-animation: fadeIn .5s ease both;
             animation: fadeIn .5s ease both;*/
 }
+.aui-tab-theme .aui-tab-nav li.active {
+	color: #7935fe;
+	border-bottom: 2px #7935FE solid;
+}
 .aui-tab-success .aui-tab-nav li.active {
 	color: #2ecc71;
 	border-bottom: 2px #2ecc71 solid;
@@ -1939,6 +1977,15 @@ input.aui-counter-input {
 	border-bottom: 2px #34495e solid;
 }
 
+.aui-tab-theme .aui-tab-nav.aui-tab-border,
+.aui-tab-theme .aui-tab-border li {
+	border-color: #7935FE;
+	color: #7935FE;
+}
+.aui-tab-theme .aui-tab-border li.active {
+	background-color: #7935FE;
+	color: #fff;
+}
 .aui-tab-success .aui-tab-nav.aui-tab-border,
 .aui-tab-success .aui-tab-border li {
 	border-color: #2ecc71;
@@ -2032,6 +2079,9 @@ input.aui-counter-input {
 .aui-progress.xxs .progress-bar,
 .aui-progress-xxs .progress-bar {
 	border-radius: 1px;
+}
+.aui-progress-theme {
+	background-color: #7935fe;
 }
 .aui-progress-primary {
 	background-color: #1abc9c;
@@ -2207,6 +2257,10 @@ input.aui-counter-input {
 .aui-range input[type='range'].aui-range-danger::-webkit-slider-thumb{
     background-color: #e74c3c;
     border-color: #e74c3c;
+}
+.aui-range input[type='range'].aui-range-theme::-webkit-slider-thumb{
+    background-color: #7935FE;
+    border-color: #7935fe;
 }
 .aui-range input[type='range'].aui-range-primary::-webkit-slider-thumb{
     background-color: #1abc9c;
@@ -2392,6 +2446,10 @@ input.aui-counter-input {
     background-color: rgba(231,76,60,.9);
     color: #fff;
 }
+.aui-tips-theme .aui-tips-content {
+    background-color: rgba(121,53,254,.9);
+    color: #fff;
+}
 .aui-tips-primary .aui-tips-content {
     background-color: rgba(26,188,156,.9);
     color: #fff;
@@ -2399,9 +2457,11 @@ input.aui-counter-input {
 .aui-tips-info i:before,
 .aui-tips-success i:before,
 .aui-tips-danger i:before,
+.aui-tips-theme i:before,
 .aui-tips-primary i:before {
     color: #fff;
 }
+.aui-tips-theme .aui-arrow-right:after,
 .aui-tips-primary .aui-arrow-right:after,
 .aui-tips-info .aui-arrow-right:after,
 .aui-tips-success .aui-arrow-right:after,

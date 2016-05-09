@@ -1,25 +1,25 @@
 //投票方法
-function toupiao(obj,id){
-	var member_id = is_login();
-	if(member_id == '-1'){
-		api.alert({msg: '请先登录'});
-		login_page('toupiao');
-		return false;
-	}
-	$.post(ApiUrl+'/api/toupiao?id='+id+'&member_id='+member_id+'&callback=?',{},function(data){
-		var data = JSON.parse(data);
-        if(data.status == 0 || data.status == 2){
-            api.alert({msg: data.data});
-            $('#vote_num').html(data.item_optnum);
-            $(obj).removeAttr('onclick');
-            $(obj).children('span').removeClass('aui-icon-roundcheck');
-        	$(obj).children('span').addClass('aui-icon-roundcheckfill');
-            $(obj).children('a').html("已投票");
-        }else{
-            api.alert({msg: data.data});
-        }
-    });
-}
+// function toupiao(obj,id){
+// 	var member_id = is_login();
+// 	if(member_id == '-1'){
+// 		api.alert({msg: '请先登录'});
+// 		login_page('toupiao');
+// 		return false;
+// 	}
+// 	$.post(ApiUrl+'/api/toupiao?id='+id+'&member_id='+member_id+'&callback=?',{},function(data){
+// 		var data = JSON.parse(data);
+//         if(data.status == 0 || data.status == 2){
+//             api.alert({msg: data.data});
+//             $('#vote_num').html(data.item_optnum);
+//             $(obj).removeAttr('onclick');
+//             $(obj).children('span').removeClass('aui-icon-roundcheck');
+//         	$(obj).children('span').addClass('aui-icon-roundcheckfill');
+//             $(obj).children('a').html("已投票");
+//         }else{
+//             api.alert({msg: data.data});
+//         }
+//     });
+// }
 
 //发表评论
 function pinglun(){
@@ -98,11 +98,11 @@ function good_bad(obj,commid,status){
     });
 }
 
-//点击加载更多最新评论
-loading_new_comm(1,'new');
-function loading_new_comm(page,good_new){
+//点击加载更多精彩评论
+loading_good_comm(1,'good');
+function loading_good_comm(page,good_new){
 	//获取主题选项id
-    var itemoptid = getQueryString('itemoptid');
+    var itemoptid = getQueryString('itemopt_id');
     //获取当前登陆用户的id
     var member_id = is_login();
 	var next_page = page+1;
@@ -116,9 +116,9 @@ function loading_new_comm(page,good_new){
 		success:function(data){
 			var data = JSON.parse(data);
 			if(data.status == 0){
-				$('#itemopt_new_comminfo').append(data.msg);
+				$('#itemopt_good_comminfo').append(data.msg);
 				$('#loading').html('查看更多精彩评论');
-				$('#loading').attr('onclick','loading_new_comm('+next_page+',"new")');
+				$('#loading').attr('onclick','loading_good_comm('+next_page+',"good")');
 			}else if(data.status == 2){
 				$('#loading').removeAttr('onclick');
 				$('#loading').html('没有更多评论了');
@@ -131,25 +131,25 @@ function loading_new_comm(page,good_new){
 
 $(function() {
     //获取主题选项id
-    var itemoptid = getQueryString('itemoptid');
+    // var itemoptid = getQueryString('itemoptid');
     //获取当前登陆用户的id
-    var member_id = is_login();
+    // var member_id = is_login();
 
     //主题选项基本信息
-	$.post(ApiUrl+'/api/itemoption?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
-		var data = JSON.parse(data);
-		$('.aui-title').html(data.data.item_opttitle);
-		var html = template('itemoptdata', data);
-		document.getElementById('itemoptinfo').innerHTML = html;
-	});
+	// $.post(ApiUrl+'/api/itemoption?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
+	// 	var data = JSON.parse(data);
+	// 	$('.aui-title').html(data.data.item_opttitle);
+	// 	var html = template('itemoptdata', data);
+	// 	document.getElementById('itemoptinfo').innerHTML = html;
+	// });
 	
 	//主题选项精彩评论列表
-	$.post(ApiUrl+'/api/option_good_comm?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
-		var data = JSON.parse(data);
+	// $.post(ApiUrl+'/api/option_good_comm?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
+	// 	var data = JSON.parse(data);
 		
-		var html = template('itemopt_good_commdata', data);
-		document.getElementById('itemopt_good_comminfo').innerHTML = html;
-	});
+	// 	var html = template('itemopt_good_commdata', data);
+	// 	document.getElementById('itemopt_good_comminfo').innerHTML = html;
+	// });
 
 	//主题选项最新评论列表
 	// $.post(ApiUrl+'/api/option_new_comm?id='+itemoptid+'&member_id='+member_id+'&callback=?',{},function(data){
