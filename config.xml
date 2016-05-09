@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<widget id="A6917213385648" version="0.0.1"> 
+<widget id="A6917214012389" version="0.0.1"> 
   <name>投票项目</name>  
   <description>应用AUI框架</description>  
   <author email="cuihuale@yeah.net" href="http://www.apicloud.com">APPxn</author>  
@@ -12,8 +12,8 @@
   <preference name="autoUpdate" value="true"/>  
   <preference name="smartUpdate" value="false"/>  
   <preference name="debug" value="true"/>  
-  <preference name="statusBarAppearance" value="true"/>  
-  <permission name="location"/>  
+  <preference name="statusBarAppearance" value="true"/>
+  <permission name="location"/>
   <permission name="internet"/>  
   <access origin="*"/> 
     <!--qq分享-->
