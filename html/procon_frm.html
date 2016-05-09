@@ -295,6 +295,7 @@
     }
    function openAdd(){
        var item_id = getQueryString('item_id');
+
        api.openWin({
 	       name: 'add_option',
 	       url: 'add_option_win.html?item_id='+item_id
@@ -428,10 +429,34 @@
 //          msg: '您点击了确定'
 //      });
     }
+
+
+    function search_info_two(item_title){
+
+            var item_id=$('#search_id').val();
+            var item_title=$('#search-input').val();
+             $.post(ApiUrl+'/api/search_info?id='+item_id+'&item_title='+item_title+'&callback=?',{},function(data){
+                    
+                    var data = JSON.parse(data);
+                   if(data.status=='0'){
+                    $('#itemoption_list_two').css('display','block');
+                    $('#itemoption_list').css('display','none');
+                    document.getElementById('itemoption_list_two').innerHTML = data.data;
+                   }else{
+                    api.alert({msg:data.data});
+                    $('#itemoption_list_two').css('display','none');
+                    $('#itemoption_list').css('display','block');
+                   }
+                    
+                    
+            });
+    }
+
+
     function openRank(item_id){
       
         var member_id = is_login();
-        $.post(ApiUrl+'/api/is_one_toupiao??member_id='+member_id+'&item_id='+item_id+'&callback=?',{},function(data){
+        $.post(ApiUrl+'/api/is_one_toupiao?member_id='+member_id+'&item_id='+item_id+'&callback=?',{},function(data){
             var data = JSON.parse(data);
             if(data.status == 1){
                 api.openWin({

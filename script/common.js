@@ -352,6 +352,7 @@ function uploadxxpic(picUrl){
                 }
             }
         },function(ret, err){
+        
         	//显示等待上传过程
         	//showDialog()
             if (ret.msg != '') {
