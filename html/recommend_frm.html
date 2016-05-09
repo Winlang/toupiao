@@ -177,9 +177,7 @@
             </div>
        </div>
        <div class="aui-content aui-padded-10">
-             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">
-              {{data.item_desc}}
-            </p>
+             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">{{data.item_desc}}</p>
        </div>  
        </script>
        <div class="aui-content">
@@ -309,8 +307,11 @@
   // }
 
   apiready = function(){
-
-
+     //暂无简介
+     var sum = $("#summary").html();
+     if(sum == ""){
+        $("#summary").html("暂无简介");
+     }
     //监听 登陆成功 
         // 监听是否注册或者登录成功   监听成功
           api.addEventListener({
