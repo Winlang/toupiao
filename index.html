@@ -5,23 +5,26 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <title>欢迎加入关键一票！</title>
     <link rel="stylesheet" type="text/css" href="css/aui.css" />
+    <style>
+        .btn-a{
+           background-color:#fff;
+        }
+    </style>
 </head>
 <body>
-    <header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
-      <a class="aui-btn aui-btn-warning aui-pull-left" tapmode>
-           
-      </a>
-      <div class="aui-title" id="header-title">关键一票</div>
+    <header class="aui-bar aui-bar-nav aui-bar-theme" id="aui-header">
+       <a class="aui-btn aui-pull-left btn-a" tapmode></a>
+       <div class="aui-title" id="header-title">关键一票</div>
     </header>
     <footer class="aui-nav" id="aui-footer">
         <ul class="aui-bar-tab">
-            <li class="active-warning" id="tabbar1" tapmode onclick="randomSwitchBtn(this,'首页',0)">
-                <span class="aui-iconfont aui-icon-favor"></span>
+            <li class="active-theme" id="tabbar1" tapmode onclick="randomSwitchBtn(this,'首页',0)">
+                <span class="aui-iconfont aui-icon-home"></span>
                 <p>首页</p>
             </li>
-            <li id="tabbar2" tapmode onclick="randomSwitchBtn(this,'找活动',1)">
+            <li id="tabbar2" tapmode onclick="randomSwitchBtn(this,'活动',1)">
                 <span class="aui-iconfont aui-icon-like"></span>
-                <p>找活动</p>
+                <p>活动</p>
             </li>
             <li id="tabbar3" tapmode onclick="randomSwitchBtn(this,'投票',2)">
                 <span class="aui-iconfont aui-icon-roundadd"></span>
@@ -32,7 +35,7 @@
                 <p>消息</p>
             </li>
             <li id="tabbar5" tapmode onclick="randomSwitchBtn(this,'个人中心',4)">
-                <span class="aui-iconfont aui-icon-my"></span>
+                <span class="aui-iconfont aui-icon-people"></span>
                 <p>我的</p>
             </li>
         </ul>
@@ -65,8 +68,8 @@
             preload:4,
             frames:
             [{
-                name: 'waterfall_frm', 
-                url: 'html/waterfall_frm.html', 
+                name: 'home_frm', 
+                url: 'html/home_frm.html', 
                 bounces:false
             },{
                 name: 'grid_frm', 
@@ -87,34 +90,34 @@
             }]
         }, function(ret, err){
             var footer = $api.byId('aui-footer');
-            var footerAct = $api.dom(footer, '.aui-bar-tab li.active-warning');
-            $api.removeCls(footerAct, 'active-warning');
+            var footerAct = $api.dom(footer, '.aui-bar-tab li.active-theme');
+            $api.removeCls(footerAct, 'active-theme');
             var name = ret.name;
             var index = ret.index;
             if(index==0){
                 $api.text($api.byId('header-title'),'首页');
-                $api.addCls($api.byId('tabbar1'), 'active-warning');
+                $api.addCls($api.byId('tabbar1'), 'active-theme');
             }else if(index==1){
-                $api.text($api.byId('header-title'),'找活动');
-                $api.addCls($api.byId('tabbar2'), 'active-warning');
+                $api.text($api.byId('header-title'),'活动');
+                $api.addCls($api.byId('tabbar2'), 'active-theme');
            }else if(index==2){
                 $api.text($api.byId('header-title'),'投票');
-                $api.addCls($api.byId('tabbar3'), 'active-warning');
+                $api.addCls($api.byId('tabbar3'), 'active-theme');
             }else if(index==3){
                 $api.text($api.byId('header-title'),'消息');
-                $api.addCls($api.byId('tabbar4'), 'active-warning');
+                $api.addCls($api.byId('tabbar4'), 'active-theme');
             }else if(index==4){
                 $api.text($api.byId('header-title'),'个人中心');
-                $api.addCls($api.byId('tabbar5'), 'active-warning');
+                $api.addCls($api.byId('tabbar5'), 'active-theme');
             }
         })
     }
     function randomSwitchBtn(obj, name, index) {
         $api.text($api.byId('header-title'),name);
         var footer = $api.byId('aui-footer');
-        var footerAct = $api.dom(footer, '.aui-bar-tab li.active-warning');
-        $api.removeCls(footerAct, 'active-warning');
-        $api.addCls(obj, 'active-warning');
+        var footerAct = $api.dom(footer, '.aui-bar-tab li.active-theme');
+        $api.removeCls(footerAct, 'active-theme');
+        $api.addCls(obj, 'active-theme');
         api.setFrameGroupIndex({
             name: 'footer_tab_demo',
             index: index,
