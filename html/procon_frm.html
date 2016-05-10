@@ -222,19 +222,11 @@
                 {{each data as value i}}
                 <div class="aui-input-row idols">
                 	{{if value.is_toupiao == 1}}
-<<<<<<< HEAD
                    		<input type="radio" class="aui-radio aui-radio-theme" checked="checked" tapmode />
                    	{{else}}
                    		<input type="radio" class="aui-radio aui-radio-theme" tapmode onclick="showToast()"/>
                    		<input type="hidden" name="item_optid" value="{{value.item_optid}}"/>
                    	{{/if}}
-=======
-             		   <input type="radio" class="aui-radio aui-radio-warning" checked="checked" tapmode />
-                	{{else}}
-             		   <input type="radio" value="{{value.item_optid}}" class="aui-radio aui-radio-warning" tapmode onclick="showToast(this)"/>
-                	{{/if}}
-                  <input type="hidden" name="item_optid" value="{{value.item_optid}}"/>
->>>>>>> master
                    <div class="aui-toast" style="display:none" id="default_succ">
                            <i class="aui-iconfont aui-icon-check"></i>
                           <div class="aui-toast-content">投票成功</div>
@@ -532,38 +524,3 @@
 </script>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
