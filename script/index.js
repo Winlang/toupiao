@@ -23,6 +23,14 @@ $(function() {
                 document.getElementById('aui-content').innerHTML = html;
         }else{
         	//alert('hello'+$api.getStorage('is_login'));
+
+
+
+
+
+
+
+                /****************************实时数据 开始****************************/            
                 //最新
                 $.post(ApiUrl+'/api/index/?callback=?',{},function(data){
                         //记录设置缓存时间
@@ -61,6 +69,8 @@ $(function() {
                         var html = template('test1', data);
                         document.getElementById('aui-content1').innerHTML = html;
                 });
+                /****************************实时数据 结束****************************/ 
+
         }
 })
 
