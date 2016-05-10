@@ -50,8 +50,9 @@
 		.aui-content-padded {
 			padding-bottom: 0;
 		}
-		.option-name{
-		  padding:10px 0;
+		.aui-input-row .aui-input{
+		   line-height:1;
+		   padding:5px;
 		}
 	</style>
  </head>
@@ -66,10 +67,12 @@
 	 		      </div>   
 	 		</div>
 	 		<input type="hidden" id="opt_img_path" value="">
-	 		<div class="aui-input-row option-name">
-	 			<label class="aui-input-addon">选项名称</label>
-	 			<input class="aui-input" id="xx_title" value="" placeholder="请输入您的选项名称" />
-	 		</div>
+	 	<div class="aui-line-x"></div>
+	 	<p class="aui-text-center title"></p>
+	 	<div class="aui-line-x"></div>
+	    <div class="aui-input-row">
+	 	     <label class="aui-input-addon">选项名称</label>
+	 	     <input class="aui-input" id="xx_title" value="" placeholder="请输入您的选项名称" />
 	 	</div>
 	 	<div class="aui-line-x"></div>
 	 	<p class="aui-text-center title">选项描述</p>
@@ -109,17 +112,29 @@
  		var item_optimg = $('#opt_img_path').val();
  		var item_opttitle = $('#xx_title').val();
  		var item_optdesc = $('#xx_desc').val();
- 		$.post(ApiUrl+'/api/additemopt/?callback=?',{'item_id':item_id,'item_opttitle':item_opttitle,'item_optdesc':item_optdesc,'item_optimg':item_optimg},function(data){
-                      var data = JSON.parse(data);
-                      if(data.status == 1){
-                      		var item_optid = data.msg;
-                     		openVote(item_optid);
-				            //跳至所增加的选项页
+ 		
+ 		//提交增加选项
+ 		api.ajax({
+			    url: ApiUrl+'/api/additemopt/?callback=?',
+			    method: 'post',
+			    data: {
+			    	values:{
+			    		'item_id':item_id,
+			    		'item_opttitle':item_opttitle,
+			    		'item_optdesc':item_optdesc,
+			    		'item_optimg':item_optimg
+			    	}
+			    }
+			},function(data, err){
+			    if(data.status == 1){
+              		var item_optid = data.msg;
+             		openVote(item_optid);
+		            //跳至所增加的选项页
 
-                      }else{
-                      	  alert(data.msg);
-                      }
-                });
+              	}else{
+              	  	alert(data.msg);
+              	}
+		});
  	}
 
 function openVote(itemoptid){
