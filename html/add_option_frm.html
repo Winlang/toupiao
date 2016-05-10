@@ -56,7 +56,7 @@
 	 		<input type="hidden" id="opt_img_path" value="">
 	 		<div class="aui-input-row">
 	 			<label class="aui-input-addon">选项名称</label>
-	 			<input type="number" class="aui-input" id="xx_title" value="" placeholder="请输入您的选项名称" />
+	 			<input class="aui-input" id="xx_title" value="" placeholder="请输入您的选项名称" />
 	 		</div>
 	 	</div>
 	 	<div class="aui-line-x"></div>
@@ -78,16 +78,16 @@
  	apiready = function(){
  	    api.parseTapmode();
  	    // 监听头像上传成功
-      api.addEventListener({
-              name : 'xx_upload_successEvent'
-      }, function(ret) {
+	    api.addEventListener({
+	        name : 'xx_upload_successEvent'
+	    }, function(ret) {
             if (ret && ret.value) {
                 var value = ret.value;
                 var imgpath = UploadUrl+'/admin/vote_itemopt/usercreate/'+value.name;
                 $api.attr($api.byId("xx_bg_img"),'src',imgpath);
                 $('#opt_img_path').val('vote_itemopt/usercreate/'+value.name);
             }
-      });
+	    });
  	}
 
  	function submit_xx(){
