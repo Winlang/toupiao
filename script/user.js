@@ -124,33 +124,48 @@ function login(){
         	return false;
         }
         //提交数据
-        $.post(ApiUrl+'/api/login',{'mobile':mobile,'passwd':password},function(data){
-        	
-        	//登陆成功 进入个人中心
+       api.ajax({
+              url: ApiUrl+'/api/login',
+              method: 'post',
+              data: {
+                values: { 
+                    'mobile':mobile,
+                    'passwd':password
+                }
+              }
+          },function(data, err){
+              //登陆成功 进入个人中心
         	if(data.status == 1){
         		//设置 登陆表识
         		var uid = data.msg;
         		$api.setStorage('uid',uid);
 
         		//用户中心信息
-				$.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
+				api.ajax({
+                      url: ApiUrl+'/api/userinfo',
+                      method: 'post',
+                      data: {
+                        values: { 
+                            'uid':uid
+                        }
+                      }
+                  },function(data, err){
+                      // 广播事件
+			            api.sendEvent({
+				            name : 'reg_login_successEvent',
+				            extra : {
+				               name : data.mobile,
+				               callback : type,
+				            }
+				        });
 
-			        // 广播事件
-		            api.sendEvent({
-			            name : 'reg_login_successEvent',
-			            extra : {
-			               name : data.mobile,
-			               callback : type,
-			            }
-			        });
+			            api.closeWin();
+                });
 
-		            api.closeWin();
-		           
-		           
-			    },'json');
 
 	        }else{
 	        	alert('登陆失败,请重新登陆~');
 	        }
-        },'json');
+        });
+
 }
