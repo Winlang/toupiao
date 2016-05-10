@@ -23,6 +23,7 @@ $(function() {
                 document.getElementById('aui-content').innerHTML = html;
         }else{
         	//alert('hello'+$api.getStorage('is_login'));
+                //最新
                 $.post(ApiUrl+'/api/index/?callback=?',{},function(data){
                         //记录设置缓存时间
                         $api.setStorage('entertime',getNowTime());
@@ -40,6 +41,25 @@ $(function() {
                         
                         var html = template('test', data);
                         document.getElementById('aui-content').innerHTML = html;
+                });
+                //最热
+                $.post(ApiUrl+'/api/index/?callback=?',{},function(data){
+                        //记录设置缓存时间
+                        $api.setStorage('entertime',getNowTime());
+                        //设置缓存
+                        $api.setStorage('storage_data',data);
+
+                        var data = JSON.parse(data);
+
+
+                        //处理图片
+                        for (var i = data.list.length - 1; i >= 0; i--) {
+                                data.list[i].item_titleimg = set_item_titleimg(data.list[i].item_titleimg);
+                        }
+
+                        
+                        var html = template('test1', data);
+                        document.getElementById('aui-content1').innerHTML = html;
                 });
         }
 })
