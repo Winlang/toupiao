@@ -207,18 +207,19 @@ function collectionInfo(obj){
 		login_page('shoucang');return false;
 	}
 	var item_optid=obj;
-	$.post(ApiUrl+'/api/collectionInfo?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',{},function(data){
-	var data = JSON.parse(data);
-
-	if(data.status=='0' || data.status=='2'){
-		api.alert({msg: data.data});
-		$('#collectionInfo').removeAttr('onclick');
-		$('#class_shoucang').removeClass('aui-icon-like');
-		$('#class_shoucang').addClass('aui-icon-likefill');
-		$('.shoucang').html("已收藏");
-	}else{
-		api.alert({msg: data.data});
-	}
-
+	api.ajax({
+		url:ApiUrl+'/api/collectionInfo?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',
+		method:'post',
+		data:{}
+	},function(data,err){
+		if(data.status=='0' || data.status=='2'){
+			api.alert({msg: data.data});
+			$('#collectionInfo').removeAttr('onclick');
+			$('#class_shoucang').removeClass('aui-icon-like');
+			$('#class_shoucang').addClass('aui-icon-likefill');
+			$('.shoucang').html("已收藏");
+		}else{
+			api.alert({msg: data.data});
+		}
 	});
 }
