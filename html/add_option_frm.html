@@ -35,6 +35,13 @@
 		  vertical-align:middle;
 		  font-size:18px;
 		}
+		.add-pic{
+		  display:block;
+		  width:100%;
+		  height:200px;
+		  margin-top:-200px;
+		  z-index: 10;
+		}
 		.middle{
 		  display: inline-block;
 		  height:100%;
@@ -43,18 +50,23 @@
 		.aui-content-padded {
 			padding-bottom: 0;
 		}
+		.option-name{
+		  padding:10px 0;
+		}
 	</style>
  </head>
  <body>
  	<section class="aui-card">
 	 		<div class="option-img aui-text-center aui-text-info" tapmode onclick="xx_getPicture()">
-	 		      <img src=""  id="xx_bg_img" style="width:100%;height:200px">
-	 		      <i class="aui-iconfont aui-icon-add"></i>
-	 		      <span>添加选项图片</span>
-	 		      <span class="middle"></span>
+	 		      <img src=""  id="xx_bg_img" style="width:100%;height:200px;">
+	 		      <div class="add-pic aui-text-theme">
+	 		             <i class="aui-iconfont aui-icon-add"></i>
+	 		             <span>添加选项图片</span>
+	 		             <span class="middle"></span>   
+	 		      </div>   
 	 		</div>
 	 		<input type="hidden" id="opt_img_path" value="">
-	 		<div class="aui-input-row">
+	 		<div class="aui-input-row option-name">
 	 			<label class="aui-input-addon">选项名称</label>
 	 			<input class="aui-input" id="xx_title" value="" placeholder="请输入您的选项名称" />
 	 		</div>
@@ -67,7 +79,7 @@
 	 	</div>
  	</section>
  	<section class="aui-content-padded">
- 		<div class="aui-btn aui-btn-block aui-btn-info" tapmode onclick="submit_xx()">提交选项</div>
+ 		<div class="aui-btn aui-btn-block aui-btn-theme" tapmode onclick="submit_xx()">提交选项</div>
  	</section>
  </body>
  <script type="text/javascript" src="../script/api.js"></script>
@@ -86,6 +98,7 @@
                 var imgpath = UploadUrl+'/admin/vote_itemopt/usercreate/'+value.name;
                 $api.attr($api.byId("xx_bg_img"),'src',imgpath);
                 $('#opt_img_path').val('vote_itemopt/usercreate/'+value.name);
+                $('.add-pic').css('display','none');
             }
 	    });
  	}
