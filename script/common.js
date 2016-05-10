@@ -247,9 +247,7 @@ function uploadAvatar(picUrl){
                            api.alert({msg:JSON.stringify(err)});
                       }
                 });
-
-
-                
+                  
             } else {
                 alert('上传失败~');
                 //api.alert({msg:JSON.stringify(err)});
