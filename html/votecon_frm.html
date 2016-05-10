@@ -152,10 +152,9 @@
 	.ask-text textarea {
 		height: 100%;
 		padding: 5px;
-		margin: 0;
-		
+		margin: 0;		
 		border:none;
-    overflow-y: auto;
+		overflow-y: auto;
 	}
 	.main{
 	   display:block;
@@ -163,10 +162,10 @@
 	   height:auto;
 	   position: relative;	
 	}
-  .main-fix{
-     position:fixed;
-     top:inherit;
-   }
+	.main-fix{
+	  position:fixed;
+	  top:inherit;
+	}
 	.mark {
 		background: rgba(0,0,0,0.5);
 		position: absolute;
@@ -182,7 +181,7 @@
 	}
 	#ask-reply-box {
 		padding: 10px;
-    z-index: 20;
+		z-index: 20;
 	}
 	#aui-footer {
 		background:rgba(255,255,255,1);	
@@ -225,9 +224,9 @@
     </style>
 </head>
 <body>
-    <header class="aui-bar aui-bar-nav aui-bar-warning" id="aui-header">
-            <a class="aui-btn aui-btn-warning aui-pull-left" tapmode onclick="closeWin()">
-                <span class="aui-iconfont aui-icon-left"></span>
+    <header class="aui-bar aui-bar-nav aui-bar-theme" id="aui-header">
+            <a class="aui-btn aui-btn-white aui-pull-left" tapmode onclick="closeWin()">
+                <span class="aui-iconfont aui-icon-left aui-text-theme"></span>
             </a>
             <div class="aui-title"></div>
             <a class="aui-iconfont aui-icon-menu aui-pull-right"></a>
@@ -249,22 +248,22 @@
               <ul class="mine">
                 {{if data.is_toupiao == 1}}
                     <li class="vote">
-                        <span class="aui-text-warning aui-iconfont aui-icon-roundcheckfill"></span>
+                        <span class="aui-text-theme aui-iconfont aui-icon-roundcheckfill"></span>
                         <a>已投票</a>
                     </li>
                 {{else}}
                     <li class="vote" onclick="toupiao(this,{{data.item_optid}});">
-                        <span class="aui-text-warning aui-iconfont aui-icon-roundcheck"></span>
+                        <span class="aui-text-theme aui-iconfont aui-icon-roundcheck"></span>
                         <a>投一票</a>
                     </li>
                 {{/if}}
                 <li class="comment" onclick="showReply();">
-                     <span class="aui-text-warning aui-iconfont aui-icon-comment"></span>
+                     <span class="aui-text-theme aui-iconfont aui-icon-comment"></span>
                      <a >说两句</a>
                 
                 </li>
                 <li class="share" onclick="share();">
-                     <span class="aui-text-warning aui-iconfont aui-icon-share"></span>
+                     <span class="aui-text-theme aui-iconfont aui-icon-share"></span>
                      <a>分享拉票</a>
                 </li>
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
@@ -283,12 +282,12 @@
                </div>
                 {{if data.collection == 1}}
                  <li class="collect" id="collectionInfo">
-                     <span class="aui-text-warning aui-iconfont aui-icon-likefill"></span>
+                     <span class="aui-text-theme aui-iconfont aui-icon-likefill"></span>
                      <a>已收藏</a>
                 </li>
                 {{else}}
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
-                     <span class="aui-text-warning aui-iconfont aui-icon-like" id="class_shoucang"></span>
+                     <span class="aui-text-theme aui-iconfont aui-icon-like" id="class_shoucang"></span>
                      <a class="shoucang">收藏</a>
                 </li>
                   {{/if}}
@@ -302,8 +301,10 @@
             </li>
          </ul>
     </div>
-    <div class="aui-content aui-padded-10">
-          <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">{{data.item_optdesc}}</p>
+
+    <div class="aui-content aui-padded-10" id="jianjie">
+          <p id="summary" class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode >{{data.item_optdesc}}</p>
+
     </div>
     </script>
     
@@ -322,7 +323,7 @@
                 {{each data as v i}}
                 <li class="aui-list-view-cell aui-img">                  
                      <div class="aui-img-object aui-pull-left ">
-                          <img class="avatar" src="../image/demos-2.jpg" alt="" /> 
+                          <img class="avatar" src="/Uploads/avatar{{v.avatar}}" alt="" /> 
                      </div>                 
                      <div class="aui-img-body">                        
                          <div class="commemt-caption">
@@ -333,26 +334,30 @@
                            <div class="aui-pull-right appreciate">
                                 {{if v.good_bad_status == 'good'}}
                                     {{if v.good_bad == '1'}}
-                                        <span class="aui-iconfont aui-icon-appreciatefill aui-text-warning"></span>
+
+                                        <span onclick="cancel_goodbad(this,{{v.id}});" class="aui-iconfont aui-icon-appreciatefill aui-text-theme"></span>
+
                                         <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
+                                        <span onclick="good_bad(this,{{v.id}},'bad');" class="aui-iconfont aui-icon-appreciate reverse"></span>
                                         <span>{{v.comm_bad}}</span>
                                     {{else}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
+                                        <span onclick="good_bad(this,{{v.id}},'good');" class="aui-iconfont aui-icon-appreciate"></span>
                                         <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
+                                        <span onclick="good_bad(this,{{v.id}},'bad');" class="aui-iconfont aui-icon-appreciate reverse"></span>
                                         <span>{{v.comm_bad}}</span>
                                     {{/if}}
                                 {{else}}
                                     {{if v.good_bad == '1'}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
+                                        <span onclick="good_bad(this,{{v.id}},'good');" class="aui-iconfont aui-icon-appreciate"></span>
                                         <span>{{v.comm_good}}</span>
-                                        <span class="aui-iconfont aui-iconfont aui-icon-appreciatefill aui-text-warning reverse"></span>
+
+                                        <span onclick="cancel_goodbad(this,{{v.id}});" class="aui-iconfont aui-iconfont aui-icon-appreciatefill aui-text-theme reverse"></span>
+
                                         <span>{{v.comm_bad}}</span>
                                     {{else}}
-                                        <span onclick="good_bad(this,{{v.id}},'good')" class="aui-iconfont aui-icon-appreciate"></span>
+                                        <span onclick="good_bad(this,{{v.id}},'good');" class="aui-iconfont aui-icon-appreciate"></span>
                                         <span>{{v.comm_good}}</span>
-                                        <span onclick="good_bad(this,{{v.id}},'bad')" class="aui-iconfont aui-icon-appreciate reverse"></span>
+                                        <span onclick="good_bad(this,{{v.id}},'bad');" class="aui-iconfont aui-icon-appreciate reverse"></span>
                                         <span>{{v.comm_bad}}</span>
                                     {{/if}}
                                 {{/if}}
@@ -400,11 +405,25 @@
     
 
     apiready=function(){
-          //暂无简介
-         var sum = $("#summary").html();
-         if(sum == ""){
-            $("#summary").html("暂无简介");
-         }
+
+        //获取主题选项id
+        var itemoptid = getQueryString('itemoptid');
+        //获取当前登陆用户的id
+        var member_id = is_login();
+
+        //主题选项基本信息
+        itemoption(itemoptid,member_id);
+        //主题选项精彩评论列表
+        option_good_comm(itemoptid,member_id)
+        //主题选项最新评论列表
+        loading_new_comm(1,'new');
+
+         //暂无简介
+	      var sum = $("#summary").html();
+	      if(sum == ""){
+	         $("#summary").html("暂无简介");
+	      }
+
         //监听 登陆成功 
         // 监听是否注册或者登录成功   监听成功
           api.addEventListener({
@@ -438,8 +457,9 @@
             $api.removeCls($api.byId("aui-footer"),"show");
             $api.removeCls($api.dom(".main"),"main-fix");
         });
-    }
 
+        
+    }
     //qq指定好友分享
     function qqfriend_share(){
         var qq = api.require('qq');
@@ -512,7 +532,7 @@
     	$api.css($api.byId("ask-input"),"display:none");
     	$api.css($api.byId("ask-reply-box"),"display:block");
     	$api.addCls($api.byId("aui-footer"),"show");
-      $api.addCls($api.dom(".main"),"main-fix");
+    	$api.addCls($api.dom(".main"),"main-fix");
     }
     function hideReply(){
         $api.css($api.dom(".mark"),"display:none");
