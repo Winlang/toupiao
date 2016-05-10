@@ -30,20 +30,20 @@ function itemoptions(item_id,member_id){
 
 //搜索
 function search_info(item_title){
-                var item_id = getQueryString('item_id');
-         $.post(ApiUrl+'/api/search_info?id='+item_id+'&item_title='+item_title+'&callback=?',{},function(data){
-                
-                var data = JSON.parse(data);
-               if(data.status=='0'){
-                $('#itemoption_l').css('display','block');
-                $('#itemoption_list').css('display','none');
-                document.getElementById('itemoption_l').innerHTML = data.data;
-               }else{
-                api.alert({msg:data.data});
-                $('#itemoption_l').css('display','none');
-                $('#itemoption_list').css('display','block');
-               }
-                
-                
-        });
+    var item_id = getQueryString('item_id');
+    api.ajax({
+        url:ApiUrl+'/api/search_info?id='+item_id+'&item_title='+item_title+'&callback=?',
+        method:'post',
+        data:{}
+    },function(data,err){
+        if(data.status=='0'){
+            $('#itemoption_l').css('display','block');
+            $('#itemoption_list').css('display','none');
+            document.getElementById('itemoption_l').innerHTML = data.data;
+        }else{
+            api.alert({msg:data.data});
+            $('#itemoption_l').css('display','none');
+            $('#itemoption_list').css('display','block');
+        }
+    });
 }
