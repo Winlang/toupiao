@@ -16,7 +16,6 @@ function toupiao(obj,id){
         	$(obj).children('span').addClass('aui-icon-roundcheckfill');
             $(obj).children('a').html("已投票");
         }else{
-        	
             api.alert({msg: data.data});
         }
     });
@@ -78,20 +77,18 @@ function pinglun(){
 
 //点赞和点扯ajax
 function good_bad(obj,commid,status){
-	alert(commid);
-	alert(status);
-	return false;
 	var member_id = is_login();
 	if(member_id == '-1'){
 		api.alert({msg: '请先登录'});
 		login_page();
 		return false;
 	}
+	//请求接口
     $.post(ApiUrl+'/api/comm_goodbad?id='+commid+'&status='+status+'&member_id='+member_id+'&callback=?',{},function(data){
     	var data = JSON.parse(data);
         if(data.status == 0){
             api.alert({msg: data.data});
-            $(obj).attr('onclick','cancel_goodbad('+obj+','+data.comm_id+')');
+            $(obj).attr('onclick','cancel_goodbad(this,'+data.comm_id+');');
         	$(obj).removeClass('aui-icon-appreciate');
         	$(obj).addClass('aui-icon-appreciatefill');
         	$(obj).addClass('aui-text-warning');
@@ -110,22 +107,20 @@ function cancel_goodbad(obj,comm_id){
 		login_page();
 		return false;
 	}
-
 	//请求接口
-	$.post(ApiUrl+'/api/cancel_goodbad?comm_id='+commid+'&member_id='+member_id+'&callback=?',{},function(data){
+	$.post(ApiUrl+'/api/cancel_goodbad?comm_id='+comm_id+'&member_id='+member_id+'&callback=?',{},function(data){
     	var data = JSON.parse(data);
         if(data.status == 0){
-            api.alert({msg: data.data});
-            $(obj).attr('onclick','good_bad('+obj+','+data.comm_id+','+data.good_bad+')');
-        	$(obj).removeClass('aui-icon-appreciate');
-        	$(obj).addClass('aui-icon-appreciatefill');
-        	$(obj).addClass('aui-text-warning');
+            api.alert({msg: data.msg});
+            $(obj).attr('onclick','good_bad(this,'+data.comm_id+',"'+data.good_bad+'")');
+        	$(obj).addClass('aui-icon-appreciate');
+        	$(obj).removeClass('aui-icon-appreciatefill');
+        	$(obj).removeClass('aui-text-warning');
         	$(obj).next('span').html(data.num);
         }else{
-            api.alert({msg: data.data});
+            api.alert({msg: data.msg});
         }
     });
-
 }
 
 //点击加载更多最新评论
