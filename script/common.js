@@ -200,26 +200,54 @@ function uploadAvatar(picUrl){
                 //手机显示预览
                 var uid = is_login();
                 //记录用户所传图片路径及返回
-                $.post(ApiUrl+'/api/saveUserAvatar/?callback=?',{'avatar':ret1.msg,'uid':uid},function(ret_data){
-                      var ret_data = JSON.parse(ret_data);
-                      if(ret_data.status == 1){
-                      	  //设置监听 返回设置头像
-                		  // 广播事件
-				            api.sendEvent({
-					            name : 'avatar_upload_successEvent',
-					            extra : {
-					               name : ret1.msg,
-					            }
-					        });
+             //    $.post(ApiUrl+'/api/saveUserAvatar/?callback=?',{'avatar':ret1.msg,'uid':uid},function(ret_data){
+             //          var ret_data = JSON.parse(ret_data);
+             //          if(ret_data.status == 1){
+             //          	  //设置监听 返回设置头像
+             //    		  // 广播事件
+				         //    api.sendEvent({
+					        //     name : 'avatar_upload_successEvent',
+					        //     extra : {
+					        //        name : ret1.msg,
+					        //     }
+					        // });
 
-				            //关闭当前窗口
-				            api.closeWin();
+				         //    //关闭当前窗口
+				         //    api.closeWin();
                 		  	
-                      }else{
-                      	  alert(ret_data.msg);
+             //          }else{
+             //          	  alert(ret_data.msg);
+             //          }
+             //    });
+
+                api.ajax({
+                      url: ApiUrl+'/api/saveUserAvatar/?callback=?',
+                      method: 'post',
+                      data: {
+                        values: { 
+                            'avatar':ret1.msg,
+                            'uid':uid
+                        }
+                      }
+                  },function(ret_data, err){
+                      if (ret_data) {
+                          //设置监听 返回设置头像
+                          // 广播事件
+                            api.sendEvent({
+                                name : 'avatar_upload_successEvent',
+                                extra : {
+                                   name : ret1.msg,
+                                }
+                            });
+
+                            //关闭当前窗口
+                            api.closeWin();
+                            
+                      } else {
+                           api.alert({msg:JSON.stringify(err)});
                       }
                 });
-                
+                  
             } else {
                 alert('上传失败~');
                 //api.alert({msg:JSON.stringify(err)});
