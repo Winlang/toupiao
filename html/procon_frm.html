@@ -179,9 +179,7 @@
             </div>
        </div>
        <div class="aui-content aui-padded-10">
-             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode>
-             	{{data.item_desc}}
-            </p>
+             <p class="aui-ellipsis-2 desc-1"  onclick="xian(this);" tapmode id="summary">{{data.item_desc}}</p>
        </div>  
        </script>
        <div class="aui-content">
@@ -192,7 +190,8 @@
              </ul>
        </div>
        <div class="aui-content">
-              <div class="aui-padded-10 vote-title">
+           <div class="aui-padded-10 vote-title">
+
                                         投票选项          
              <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>  
              <div class="aui-btn aui-btn-warning aui-pull-right" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div>                      
@@ -209,7 +208,8 @@
             </div>
             <i class="aui-iconfont aui-icon-roundclosefill" tapmode onclick="clearInput()"></i>
         </div>
-        <div class="aui-btn aui-btn-warning" tapmode onclick="search_info_two()">搜索</div>
+
+        <div class="aui-btn aui-btn-warning" tapmode onclick="search_info($('#search-input').val())">搜索</div>
     </div>
 <!--搜索项目-->
 
@@ -222,11 +222,11 @@
                 {{each data as value i}}
                 <div class="aui-input-row idols">
                 	{{if value.is_toupiao == 1}}
-                   		<input type="radio" class="aui-radio aui-radio-warning" checked="checked" tapmode />
-                   	{{else}}
-                   		<input type="radio" class="aui-radio aui-radio-warning" tapmode onclick="showToast()"/>
-                   		<input type="hidden" name="item_optid" value="{{value.item_optid}}"/>
-                   	{{/if}}
+             		   <input type="radio" class="aui-radio aui-radio-warning" checked="checked" tapmode />
+                	{{else}}
+             		   <input type="radio" value="{{value.item_optid}}" class="aui-radio aui-radio-warning" tapmode onclick="showToast(this)"/>
+                	{{/if}}
+                  <input type="hidden" name="item_optid" value="{{value.item_optid}}"/>
                    <div class="aui-toast" style="display:none" id="default_succ">
                            <i class="aui-iconfont aui-icon-check"></i>
                           <div class="aui-toast-content">投票成功</div>
@@ -234,6 +234,10 @@
                    <div class="aui-toast" style="display:none" id="default_fail">
                            <i class="aui-iconfont aui-icon-close"></i>
                           <div class="aui-toast-content">投票失败</div>
+                   </div>
+                   <div class="aui-toast" style="display:none" id="yitouguo">
+                           <i class="aui-iconfont aui-icon-close"></i>
+                          <div class="aui-toast-content">您已经投过了</div>
                    </div>
                    <div class="option" tapmode onclick="openVote({{value.item_optid}})">
 	                    <div class="idol-info">
@@ -323,7 +327,12 @@
 	// 	api.parseTapmode();
 	// }
 
-  apiready = function(){
+  apiready = function(){ 
+      //暂无简介
+      var sum = $("#summary").html();
+      if(sum == ""){
+         $("#summary").html("暂无简介");
+      }
       //头部加宽
       var header = $api.byId('aui-header');
       $api.fixStatusBar(header); 
@@ -469,8 +478,8 @@
         });
     }
     
-    function showToast(){
-    	var id = $('input[name="item_optid"]').val();
+    function showToast(obj){
+    	var id = $(obj).val();
     	var member_id = is_login();
 		if(member_id == '-1'){
 			api.alert({msg: '请先登录'});
@@ -480,17 +489,27 @@
 		$.post(ApiUrl+'/api/toupiao?id='+id+'&member_id='+member_id+'&callback=?',{},function(data){
 			var data = JSON.parse(data);
 	        if(data.status == 0){
+               //投票成功
+               $(obj).removeAttr('onclick');
 	            $api.css($api.byId("default_succ"),"display:block");
 		        setTimeout(function(){
 		            $api.css($api.byId("default_succ"),"display:none");
 		        },2000)
+	        }else if(data.status == 2){
+               //已经投过了
+	        	  $(obj).removeAttr('checked');
+	            $api.css($api.byId("yitouguo"),"display:block");
+                setTimeout(function(){
+                    $api.css($api.byId("yitouguo"),"display:none");
+                },2000)
 	        }else{
-	        	$('input[name="item_optid"]').prev().removeAttr('checked');
-	            $api.css($api.byId("default_fail"),"display:block");
+               //投票失败
+               $(obj).removeAttr('checked');
+               $api.css($api.byId("default_fail"),"display:block");
                 setTimeout(function(){
                     $api.css($api.byId("default_fail"),"display:none");
                 },2000)
-	        }
+           }
 	    });
     }
 
