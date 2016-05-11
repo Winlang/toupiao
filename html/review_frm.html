@@ -113,7 +113,7 @@ function loading_comments(page){
         if(data.status == 0){
           $('#comment_list').append(data.msg);
           $('#loading').html('查看更多评论信息');
-          $('#loading').attr('onclick','loading_appreciate('+next_page+')');
+          $('#loading').attr('onclick','loading_comments('+next_page+')');
         }else if(data.status == 2){
           $('#loading').removeAttr('onclick');
           $('#loading').html('没有更多评论信息了');
