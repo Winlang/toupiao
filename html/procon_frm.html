@@ -241,27 +241,24 @@
                 <div id="itemoption_list" style="display:block;" ></div>
                 <div id="itemoption_l" style="display:none;"></div>
                 <!--选项列表-->
+                <div class="aui-toast" style="display:none" id="default_succ">
+                       <i class="aui-iconfont aui-icon-check"></i>
+                      <div class="aui-toast-content"></div>
+               </div>
+               <div class="aui-toast" style="display:none" id="default_fail">
+                       <i class="aui-iconfont aui-icon-close"></i>
+                      <div class="aui-toast-content"></div>
+               </div>
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
                 <div class="aui-input-row idols">
                 	{{if value.is_toupiao == 1}}
-                   		<input type="radio" class="aui-radio aui-radio-theme" checked="checked" tapmode />
+                   		<input type="radio" class="aui-radio aui-radio-theme" checked="checked" tapmode onclick="cancel_toupiao(this);" value="{{value.item_optid}}" />
                    	{{else}}
                    		<input type="radio" class="aui-radio aui-radio-theme" tapmode onclick="showToast(this);" value="{{value.item_optid}}" />
                    	{{/if}}
                     <input type="hidden" name="item_optid" value="{{value.item_optid}}"/>
-                   <div class="aui-toast" style="display:none" id="default_succ">
-                           <i class="aui-iconfont aui-icon-check"></i>
-                          <div class="aui-toast-content">投票成功</div>
-                   </div>
-                   <div class="aui-toast" style="display:none" id="default_fail">
-                           <i class="aui-iconfont aui-icon-close"></i>
-                          <div class="aui-toast-content">投票失败</div>
-                   </div>
-                   <div class="aui-toast" style="display:none" id="yitouguo">
-                           <i class="aui-iconfont aui-icon-close"></i>
-                          <div class="aui-toast-content">您已经投过了</div>
-                   </div>
+                   
                    <div class="option" tapmode onclick="openVote({{value.item_optid}})">
 	                    <div class="idol-info">
 	                        <div class="idol-info-1" >
@@ -273,8 +270,10 @@
 	                   </div>
 	                   <div class="aui-pull-right idol-vote">
 	                         <div>
-	                               <span><i class="aui-iconfont aui-icon-rank aui-text-theme"></i>{{value.item_opttoupiao}}</span>
-	                               <span><i class="aui-iconfont aui-icon-comment aui-text-theme"></i>{{value.item_optcomment_number}}</span>
+                                    <i class="aui-iconfont aui-icon-rank aui-text-theme"></i>
+	                               <span id="n_{{value.item_optid}}">{{value.item_opttoupiao}}</span>
+                                   <i class="aui-iconfont aui-icon-comment aui-text-theme"></i>
+	                               <span>{{value.item_optcomment_number}}</span>
 	                         </div>
 	                   </div>
                    </div>
@@ -532,21 +531,25 @@ apiready = function(){
         },function(data,err){
             if(data.status == 0){
                //投票成功
-               $(obj).removeAttr('onclick');
+               $(obj).attr('onclick','cancel_toupiao(this);');
+               $("#n_"+id).text(data.itemopt_num);
+               $('#default_succ div').text(data.data);
                 $api.css($api.byId("default_succ"),"display:block");
                 setTimeout(function(){
                     $api.css($api.byId("default_succ"),"display:none");
                 },2000)
             }else if(data.status == 2){
-               //已经投过了
+                //已经投过了
                 $(obj).removeAttr('checked');
-                $api.css($api.byId("yitouguo"),"display:block");
+                $('#default_fail div').html(data.data);
+                $api.css($api.byId("default_fail"),"display:block");
                 setTimeout(function(){
-                    $api.css($api.byId("yitouguo"),"display:none");
+                    $api.css($api.byId("default_fail"),"display:none");
                 },2000)
             }else{
                //投票失败
                 $(obj).removeAttr('checked');
+                $('#default_fail div').html(data.data);
                 $api.css($api.byId("default_fail"),"display:block");
                 setTimeout(function(){
                     $api.css($api.byId("default_fail"),"display:none");
