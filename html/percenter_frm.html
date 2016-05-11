@@ -269,16 +269,26 @@
               $('.logined_show').show();
               $('.logout_show').hide();
               //用户中心信息
-              $.post(ApiUrl+'/api/userinfo',{'uid':uid},function(data){
-                    //昵称
-                    $('#nickname').html(data.mobile);
-                    //金币数量
-                    //票友数量
-                    
-                    //我的号召力
-                    //积分等级
-                    //红包数量
-                },'json');
+              api.ajax({
+                  url: ApiUrl+'/api/userinfo',
+                  method: 'post',
+                  data: {
+                    values:{
+                      'uid':uid,
+                    }
+                  }
+              },function(data, err){
+                  //昵称
+                  $('#nickname').html(data.mobile);
+                  //金币数量
+                  //票友数量
+                  
+                  //我的号召力
+                  //积分等级
+                  //红包数量
+              });
+              
+
           }else{
               $('.logined_show').hide();
               $('.logout_show').show();
