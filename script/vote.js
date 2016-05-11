@@ -1,5 +1,6 @@
 //投票方法
-function toupiao(obj,id){
+function toupiao(obj){
+	var itemopt_id = getQueryString('itemoptid');
 	var member_id = is_login();
 	if(member_id == '-1'){
 		api.alert({msg: '请先登录'});
@@ -7,19 +8,43 @@ function toupiao(obj,id){
 		return false;
 	}
 	api.ajax({
-		url:ApiUrl+'/api/toupiao?id='+id+'&member_id='+member_id+'&callback=?',
+		url:ApiUrl+'/api/toupiao?id='+itemopt_id+'&member_id='+member_id+'&callback=?',
 		method:'post',
 		data:{}
 	},function(data,err){
 		if(data.status == 0){
             api.alert({msg: data.data});
-            $('#vote_num').html(data.item_optnum);
-            $(obj).removeAttr('onclick');
-            $(obj).children('span').removeClass('aui-icon-roundcheck');
-        	$(obj).children('span').addClass('aui-icon-roundcheckfill');
+            $('#vote_num').html(data.itemopt_num);
+            $(obj).attr('onclick','cancel_toupiao(this);');
+            $(obj).children('span').attr('class','aui-text-theme aui-iconfont aui-icon-roundcheckfill');
             $(obj).children('a').html("已投票");
         }else{
             api.alert({msg: data.data});
+        }
+	});
+}
+
+//取消投票
+function cancel_toupiao(obj){
+	var itemopt_id = getQueryString('itemoptid');
+	var member_id = is_login();
+	if(member_id == '-1'){
+		api.alert({msg: '请先登录'});
+		login_page();
+		return false;
+	}
+
+	api.ajax({
+		url:ApiUrl+'/api/cancel_toupiao?itemopt_id='+itemopt_id+'&member_id='+member_id+'&callback=?',
+	},function(data,err){
+		if(data.status == 0){
+            api.alert({msg: data.msg});
+            $('#vote_num').html(data.itemopt_num);
+            $(obj).attr('onclick','toupiao(this);');
+            $(obj).children('span').attr('class','aui-text-default aui-iconfont aui-icon-roundcheck');
+            $(obj).children('a').html("投一票");
+        }else{
+            api.alert({msg: data.msg});
         }
 	});
 }

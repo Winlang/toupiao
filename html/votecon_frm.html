@@ -260,7 +260,7 @@
               <div class="vote-info">
                  <div class="aui-pull-left sub-title">
                        <i class="aui-iconfont aui-icon-rank"></i>
-                       <span>{{data.item_opttoupiao}}</span>
+                       <span id="vote_num">{{data.item_opttoupiao}}</span>
                  </div>
                  <div class="aui-pull-right sub-title">
                       <i class="aui-iconfont aui-icon-upstage"></i>
@@ -269,12 +269,12 @@
             </div>
               <ul class="mine">
                 {{if data.is_toupiao == 1}}
-                    <li class="vote">
+                    <li class="vote" onclick="cancel_toupiao(this);">
                         <span class="aui-text-theme aui-iconfont aui-icon-roundcheckfill"></span>
                         <a>已投票</a>
                     </li>
                 {{else}}
-                    <li class="vote" onclick="toupiao(this,{{data.item_optid}});">
+                    <li class="vote" onclick="toupiao(this);">
                         <span class="aui-text-default aui-iconfont aui-icon-roundcheck"></span>
                         <a>投一票</a>
                     </li>
@@ -282,7 +282,6 @@
                 <li class="comment" onclick="showReply();">
                      <span class="aui-text-default aui-iconfont aui-icon-comment"></span>
                      <a >说两句</a>
-                
                 </li>
                 <li class="share" onclick="share();">
                      <span class="aui-text-default aui-iconfont aui-icon-share"></span>
