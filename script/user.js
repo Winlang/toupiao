@@ -141,7 +141,7 @@ function login(){
         		$api.setStorage('uid',uid);
 
         		//用户中心信息
-				api.ajax({
+    				api.ajax({
                       url: ApiUrl+'/api/userinfo',
                       method: 'post',
                       data: {
