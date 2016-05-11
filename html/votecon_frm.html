@@ -275,17 +275,17 @@
                     </li>
                 {{else}}
                     <li class="vote" onclick="toupiao(this,{{data.item_optid}});">
-                        <span class="aui-text-theme aui-iconfont aui-icon-roundcheck"></span>
+                        <span class="aui-text-default aui-iconfont aui-icon-roundcheck"></span>
                         <a>投一票</a>
                     </li>
                 {{/if}}
                 <li class="comment" onclick="showReply();">
-                     <span class="aui-text-theme aui-iconfont aui-icon-comment"></span>
+                     <span class="aui-text-default aui-iconfont aui-icon-comment"></span>
                      <a >说两句</a>
                 
                 </li>
                 <li class="share" onclick="share();">
-                     <span class="aui-text-theme aui-iconfont aui-icon-share"></span>
+                     <span class="aui-text-default aui-iconfont aui-icon-share"></span>
                      <a>分享拉票</a>
                 </li>
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
@@ -304,12 +304,12 @@
                </div>
                 {{if data.collection == 1}}
                  <li class="collect" id="collectionInfo">
-                     <span class="aui-text-theme aui-iconfont aui-icon-likefill"></span>
+                     <span class="aui-text-theme aui-iconfont aui-icon-favorfill"></span>
                      <a>已收藏</a>
                 </li>
                 {{else}}
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
-                     <span class="aui-text-theme aui-iconfont aui-icon-like" id="class_shoucang"></span>
+                     <span class="aui-text-default aui-iconfont aui-icon-favor" id="class_shoucang"></span>
                      <a class="shoucang">收藏</a>
                 </li>
                   {{/if}}
