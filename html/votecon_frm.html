@@ -260,7 +260,7 @@
               <div class="vote-info">
                  <div class="aui-pull-left sub-title">
                        <i class="aui-iconfont aui-icon-rank"></i>
-                       <span>{{data.item_opttoupiao}}</span>
+                       <span id="vote_num">{{data.item_opttoupiao}}</span>
                  </div>
                  <div class="aui-pull-right sub-title">
                       <i class="aui-iconfont aui-icon-upstage"></i>
@@ -269,23 +269,22 @@
             </div>
               <ul class="mine">
                 {{if data.is_toupiao == 1}}
-                    <li class="vote">
+                    <li class="vote" onclick="cancel_toupiao(this);">
                         <span class="aui-text-theme aui-iconfont aui-icon-roundcheckfill"></span>
                         <a>已投票</a>
                     </li>
                 {{else}}
-                    <li class="vote" onclick="toupiao(this,{{data.item_optid}});">
-                        <span class="aui-text-theme aui-iconfont aui-icon-roundcheck"></span>
+                    <li class="vote" onclick="toupiao(this);">
+                        <span class="aui-text-default aui-iconfont aui-icon-roundcheck"></span>
                         <a>投一票</a>
                     </li>
                 {{/if}}
                 <li class="comment" onclick="showReply();">
-                     <span class="aui-text-theme aui-iconfont aui-icon-comment"></span>
+                     <span class="aui-text-default aui-iconfont aui-icon-comment"></span>
                      <a >说两句</a>
-                
                 </li>
                 <li class="share" onclick="share();">
-                     <span class="aui-text-theme aui-iconfont aui-icon-share"></span>
+                     <span class="aui-text-default aui-iconfont aui-icon-share"></span>
                      <a>分享拉票</a>
                 </li>
                 <div class="aui-dialog aui-hidden sharecss" id="dialog">
@@ -304,12 +303,12 @@
                </div>
                 {{if data.collection == 1}}
                  <li class="collect" id="collectionInfo">
-                     <span class="aui-text-theme aui-iconfont aui-icon-likefill"></span>
+                     <span class="aui-text-theme aui-iconfont aui-icon-favorfill"></span>
                      <a>已收藏</a>
                 </li>
                 {{else}}
                 <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
-                     <span class="aui-text-theme aui-iconfont aui-icon-like" id="class_shoucang"></span>
+                     <span class="aui-text-default aui-iconfont aui-icon-favor" id="class_shoucang"></span>
                      <a class="shoucang">收藏</a>
                 </li>
                   {{/if}}

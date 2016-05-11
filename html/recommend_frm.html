@@ -24,8 +24,8 @@
     	         }
     	.vote-info{
               position:relative;
-              margin-top:-245px;
-              height:240px;           
+              margin-top:-250px;
+              height:245px;           
               background-color:rgba(0,0,0,.4);  
               color:#fff;
               padding:10px;
@@ -83,50 +83,44 @@
     	     display:inline-block;
     	     float:left;
     	 }
-    	 .idol-info-2{padding-top:20px;}
+    	.idol-info-2{padding-top:10px;}
     	.idol-info-1 img{
     	         width:40px;
     	         height:40px;
+    	         border-radius:5px;
     	         margin-right:10px;
     	         margin-top:10px;
     	 }
     	.idol-vote{
     	     display:inline-block;
-    	     font-size:12px; 
-             margin-top:20px;
+    	     font-size:14px; 
+             margin-top:10px;
              margin-right:10px;
     	}
-    	.idol-vote img{
-    	    position: relative;
-    	    top:5px;
+    	.idol-vote span{
+    	    padding-right:5px;
+    	}
+    	.idol-vote span i{
+    	    padding-right:2px;
     	}
     	.comment{
     	   display:block;
-    	   padding-left:12%;
+    	   padding-left:26%;  
+    	   margin-top:-20px;  	   
     	}
     	.comment-1{
     	  display:inline-block;
-    	  max-width:70%;
+    	  width:95%;
     	  height:auto;
           word-break:break-all;
           word-wrap: break-word;
           text-overflow:ellipsis;
           background-color:#f5f5f5;
           color:#333;
-          padding:5px;
+          font-size:12px;
+          padding:10px 5px;
           border-radius: 5px;
     	 }
-    	.comment-2{
-    	   display:inline-block;
-    	   width:60px;
-    	   height:25px;
-    	   margin-top:5px;
-    	   border:1px solid #3498db;
-    	   border-radius:15px;
-    	   text-align:center;
-    	   font-size:12px;
-    	   padding:0 5px;
-    	}
     	.idols{
     	         vertical-align:middle;
     	         width: 100%;
@@ -276,24 +270,22 @@
                           <div class="idol-info-2">
                                {{value.item_opttitle}}                            
                           </div>                                                           
-                          <!--<img src="http://votetest.xieli.cn/Uploads/admin/{{value.item_optimg}}" alt="" />
-                          {{value.item_opttitle}}-->
                      </div>
                      <div class="aui-pull-right idol-vote">
-                           <div>
-                                 <img src="../image/idol-1.png" alt="" />{{value.item_opttoupiao}}
-                                 <img src="../image/idol-2.png" alt="" />{{value.item_optcomment_number}}
-                           </div>
-                     </div>
+	                         <div>
+	                               <span><i class="aui-iconfont aui-icon-rank aui-text-theme"></i>{{value.item_opttoupiao}}</span>
+	                               <span><i class="aui-iconfont aui-icon-comment aui-text-theme"></i>{{value.item_optcomment_number}}</span>
+	                         </div>
+	                 </div>
                    </div>
                     {{if value.comm_data}}
-                    <div class="comment">
-                          <div class="comment-1 aui-ellipsis-2">
-                                <span class="aui-text-danger aui-padded-5"></span>SSA:
-                                {{value.comm_data}}
-                          </div>
-                      </div>
-                  {{/if}}
+	               		<div class="comment">
+	                        <div class="comment-1 aui-ellipsis-2">
+		                            <span class="aui-text-default aui-padded-5">{{value.member_nick}}:</span>
+	                             	{{value.comm_data}}
+	                        </div>
+	                   	</div>
+	                {{/if}}
                 </div>
                 {{/each}}
                 </script>

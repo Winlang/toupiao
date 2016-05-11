@@ -24,8 +24,8 @@
     	         }
     	.vote-info{
               position:relative;
-              margin-top:-245px;
-              height:240px;           
+              margin-top:-250px;
+              height:245px;           
               background-color:rgba(0,0,0,.4);  
               color:#fff;
               padding:10px;
@@ -83,50 +83,44 @@
     	     display:inline-block;
     	     float:left;
     	 }
-    	 .idol-info-2{padding-top:20px;}
+    	.idol-info-2{padding-top:10px;}
     	.idol-info-1 img{
     	         width:40px;
     	         height:40px;
+    	         border-radius:5px;
     	         margin-right:10px;
     	         margin-top:10px;
     	 }
     	.idol-vote{
     	     display:inline-block;
-    	     font-size:12px; 
-             margin-top:20px;
+    	     font-size:14px; 
+             margin-top:10px;
              margin-right:10px;
     	}
-    	.idol-vote img{
-    	    position: relative;
-    	    top:5px;
+    	.idol-vote span{
+    	    padding-right:5px;
+    	}
+    	.idol-vote span i{
+    	    padding-right:2px;
     	}
     	.comment{
     	   display:block;
-    	   padding-left:12%;
+    	   padding-left:26%;  
+    	   margin-top:-20px;  	   
     	}
     	.comment-1{
     	  display:inline-block;
-    	  max-width:70%;
+    	  width:95%;
     	  height:auto;
           word-break:break-all;
           word-wrap: break-word;
           text-overflow:ellipsis;
           background-color:#f5f5f5;
           color:#333;
-          padding:5px;
+          font-size:12px;
+          padding:10px 5px;
           border-radius: 5px;
     	 }
-    	.comment-2{
-    	   display:inline-block;
-    	   width:60px;
-    	   height:25px;
-    	   margin-top:5px;
-    	   border:1px solid #3498db;
-    	   border-radius:15px;
-    	   text-align:center;
-    	   font-size:12px;
-    	   padding:0 5px;
-    	}
     	.idols{
     	         vertical-align:middle;
     	         width: 100%;
@@ -207,7 +201,7 @@
                  </li>
                  <li>
                      <div class="aui-padded-10 avatar-list">
-                            <img class="f-avatar" src="../image/demo1.png"/>
+                           <img class="f-avatar" src="../image/demo1.png"/>
 		             	   <img class="f-avatar" src="../image/demo4.png"/>
 		             	   <img class="f-avatar" src="../image/demo5.png"/>
 		             	   <img class="f-avatar" src="../image/demo3.png"/>
@@ -247,27 +241,24 @@
                 <div id="itemoption_list" style="display:block;" ></div>
                 <div id="itemoption_l" style="display:none;"></div>
                 <!--选项列表-->
+                <div class="aui-toast" style="display:none" id="default_succ">
+                       <i class="aui-iconfont aui-icon-check"></i>
+                      <div class="aui-toast-content"></div>
+               </div>
+               <div class="aui-toast" style="display:none" id="default_fail">
+                       <i class="aui-iconfont aui-icon-close"></i>
+                      <div class="aui-toast-content"></div>
+               </div>
                 <script type="text/html" id="itemoptions">
                 {{each data as value i}}
                 <div class="aui-input-row idols">
                 	{{if value.is_toupiao == 1}}
-                   		<input type="radio" class="aui-radio aui-radio-theme" checked="checked" tapmode />
+                   		<input type="radio" class="aui-radio aui-radio-theme" checked="checked" tapmode onclick="cancel_toupiao(this);" value="{{value.item_optid}}" />
                    	{{else}}
                    		<input type="radio" class="aui-radio aui-radio-theme" tapmode onclick="showToast(this);" value="{{value.item_optid}}" />
                    	{{/if}}
                     <input type="hidden" name="item_optid" value="{{value.item_optid}}"/>
-                   <div class="aui-toast" style="display:none" id="default_succ">
-                           <i class="aui-iconfont aui-icon-check"></i>
-                          <div class="aui-toast-content">投票成功</div>
-                   </div>
-                   <div class="aui-toast" style="display:none" id="default_fail">
-                           <i class="aui-iconfont aui-icon-close"></i>
-                          <div class="aui-toast-content">投票失败</div>
-                   </div>
-                   <div class="aui-toast" style="display:none" id="yitouguo">
-                           <i class="aui-iconfont aui-icon-close"></i>
-                          <div class="aui-toast-content">您已经投过了</div>
-                   </div>
+                   
                    <div class="option" tapmode onclick="openVote({{value.item_optid}})">
 	                    <div class="idol-info">
 	                        <div class="idol-info-1" >
@@ -275,27 +266,23 @@
 	                        </div>
 	                        <div class="idol-info-2">
 	                             {{value.item_opttitle}}                            
-	                        </div>                                                           
-	                        <!--<img src="http://votetest.xieli.cn/Uploads/admin/{{value.item_optimg}}" alt="" />
-	                        {{value.item_opttitle}}-->
+	                        </div>                                                           	                    
 	                   </div>
 	                   <div class="aui-pull-right idol-vote">
 	                         <div>
-	                               <img src="../image/idol-1.png" alt="" />{{value.item_opttoupiao}}
-	                               <img src="../image/idol-2.png" alt="" />{{value.item_optcomment_number}}
+                                    <i class="aui-iconfont aui-icon-rank aui-text-theme"></i>
+	                               <span id="n_{{value.item_optid}}">{{value.item_opttoupiao}}</span>
+                                   <i class="aui-iconfont aui-icon-comment aui-text-theme"></i>
+	                               <span>{{value.item_optcomment_number}}</span>
 	                         </div>
 	                   </div>
                    </div>
                    {{if value.comm_data}}
 	               		<div class="comment">
 	                        <div class="comment-1 aui-ellipsis-2">
-		                            <span class="aui-text-danger aui-padded-5">
-		                            </span>{{value.member_nick}}:
+		                            <span class="aui-text-default aui-padded-5">{{value.member_nick}}:</span>
 	                             	{{value.comm_data}}
 	                        </div>
-	                        <!--<div class="comment-2 aui-text-info aui-pull-right">
-		                          <span class="aui-iconfont aui-icon-appreciate"></span> 99+
-		                    </div>-->
 	                   	</div>
 	                {{/if}}
                 </div>
@@ -544,21 +531,25 @@ apiready = function(){
         },function(data,err){
             if(data.status == 0){
                //投票成功
-               $(obj).removeAttr('onclick');
+               $(obj).attr('onclick','cancel_toupiao(this);');
+               $("#n_"+id).text(data.itemopt_num);
+               $('#default_succ div').text(data.data);
                 $api.css($api.byId("default_succ"),"display:block");
                 setTimeout(function(){
                     $api.css($api.byId("default_succ"),"display:none");
                 },2000)
             }else if(data.status == 2){
-               //已经投过了
+                //已经投过了
                 $(obj).removeAttr('checked');
-                $api.css($api.byId("yitouguo"),"display:block");
+                $('#default_fail div').html(data.data);
+                $api.css($api.byId("default_fail"),"display:block");
                 setTimeout(function(){
-                    $api.css($api.byId("yitouguo"),"display:none");
+                    $api.css($api.byId("default_fail"),"display:none");
                 },2000)
             }else{
                //投票失败
                 $(obj).removeAttr('checked');
+                $('#default_fail div').html(data.data);
                 $api.css($api.byId("default_fail"),"display:block");
                 setTimeout(function(){
                     $api.css($api.byId("default_fail"),"display:none");
