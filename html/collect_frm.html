@@ -17,9 +17,9 @@
             <script id="comments" type="text/html">
                 {{each msg as value i}}
                 <li class="aui-list-view-cell" tapmode>
-	      	     <h3 class="aui-text-theme">{{value.item_opttitle}}</h3>
+	      	     <h3 class="aui-text-theme" tapmode onclick="openVote({{value.item_optid}})">{{value.item_opttitle}}</h3>
 	      	     <span>{{value.ctime}}</span>
-	      	     <div class="aui-padded-10 aui-text-danger theme">
+	      	     <div class="aui-padded-10 aui-text-danger theme" onclick="openNew({{value.item_id}})">
 	      	                                 {{value.item_title}}
 	      	     </div>
 	      	</li>
@@ -89,6 +89,29 @@ function loading_collections(page){
         }
       }
     });
+}
+
+//打开新主题
+function openNew(item_id){
+    api.openWin({
+        name: 'procon',
+        url: 'procon_win.html?item_id='+item_id,
+        bounces: true,
+        rect: {
+            x: 0,
+            y: 0,
+            w: 'auto',
+            h: 'auto'
+        }
+    });
+}
+
+//打开新选项
+function openVote(itemoptid){
+	   api.openWin({
+	       name: 'votecon_frm',
+	       url: 'votecon_frm.html?itemoptid='+itemoptid
+	   });
 }
 </script>
 </html>
