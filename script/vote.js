@@ -239,8 +239,7 @@ function collectionInfo(obj){
 	},function(data,err){
 		if(data.status=='0' || data.status=='2'){
 			$(obj).attr('onclick','cancel_collection(this);');
-			$(obj).children('span').removeClass('aui-icon-like');
-			$(obj).children('span').addClass('aui-icon-likefill');
+			$(obj).children('span').attr('class','aui-text-theme aui-iconfont aui-icon-favorfill');
 			$(obj).children('a').html("已收藏");
 		}else{
 			api.alert({msg: data.data});
@@ -265,8 +264,7 @@ function cancel_collection(obj){
 	},function(data,err){
 		if(data.status == 0){
 			$(obj).attr('onclick','collectionInfo(this);');
-			$(obj).children('span').addClass('aui-icon-like');
-			$(obj).children('span').removeClass('aui-icon-likefill');
+			$(obj).children('span').attr('class','aui-text-theme aui-iconfont aui-icon-favor');
 			$(obj).children('a').html("收藏");
 		}else{
 			api.alert({msg:data.msg});
