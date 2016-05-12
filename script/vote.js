@@ -13,7 +13,6 @@ function toupiao(obj){
 		data:{}
 	},function(data,err){
 		if(data.status == 0){
-            api.alert({msg: data.data});
             $('#vote_num').html(data.itemopt_num);
             $(obj).attr('onclick','cancel_toupiao(this);');
             $(obj).children('span').attr('class','aui-text-theme aui-iconfont aui-icon-roundcheckfill');
@@ -38,7 +37,6 @@ function cancel_toupiao(obj){
 		url:ApiUrl+'/api/cancel_toupiao?itemopt_id='+itemopt_id+'&member_id='+member_id+'&callback=?',
 	},function(data,err){
 		if(data.status == 0){
-            api.alert({msg: data.msg});
             $('#vote_num').html(data.itemopt_num);
             $(obj).attr('onclick','toupiao(this);');
             $(obj).children('span').attr('class','aui-text-default aui-iconfont aui-icon-roundcheck');
@@ -121,7 +119,6 @@ function good_bad(obj,commid,status){
 		data:{}
 	},function(data,err){
 		if(data.status == 0){
-            api.alert({msg: data.data});
             $(obj).attr('onclick','cancel_goodbad(this,'+data.comm_id+');');
         	$(obj).removeClass('aui-icon-appreciate');
         	$(obj).addClass('aui-icon-appreciatefill');
@@ -148,7 +145,6 @@ function cancel_goodbad(obj,comm_id){
 		data:{}
 	},function(data,err){
 		if(data.status == 0){
-            api.alert({msg: data.msg});
             $(obj).attr('onclick','good_bad(this,'+data.comm_id+',"'+data.good_bad+'")');
         	$(obj).addClass('aui-icon-appreciate');
         	$(obj).removeClass('aui-icon-appreciatefill');
