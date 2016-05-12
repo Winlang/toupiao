@@ -79,28 +79,29 @@ function register(){
         		$api.setStorage('uid',uid);
 
         		//获取用户数据
-				api.ajax({
-                      url: ApiUrl+'/api/userinfo',
-                      method: 'post',
-                      data: {
-                        values: { 
-                            'uid':uid
-                        }
+      			api.ajax({
+                    url: ApiUrl+'/api/userinfo',
+                    method: 'post',
+                    data: {
+                      values: { 
+                          'uid':uid
                       }
-                  },function(ret_data, err){
-                       // 广播事件
-			            api.sendEvent({
-				            name : 'reg_login_successEvent',
-				            extra : {
-				               name : ret_data.mobile,
-				            }
-				        });
+                    }
+                },function(ret_data, err){
+                     // 广播事件
+		            api.sendEvent({
+			            name : 'reg_login_successEvent',
+			            extra : {
+			               name : ret_data.mobile,
+                     avatar : ret_data.avatar,
+			            }
+			        });
 
-					    api.openFrame({
-				            name : 'register_two_frm',
-				            url : 'register_two_frm.html',
-				        });
-                });
+				    api.openFrame({
+			            name : 'register_two_frm',
+			            url : 'register_two_frm.html',
+			        });
+              });
 	        }else{
 	        	alert('注册失败,请重新注册~');
 	        }
@@ -154,7 +155,8 @@ function login(){
 			            api.sendEvent({
 				            name : 'reg_login_successEvent',
 				            extra : {
-				               name : data.mobile,
+                       name : data.mobile,
+				               avatar : data.avatar,
 				               callback : type,
 				            }
 				        });
