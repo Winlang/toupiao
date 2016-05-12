@@ -221,26 +221,51 @@ function option_good_comm(itemoptid,member_id){
 
 //收藏
 function collectionInfo(obj){
-
+	var itemopt_id = getQueryString('itemoptid');
 	var member_id=is_login();
 	if(member_id==-1){
 		alert('请先登录');
-		login_page('shoucang');return false;
+		login_page('shoucang');
+		return false;
 	}
-	var item_optid=obj;
 	api.ajax({
-		url:ApiUrl+'/api/collectionInfo?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',
+		url:ApiUrl+'/api/collectionInfo?member_id='+member_id+'&item_optid='+itemopt_id+'&callback=?',
 		method:'post',
 		data:{}
 	},function(data,err){
 		if(data.status=='0' || data.status=='2'){
-			api.alert({msg: data.data});
-			$('#collectionInfo').removeAttr('onclick');
-			$('#class_shoucang').removeClass('aui-icon-like');
-			$('#class_shoucang').addClass('aui-icon-likefill');
-			$('.shoucang').html("已收藏");
+			$(obj).attr('onclick','cancel_collection(this);');
+			$(obj).children('span').removeClass('aui-icon-like');
+			$(obj).children('span').addClass('aui-icon-likefill');
+			$(obj).children('a').html("已收藏");
 		}else{
 			api.alert({msg: data.data});
+		}
+	});
+}
+
+//取消收藏
+function cancel_collection(obj){
+	var itemopt_id = getQueryString('itemoptid');
+	var member_id=is_login();
+	if(member_id==-1){
+		alert('请先登录');
+		login_page();
+		return false;
+	}
+
+	api.ajax({
+		url:ApiUrl+'/api/cancel_collection?member_id='+member_id+'&itemopt_id='+itemopt_id+'&callback=?',
+		method:'post',
+		data:{}
+	},function(data,err){
+		if(data.status == 0){
+			$(obj).attr('onclick','collectionInfo(this);');
+			$(obj).children('span').addClass('aui-icon-like');
+			$(obj).children('span').removeClass('aui-icon-likefill');
+			$(obj).children('a').html("收藏");
+		}else{
+			api.alert({msg:data.msg});
 		}
 	});
 }
