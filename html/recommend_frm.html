@@ -179,10 +179,12 @@
                </div>
                <div class="aui-dialog aui-hidden" id="dialog">
                           <div class="aui-dialog-header">投票奖励</div>
-                          <div class="aui-dialog-body aui-text-left">
+                           <div class="aui-dialog-body aui-text-left">
+                              <div class="aui-dialog-body aui-text-left">
                                 {{each data.item_prize as v i}}
                                     <p>{{i+1}}、{{v}}</p>
                                 {{/each}}
+                              </div>
                           </div>
                           <div class="aui-dialog-footer">
                               <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
