@@ -179,10 +179,12 @@
                </div>
                <div class="aui-dialog aui-hidden" id="dialog">
                           <div class="aui-dialog-header">投票奖励</div>
-                          <div class="aui-dialog-body aui-text-left">
+                           <div class="aui-dialog-body aui-text-left">
+                              <div class="aui-dialog-body aui-text-left">
                                 {{each data.item_prize as v i}}
                                     <p>{{i+1}}、{{v}}</p>
                                 {{/each}}
+                              </div>
                           </div>
                           <div class="aui-dialog-footer">
                               <div class="aui-dialog-btn aui-text-danger" tapmode onclick="cancel()">取消</div>
@@ -262,8 +264,8 @@
                            <i class="aui-iconfont aui-icon-check"></i>
                           <div class="aui-toast-content">投票成功</div>
                    </div>
-                   <div class="option">
-                      <div class="idol-info" tapmode onclick="openVote({{value.item_optid}})">
+                   <div class="option" tapmode onclick="openVote({{value.item_optid}})">
+                      <div class="idol-info" >
                           <div class="idol-info-1" >
                                 <img src="{{value.item_optimg}}" alt="" />
                           </div>
@@ -277,8 +279,7 @@
 	                               <span><i class="aui-iconfont aui-icon-comment aui-text-theme"></i>{{value.item_optcomment_number}}</span>
 	                         </div>
 	                 </div>
-                   </div>
-                    {{if value.comm_data}}
+	                 {{if value.comm_data}}
 	               		<div class="comment">
 	                        <div class="comment-1 aui-ellipsis-2">
 		                            <span class="aui-text-default aui-padded-5">{{value.member_nick}}:</span>
@@ -286,6 +287,8 @@
 	                        </div>
 	                   	</div>
 	                {{/if}}
+                   </div>
+
                 </div>
                 {{/each}}
                 </script>

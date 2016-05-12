@@ -118,6 +118,12 @@
                       <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">议长</span>
                </div>
             </li>
+             <li class="aui-list-view-cell" tapmode onclick="openMyZan()">
+               <div class="aui-arrow-right">
+                      <i class="aui-iconfont aui-icon-favor aui-bg-info"></i>我的赞
+                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">9个</span>
+               </div>             
+            </li>
             <li class="aui-list-view-cell" tapmode onclick="openCollect()">
                <div class="aui-arrow-right">
                       <i class="aui-iconfont aui-icon-favor aui-bg-info"></i>我的收藏
@@ -202,11 +208,25 @@
           }
        });
     }
-   
+   //打开我的收藏列表
    function openCollect(){
        api.openWin({
          name: 'collect_win',
          url: 'collect_win.html',
+         bounces:true,
+          rect:{
+             x:0,
+             y:0,
+             w:'auto',
+             h:'auto'
+          }
+       });
+    }
+    //打开我的赞列表
+    function openMyZan(){
+       api.openWin({
+         name: 'my_zan_win',
+         url: 'my_zan_win.html',
          bounces:true,
           rect:{
              x:0,
