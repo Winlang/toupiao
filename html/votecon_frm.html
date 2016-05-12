@@ -303,15 +303,15 @@
                     </div>
                </div>
                 {{if data.collection == 1}}
-                 <li class="collect" id="collectionInfo">
-                     <span class="aui-text-theme aui-iconfont aui-icon-favorfill"></span>
-                     <a>已收藏</a>
-                </li>
+                    <li class="collect" onclick="cancel_collection(this);">
+                        <span class="aui-text-theme aui-iconfont aui-icon-favorfill"></span>
+                        <a>已收藏</a>
+                    </li>
                 {{else}}
-                <li class="collect" id="collectionInfo" onclick="collectionInfo({{data.item_optid}});">
-                     <span class="aui-text-default aui-iconfont aui-icon-favor" id="class_shoucang"></span>
-                     <a class="shoucang">收藏</a>
-                </li>
+                    <li class="collect" onclick="collectionInfo(this);">
+                        <span class="aui-text-default aui-iconfont aui-icon-favor"></span>
+                        <a class="shoucang">收藏</a>
+                    </li>
                   {{/if}}
               </ul>
         </div>
