@@ -66,7 +66,7 @@
     <div class="aui-content">
         <ul class="aui-list-view aui-in">
             <li class="aui-list-view-cell aui-img">
-            <img class="aui-img-object aui-pull-left per-avatar" src="../image/demo2.png" alt="" />
+            <img id="avatar_img" class="aui-img-object aui-pull-left per-avatar" src="../image/demo2.png" alt="" />
             <div class="aui-img-body">
                   <span class="aui-text-danger"><em id="nickname" tapmode onclick="login()">登陆/注册</em><em class="per-badge" tapmode onclick="openInfo()">资料</em></span>
                   <div class="aui-ellipsis-1"><i class="aui-badge aui-badge-theme">LV.1</i><span class="rank">议员</span></div>                                
@@ -291,6 +291,7 @@
                 if (ret && ret.value) {
                     var value = ret.value;
                     $('#nickname').html(value.name);
+                    $('#avatar_img').attr(UploadUrl+'/avatar/'+value.avatar);
                     $('.logined_show').show();
                     $('.logout_show').hide();
                 }
