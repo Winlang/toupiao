@@ -70,7 +70,7 @@ function cancel_toupiao(obj){
 
 //搜索
 function search_info(item_title){
-    var item_id = getQueryString('item_id');
+    var item_id = $("#item_id").val();
     api.ajax({
         url:ApiUrl+'/api/search_info?id='+item_id+'&item_title='+item_title+'&callback=?',
         method:'post',
