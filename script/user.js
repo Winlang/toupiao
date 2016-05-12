@@ -7,24 +7,29 @@ function sendVerify(){
 		    return false;
 		}
 
-		if(mobile == "" || mobile == null){
+		if(mobile == ""){
 			alert('手机号不能为空');
 			return false;
 		}
-		
 
+    // if(mobile == "" || mobile == null){
+    //   alert('手机号不能为空');
+    //   return false;
+    // }
+		
 		//发送短信 并显示 倒计时
 		var sms_status = sendMsg(mobile);
+    
 		if(sms_status == 0){
 			alert('发送失败');
 			return false;
 		}
 
 		//倒计时
-		$(this).html(60);
+		$('#sendVerify').html(60);
 
 		//不能被点击
-		$(this).attr("disabled", "disabled");
+		$('#sendVerify').attr("disabled", "disabled");
 
 		StepTimes();
 
@@ -52,6 +57,14 @@ function register(){
         var password = $('#password').val();
         var password2 = $('#password2').val();
 
+        if(mobile == ''){
+          alert('手机号不能为空');
+          return false;
+        }
+        if(password == ''){
+          alert('密码不能为空');
+          return false;
+        }
         if(password != password2){
         	alert('两次密码不一致密码');
         	return false;
@@ -103,7 +116,7 @@ function register(){
 			        });
               });
 	        }else{
-	        	alert('注册失败,请重新注册~');
+	        	alert(data.msg);
 	        }
         });
 }
