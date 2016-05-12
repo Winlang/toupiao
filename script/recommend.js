@@ -70,9 +70,15 @@ function cancel_toupiao(obj){
 
 //搜索
 function search_info(item_title){
-    var item_id = getQueryString('item_id');
+    var item_id = $("#item_id").val();
+    var member_id = is_login();
+    if(member_id == '-1'){
+        api.alert({msg: '请先登录'});
+        login_page();
+        return false;
+    }
     api.ajax({
-        url:ApiUrl+'/api/search_info?id='+item_id+'&item_title='+item_title+'&callback=?',
+        url:ApiUrl+'/api/search_info?id='+item_id+'&item_title='+item_title+'&member_id='+member_id+'&callback=?',
         method:'post',
         data:{}
     },function(data,err){
