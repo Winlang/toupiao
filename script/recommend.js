@@ -52,6 +52,7 @@ function cancel_toupiao(obj){
             $(obj).removeAttr('checked');
             $(obj).attr('onclick','showToast(this);');
             $("#n_"+itemopt_id).text(data.itemopt_num);
+            $(".n_"+itemopt_id).text(data.itemopt_num);
             $('#default_succ div').html(data.msg);
                 $api.css($api.byId("default_succ"),"display:block");
                 setTimeout(function(){
