@@ -40,15 +40,15 @@
             <script id="comments" type="text/html">
                 {{each list as value i}}
                 <li class="aui-list-view-cell aui-img" tapmode>
-                      <img class="aui-img-object aui-pull-left" src="../image/demo2.png"  />
+                      <img class="aui-img-object aui-pull-left" src="{{value.avatar}}"/>
                       <div class="aui-img-body">
-                                                                                    1流浪猫{{value.zan_id}}
+                                                                                   {{value.nick}}
                             <p class="sub-tit aui-text-default">{{value.ctime}}</p>                                                      
                       </div>
                       <p style="clear:both;"></p>
-                      <div class="aui-ellipsis-2 aui-pull-left zan">赞了这条评论</div>
+                      <div class="aui-ellipsis-2 aui-pull-left zan">赞了我的评论</div>
                       <div class="aui-pull-left aui-padded-10 quote">
-                           <p><span class="aui-text-theme">@{{value.nick}}：</span>{{value.comm_con}}</p>
+                           <p><span class="aui-text-theme">我：</span>{{value.comm_con}}</p>
                            <div class="quote-con aui-padded-10">
                                 <span class="aui-text-danger qc-1">{{value.item_title}}</span><br />
                                 <span class="aui-text-warning qc-2">{{value.item_opttitle}}</span>
@@ -59,7 +59,7 @@
             </script>
           
             <div class="aui-list-view-cell aui-img"> 
-            <p id="loading" onclick="loading_appreciate(2)" class="aui-text-center comment-more">点击查看更多</p>
+            <p id="loading" onclick="loading_receive_appreciate(2)" class="aui-text-center comment-more">点击查看更多</p>
             </div>
        </div>
 </body>
@@ -84,6 +84,12 @@
        }
    },function(data, err){
        if (data) {
+
+          for (var i = data.list.length - 1; i >= 0; i--) {
+              data.list[i].avatar = set_avatar(data.list[i].avatar);
+          }
+
+
            var html = template('comments', data);
            document.getElementById('comment_list').innerHTML = html;
        } else {
