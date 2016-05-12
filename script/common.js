@@ -39,6 +39,11 @@ function set_item_optimg(item_optimg){
 	return UploadUrl+'/admin/'+item_optimg;
 }
 
+//用户头像图片
+function set_avatar(avatar){
+    return UploadUrl+'/avatar/'+avatar;
+}
+
 function showToast(){
     $api.css($api.byId("default"),"display:block");
     setTimeout(function(){
