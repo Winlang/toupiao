@@ -28,7 +28,7 @@ function sendMsg(mobile){
 	// });
 
      api.ajax({
-          url: ApiUrl+'/api/sendMsg/?callback=?',
+          url: ApiUrl+'/userapi/sendMsg/?callback=?',
           method: 'post',
           data: {
             values: { 
