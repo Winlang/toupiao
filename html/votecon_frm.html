@@ -357,7 +357,7 @@
                 {{each data as v i}}
                 <li class="aui-list-view-cell aui-img">                  
                      <div class="aui-img-object aui-pull-left ">
-                          <img class="avatar" src="/Uploads/avatar{{v.avatar}}" alt="" /> 
+                          <img class="avatar" src="{{v.member_avatar}}" alt="" /> 
                      </div>                 
                      <div class="aui-img-body">                        
                          <div class="commemt-caption">
@@ -558,8 +558,10 @@
     //复制链接分享 
     function clip_share(){
         var clipBoard = api.require('clipBoard');
+        //拼装复制链接
+        var s_url = 'http://votetest.xieli.cn';
         clipBoard.set({
-             value:'http://www.xieli.cn/toutoushidao'
+             value:s_url
         },function(ret,err){
            if(ret){
                 alert( "恭喜！复制成功！" );
