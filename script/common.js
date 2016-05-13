@@ -8,6 +8,8 @@ function getQueryString(name) {
 	if (r != null) return unescape(r[2]); return null;
 }
 
+
+
 /**
  * 回到应用的首页
  */
