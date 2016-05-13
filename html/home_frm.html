@@ -88,8 +88,8 @@
 	      	          </p>   	          
 	      	     </div>
 	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
+	      	          <span >{{value.item_time}}</span>
+	      	           <span class="aui-pull-right">{{value.num}}人参与</span>
 	      	     </div>
 	      	</li>
 	      	{{/each}}
@@ -117,6 +117,15 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 	    	
 	    
 	apiready = function(){
+
+		//监听是否已经到底部 自动刷新
+		api.addEventListener({
+            name: 'scrolltobottom'
+        }, function(ret, err){
+            //page++;
+           	//getData(page);//取数据
+           	alert('已到底部');
+        });
 
 		/***************************正式版打包 放开********************************/
 		//jpush = api.require('ajpush');
