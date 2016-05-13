@@ -128,7 +128,7 @@
     	         }
   	   .rule{
     	   display:block;
-    	   padding:10px 10px 0 10px;
+    	   padding:15px 10px 0 10px;
     	}
         .rule-1,.rule-2{
             display: inline-block;
@@ -216,7 +216,7 @@
        <div class="aui-content">
            <div class="aui-padded-10 vote-title">
                                         投票选项          
-             <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>）</span>  
+             <span>（投票请点选  <i class="aui-iconfont aui-icon-round"></i>,限3票）</span>  
              <div class="aui-btn aui-btn-theme aui-pull-right" tapmode onclick="openAdd()"> <span class="aui-iconfont aui-icon-add"></span>增加选项</div>                      
           </div>                    
 <!--搜索项目-->
@@ -276,8 +276,7 @@
 	                               <span>{{value.item_optcomment_number}}</span>
 	                         </div>
 	                   </div>
-                   </div>
-                   {{if value.comm_data}}
+	                {{if value.comm_data}}
 	               		<div class="comment">
 	                        <div class="comment-1 aui-ellipsis-2">
 		                            <span class="aui-text-default aui-padded-5">{{value.member_nick}}:</span>
@@ -285,6 +284,7 @@
 	                        </div>
 	                   	</div>
 	                {{/if}}
+                   </div>
                 </div>
                 {{/each}}
                 </script>
@@ -532,7 +532,10 @@ apiready = function(){
             if(data.status == 0){
                //投票成功
                $(obj).attr('onclick','cancel_toupiao(this);');
+               // alert($(".n_"+id).text());
                $("#n_"+id).text(data.itemopt_num);
+               $(".n_"+id).text(data.itemopt_num);
+               // alert($(".n_"+id).text());
                $('#default_succ div').text(data.data);
                 $api.css($api.byId("default_succ"),"display:block");
                 setTimeout(function(){

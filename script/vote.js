@@ -13,7 +13,6 @@ function toupiao(obj){
 		data:{}
 	},function(data,err){
 		if(data.status == 0){
-            api.alert({msg: data.data});
             $('#vote_num').html(data.itemopt_num);
             $(obj).attr('onclick','cancel_toupiao(this);');
             $(obj).children('span').attr('class','aui-text-theme aui-iconfont aui-icon-roundcheckfill');
@@ -38,7 +37,6 @@ function cancel_toupiao(obj){
 		url:ApiUrl+'/api/cancel_toupiao?itemopt_id='+itemopt_id+'&member_id='+member_id+'&callback=?',
 	},function(data,err){
 		if(data.status == 0){
-            api.alert({msg: data.msg});
             $('#vote_num').html(data.itemopt_num);
             $(obj).attr('onclick','toupiao(this);');
             $(obj).children('span').attr('class','aui-text-default aui-iconfont aui-icon-roundcheck');
@@ -78,10 +76,11 @@ function pinglun(){
 		    $('#ask-text textarea').val(' ');
             hideReply();
 		    //最新评论显示在最上面
+		    data.comm_data.member_avatar = set_avatar(data.comm_data.member_avatar);
         	var hh = '';
 			hh += '<li class="aui-list-view-cell aui-img">';                  
 				hh += '<div class="aui-img-object aui-pull-left ">';
-			  		hh += '<img class="avatar" src="/Uploads/avatar"'+data.comm_data.avatar+' alt="" /> ';
+			  		hh += '<img class="avatar" src="'+data.comm_data.member_avatar+'" alt="" /> ';
 				hh += '</div>';
 				hh += '<div class="aui-img-body">';
 					hh += '<div class="commemt-caption">';
@@ -121,7 +120,6 @@ function good_bad(obj,commid,status){
 		data:{}
 	},function(data,err){
 		if(data.status == 0){
-            api.alert({msg: data.data});
             $(obj).attr('onclick','cancel_goodbad(this,'+data.comm_id+');');
         	$(obj).removeClass('aui-icon-appreciate');
         	$(obj).addClass('aui-icon-appreciatefill');
@@ -148,7 +146,6 @@ function cancel_goodbad(obj,comm_id){
 		data:{}
 	},function(data,err){
 		if(data.status == 0){
-            api.alert({msg: data.msg});
             $(obj).attr('onclick','good_bad(this,'+data.comm_id+',"'+data.good_bad+'")');
         	$(obj).addClass('aui-icon-appreciate');
         	$(obj).removeClass('aui-icon-appreciatefill');
@@ -217,6 +214,9 @@ function option_good_comm(itemoptid,member_id){
         method:'post',
         data:{}
     },function(data,err){
+    	$.each(data.data,function(k,v){
+    		v.member_avatar = set_avatar(v.member_avatar);
+    	});
         var html = template('itemopt_good_commdata', data);
         document.getElementById('itemopt_good_comminfo').innerHTML = html;
     });
@@ -225,26 +225,49 @@ function option_good_comm(itemoptid,member_id){
 
 //收藏
 function collectionInfo(obj){
-
+	var itemopt_id = getQueryString('itemoptid');
 	var member_id=is_login();
 	if(member_id==-1){
 		alert('请先登录');
-		login_page('shoucang');return false;
+		login_page('shoucang');
+		return false;
 	}
-	var item_optid=obj;
 	api.ajax({
-		url:ApiUrl+'/api/collectionInfo?member_id='+member_id+'&item_optid='+item_optid+'&callback=?',
+		url:ApiUrl+'/api/collectionInfo?member_id='+member_id+'&item_optid='+itemopt_id+'&callback=?',
 		method:'post',
 		data:{}
 	},function(data,err){
 		if(data.status=='0' || data.status=='2'){
-			api.alert({msg: data.data});
-			$('#collectionInfo').removeAttr('onclick');
-			$('#class_shoucang').removeClass('aui-icon-like');
-			$('#class_shoucang').addClass('aui-icon-likefill');
-			$('.shoucang').html("已收藏");
+			$(obj).attr('onclick','cancel_collection(this);');
+			$(obj).children('span').attr('class','aui-text-theme aui-iconfont aui-icon-favorfill');
+			$(obj).children('a').html("已收藏");
 		}else{
 			api.alert({msg: data.data});
+		}
+	});
+}
+
+//取消收藏
+function cancel_collection(obj){
+	var itemopt_id = getQueryString('itemoptid');
+	var member_id=is_login();
+	if(member_id==-1){
+		alert('请先登录');
+		login_page();
+		return false;
+	}
+
+	api.ajax({
+		url:ApiUrl+'/api/cancel_collection?member_id='+member_id+'&itemopt_id='+itemopt_id+'&callback=?',
+		method:'post',
+		data:{}
+	},function(data,err){
+		if(data.status == 0){
+			$(obj).attr('onclick','collectionInfo(this);');
+			$(obj).children('span').attr('class','aui-text-theme aui-iconfont aui-icon-favor');
+			$(obj).children('a').html("收藏");
+		}else{
+			api.alert({msg:data.msg});
 		}
 	});
 }

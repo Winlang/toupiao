@@ -8,6 +8,8 @@ function getQueryString(name) {
 	if (r != null) return unescape(r[2]); return null;
 }
 
+
+
 /**
  * 回到应用的首页
  */
@@ -19,13 +21,29 @@ function backtoindex(){
 
 //发送短信操作
 function sendMsg(mobile){
-	$.post(ApiUrl+'/api/sendMsg/?callback=?',{'mobile':mobile},function(data){
-		if(data.status == 1){
-			return 1;
-		}else{
-			return 0;
-		}
-	});
+	// $.post(ApiUrl+'/api/sendMsg/?callback=?',{'mobile':mobile},function(data){
+	// 	if(data.status == 1){
+	// 		return 1;
+	// 	}else{
+	// 		return 0;
+	// 	}
+	// });
+
+     api.ajax({
+          url: ApiUrl+'/userapi/sendMsg/?callback=?',
+          method: 'post',
+          data: {
+            values: { 
+                'mobile':mobile
+            }
+          }
+      },function(data, err){
+          if (data.status == 1) {
+                return 1;
+          } else {
+                return 0;
+          }
+    });
 }
 
 //主题图片
@@ -37,6 +55,11 @@ function set_item_titleimg(item_titleimg){
 //主题选项图片
 function set_item_optimg(item_optimg){
 	return UploadUrl+'/admin/'+item_optimg;
+}
+
+//用户头像图片
+function set_avatar(avatar){
+    return UploadUrl+'/avatar/'+avatar;
 }
 
 function showToast(){

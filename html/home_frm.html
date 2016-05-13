@@ -48,6 +48,7 @@
                </ul>        
           </div>
     </div>
+    <!--最热 主题-->
     <div id="tab-hot">
        <div class="aui-content">
        	  <div id="aui-content"></div>
@@ -62,8 +63,8 @@
 	      	          </p>   	          
 	      	     </div>
 	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
+	      	          <span >{{value.item_time}}</span>
+	      	           <span class="aui-pull-right">{{value.num}}人参与</span>
 	      	     </div>
 	      	</li>
 	      	{{/each}}
@@ -71,6 +72,7 @@
 	      </script>
 	</div>
     </div>
+    <!--最新主题-->
    <div id="tab-new" style="display:none;">
        <div class="aui-content">
        		<div id="aui-content1"></div>
@@ -86,8 +88,8 @@
 	      	          </p>   	          
 	      	     </div>
 	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
+	      	          <span >{{value.item_time}}</span>
+	      	           <span class="aui-pull-right">{{value.num}}人参与</span>
 	      	     </div>
 	      	</li>
 	      	{{/each}}
@@ -109,7 +111,29 @@ $aui.waterfall($api.byId("aui-waterfall"),{
     space:10//列间距
 });
 
+
+	var jpush = null;
+	
+	    	
+	    
 	apiready = function(){
+
+		//监听是否已经到底部 自动刷新
+		api.addEventListener({
+            name: 'scrolltobottom'
+        }, function(ret, err){
+            //page++;
+           	//getData(page);//取数据
+           	alert('已到底部');
+        });
+
+		/***************************正式版打包 放开********************************/
+		//jpush = api.require('ajpush');
+		//极光推送初始化
+		//initJPush();
+		/***************************正式版打包 放开********************************/
+
+
 		api.parseTapmode();
 	    var mt = $api.domAll("#main-tab li");
 	    for(var i in mt){
@@ -144,7 +168,7 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 
 
      /****************************实时数据 开始****************************/            
-	    //最新主题
+	    //最热主题
         api.ajax({
 			    url: ApiUrl+'/api/index',
 			    method: 'post',
@@ -171,9 +195,9 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 		});
 
 
-	    //最热主题
+	    //最新主题
         api.ajax({
-			    url: ApiUrl+'/api/index',
+			    url: ApiUrl+'/api/index_new',
 			    method: 'post',
 			    data: {}
 			},function(data, err){
@@ -215,18 +239,181 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 	   news.style.display = "block";
 	}
 
-	    function openNew(item_id){
-		    api.openWin({
-		        name: 'procon',
-		        url: 'procon_win.html?item_id='+item_id,
-		        bounces: true,
-		        rect: {
-		            x: 0,
-		            y: 0,
-		            w: 'auto',
-		            h: 'auto'
-		        }
-		    });
+    function openNew(item_id){
+	    api.openWin({
+	        name: 'procon',
+	        url: 'procon_win.html?item_id='+item_id,
+	        bounces: true,
+	        rect: {
+	            x: 0,
+	            y: 0,
+	            w: 'auto',
+	            h: 'auto'
+	        }
+	    });
+	}
+
+
+	//----------------------------------  推送相关 开始 ---------------------------------------//
+	function initJPush(){
+		//apicloud 获取设备号
+		//alert(api.deviceId);
+		jpush.init(function(ret, err){
+			if(ret && ret.status){
+				//alert('操作成功!');
+			}else{
+				//alert('操作失败!');
+			}
+		});
+	}
+		
+		function setListener(){
+			jpush.setListener(function(ret, err){
+				if(ret){
+					alert('收到消息：\n' + JSON.stringify(ret));
+				}else{
+					//
+				}
+			});
+			alert('设置成功，收到的消息将通过此函数回调给网页，不再弹出通知到状态栏');
 		}
+		
+		function removeListener(){
+			jpush.removeListener();
+			alert('移除成功，移除后网页将不再收到消息，消息将弹出通知到状态栏');
+		}
+		
+		function bindAliasAndTags(){
+			var alias = valueOf('alias');
+			var tags = valueOf('tags');
+			if(!alias && !tags){
+				alert('别名和标签至少传一个');
+				return;
+			}
+			if(!alias){
+				alias = '';
+			}
+			if(!tags){
+				tags = '';
+			}
+			tags = tags.split(',');
+			jpush.bindAliasAndTags({
+				alias:alias,
+				tags:tags
+			}, function(ret, err){
+				alert('处理结果：\n' + JSON.stringify(ret));
+			});
+		}
+		
+		function clearNotification(id){
+			if(!id){
+				id = -1;
+			}
+			jpush.clearNotification({id:id});
+		}
+		
+		function setPushTime(){
+			var days = valueOf('days');
+			var startHour = valueOf('startHour');
+			var endHour = valueOf('endHour');
+			if(!days){
+				alert('日期不能为空');
+				return;
+			}
+			days = days.split(',');
+			if(!startHour){
+				startHour = 0;
+			}
+			if(!endHour){
+				endHour = 23;
+			}
+			jpush.setPushTime({
+				days: days,
+				startHour: startHour,
+				endHour: endHour
+			}, function(ret, err){
+				if(ret && ret.status){
+					alert('操作成功!');
+				}else{
+					alert('操作失败!');
+				}
+			});
+		}
+		
+		function setSilenceTime(){
+			var startHour = valueOf('startHour');
+			var endHour = valueOf('endHour');
+			var startMinute = valueOf('startMinute');
+			var endMinute = valueOf('endMinute');
+			if(!startHour){
+				startHour = 0;
+			}
+			if(!endHour){
+				endHour = 23;
+			}
+			if(!startMinute){
+				startMinute = 0
+			}
+			if(!endMinute){
+				endMinute = 50;
+			}
+			jpush.setSilenceTime({
+				startHour: startHour,
+				endHour: endHour,
+				startMinute: startMinute,
+				endMinute: endMinute
+			}, function(ret, err){
+				if(ret && ret.status){
+					alert('操作成功!');
+				}else{
+					alert('操作失败!');
+				}
+			});
+		}
+		
+		function stopPush(){
+			jpush.stopPush(function(ret, err){
+				if(ret && ret.status){
+					alert('操作成功!');
+				}else{
+					alert('操作失败!');
+				}
+			});
+		}
+		
+		function resumePush(){
+			jpush.resumePush(function(ret, err){
+				if(ret && ret.status){
+					alert('操作成功!');
+				}else{
+					alert('操作失败!');
+				}
+			});
+		}
+		
+		function isPushStopped(){
+			jpush.isPushStopped(function(ret, err){
+				if(ret.isStopped == 1){
+					alert('已停止');
+				}else{
+					alert('未停止');
+				}
+			});
+		}
+
+		function getId(){
+			jpush.getRegistrationId(function(ret, err){
+				alert(JSON.stringify(ret));
+			});
+		}
+		
+		function valueOf(id){
+			if(!id){
+				return '';
+			}
+			return document.getElementById(id).value;
+		}
+		/**********************************推送相关 结束*********************************************/
+
 </script>
 </html>
