@@ -48,6 +48,7 @@
                </ul>        
           </div>
     </div>
+    <!--最热 主题-->
     <div id="tab-hot">
        <div class="aui-content">
        	  <div id="aui-content"></div>
@@ -62,8 +63,8 @@
 	      	          </p>   	          
 	      	     </div>
 	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
+	      	          <span >{{value.item_time}}</span>
+	      	           <span class="aui-pull-right">{{value.num}}人参与</span>
 	      	     </div>
 	      	</li>
 	      	{{/each}}
@@ -71,6 +72,7 @@
 	      </script>
 	</div>
     </div>
+    <!--最新主题-->
    <div id="tab-new" style="display:none;">
        <div class="aui-content">
        		<div id="aui-content1"></div>
@@ -86,8 +88,8 @@
 	      	          </p>   	          
 	      	     </div>
 	      	     <div class="aui-waterfall-body wcaption">
-	      	          <span >2015-1-20</span>
-	      	           <span class="aui-pull-right">125人参与</span>
+	      	          <span >{{value.item_time}}</span>
+	      	           <span class="aui-pull-right">{{value.num}}人参与</span>
 	      	     </div>
 	      	</li>
 	      	{{/each}}
@@ -115,12 +117,13 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 	    	
 	    
 	apiready = function(){
-		jpush = api.require('ajpush');
-		//极光推送初始化
-		initJPush();
 
-		//获取极光推送 Registration ID 号 推送
-		//getId();
+		/***************************正式版打包 放开********************************/
+		//jpush = api.require('ajpush');
+		//极光推送初始化
+		//initJPush();
+		/***************************正式版打包 放开********************************/
+
 
 		api.parseTapmode();
 	    var mt = $api.domAll("#main-tab li");
@@ -156,7 +159,7 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 
 
      /****************************实时数据 开始****************************/            
-	    //最新主题
+	    //最热主题
         api.ajax({
 			    url: ApiUrl+'/api/index',
 			    method: 'post',
@@ -183,9 +186,9 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 		});
 
 
-	    //最热主题
+	    //最新主题
         api.ajax({
-			    url: ApiUrl+'/api/index',
+			    url: ApiUrl+'/api/index_new',
 			    method: 'post',
 			    data: {}
 			},function(data, err){
@@ -227,33 +230,33 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 	   news.style.display = "block";
 	}
 
-	    function openNew(item_id){
-		    api.openWin({
-		        name: 'procon',
-		        url: 'procon_win.html?item_id='+item_id,
-		        bounces: true,
-		        rect: {
-		            x: 0,
-		            y: 0,
-		            w: 'auto',
-		            h: 'auto'
-		        }
-		    });
-		}
+    function openNew(item_id){
+	    api.openWin({
+	        name: 'procon',
+	        url: 'procon_win.html?item_id='+item_id,
+	        bounces: true,
+	        rect: {
+	            x: 0,
+	            y: 0,
+	            w: 'auto',
+	            h: 'auto'
+	        }
+	    });
+	}
 
 
-		//推送相关
-		function initJPush(){
-			//apicloud 获取设备号
-			//alert(api.deviceId);
-			jpush.init(function(ret, err){
-				if(ret && ret.status){
-					//alert('操作成功!');
-				}else{
-					//alert('操作失败!');
-				}
-			});
-		}
+	//----------------------------------  推送相关 开始 ---------------------------------------//
+	function initJPush(){
+		//apicloud 获取设备号
+		//alert(api.deviceId);
+		jpush.init(function(ret, err){
+			if(ret && ret.status){
+				//alert('操作成功!');
+			}else{
+				//alert('操作失败!');
+			}
+		});
+	}
 		
 		function setListener(){
 			jpush.setListener(function(ret, err){
@@ -401,5 +404,7 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 			}
 			return document.getElementById(id).value;
 		}
+		/**********************************推送相关 结束*********************************************/
+
 </script>
 </html>
