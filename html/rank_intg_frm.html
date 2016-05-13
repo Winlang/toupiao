@@ -6,36 +6,79 @@
     <title>title</title>
     <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
     <style>
-    	.aui-content{
-    	    background-color:#fff;
-    	}
-    	.ravatar{
-    	    width:40px;
-    	    height:40px;
-    	    border-radius:50%;
-    	    margin-top:20px;
-    	    border:1px solid #7935fe;
-    	}
+          .aui-content{
+            background-color:#fff;
+          }
+          .aui-progress{
+            border-radius:10px;
+            margin:10px 0;
+          }
+          .aui-progress-bar{
+            border-radius:10px;
+          }
+          .aui-line-x{
+              margin:20px 0;
+          }
+          .rcontent{
+              padding:10px;
+          }
+          .rhead{
+             margin: 20px auto;
+          }
+          .rhead img{
+             width:60px;
+             height:60px;
+             border-radius:50%;
+          }
+          .privi span{
+             font-size:12px;
+             color:#666;
+          }
+          .privi span>i{
+             margin:0 10px;
+          }
+          .notice{
+            font-size:12px;
+            padding:10px 10px 0 10px;
+            background-color:#f4f4f4;
+          }
+          .loading-circle {position: relative; width: 100px; height: 100px; margin: auto;}
+          .loading-circle>* {display: block; position: absolute; box-sizing: border-box; border-radius: 50px;}
+          .loading-circle>canvas.bg {z-index: 1; width: 100%; height: 100%; border: 5px solid #ecedf1 ;}
+          .loading-circle>canvas.mask {z-index: 2; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);border-radius:10px;}
+          .loading-circle>p {z-index: 3;  width: 100%; height: 100%; text-align: center; line-height: 100px; font-size: 14px; font-weight: lighter; color: #999;}
     </style>
 </head>
 <body>
-	<div class="aui-content aui-text-center">
-	       <img src="../image/demo3.png" class="ravatar" />
-	       <h3>当前等级：<span class="aui-text-theme">Lv4</span></h3>
-	       <div class="aui-line-x"></div>
-	       <!--<div class="aui-pull-left">
-	            <h4>当前等级特权</h4>
-	            <span>享受优先票尊享</span><br />
-	            <span>可以和多名同级好友交流</span>
-	       </div>-->
-	</div>
-	<div class="aui-content">
-	     <p>距离下一等级：<span class="aui-text-theme">Lv5</span></p>
-	</div>
-	<p>投票量是指每个主题下选项投票的数量，而非重复投票某一选项的数量，重复的投票不会计算在内。</p>
+    <div class="aui-content rcontent">
+          <div class="aui-text-center rhead">
+                <img src="../image/demo3.png"/>
+                <h2>当前等级：<span class="aui-text-theme">Lv.4</span></h2>
+          </div>
+          <div class="aui-progress aui-progress-sm">
+                <div class="aui-progress-bar aui-progress-theme" style="width:100%"></div>
+          </div>
+          <p class="aui-text-default">等级数据每天早上6点更新</p>
+          <div class="aui-line-x"></div>
+          <div class="privi">
+               <h3>当前等级特权</h3>
+               <span><i class="aui-text-danger aui-iconfont aui-icon-upstagefill"></i>更多认识好友的机会</span><br />
+               <span><i class="aui-text-danger aui-iconfont aui-icon-upstagefill"></i>优先投票的机会</span>
+          </div>
+    </div>
+    <div class="aui-content">
+          <p class="aui-padded-10 aui-text-default">距离下一个等级：<span class="aui-text-danger">Lv.5</span></p>
+          <div class="loading-circle" id="loadingCircle">
+            <p><span id="loadedNum">0</span>%</p>
+            <canvas class="mask" id="loadingProgress" width="100" height="100"></canvas>
+            <canvas class="bg" width="100" height="100"></canvas>
+          </div>
+          <p class="aui-text-center aui-padded-10">投票量</p>
+          <p class="notice">投票量是指累计投票的数量而非重复投票的数量，并且重复投票的数量将不纳入计算。</p>
+    </div>    
 	<div class="aui-content">
 	     <ul class="aui-list-view">
-	     	<li class="aui-list-view-cell">
+	     	<li class="aui-list-view-cell" tapmode onclick="openPriv()">
 	     		<div class="aui-arrow-right">了解等级特权</div>
 	     	</li>
 	     </ul>
@@ -46,5 +89,52 @@
 	apiready = function(){
 		
 	};
+	function openPriv(){
+       api.openWin({
+	       name: 'priv_win',
+	       url: 'priv_win.html'
+       });
+    }
+</script>
+<script>
+    var slots={},c=document.getElementById('loadingProgress'),ctx=c.getContext('2d');
+    window.hasLoaded = 0;
+    window.loading = false;
+    window.ulp = ulp;
+    function ulp(percent){
+        window.loading = true;
+        var i = 0, draw = null;
+        draw = setInterval(function(){
+            if (window.hasLoaded > 100) {
+                window.loading = false;
+                clearInterval(draw);
+                draw = null;
+                return true;
+            }
+
+            if (i<percent) {
+                d();
+                i++;
+                window.hasLoaded += 1;
+            } else {
+                clearInterval(draw);
+                draw = null;
+            }
+        }, 100);
+    }
+
+    function d(){
+        var lp = document.getElementById('loadedNum');
+        lp.innerHTML = window.hasLoaded;
+
+        var loaded = window.hasLoaded * 2 / 100 * Math.PI, cw = 100, hcw = 50;
+        ctx.clearRect (0,0,cw,cw);
+        ctx.beginPath();
+        ctx.arc(hcw,hcw,hcw-4, 0, loaded, false);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#7935FE';
+        ctx.stroke();
+    }
+    ulp(48);
 </script>
 </html>
