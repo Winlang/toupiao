@@ -26,9 +26,9 @@
                 <span class="aui-iconfont aui-icon-like"></span>
                 <p>活动</p>
             </li>
-            <li id="tabbar3" tapmode onclick="randomSwitchBtn(this,'投票',2)">
+            <li id="tabbar3" tapmode onclick="randomSwitchBtn(this,'增加主题',2)">
                 <span class="aui-iconfont aui-icon-roundadd"></span>
-                <p>投票</p>
+                <p>主题</p>
             </li>
             <li id="tabbar4" tapmode onclick="randomSwitchBtn(this,'消息',3)">
                 <span class="aui-iconfont aui-icon-mark"></span>
@@ -137,8 +137,8 @@ function openItem(item_id){
                 url: 'html/grid_frm.html', 
                 bounces:false
             },{
-                name: 'recommend_frm', 
-                url: 'html/recommend_frm.html', 
+                name: 'add_theme_frm', 
+                url: 'html/add_theme_frm.html', 
                 bounces:false
             },{
                 name: 'list_frm', 
@@ -162,7 +162,7 @@ function openItem(item_id){
                 $api.text($api.byId('header-title'),'活动');
                 $api.addCls($api.byId('tabbar2'), 'active-theme');
            }else if(index==2){
-                $api.text($api.byId('header-title'),'投票');
+                $api.text($api.byId('header-title'),'增加主题');
                 $api.addCls($api.byId('tabbar3'), 'active-theme');
             }else if(index==3){
                 $api.text($api.byId('header-title'),'消息');
