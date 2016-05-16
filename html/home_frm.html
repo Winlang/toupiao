@@ -118,6 +118,15 @@ $aui.waterfall($api.byId("aui-waterfall"),{
 	    
 	apiready = function(){
 
+		//监听是否已经到底部 自动刷新
+		api.addEventListener({
+            name: 'scrolltobottom'
+        }, function(ret, err){
+            //page++;
+           	//getData(page);//取数据
+           	alert('已到底部');
+        });
+
 		/***************************正式版打包 放开********************************/
 		//jpush = api.require('ajpush');
 		//极光推送初始化
