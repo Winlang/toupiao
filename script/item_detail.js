@@ -30,6 +30,32 @@ function itemoptions(item_id,member_id){
     });
 }
 
+//点击加载更多选项
+function loading_itemopt(page){
+    //获取主题的id
+    var item_id = getQueryString('item_id');
+    //获取当前登陆用户的id
+    var member_id = is_login();
+    var next_page = page+1;
+
+    api.ajax({
+        url:ApiUrl+'/api/loading_itemopt?item_id='+item_id+'&member_id='+member_id+'&page='+page+'&callback=?',
+        method:'post',
+        data:{}
+    },function(data,err){
+        if(data.status == 0){
+            $('#itemoption_list').append(data.msg);
+            $('#loading').html('查看更多选项');
+            $('#loading').attr('onclick','loading_itemopt('+next_page+')');
+        }else if(data.status == 2){
+            $('#loading').removeAttr('onclick');
+            $('#loading').html('没有更多选项了');
+        }else{
+            $('#loading').parent('li').remove();
+        }
+    });
+}
+
 //取消投票
 function cancel_toupiao(obj){
     var itemopt_id = $(obj).val();
