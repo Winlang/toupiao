@@ -5,6 +5,8 @@ function iteminfo(item_id){
         method:'post',
         data:{}
     },function(data,err){
+        //限制投票数
+        $("#item_setnum").html(data.data.item_setnum);
         //设置图片
         data.data.item_titleimg = set_item_titleimg(data.data.item_titleimg);
 
