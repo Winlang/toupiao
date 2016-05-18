@@ -156,7 +156,8 @@
               		var item_optid = data.msg;
 
               		if(tag == 'complate'){
-              			openVote(item_optid);
+              			openItem(item_id);
+              			//openVote(item_optid);
 		            	//跳至所增加的选项页
               		}else{
               			openOption(item_id);
@@ -182,5 +183,19 @@ function openOption(item_id){
        url: 'add_option_win.html?item_id='+item_id
    });
 }
+
+function openItem(item_id){
+	    api.openWin({
+	        name: 'procon',
+	        url: 'procon_win.html?item_id='+item_id,
+	        bounces: true,
+	        rect: {
+	            x: 0,
+	            y: 0,
+	            w: 'auto',
+	            h: 'auto'
+	        }
+	    });
+	}
  </script>
  </html>
