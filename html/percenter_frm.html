@@ -75,7 +75,7 @@
 
             
             <li class="aui-list-view-cell per-account">
-                 <div>金币：<span class="aui-text-danger coin">281,858</span></div>
+                 <div>金币：<span class="aui-text-danger coin" id="coin">0</span></div>
                  <div class="per-change">
                        <span><i class="aui-iconfont aui-icon-pay aui-text-danger"></i>兑换</span> 
                        <span><i class="aui-iconfont aui-icon-form aui-text-danger"></i>明细</span>
@@ -109,7 +109,7 @@
             <li class="aui-list-view-cell">
                <div class="aui-arrow-right">
                       <i class="aui-iconfont aui-icon-sponsor aui-bg-warning"></i>我的金币
-                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">12306个</span>
+                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1" id="coin_1">0个</span>
                </div>             
             </li>
             <li class="aui-list-view-cell" tapmode onclick="openRank()">
@@ -335,6 +335,8 @@
                   //昵称
                   $('#nickname').html(data.mobile);
                   //金币数量
+                  $('#coin').html(data.coin);
+                  $('#coin_1').html(data.coin+'个');
                   //票友数量
                   
                   //我的号召力
