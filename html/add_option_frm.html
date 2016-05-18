@@ -74,6 +74,7 @@
 	 		      </div>   
 	 		</div>
 	 		<input type="hidden" id="opt_img_path" value="">
+	 		<input type="hidden" id="item_id" value="">
 	 	<div class="aui-line-x"></div>
 	 	<p class="aui-text-center title"></p>
 	 	<div class="aui-line-x"></div>
@@ -89,8 +90,14 @@
 	 	</div>
  	</section>
  	<section class="aui-content-padded">
- 		<div class="aui-btn  aui-btn-theme opbtn" tapmode onclick="submit_xx()">继续添加</div>
- 		<div class="aui-btn  aui-btn-theme opbtn" tapmode >完成</div>
+ 		
+ 		<!-- <div class="aui-btn  aui-btn-theme opbtn" tapmode onclick="submit_xx()">继续添加</div>
+ 		
+ 		<div class="aui-btn  aui-btn-theme opbtn" tapmode onclick="submit_xx()">完成</div> -->
+ 		<!--保存并继续显示添加选项页面-->
+ 		<div class="aui-btn aui-btn-block aui-btn-theme" tapmode onclick="submit_xx('next')">继续添加</div>
+ 		<!--直接保存选项并展示-->
+ 		<div style="margin-top:5px" class="aui-btn aui-btn-block aui-btn-success" tapmode onclick="submit_xx('complate')">完成</div>
  	</section>
  </body>
  <script type="text/javascript" src="../script/api.js"></script>
@@ -114,7 +121,7 @@
 	    });
  	}
 
- 	function submit_xx(){
+ 	function submit_xx(tag){
  		var item_id = getQueryString('item_id');
  		
  		var item_optimg = $('#opt_img_path').val();
@@ -147,8 +154,14 @@
 			},function(data, err){
 			    if(data.status == 1){
               		var item_optid = data.msg;
-             		openVote(item_optid);
-		            //跳至所增加的选项页
+
+              		if(tag == 'complate'){
+              			openVote(item_optid);
+		            	//跳至所增加的选项页
+              		}else{
+              			openOption(item_id);
+              		}
+             		
 
               	}else{
               	  	alert(data.msg);
@@ -162,5 +175,12 @@ function openVote(itemoptid){
 	       url: 'votecon_frm.html?itemoptid='+itemoptid
        });
     }
+
+function openOption(item_id){
+   api.openWin({
+       name: 'add_option',
+       url: 'add_option_win.html?item_id='+item_id
+   });
+}
  </script>
  </html>
