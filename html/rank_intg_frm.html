@@ -47,6 +47,17 @@
           .loading-circle>canvas.bg {z-index: 1; width: 100%; height: 100%; border: 5px solid #ecedf1 ;}
           .loading-circle>canvas.mask {z-index: 2; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);border-radius:10px;}
           .loading-circle>p {z-index: 3;  width: 100%; height: 100%; text-align: center; line-height: 100px; font-size: 14px; font-weight: lighter; color: #999;}
+     /*进度条*/
+        .trends{display: block;width: 100%;height:10px;margin:40px auto 10px auto;}
+        .trends dl{width: 100%;height:10px;background-color:#f5f5f5;border-radius: 5px;}
+        .trends dl dd{background-color:#7935fe;height:10px;border-radius: 5px;}
+        .scale{display: block;z-index:99;width:100%;height:10px;margin-top: -26px;}
+        .scale ul li{border-left:1px solid #fff;list-style: none;float:left;width:10%;height:26px;}
+        .scale ul li:first-child{border-left:0;}
+        .scale li a{display: block;width: 16px;height:16px;border-radius:8px;margin-left:-8px;line-height: 16px;text-align: center;color:#333;font-size:12px;}
+        .sten{display:inline-block;float:right;margin-right:-8px;font-size:12px;margin-top:-16px;}
+        .scale .pactive{background-color:red; color:#fff;}
+        .scale .sactive{color:red;}          
     </style>
 </head>
 <body>
@@ -55,9 +66,29 @@
                 <img src="../image/demo3.png"/>
                 <h2>当前等级：<span class="aui-text-theme">Lv.4</span></h2>
           </div>
-          <div class="aui-progress aui-progress-sm">
+          <!--<div class="aui-progress aui-progress-sm">
                 <div class="aui-progress-bar aui-progress-theme" style="width:65%"></div>
-          </div>
+          </div>-->
+          <div class="trends">
+			<dl>
+				<dd ps="66" style="width:0%" class="charts"></dd>
+			</dl>
+			<div class="scale">
+				<ul>
+				    <li><a href="javascript:void(0);">0</a></li>
+					<li><a href="javascript:void(0);">1</a></li>
+					<li><a href="javascript:void(0);">2</a></li>
+					<li><a href="javascript:void(0);">3</a></li>
+					<li><a href="javascript:void(0);">4</a></li>
+					<li><a href="javascript:void(0);">5</a></li>
+					<li><a href="javascript:void(0);">6</a></li>
+					<li><a href="javascript:void(0);">7</a></li>
+					<li><a href="javascript:void(0);">8</a></li>
+					<li><a href="javascript:void(0);">9</a><span class="sten">10</span></li>
+					<!--<li><a href="javascript:void(0);">10</a></li>-->
+				</ul>
+			</div>
+		</div>
           <p class="aui-text-default">等级数据每天早上6点更新</p>
           <div class="aui-line-x"></div>
           <div class="privi">
@@ -84,6 +115,58 @@
 	     </ul>
 	</div>
 </body>
+<!--进度条-->
+	<script type="text/javascript" src="../script/jquery.js"></script>
+	<script>
+         function animate(){
+            $(".charts").each(function(i,item){
+                var a = parseInt($(item).attr("ps"));
+                if(a>=0 && a<10){
+                     b=0;
+                }
+                if(a>=10 && a<20){
+                     b=1;
+                }
+                if(a>=20 && a<=30){
+                     b=2;
+                }
+                if(a>30 && a<=40){
+                     b=3;
+                }
+                if(a>40 && a<=50){
+                     b=4;
+                }
+                if(a>50 && a<=60){
+                     b=5;
+                }
+                if(a>60 && a<=70){
+                     b=6;
+                }
+                if(a>70 && a<=80){
+                     b=7;
+                }
+                if(a>80 && a<=90){
+                     b=8;
+                }
+                if(a>90 && a<=100){
+                     b=9;
+                }
+                if(a>100){
+                	b=10;
+                }
+                // b = b*10;
+                // $(item).attr("ps",a);
+                $('.scale li').eq(b).children('a').addClass('pactive');
+                for(var i=0; i<b;i++ ){
+                	$('.scale li').eq(i).children('a').addClass('sactive');
+                }
+                $(item).animate({
+                   width: a+"%"
+                },1000);
+            });
+         }
+         animate();
+	</script>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript">
 	apiready = function(){
@@ -120,7 +203,7 @@
                 clearInterval(draw);
                 draw = null;
             }
-        }, 100);
+        }, 50);
     }
 
     function d(){

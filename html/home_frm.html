@@ -25,7 +25,6 @@
        }
        .wtitle{
          margin-top:90px;
-         /*vertical-align: middle;*/
          display:inline-block;
          padding:10px;
        }
@@ -76,12 +75,10 @@
 	</div>
     </div>
     <!--最新主题-->
-   <div id="tab-new" style="display:none;">
-       <div class="aui-content">
-       	
+   <div id="tab-new" style="display:none;padding-top: 10px;">
+       <div class="aui-content-padded">     	
        	<ul class="aui-waterfall" id="aui-waterfall1"></ul>
-       	  <script id="test1" type="text/html">
-	      
+       	  <script id="test1" type="text/html">	      
 	      	{{each list as value i}}
 	      	<li onclick="openNew({{value.id}})">
 	      	     <div class="aui-waterfall-header wheader" style="background:url({{value.item_titleimg}}) center no-repeat;background-size:cover;">
