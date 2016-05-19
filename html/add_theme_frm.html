@@ -116,14 +116,17 @@
  		
  		if(item_titleimg == '' || item_titleimg == null){
  			alert('请您上传主题封面图');
+ 			return false;
  		}
 
  		if(item_title == '' || item_title == null){
  			alert('请您填写主题标题');
+ 			return false;
  		}
 
  		if(item_desc == '' || item_desc == null){
  			alert('请您填写主题描述');
+ 			return false;
  		}
  		//提交增加主题
  		api.ajax({
