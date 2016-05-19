@@ -66,9 +66,9 @@
     <div class="aui-content">
         <ul class="aui-list-view aui-in">
             <li class="aui-list-view-cell aui-img">
-            <img id="avatar_img" class="aui-img-object aui-pull-left per-avatar" src="../image/demo2.png" alt="" />
+            <img id="avatar_img" tapmode onclick="update_avatar()" class="aui-img-object aui-pull-left per-avatar" src="../image/demo2.png" alt="" />
             <div class="aui-img-body">
-                  <span class="aui-text-danger"><em id="nickname" tapmode onclick="login()">登陆/注册</em><em class="per-badge" tapmode onclick="openInfo()">资料</em></span>
+                  <span class="aui-text-danger"><em id="nickname" tapmode onclick="login()">登陆/注册</em><!-- <em class="per-badge" tapmode onclick="openInfo()">资料</em> --></span>
                   <div class="aui-ellipsis-1"><i class="aui-badge aui-badge-theme">LV.1</i><span class="rank">议员</span></div>                                
             </div>
             </li>
@@ -258,11 +258,21 @@
         });
     }
     function login(){
-        api.openWin({
-            name: 'login',
-            url: 'login.html',
-            delay:delay
-        });
+        var uid = is_login();
+        if(uid > 0){
+
+        }else{
+          login_page();
+        }
+    }
+
+    function update_avatar(){
+        var uid = is_login();
+        if(uid > 0){
+          getPicture();
+        }else{
+          login_page();
+        }
     }
 
     // function logout(){
@@ -310,6 +320,17 @@
                     $('.logout_show').hide();
                 }
           });
+
+          // 监听头像上传成功
+          api.addEventListener({
+                  name : 'avatar_upload_successEvent'
+          }, function(ret) {
+                if (ret && ret.value) {
+                    var value = ret.value;
+                    var imgpath = UploadUrl+'/avatar/'+value.name;
+                    $api.attr($api.byId("avatar_img"),'src',imgpath);
+                }
+          });
           
 
 
@@ -332,6 +353,9 @@
                     }
                   }
               },function(data, err){
+                  //头像
+                  var imgpath = UploadUrl+'/avatar/'+data.avatar;
+                  $api.attr($api.byId("avatar_img"),'src',imgpath);
                   //昵称
                   $('#nickname').html(data.mobile);
                   //金币数量
