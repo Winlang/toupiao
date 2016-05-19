@@ -88,9 +88,9 @@
                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">兴趣；主题；选项；票友</span>
                </div>
             </li>
-            <li class="aui-list-view-cell">
+            <li class="aui-list-view-cell" tapmode onclick="openThemes()">
                <div class="aui-arrow-right">
-                      <i class="aui-iconfont aui-icon-activity aui-bg-info"></i>我发起的活动
+                      <i class="aui-iconfont aui-icon-activity aui-bg-info"></i>我发起的主题
                       <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">无</span>
                </div>               
             </li>
@@ -186,6 +186,19 @@
        api.openWin({
           name:'focus_win',
           url:'focus_win.html',
+          bounces:true,
+          rect:{
+             x:0,
+             y:0,
+             w:'auto',
+             h:'auto'
+          }
+       });
+    }
+    function openThemes(){
+       api.openWin({
+          name:'my_themes_win',
+          url:'my_themes_win.html',
           bounces:true,
           rect:{
              x:0,
