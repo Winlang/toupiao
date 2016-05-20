@@ -115,7 +115,7 @@
             <li class="aui-list-view-cell" tapmode onclick="openRank()">
                <div class="aui-arrow-right">  
                       <i class="aui-iconfont aui-icon-choiceness aui-bg-primary"></i>积分等级        
-                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">议长</span>
+                      <span id="level" class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1"></span>
                </div>
             </li>
              <li class="aui-list-view-cell" tapmode onclick="openMyZan()">
@@ -374,6 +374,8 @@
                   //金币数量
                   $('#coin').html(data.coin);
                   $('#coin_1').html(data.coin+'个');
+                  //积分等级
+                  $('#level').html(data.level.lev_text);
                   //票友数量
                   
                   //我的号召力
