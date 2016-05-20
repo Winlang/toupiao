@@ -54,6 +54,42 @@
 		   line-height:1;
 		   padding:5px;
 		}
+		
+		.cate-caption{
+		   color:#333;
+		   padding:10px 5px 0px; 
+		}
+		.cate-list {
+            background: none;
+            text-align: center;
+            overflow: hidden;
+            padding:10px 5px;
+        }
+        .cate {
+            text-align: center;
+            font-size: 12px;
+            margin: 0 5px 5px 5px;
+            background: #fff;
+            height: 32px;
+            line-height: 32px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .cate.active {
+            background: #ff9900;
+            border: 1px solid #ff9900;
+            color: #ffffff;
+            -webkit-animation: fadeIn .5s ease both;
+                    animation: fadeIn .5s ease both;
+        }
+        .cate.disabled{
+            background: #eeeeee;
+            border-color: #eeeeee;
+            color: #666;
+        }
 	</style>
  </head>
  <body>
@@ -74,6 +110,38 @@
 	 	     <label class="aui-input-addon">主题名称</label>
 	 	     <input class="aui-input" id="item_title" value="" placeholder="请输入您的主题名称" />
 	 	</div>
+ 	    <p class="cate-caption">主题分类</p>
+	    <div class="aui-content cate-list">
+	        <div class="">
+	            <div class="aui-col-xs-3">
+	                <div class="cate active" cate-data="1" data-status="1" tapmode>娱乐</div>
+	            </div>
+	            <div class="aui-col-xs-3">
+	                <div class="cate" cate-data="2" data-status="1" tapmode>体育</div>
+	            </div>    
+	            <div class="aui-col-xs-3">
+	                <div class="cate" cate-data="3" data-status="1" tapmode>互联网</div>
+	            </div>    
+	            <div class="aui-col-xs-3">
+	                <div class="cate" cate-data="4" data-status="1" tapmode>追剧</div>
+	            </div>
+	            <div class="aui-col-xs-3">
+	                <div class="cate" cate-data="5" data-status="1" tapmode>国际</div>
+	            </div>
+	            <div class="aui-col-xs-3">
+	                <div class="cate" cate-data="6" data-status="1" tapmode>游戏</div>
+	            </div>    
+	            <div class="aui-col-xs-3">
+	                <div class="cate" cate-data="7" data-status="1" tapmode>美女</div>
+	            </div>    
+	            <div class="aui-col-xs-3">
+	                <div class="cate" cate-data="8" data-status="1" tapmode>搞笑</div>
+	            </div> 
+	            <div class="aui-col-xs-3">
+	                <div class="cate" cate-data="9" data-status="1" tapmode>社会</div>
+	            </div>     
+	        </div>
+	    </div>
 	 	<div class="aui-line-x"></div>
 	 	<p class="aui-text-center title">主题描述</p>
 	 	<div class="aui-line-x"></div>
@@ -107,6 +175,15 @@
                 $('.add-pic').css('display','none');
             }
 	    });
+	    
+	    //主题分类
+	    var cateList = $api.domAll(".cate");
+        for(var i in cateList){
+            $api.addEvt(cateList[i], 'click', function(){
+                $api.removeCls($api.dom(".cate.active"),'active');
+                $api.addCls(this,'active');
+            });
+        }
  	}
 
  	function submit_item(tag){
