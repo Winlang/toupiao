@@ -14,7 +14,7 @@
     		padding:0;
     		background-color:#f7f9f8;
     	}
-    	.aui-content{background-color:#fff;}
+    	.aui-content{background-color:#fff;/*margin-bottom:5px;*/}
     	.desc-1{
     	   word-wrap: break-word;
     	}
@@ -105,18 +105,15 @@
     	}
     	.comment{
     	   display:block;
-    	   padding-left:26%;  
-    	   margin-top:-20px;  	   
-    	}
-    	.comment-1{
-    	  display:block;
-    	  width:95%;
+    	   margin-left:26%;  
+    	   margin-top:-20px; 
+    	   width:70%;
           background-color:#f5f5f5;
           color:#333;
           font-size:12px;
           padding:10px 5px;
-          border-radius: 5px;
-    	 }
+          border-radius: 5px; 	   
+    	}
     	.idols{
     	         vertical-align:middle;
     	         width: 100%;
@@ -283,10 +280,9 @@
 	                   </div>
 	                {{if value.comm_data}}
 	               		<div class="comment">
-	                        <div class="comment-1">
-	                                <span>{{value.member_nick}}:</span>
-		                            <span class="aui-ellipsis-1 ">{{value.comm_data}}</span>
-	                        </div>
+	                      <p class="aui-ellipsis-2">
+	                         <span class="aui-text-default">{{value.member_nick}}:</span>{{value.comm_data}}
+	                      </p>
 	                   	</div>
 	                {{/if}}
                    </div>
