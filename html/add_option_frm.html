@@ -130,14 +130,17 @@
  		
  		if(item_optimg == '' || item_optimg == null){
  			alert('请您上传选项封面图');
+ 			return false;
  		}
 
  		if(item_opttitle == '' || item_opttitle == null){
  			alert('请您填写选项标题');
+ 			return false;
  		}
 
  		if(item_optdesc == '' || item_optdesc == null){
  			alert('请您填写选项描述');
+ 			return false;
  		}
  		//提交增加选项
  		api.ajax({
@@ -187,7 +190,7 @@ function openOption(item_id){
 function openItem(item_id){
 	    api.openWin({
 	        name: 'procon',
-	        url: 'procon_win.html?item_id='+item_id,
+	        url: 'procon_add_win.html?item_id='+item_id,
 	        bounces: true,
 	        rect: {
 	            x: 0,
@@ -197,5 +200,6 @@ function openItem(item_id){
 	        }
 	    });
 	}
+	
  </script>
  </html>
