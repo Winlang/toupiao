@@ -68,7 +68,7 @@
             <li class="aui-list-view-cell aui-img">
             <img id="avatar_img" tapmode onclick="update_avatar()" class="aui-img-object aui-pull-left per-avatar" src="../image/demo2.png" alt="" />
             <div class="aui-img-body">
-                  <span class="aui-text-danger"><em id="nickname" tapmode onclick="login()">登陆/注册</em><!-- <em class="per-badge" tapmode onclick="openInfo()">资料</em> --></span>
+                  <span class="aui-text-danger"><em id="nickname" tapmode onclick="login()">登陆/注册</em><em class="per-badge" tapmode onclick="openInfo()">资料</em></span>
                   <div class="aui-ellipsis-1"><i class="aui-badge aui-badge-theme">LV.1</i><span class="rank">议员</span></div>                                
             </div>
             </li>
@@ -82,19 +82,19 @@
                  </div>               
             </li>
           
-            <li class="aui-list-view-cell" tapmode onclick="openFocus()">
+            <!--<li class="aui-list-view-cell" tapmode onclick="openFocus()">
                <div class="aui-arrow-right">
                      <i class="aui-iconfont aui-icon-edit aui-bg-info"></i>关注
                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">兴趣；主题；选项；票友</span>
                </div>
-            </li>
+            </li>-->
             <li class="aui-list-view-cell" tapmode onclick="openThemes()">
                <div class="aui-arrow-right">
                       <i class="aui-iconfont aui-icon-activity aui-bg-info"></i>我发起的主题
                       <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">无</span>
                </div>               
             </li>
-            <li class="aui-list-view-cell">
+            <!--<li class="aui-list-view-cell">
                <div class="aui-arrow-right">
                      <i class="aui-iconfont aui-icon-favor aui-bg-danger"></i>我的票友
                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">共120好友</span>
@@ -105,7 +105,7 @@
                       <i class="aui-iconfont aui-icon-hotfill aui-bg-danger"></i>我的号召力
                       <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">37785</span>
                </div>             
-            </li>
+            </li>-->
             <li class="aui-list-view-cell">
                <div class="aui-arrow-right">
                       <i class="aui-iconfont aui-icon-sponsor aui-bg-warning"></i>我的金币
@@ -115,7 +115,7 @@
             <li class="aui-list-view-cell" tapmode onclick="openRank()">
                <div class="aui-arrow-right">  
                       <i class="aui-iconfont aui-icon-choiceness aui-bg-primary"></i>积分等级        
-                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">议长</span>
+                      <span id="level" class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1"></span>
                </div>
             </li>
              <li class="aui-list-view-cell" tapmode onclick="openMyZan()">
@@ -132,7 +132,7 @@
             </li>
         </ul>
     </div>
-    <div class="aui-content">
+    <!--<div class="aui-content">
          <ul class="aui-list-view aui-in">
             <li class="aui-list-view-cell">
                 <div class="aui-arrow-right">
@@ -147,7 +147,7 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div>-->
     <section class="aui-content">
         <!--退出后显示-->
         <ul class="aui-list-view logout_show">
@@ -374,6 +374,8 @@
                   //金币数量
                   $('#coin').html(data.coin);
                   $('#coin_1').html(data.coin+'个');
+                  //积分等级
+                  $('#level').html(data.level.lev_text);
                   //票友数量
                   
                   //我的号召力
