@@ -55,7 +55,7 @@
         .scale ul li{border-left:1px solid #fff;list-style: none;float:left;width:12.5%;height:26px;}
         .scale ul li:first-child{border-left:0;}
         .scale li a{display: block;width: 16px;height:16px;border-radius:8px;margin-left:-8px;line-height: 16px;text-align: center;color:#333;font-size:12px;}
-        .sten{display:inline-block;float:right;margin-right:-8px;font-size:12px;margin-top:-16px;}
+        .sten{display:inline-block;float:right;margin-right:-8px;font-size:12px;margin-top:-16px;width: 16px;height:16px;border-radius:8px;line-height: 16px;text-align: center;color:#333;}
         .scale .pactive{background-color:red; color:#fff;}
         .scale .sactive{color:red;}          
     </style>
@@ -121,87 +121,79 @@
 <!--进度条-->
 <script>
     function animate(){
+        /**
+         *  a --------------- 从数据库取出的分数
+         *  b --------------- calss="scale" 中li索引
+         *  one ------------- 每一等级代表的百分比，整体是100%
+         *  width ----------- 填充颜色的宽度
+         *  toupiao_num ----- 投票量，触发ulp函数的参数
+        **/
             var a = parseInt($('.charts').attr("ps"));
             var width = 0;
-
-            // if(a>=10 && a<20){
-            //     b=1;
-            // }
-            // if(a>=20 && a<=30){
-            //     b=2;
-            // }
-            // if(a>30 && a<=40){
-            //     b=3;
-            // }
-            // if(a>40 && a<=50){
-            //     b=4;
-            // }
-            // if(a>50 && a<=60){
-            //     b=5;
-            // }
-            // if(a>60 && a<=70){
-            //     b=6;
-            // }
-            // if(a>70 && a<=80){
-            //     b=7;
-            // }
-            // if(a>80 && a<=90){
-            //     b=8;
-            // }
-            // if(a>90 && a<=100){
-            //     b=9;
-            // }
-            // if(a>100){
-            //     a = 100;
-            //     b=10;
-            // }
+            var one = 12.5;
+            var toupiao_num = 0;
 
             if(a >= 1 && a < 100){
-                b=1;
+                toupiao_num = (a-1)/(100-1)*100;
+                width = (a-1)/(100-1)*one;
+                b = 0;
             }
             if(a >= 100 && a < 1000){
-                width = (a-100)/(1000-100)*100;
-                b = 2;
+                toupiao_num = (a-100)/(1000-100)*100;
+                width = (a-100)/(1000-100)*one+one*1;
+                b = 1;
             }
             if(a >= 1000 && a < 10000){
-                width = (a-1000)/(10000-1000)*100;
-                b = 3;
+                toupiao_num = (a-1000)/(10000-1000)*100;
+                width = (a-1000)/(10000-1000)*one+one*2;
+                b = 2;
             }
             if(a >= 10000 && a < 100000){
-                width = (a-10000)/(100000-10000)*100;
-                b = 4;
+                toupiao_num = (a-10000)/(100000-10000)*100;
+                width = (a-10000)/(100000-10000)*one+one*3;
+                b = 3;
             }
             if(a >= 100000 && a < 500000){
-                width = (a-100000)/(500000-100000)*100;
-                b = 5;
+                toupiao_num = (a-100000)/(500000-100000)*100;
+                width = (a-100000)/(500000-100000)*one+one*4;
+                b = 4;
             }
             if(a >= 500000 && a < 2000000){
-                width = (a-500000)/(2000000-500000)*100;
-                b = 6;
+                toupiao_num = (a-500000)/(2000000-500000)*100;
+                width = (a-500000)/(2000000-500000)*one+one*5;
+                b = 5;
             }
             if(a >= 2000000 && a < 5000000){
-                width = (a-2000000)/(5000000-2000000)*100;
-                b = 7;
+                toupiao_num = (a-2000000)/(5000000-2000000)*100;
+                width = (a-2000000)/(5000000-2000000)*one+one*6;
+                b = 6;
             }
             if(a >= 5000000 && a < 12000000){
-                width = (a-5000000)/(12000000-5000000)*100;
-                b = 8;
+                toupiao_num = (a-5000000)/(12000000-5000000)*100;
+                width = (a-5000000)/(12000000-5000000)*one+one*7;
+                b = 7;
             }
             if(a >= 12000000){
                 width = 100;
-                b = 9;
+                b = 8;
             }
 
-            b=b-1;
-
-            $('.scale li').eq(b).children('a').addClass('pactive');
-              for(var i=0; i<b;i++ ){
+            if(b == 8){
+                $('.scale li').eq(b-1).children('span').addClass('pactive');
+            }else{
+                $('.scale li').eq(b).children('a').addClass('pactive');
+            }
+            for(var i=0; i<b;i++ ){
                 $('.scale li').eq(i).children('a').addClass('sactive');
             }
+            
           
             $('.charts').animate({
                width: width+"%"
             },1000);
+
+            toupiao_num = toupiao_num+1;
+            ulp(toupiao_num);
     }
 
 	apiready = function(){
@@ -256,6 +248,5 @@
         ctx.strokeStyle = '#7935FE';
         ctx.stroke();
     }
-    ulp(48);
 </script>
 </html>
