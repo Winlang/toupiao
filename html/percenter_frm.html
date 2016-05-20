@@ -91,7 +91,7 @@
             <li class="aui-list-view-cell" tapmode onclick="openThemes()">
                <div class="aui-arrow-right">
                       <i class="aui-iconfont aui-icon-activity aui-bg-info"></i>我发起的主题
-                      <span class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1">无</span>
+                      <span id='myitem_num' class="per-setting  aui-text-default aui-pull-right aui-ellipsis-1"></span>
                </div>               
             </li>
             <!--<li class="aui-list-view-cell">
@@ -376,6 +376,8 @@
                   $('#coin_1').html(data.coin+'个');
                   //积分等级
                   $('#level').html(data.level.lev_text);
+                  //我发布主题数量
+                  $('#myitem_num').html(data.myitem_num);
                   //票友数量
                   
                   //我的号召力

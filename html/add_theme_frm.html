@@ -213,6 +213,9 @@
  		var item_desc = $('#item_desc').val();
  		//获取主题分类的id
  		var item_cate = $('.aui-col-xs-3').children('div [class="cate active"]').attr('title');
+
+ 		//当前登录用户id
+ 		var item_member_id = is_login();
  		
  		if(item_titleimg == '' || item_titleimg == null){
  			alert('请您上传主题封面图');
@@ -237,7 +240,8 @@
 			    		'item_title':item_title,
 			    		'item_desc':item_desc,
 			    		'item_titleimg':item_titleimg,
-			    		'item_cate':item_cate
+			    		'item_cate':item_cate,
+			    		'item_member_id':item_member_id
 			    	}
 			    }
 			},function(data, err){
