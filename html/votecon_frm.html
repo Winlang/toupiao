@@ -268,6 +268,11 @@
     <div class="mark" id="mark"></div>
     <div id="itemoptinfo"></div>
     <script type="text/html" id="itemoptdata">
+        <!--相关数据保存 开始-->
+        <input type="hidden" id="item_title" value="{{data.item_title}}">
+        <input type="hidden" id="item_opttitle" value="{{data.item_opttitle}}">
+        <input type="hidden" id="item_optdesc" value="{{data.item_optdesc}}">
+        <!--相关数据保存 开始-->
         <div class="aui-content">
               <img class="idol-avatar" src="http://votetest.xieli.cn/Uploads/admin/{{data.item_optimg}}" alt="" />
               <div class="vote-info">
@@ -304,7 +309,8 @@
                     <div class="aui-dialog-header share-tit">分享拉票</div>
                     <div class="aui-dialog-body share-content">
                         <ul>
-                        	<li onclick="share_wx('timeline');"><img src="../image/sweixin.png"/></li>
+                          <li onclick="share_wx('timeline');"><img src="../image/sweixin.png"/></li>
+                        	<li onclick="share_wx('session');"><img src="../image/sweixin.png"/></li>
                         	<li onclick="qqfriend_share();" tapmode><img src="../image/sqq.png"/></li>
                         	<li onclick="sina_share();" tapmode><img src="../image/ssina.png"/></li>
                         	<li onclick="qqkongjian_share();" tapmode><img src="../image/szone.png"/></li>
@@ -526,16 +532,16 @@
     }
 
     //微信分享
-    function weixin_share(){
-        var weixin = api.require('weiXin');
-        weixin.getUserInfo(function(ret,err){
-            if(ret.status){
-                api.alert({msg: ret.nickname});
-            }else{
-                api.alert({msg: "错误："+err.msg});
-            }
-        });
-    }
+    // function weixin_share(){
+    //     var weixin = api.require('weiXin');
+    //     weixin.getUserInfo(function(ret,err){
+    //         if(ret.status){
+    //             api.alert({msg: ret.nickname});
+    //         }else{
+    //             api.alert({msg: "错误："+err.msg});
+    //         }
+    //     });
+    // }
 
 
     function share_wx(wx_scene){//wx_scene,取值范围：session（会话）timeline（朋友圈）favorite（收藏）
@@ -543,19 +549,27 @@
           wx.isInstalled(function(ret, err){
               if(ret.installed){
                     //alert("当前设备已安装微信客户端");
+                    var item_title = $('#item_title').val();
+                    var opt_title = $('#item_opttitle').val();
+                    var desc = $('#item_optdesc').val();
+                    var thumb = $('.idol-avatar').attr('src');
+                    var share_url = "http://www.xieli.cn"; 
+
+                    var share_text = "我在#"+item_title+"#活动中，为"+opt_title+"投出了宝贵一票，男神女神们正在等你投票，猛戳"+share_url+"，还能赢取手机大奖哦！";
+
                     wx.shareWebpage({
                           apiKey: '',
                           scene: wx_scene,
-                          title: '我是标题',
-                          description: '我是描述',
-                          thumb: '123.jpg',
-                          contentUrl: 'http://www.baidu.com'
+                          title: share_text,
+                          description: desc,
+                          thumb: 'widget://icon/icon2.png',
+                          contentUrl: 'http://www.xieli.com'
                     }, function(ret, err){
 
                           if(ret.status){
-                              alert('分享成功');
+                              alertWindow('分享成功~');
                           }else{
-                              //alert(err.code);
+                              alert(err.code);
                           }
                     });
 
@@ -606,9 +620,9 @@
              value:s_url
         },function(ret,err){
            if(ret){
-                alert( "恭喜！复制成功！" );
+                alert( "复制成功！" );
            }else{
-                alert( "抱歉！复制失败！" );
+                alert( "复制失败！" );
            }
         });
     }
