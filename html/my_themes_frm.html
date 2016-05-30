@@ -13,38 +13,35 @@
 </head>
 <body>
 	<div class="aui-content">
-	      <ul class="aui-list-view">
-	      	<li class="aui-list-view-cell" tapmode onclick="openMyTheme()">
-	      		<div class="aui-arrow-right">
-	      		      <h3 class="aui-text-danger">谁是最火球星？</h3>
-	      		      <span class="stime">2016-05-19</span>
-	      		</div>
-	      	</li>
-	      	<li class="aui-list-view-cell" tapmode onclick="openMyTheme()">
-	      		<div class="aui-arrow-right">
-	      		      <h3 class="aui-text-danger">谁是最火球星？</h3>
-	      		      <span class="stime">2016-05-19</span>
-	      		</div>
-	      	</li>
-	      	<li class="aui-list-view-cell" tapmode onclick="openMyTheme()">
-	      		<div class="aui-arrow-right">
-	      		      <h3 class="aui-text-danger">谁是最火球星？</h3>
-	      		      <span class="stime">2016-05-19</span>
-	      		</div>
-	      	</li>
-	      	<li class="aui-list-view-cell" tapmode onclick="openMyTheme()">
-	      		<div class="aui-arrow-right">
-	      		      <h3 class="aui-text-danger">谁是最火球星？</h3>
-	      		      <span class="stime">2016-05-19</span>
-	      		</div>
-	      	</li>
-	      </ul>
+	      <ul class="aui-list-view" id="iteminfo"></ul>
+	      <p  class="aui-text-center aui-text-default" id="but" onclick="myitem_data(1);">查看更多</p>
 	</div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/my_themes.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
 <script type="text/javascript">
 	apiready = function(){
 		
+		//调取我发布的主题
+		myitem_data(1);
 	};
+
+	function openMyTheme(item_id){
+		api.openWin({
+	        name: 'procon',
+	        url: 'procon_win.html?item_id='+item_id,
+	        bounces: true,
+	        rect: {
+	            x: 0,
+	            y: 0,
+	            w: 'auto',
+	            h: 'auto'
+	        }
+	    });
+	}
 </script>
 </html>
